@@ -1,0 +1,78 @@
+{
+  "device": {
+    "C_m": 1e-09,
+    "R_m": 10000.0,
+    "T_cycle": 1e-06,
+    "V_th": 1.0,
+    "V_hold": 0.2,
+    "R_on": 10.0,
+    "I_mean_mA": 0.3,
+    "I_sigma_mA": 0.6
+  },
+  "note": "RC 膜 + 带迟滞阈值开关的理想稳定 DM 占位模型;无不应期机制;参数待实测替换",
+  "runs": [
+    {
+      "fit": {
+        "beta_m": 0.9049357335521033,
+        "g_m": 0.9512523307922245,
+        "theta": 0.9987221180338004,
+        "U_hold": 0.22413056670813003,
+        "rho": 1.1062263030661217,
+        "n_ref": 0
+      },
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "n_train_spikes": 110,
+      "n_test_spikes": 51,
+      "double_spike_cycles": {
+        "train": 0,
+        "test": 0
+      },
+      "I_max_mA": 0.75,
+      "beta_m_theory": 0.9048374180359596,
+      "g_m_theory_V_per_mA": 0.9516258196404037
+    },
+    {
+      "fit": {
+        "beta_m": 0.9048914887993194,
+        "g_m": 0.9512297719267528,
+        "theta": 0.9994492811456723,
+        "U_hold": 0.22510082905569284,
+        "rho": 1.106294634962492,
+        "n_ref": 0
+      },
+      "pos_precision": 0.86,
+      "pos_recall": 0.8775510204081632,
+      "n_train_spikes": 102,
+      "n_test_spikes": 49,
+      "double_spike_cycles": {
+        "train": 0,
+        "test": 0
+      },
+      "I_max_mA": 0.75,
+      "beta_m_theory": 0.9048374180359596,
+      "g_m_theory_V_per_mA": 0.9516258196404037
+    },
+    {
+      "fit": {
+        "beta_m": 0.9049745613947537,
+        "g_m": 0.9511928544512092,
+        "theta": 0.9983601793436767,
+        "U_hold": 0.22538268069659706,
+        "rho": 1.1029121282819399,
+        "n_ref": 0
+      },
+      "pos_precision": 0.9830508474576272,
+      "pos_recall": 0.9830508474576272,
+      "n_train_spikes": 100,
+      "n_test_spikes": 59,
+      "double_spike_cycles": {
+        "train": 0,
+        "test": 0
+      },
+      "I_max_mA": 0.75,
+      "beta_m_theory": 0.9048374180359596,
+      "g_m_theory_V_per_mA": 0.9516258196404037
+    }
+  ]
+}

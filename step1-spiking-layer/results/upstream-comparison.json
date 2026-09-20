@@ -1,0 +1,141 @@
+{
+  "source_commit": "aad13b87ed59f2afcfaebc985f403301887a35fc",
+  "source_sha256": "0e7410f5251e5c324a5628c5340ee3551f7a6a505ce398569fcc3b5f3ac07f7a",
+  "torch": "2.14.0",
+  "device": "cpu",
+  "dtype": "float32",
+  "atol": 1e-05,
+  "rtol": 1e-05,
+  "cases": [
+    {
+      "length": 1,
+      "nonzero_initial_state": false,
+      "mode": "normalized",
+      "output_max_abs_error": 1.4901161193847656e-08,
+      "state_max_abs_error": 0.0
+    },
+    {
+      "length": 1,
+      "nonzero_initial_state": false,
+      "mode": "continuous",
+      "output_max_abs_error": 2.9802322387695312e-08,
+      "state_max_abs_error": 0.0
+    },
+    {
+      "length": 1,
+      "nonzero_initial_state": false,
+      "mode": "spiking",
+      "output_max_abs_error": 1.1920928955078125e-07,
+      "state_max_abs_error": 0.0
+    },
+    {
+      "length": 1,
+      "nonzero_initial_state": true,
+      "mode": "normalized",
+      "output_max_abs_error": 5.960464477539063e-08,
+      "state_max_abs_error": 1.1920928955078125e-07
+    },
+    {
+      "length": 1,
+      "nonzero_initial_state": true,
+      "mode": "continuous",
+      "output_max_abs_error": 2.384185791015625e-07,
+      "state_max_abs_error": 1.1920928955078125e-07
+    },
+    {
+      "length": 1,
+      "nonzero_initial_state": true,
+      "mode": "spiking",
+      "output_max_abs_error": 9.5367431640625e-07,
+      "state_max_abs_error": 1.1920928955078125e-07
+    },
+    {
+      "length": 7,
+      "nonzero_initial_state": false,
+      "mode": "normalized",
+      "output_max_abs_error": 5.960464477539063e-08,
+      "state_max_abs_error": 5.960464477539063e-08
+    },
+    {
+      "length": 7,
+      "nonzero_initial_state": false,
+      "mode": "continuous",
+      "output_max_abs_error": 3.5762786865234375e-07,
+      "state_max_abs_error": 8.940696716308594e-08
+    },
+    {
+      "length": 7,
+      "nonzero_initial_state": false,
+      "mode": "spiking",
+      "output_max_abs_error": 2.384185791015625e-07,
+      "state_max_abs_error": 4.470348358154297e-08
+    },
+    {
+      "length": 7,
+      "nonzero_initial_state": true,
+      "mode": "normalized",
+      "output_max_abs_error": 5.960464477539063e-08,
+      "state_max_abs_error": 5.960464477539063e-08
+    },
+    {
+      "length": 7,
+      "nonzero_initial_state": true,
+      "mode": "continuous",
+      "output_max_abs_error": 2.384185791015625e-07,
+      "state_max_abs_error": 5.960464477539063e-08
+    },
+    {
+      "length": 7,
+      "nonzero_initial_state": true,
+      "mode": "spiking",
+      "output_max_abs_error": 4.76837158203125e-07,
+      "state_max_abs_error": 2.9802322387695312e-08
+    },
+    {
+      "length": 65,
+      "nonzero_initial_state": false,
+      "mode": "normalized",
+      "output_max_abs_error": 8.940696716308594e-08,
+      "state_max_abs_error": 5.960464477539063e-08
+    },
+    {
+      "length": 65,
+      "nonzero_initial_state": false,
+      "mode": "continuous",
+      "output_max_abs_error": 2.2351741790771484e-07,
+      "state_max_abs_error": 2.9802322387695312e-08
+    },
+    {
+      "length": 65,
+      "nonzero_initial_state": false,
+      "mode": "spiking",
+      "output_max_abs_error": 2.980232238769531e-07,
+      "state_max_abs_error": 2.9802322387695312e-08
+    },
+    {
+      "length": 65,
+      "nonzero_initial_state": true,
+      "mode": "normalized",
+      "output_max_abs_error": 8.940696716308594e-08,
+      "state_max_abs_error": 5.960464477539063e-08
+    },
+    {
+      "length": 65,
+      "nonzero_initial_state": true,
+      "mode": "continuous",
+      "output_max_abs_error": 2.384185791015625e-07,
+      "state_max_abs_error": 2.9802322387695312e-08
+    },
+    {
+      "length": 65,
+      "nonzero_initial_state": true,
+      "mode": "spiking",
+      "output_max_abs_error": 4.76837158203125e-07,
+      "state_max_abs_error": 2.9802322387695312e-08
+    }
+  ],
+  "upstream_chunk_vs_recurrent": {
+    "output_max_abs_error": 3.8743019104003906e-07,
+    "state_max_abs_error": 3.427267074584961e-07
+  }
+}

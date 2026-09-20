@@ -1,0 +1,99 @@
+{
+  "device": "Zhao 2025 SI Table 1 ADM 1M1T1R, deterministic",
+  "protocol": "每周期 2 ms 恒定电压 clamp(N(0.5,0.3),0,1)",
+  "note": "六参数模型只有一个状态;分别以栅电压 V 和离子通道长度 x = F + R 作状态量拟合,比较哪一个是这个器件的膜电位",
+  "runs": [
+    {
+      "seed": 0,
+      "state": "V",
+      "T_cyc": 0.002,
+      "dt": 5e-06,
+      "N": 16,
+      "n_train": 300,
+      "n_test": 150,
+      "train_fire_rate": 0.48583333333333334,
+      "test_fire_rate": 0.3104166666666667,
+      "fit": {
+        "beta_m": 0.4190137715991678,
+        "g_m": 0.006350219950726984,
+        "theta": 0.020923436144853785,
+        "U_hold": 0.5658256555133501,
+        "rho": 0.4600047351730607,
+        "n_ref": 0
+      },
+      "pos_precision": 0.0,
+      "pos_recall": 0.0,
+      "fire_rate_when_residue_below_0p5": 0.1093627065302911,
+      "fire_rate_when_residue_above_0p5": 0.5367581930912312
+    },
+    {
+      "seed": 1,
+      "state": "V",
+      "T_cyc": 0.002,
+      "dt": 5e-06,
+      "N": 16,
+      "n_train": 300,
+      "n_test": 150,
+      "train_fire_rate": 0.5027083333333333,
+      "test_fire_rate": 0.31166666666666665,
+      "fit": {
+        "beta_m": 0.420908501136234,
+        "g_m": 0.006656218028250722,
+        "theta": 0.018614097854511097,
+        "U_hold": 0.5699443522852708,
+        "rho": 0.41648082749343635,
+        "n_ref": 0
+      },
+      "pos_precision": 0.0,
+      "pos_recall": 0.0,
+      "fire_rate_when_residue_below_0p5": 0.11410459587955626,
+      "fire_rate_when_residue_above_0p5": 0.5307557117750439
+    },
+    {
+      "seed": 0,
+      "state": "x",
+      "T_cyc": 0.002,
+      "dt": 5e-06,
+      "N": 16,
+      "n_train": 300,
+      "n_test": 150,
+      "train_fire_rate": 0.48583333333333334,
+      "test_fire_rate": 0.3104166666666667,
+      "fit": {
+        "beta_m": 0.7941322444993221,
+        "g_m": 0.20301622544842526,
+        "theta": 0.8811172060815908,
+        "U_hold": 0.9976561749461943,
+        "rho": 0.018462899420490668,
+        "n_ref": 0
+      },
+      "pos_precision": 0.0,
+      "pos_recall": 0.0,
+      "fire_rate_when_residue_below_0p5": 0.1093627065302911,
+      "fire_rate_when_residue_above_0p5": 0.5367581930912312
+    },
+    {
+      "seed": 1,
+      "state": "x",
+      "T_cyc": 0.002,
+      "dt": 5e-06,
+      "N": 16,
+      "n_train": 300,
+      "n_test": 150,
+      "train_fire_rate": 0.5027083333333333,
+      "test_fire_rate": 0.31166666666666665,
+      "fit": {
+        "beta_m": 0.7921949569799983,
+        "g_m": 0.2015649061636022,
+        "theta": 0.6986452215179203,
+        "U_hold": 0.9934440496064152,
+        "rho": 0.02300274345513348,
+        "n_ref": 0
+      },
+      "pos_precision": 0.4689655172413793,
+      "pos_recall": 0.45454545454545453,
+      "fire_rate_when_residue_below_0p5": 0.11410459587955626,
+      "fire_rate_when_residue_above_0p5": 0.5307557117750439
+    }
+  ]
+}

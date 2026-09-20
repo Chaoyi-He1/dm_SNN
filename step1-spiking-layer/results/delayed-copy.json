@@ -1,0 +1,161 @@
+{
+  "torch": "2.14.0",
+  "device": "cpu",
+  "task": "4 symbols, 3 blank tokens, identical final query",
+  "steps": 300,
+  "threshold": 0.3,
+  "gate": "SigmoidGates",
+  "chance": 0.25,
+  "results": [
+    {
+      "seed": 0,
+      "steps": 300,
+      "history": [
+        {
+          "step": 1,
+          "loss": 1.4268759489059448,
+          "accuracy": 0.25
+        },
+        {
+          "step": 51,
+          "loss": 1.3863881826400757,
+          "accuracy": 0.25
+        },
+        {
+          "step": 101,
+          "loss": 0.644722580909729,
+          "accuracy": 1.0
+        },
+        {
+          "step": 151,
+          "loss": 0.7661207318305969,
+          "accuracy": 0.75
+        },
+        {
+          "step": 201,
+          "loss": 0.012738595716655254,
+          "accuracy": 1.0
+        },
+        {
+          "step": 251,
+          "loss": 0.0014783493243157864,
+          "accuracy": 1.0
+        },
+        {
+          "step": 300,
+          "loss": 0.0008770211134105921,
+          "accuracy": 1.0
+        }
+      ],
+      "accuracy": 1.0,
+      "reset_every_token": 0.25,
+      "clear_S_every_token": 1.0,
+      "clear_membranes_every_token": 0.75,
+      "untrained_delays": {
+        "1": 1.0,
+        "5": 1.0,
+        "7": 1.0
+      }
+    },
+    {
+      "seed": 1,
+      "steps": 300,
+      "history": [
+        {
+          "step": 1,
+          "loss": 1.4351303577423096,
+          "accuracy": 0.25
+        },
+        {
+          "step": 51,
+          "loss": 1.1696144342422485,
+          "accuracy": 0.5
+        },
+        {
+          "step": 101,
+          "loss": 0.253024160861969,
+          "accuracy": 1.0
+        },
+        {
+          "step": 151,
+          "loss": 0.0049163466319441795,
+          "accuracy": 1.0
+        },
+        {
+          "step": 201,
+          "loss": 0.001361065893433988,
+          "accuracy": 1.0
+        },
+        {
+          "step": 251,
+          "loss": 0.0010228160535916686,
+          "accuracy": 1.0
+        },
+        {
+          "step": 300,
+          "loss": 0.0008112027426250279,
+          "accuracy": 1.0
+        }
+      ],
+      "accuracy": 1.0,
+      "reset_every_token": 0.25,
+      "clear_S_every_token": 1.0,
+      "clear_membranes_every_token": 0.25,
+      "untrained_delays": {
+        "1": 1.0,
+        "5": 1.0,
+        "7": 1.0
+      }
+    },
+    {
+      "seed": 2,
+      "steps": 300,
+      "history": [
+        {
+          "step": 1,
+          "loss": 1.3878469467163086,
+          "accuracy": 0.25
+        },
+        {
+          "step": 51,
+          "loss": 1.3025996685028076,
+          "accuracy": 0.5
+        },
+        {
+          "step": 101,
+          "loss": 0.6925092339515686,
+          "accuracy": 0.75
+        },
+        {
+          "step": 151,
+          "loss": 0.03851647302508354,
+          "accuracy": 1.0
+        },
+        {
+          "step": 201,
+          "loss": 0.008681248873472214,
+          "accuracy": 1.0
+        },
+        {
+          "step": 251,
+          "loss": 0.0020361575298011303,
+          "accuracy": 1.0
+        },
+        {
+          "step": 300,
+          "loss": 0.001459500752389431,
+          "accuracy": 1.0
+        }
+      ],
+      "accuracy": 1.0,
+      "reset_every_token": 0.25,
+      "clear_S_every_token": 0.5,
+      "clear_membranes_every_token": 0.25,
+      "untrained_delays": {
+        "1": 1.0,
+        "5": 0.75,
+        "7": 0.5
+      }
+    }
+  ]
+}

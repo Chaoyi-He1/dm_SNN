@@ -1,0 +1,108 @@
+{
+  "single_step": {
+    "alpha=0.5,beta=0.5": {
+      "spice": {
+        "A": 1.25018,
+        "B": 1.00035,
+        "C": 0.750519,
+        "always_on": 0.96807
+      },
+      "closed_form": {
+        "A": 1.25,
+        "B": 1.0,
+        "C": 0.75
+      },
+      "always_on_prediction": 0.969956939569237
+    },
+    "alpha=0.25,beta=1.0": {
+      "spice": {
+        "A": 2.00002,
+        "B": 1.25035,
+        "C": 0.500693,
+        "always_on": 1.01719
+      },
+      "closed_form": {
+        "A": 2.0,
+        "B": 1.25,
+        "C": 0.5
+      },
+      "always_on_prediction": 1.0202647855177398
+    }
+  },
+  "alpha_sweep": [
+    {
+      "v_leak": 0.0,
+      "alpha": 0.999999
+    },
+    {
+      "v_leak": 0.05,
+      "alpha": 0.999999
+    },
+    {
+      "v_leak": 0.1,
+      "alpha": 0.999999
+    },
+    {
+      "v_leak": 0.15,
+      "alpha": 0.999999
+    },
+    {
+      "v_leak": 0.2,
+      "alpha": 0.999999
+    },
+    {
+      "v_leak": 0.25,
+      "alpha": 1.0
+    },
+    {
+      "v_leak": 0.3,
+      "alpha": 1.0
+    },
+    {
+      "v_leak": 0.35,
+      "alpha": 1.0
+    },
+    {
+      "v_leak": 0.4,
+      "alpha": 1.0
+    },
+    {
+      "v_leak": 0.45,
+      "alpha": 0.949111
+    },
+    {
+      "v_leak": 0.5,
+      "alpha": 0.796515
+    },
+    {
+      "v_leak": 0.55,
+      "alpha": 0.543192
+    },
+    {
+      "v_leak": 0.6,
+      "alpha": 0.19066
+    },
+    {
+      "v_leak": 0.65,
+      "alpha": 0.00831975
+    },
+    {
+      "v_leak": 0.7,
+      "alpha": 0.000366534
+    },
+    {
+      "v_leak": 0.75,
+      "alpha": 2.2542e-05
+    },
+    {
+      "v_leak": 0.8,
+      "alpha": 1.71814e-06
+    }
+  ],
+  "alpha_v0_dependence_at_vleak_0p55": {
+    "1.0": 0.543192,
+    "0.5": 0.1221032,
+    "0.25": 0.01108924
+  },
+  "device_note": "泄漏管为 ngspice level-1 通用 NMOS(vto 0.4 V, kp 2e-5, W=1u, L=0.5u),存储电容 1 pF,t_gap 1 us;占位器件,非实测"
+}

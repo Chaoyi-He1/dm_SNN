@@ -1,0 +1,45 @@
+{
+  "model": "Zhao 2025 SI Note 4, Table 1, sigma=0",
+  "transistor_paper": "level1 kp=7.5e-4 vto=0.22, Rl=47k, Vdd=1V",
+  "cross_check": [
+    {
+      "vin": 0.6,
+      "t_first_spice": null,
+      "t_first_python": null,
+      "n_on_spice": 0,
+      "rms_dV": 1.5560273989152955e-08,
+      "max_dV": 4.473011275187445e-08
+    },
+    {
+      "vin": 0.8,
+      "t_first_spice": 0.0349178184,
+      "t_first_python": 0.034924,
+      "n_on_spice": 9,
+      "rms_dV": 0.04745049882229033,
+      "max_dV": 0.6910035073756401
+    },
+    {
+      "vin": 1.0,
+      "t_first_spice": 0.0154277406,
+      "t_first_python": 0.015432,
+      "n_on_spice": 158,
+      "rms_dV": 0.06483543206381635,
+      "max_dV": 0.8926055526336888
+    }
+  ],
+  "pulse_train_paper_transistor": {
+    "t_end": 0.4,
+    "n_turn_on": 523,
+    "first": 0.19285717,
+    "Vg_max": 0.796812749,
+    "Vd_min": 0.0488479097
+  },
+  "pulse_train_gf180_nmos_3p3": {
+    "t_end": 0.4,
+    "n_turn_on": 530,
+    "first": 0.19285717,
+    "Vg_max": 0.796812749,
+    "Vd_min": 0.61329211,
+    "note": "Rl=47k, Vdd=1 V 沿用论文;GF180 nmos_3p3 阈值约 0.7 V,输出摆幅小,Rl/Vdd 需按 3.3 V 工艺重设"
+  }
+}
