@@ -1,0 +1,255 @@
+{
+  "model": "Zhao 2025 SI Table 1, deterministic (sigma=0), dt=2us",
+  "source": "正文 Nat. Electron. 8, 1211–1221;不含 SI",
+  "E0_constant_first_turn_on_ms": {
+    "0.6": 77.63199999999999,
+    "0.8": 34.924,
+    "1.0": 15.432
+  },
+  "E1_fig2e_Rc250M": {
+    "first_turn_on_ms": 192.934,
+    "first_output_spike_ms": 192.938,
+    "n_turn_on_0_400ms": 683,
+    "n_output_spikes_0_400ms": 9,
+    "n_turn_on_200_400ms": 681,
+    "pulses_with_turn_on_200_400ms": 94,
+    "V_min_after_0p5s": 0.3471908907552952,
+    "V_max": 0.7968127490039546,
+    "frac_time_O_high_after_0p5s": 1.0,
+    "V_at_turn_on_600_900ms_mean": 0.7526488522956015,
+    "isi_turn_on_600_900ms": {
+      "n": 1650,
+      "mean_ms": 0.18121164342025473,
+      "median_ms": 0.060000000000060005,
+      "min_ms": 0.058000000000002494,
+      "max_ms": 1.1920000000000819
+    },
+    "isi_output_600_900ms": {
+      "n": 0,
+      "mean_ms": null,
+      "median_ms": null,
+      "min_ms": null,
+      "max_ms": null
+    }
+  },
+  "E2_isi_vs_Rc": {
+    "5e+07": {
+      "paper_isi_mean_ms": 2.25,
+      "isi_turn_on": {
+        "n": 150,
+        "mean_ms": 2.0,
+        "median_ms": 2.0000000000000018,
+        "min_ms": 1.9980000000000553,
+        "max_ms": 2.0019999999999483
+      },
+      "isi_output": {
+        "n": 150,
+        "mean_ms": 2.0,
+        "median_ms": 2.0000000000000018,
+        "min_ms": 1.9980000000000553,
+        "max_ms": 2.0019999999999483
+      },
+      "V_min_after_0p5s": 0.00020450593994722003,
+      "frac_time_O_high_after_0p5s": 0.478004,
+      "refire_gate_voltage_implied_by_paper_V": 0.008887197230593846,
+      "V_at_turn_on_mean": 0.00211659895985828
+    },
+    "1e+08": {
+      "paper_isi_mean_ms": 2.3,
+      "isi_turn_on": {
+        "n": 2100,
+        "mean_ms": 0.14240876607908526,
+        "median_ms": 0.03799999999998249,
+        "min_ms": 0.03599999999992498,
+        "max_ms": 1.0859999999999204
+      },
+      "isi_output": {
+        "n": 150,
+        "mean_ms": 2.0,
+        "median_ms": 2.0000000000000018,
+        "min_ms": 1.9979999999999443,
+        "max_ms": 2.0020000000000593
+      },
+      "V_min_after_0p5s": 0.1800259778954862,
+      "frac_time_O_high_after_0p5s": 0.948428,
+      "refire_gate_voltage_implied_by_paper_V": 0.080207074978243,
+      "V_at_turn_on_mean": 0.7455340819798685
+    },
+    "2.5e+08": {
+      "paper_isi_mean_ms": 4.0,
+      "isi_turn_on": {
+        "n": 1650,
+        "mean_ms": 0.18121164342025473,
+        "median_ms": 0.060000000000060005,
+        "min_ms": 0.058000000000002494,
+        "max_ms": 1.1920000000000819
+      },
+      "isi_output": {
+        "n": 0,
+        "mean_ms": null,
+        "median_ms": null,
+        "min_ms": null,
+        "max_ms": null
+      },
+      "V_min_after_0p5s": 0.3471908907552952,
+      "frac_time_O_high_after_0p5s": 1.0,
+      "refire_gate_voltage_implied_by_paper_V": 0.1615172143957243,
+      "V_at_turn_on_mean": 0.7526488522956015
+    },
+    "5e+08": {
+      "paper_isi_mean_ms": 8.0,
+      "isi_turn_on": {
+        "n": 665,
+        "mean_ms": 0.4496777108433735,
+        "median_ms": 0.15599999999993397,
+        "min_ms": 0.132000000000021,
+        "max_ms": 1.3959999999999528
+      },
+      "isi_output": {
+        "n": 0,
+        "mean_ms": null,
+        "median_ms": null,
+        "min_ms": null,
+        "max_ms": null
+      },
+      "V_min_after_0p5s": 0.28156891303876536,
+      "frac_time_O_high_after_0p5s": 1.0,
+      "refire_gate_voltage_implied_by_paper_V": 0.1615172143957243,
+      "V_at_turn_on_mean": 0.720382630648977
+    },
+    "1e+09": {
+      "paper_isi_mean_ms": 23.8,
+      "isi_turn_on": {
+        "n": 99,
+        "mean_ms": 3.0212040816326526,
+        "median_ms": 3.962000000000021,
+        "min_ms": 1.0879999999999779,
+        "max_ms": 4.006000000000065
+      },
+      "isi_output": {
+        "n": 4,
+        "mean_ms": 9.333333333333341,
+        "median_ms": 7.974000000000037,
+        "min_ms": 4.025999999999974,
+        "max_ms": 16.000000000000014
+      },
+      "V_min_after_0p5s": 6.717445735763712e-06,
+      "frac_time_O_high_after_0p5s": 0.986964,
+      "refire_gate_voltage_implied_by_paper_V": 0.0740404620082746,
+      "V_at_turn_on_mean": 0.5492469534546289
+    }
+  },
+  "E3_single_pulse_first_turn_on_ms": {
+    "0.7V_15ms": null,
+    "0.7V_25ms": null,
+    "0.8V_15ms": null,
+    "0.8V_25ms": null,
+    "0.9V_15ms": null,
+    "0.9V_25ms": 23.268,
+    "1.0V_15ms": null,
+    "1.0V_25ms": 15.432,
+    "1.2V_15ms": 8.033999999999999,
+    "1.2V_25ms": 8.033999999999999
+  },
+  "E4_fig3b_pulses_before_firing": {
+    "0.4ms": {
+      "t_first_ms": 63.928,
+      "n_pulses": 46,
+      "paper_n_pulses": 140
+    },
+    "0.6ms": {
+      "t_first_ms": 88.762,
+      "n_pulses": 56,
+      "paper_n_pulses": 160
+    },
+    "0.8ms": {
+      "t_first_ms": 116.02399999999999,
+      "n_pulses": 65,
+      "paper_n_pulses": 180
+    },
+    "1.0ms": {
+      "t_first_ms": 146.762,
+      "n_pulses": 74,
+      "paper_n_pulses": 215
+    },
+    "1.2ms": {
+      "t_first_ms": 181.138,
+      "n_pulses": 83,
+      "paper_n_pulses": 260
+    }
+  },
+  "E5_fig4ab_paired_pulse": {
+    "3ms": {
+      "t1_ms": 2.6839999999999997,
+      "t2_ms": 1.0659999999999998,
+      "diff_ms": 1.6179999999999999,
+      "paper_diff_ms": 5.7
+    },
+    "30ms": {
+      "t1_ms": 2.6839999999999997,
+      "t2_ms": 1.138,
+      "diff_ms": 1.5459999999999998,
+      "paper_diff_ms": 4.5
+    },
+    "80ms": {
+      "t1_ms": 2.6839999999999997,
+      "t2_ms": 1.382,
+      "diff_ms": 1.3019999999999998,
+      "paper_diff_ms": 3.2
+    },
+    "200ms": {
+      "t1_ms": 2.6839999999999997,
+      "t2_ms": 1.8679999999999999,
+      "diff_ms": 0.8159999999999998,
+      "paper_diff_ms": 2.4
+    },
+    "1000ms": {
+      "t1_ms": 2.6839999999999997,
+      "t2_ms": 2.666,
+      "diff_ms": 0.017999999999999794,
+      "paper_diff_ms": 0.2
+    }
+  },
+  "E6_sensitivity_fig2e": {
+    "table1": {
+      "first_turn_on_ms": 192.934,
+      "n_turn_on_0_400ms": 683,
+      "n_output_spikes_0_400ms": 9
+    },
+    "mu=200": {
+      "first_turn_on_ms": 96.966,
+      "n_turn_on_0_400ms": 1630,
+      "n_output_spikes_0_400ms": 10
+    },
+    "mu=300": {
+      "first_turn_on_ms": 30.868,
+      "n_turn_on_0_400ms": 2411,
+      "n_output_spikes_0_400ms": 6
+    },
+    "gamma1=450": {
+      "first_turn_on_ms": 104.838,
+      "n_turn_on_0_400ms": 1604,
+      "n_output_spikes_0_400ms": 6
+    },
+    "gamma1=300": {
+      "first_turn_on_ms": 44.314,
+      "n_turn_on_0_400ms": 1701,
+      "n_output_spikes_0_400ms": 1
+    },
+    "beta=40": {
+      "first_turn_on_ms": 88.95199999999998,
+      "n_turn_on_0_400ms": 1864,
+      "n_output_spikes_0_400ms": 5
+    },
+    "gamma2=2.5": {
+      "first_turn_on_ms": 160.994,
+      "n_turn_on_0_400ms": 1226,
+      "n_output_spikes_0_400ms": 7
+    },
+    "alpha=0.005": {
+      "first_turn_on_ms": 188.856,
+      "n_turn_on_0_400ms": 1249,
+      "n_output_spikes_0_400ms": 8
+    }
+  }
+}

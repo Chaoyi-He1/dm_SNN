@@ -45,6 +45,7 @@ python3 -m venv .venv
 
 - 晶体管：GF180MCU 开源 PDK（`pdk/gf180mcu/`，固定提交与哈希见其 README）。`experiments/spice/gf180.py` 比较四种 gain cell 泄漏路径，结果 `results/spice-gf180-leak.md`。
 - 扩散忆阻器：`snn_spec/adm.py` 是 Zhao et al. 2025 补充材料 Note 4/6 的 1M1T1R 物理模型（Python，含 token 接口 `step`）；`experiments/spice/adm_spice.py` 是同一模型的 ngspice 实现并与 Python 交叉验证；`experiments/adm_fit.py` 检验六参数抽象对它是否成立。结果与结论见 `results/adm-neuron.md`。
+- 正文对照：`experiments/adm_main_text.py` 把 Table 1 模型对着正文 Fig. 2e / 3b / 3c,d / 4a,b / 4c,d 跑一遍，结果 `results/adm-main-text.json`，断言在 `tests/test_adm_main_text.py`（1 项 xfail 记录模型与正文的不符），解释见 `results/adm-neuron.md` 末节。
 - 依赖：ngspice，`pypdf`（仅用于提取补充材料文本，不入库）。
 
 ## Stage 0 完成状态
@@ -57,3 +58,7 @@ python3 -m venv .venv
 .venv/bin/python experiments/delayed_copy.py
 .venv/bin/python experiments/associative_recall.py
 ```
+
+## Windows
+
+`D:\APP\anaconda\New\python.exe`（Python 3.14，torch 2.14.0+cu126）。在本目录执行 `set PYTHONUTF8=1` 后 `python -m pytest -q`（含中文的 JSON 输出需要 UTF-8）；ngspice 未安装，SPICE 测试自动跳过。`.venv` 是 macOS 的，不能在 Windows 上用。

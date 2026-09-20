@@ -66,3 +66,12 @@ cd step1-spiking-layer
 .venv/bin/python -m experiments.spice.adm_spice    # ADM 1M1T1R
 .venv/bin/python experiments/adm_fit.py
 ```
+
+## 2026-09-19 ADM 模型与正文对照
+
+正文 PDF 到手(`paper/Crossbar/diffusive.pdf`,仅正文,无 SI)。用 `experiments/adm_main_text.py` 把 Table 1 模型对着正文 Fig. 2e、3b、3c/d、4a/b、4c/d 跑了一遍(`results/adm-main-text.json`;`tests/test_adm_main_text.py` 4 项通过、1 项 xfail 记录不符),解释见 `results/adm-neuron.md` 末节。
+
+- 正文能确认的参数(R_c 250 MΩ、R_load 47 kΩ、晶体管 0.22 V、HRS 量级、能耗量级)与我们的取值一致;V_dd 正文为 0.5 V(`adm_spice.py` 用 1 V,只影响输出级)。μ、β、γ、λ、C_g 等只在 SI 里,未核对。
+- 残留寿命 γ₂ = 5 s⁻¹、泄漏随脉冲间隔的比例与正文一致;绝对积分时间落在正文两个实验器件相差 5 倍的范围内。
+- **发现 6、7 需要更正。** Table 1 模型在 R_c ≥ 250 MΩ 下首次发放后锁死(x 在 1 附近每脉冲抖动约 7 次、V_gs ≥ 0.35 V、Eq. S15 输出恒高、没有输出脉冲),与正文 Fig. 2c/2e/4d(分立尖峰,250 MΩ 时 ISI ≈ 4 ms、由 R_c C_g 放电设定)定性不符:“2–3 kHz 松弛振荡”是抖动;“只能按导通事件计”反了,输出脉冲才是正确的事件定义。原因是模型对残留的增强太强——再次导通只需 V_in − V_gs ≈ 0.05 V,正文反推需 ≈ 0.65 V。规范“实现配置与接口约定”里关于 ADM 短脉冲/撤除输入的要求依据的是这个锁死行为,待 SI 核对后重写(未改规范)。R_c ≤ 100 MΩ 时模型与正文一致(每脉冲一个输出脉冲)。
+- 环境:本次在 Windows 上用 `D:\APP\anaconda\New` 的 Python 3.14 + torch 2.14.0+cu126 跑,pytest 全部通过(SPICE 项因无 ngspice 跳过);写含中文的 JSON 需 `PYTHONUTF8=1`。GPU 为 RTX 5070 Ti(sm_120),cu126 版 torch 的架构表不含它,Stage 2 用 GPU 前要换 cu128 及以上的 wheel。
