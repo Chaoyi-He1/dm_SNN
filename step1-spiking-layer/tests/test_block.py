@@ -79,3 +79,12 @@ def test_record_contains_signals_needed_for_stage2_replay():
     for key in ["h_in", "x_attn", "alpha", "beta", "q", "k", "v", "S", "o", "o_spk",
                 "y_attn", "h_mid", "x_ffn", "g", "u", "p", "y_ffn", "h_out"]:
         assert key in rec, key
+
+
+def test_learn_thr_makes_lif_thresholds_parameters():
+    blk = SpikingBlock(d=8, d_ff=16, n_k_heads=1, n_v_heads=1, dk=4, dv=4, learn_thr=True)
+    names = [n for n, _ in blk.named_parameters() if "log_thr" in n]
+    assert "attn.sn_q._thr.log_thr" in names and "ffn.sn_2._thr.log_thr" in names
+    assert "q_in1.log_thr" in names                       # QuantizerIn 一直可学
+    blk0 = SpikingBlock(d=8, d_ff=16, n_k_heads=1, n_v_heads=1, dk=4, dv=4)
+    assert not any("_thr.log_thr" in n for n, _ in blk0.named_parameters())   # 默认不变

@@ -14,15 +14,15 @@ class SpikingSwiGLU(nn.Module):
     """W_2( g ⊙ u ),g = BinaryLIF(W_1 x) ∈ {0,1},u = TernaryLIF(W_3 x) ∈ {-1,0,+1}。
     折叠模式下逐元素乘就是"锁存 + AND",符号取 u(因 g >= 0)。"""
 
-    def __init__(self, d, d_ff, leak=0.9, thr=1.0):
+    def __init__(self, d, d_ff, leak=0.9, thr=1.0, learn_thr=False):
         super().__init__()
         self.d, self.d_ff = d, d_ff
         self.W1 = nn.Linear(d, d_ff, bias=False)
         self.W3 = nn.Linear(d, d_ff, bias=False)
         self.W2 = nn.Linear(d_ff, d, bias=False)
-        self.sn_1 = BinaryLIF(thr, leak)
-        self.sn_3 = TernaryLIF(thr, leak)
-        self.sn_2 = TernaryLIF(thr, leak)
+        self.sn_1 = BinaryLIF(thr, leak, learn_thr=learn_thr)
+        self.sn_3 = TernaryLIF(thr, leak, learn_thr=learn_thr)
+        self.sn_2 = TernaryLIF(thr, leak, learn_thr=learn_thr)
 
     def init_state(self, B, device):
         z = lambda *s: torch.zeros(*s, device=device)
@@ -41,13 +41,13 @@ class SpikingBlock(nn.Module):
     """一个完整的 decoder block:Q_in → GDN → 累加 → Q_in → SwiGLU → 累加。"""
 
     def __init__(self, d, d_ff, n_k_heads, n_v_heads, dk, dv, gates=None, fir_taps=0,
-                 alpha_rng=(0.5, 0.99), leak=0.9, thr=1.0, thr_in=1.0):
+                 alpha_rng=(0.5, 0.99), leak=0.9, thr=1.0, thr_in=1.0, learn_thr=False):
         super().__init__()
         self.q_in1 = QuantizerIn(thr_in)
         self.attn = SpikingGDN(d, n_k_heads, n_v_heads, dk, dv, gates=gates, fir_taps=fir_taps,
-                               alpha_rng=alpha_rng, leak=leak, thr=thr)
+                               alpha_rng=alpha_rng, leak=leak, thr=thr, learn_thr=learn_thr)
         self.q_in2 = QuantizerIn(thr_in)
-        self.ffn = SpikingSwiGLU(d, d_ff, leak=leak, thr=thr)
+        self.ffn = SpikingSwiGLU(d, d_ff, leak=leak, thr=thr, learn_thr=learn_thr)
 
     def init_state(self, B, device):
         return dict(attn=self.attn.init_state(B, device), ffn=self.ffn.init_state(B, device))
