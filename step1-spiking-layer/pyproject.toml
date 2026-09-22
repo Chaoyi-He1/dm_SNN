@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "snn_spec"
+version = "0.1.0"
+description = "Stage 0 software reference of the folded T=1 spiking GDN layer and Stage 1 behavioral circuit primitives"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.1", "numpy"]
+
+[tool.setuptools]
+packages = ["snn_spec"]

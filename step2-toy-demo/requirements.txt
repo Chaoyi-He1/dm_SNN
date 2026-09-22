@@ -1,0 +1,4 @@
+torch>=2.1
+numpy
+pytest
+-e ../step1-spiking-layer
