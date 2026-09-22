@@ -1,5 +1,7 @@
 # Stage 0 软件参考实现
 
+Stage 2 起的玩具模型 demo 在 `../step2-toy-demo/`,它通过可编辑安装引用本目录的 `snn_spec`(`pyproject.toml`)。
+
 接口基线：上级目录 `folded-T1-spec.md`，版本 0.1.3，尚未冻结。
 
 在本目录执行：

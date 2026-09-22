@@ -155,7 +155,7 @@ class SpikingGDN(nn.Module):
     """
 
     def __init__(self, d, n_k_heads, n_v_heads, dk, dv, gates=None, fir_taps=0,
-                 alpha_rng=(0.5, 0.99), leak=0.9, thr=1.0):
+                 alpha_rng=(0.5, 0.99), leak=0.9, thr=1.0, learn_thr=False):
         super().__init__()
         assert n_v_heads % n_k_heads == 0
         self.d, self.Hk, self.Hv, self.dk, self.dv = d, n_k_heads, n_v_heads, dk, dv
@@ -164,11 +164,11 @@ class SpikingGDN(nn.Module):
         self.Wv = nn.Linear(d, n_v_heads * dv, bias=False)
         self.Wo = nn.Linear(n_v_heads * dv, d, bias=False)
         self.gates = gates if gates is not None else QwenNativeGates(d, n_v_heads, alpha_rng)
-        self.sn_q = BinaryLIF(thr, leak)
-        self.sn_k = TernaryLIF(thr, leak)
-        self.sn_v = TernaryLIF(thr, leak)
-        self.sn_pre = TernaryLIF(thr, leak)
-        self.sn_out = TernaryLIF(thr, leak)
+        self.sn_q = BinaryLIF(thr, leak, learn_thr=learn_thr)
+        self.sn_k = TernaryLIF(thr, leak, learn_thr=learn_thr)
+        self.sn_v = TernaryLIF(thr, leak, learn_thr=learn_thr)
+        self.sn_pre = TernaryLIF(thr, leak, learn_thr=learn_thr)
+        self.sn_out = TernaryLIF(thr, leak, learn_thr=learn_thr)
         self.c_k = 1.0 / math.sqrt(dk)                 # 固定缩放:||k||^2 = n/dk <= 1
         self.fir_taps = fir_taps
         if fir_taps > 1:
