@@ -1,5 +1,19 @@
 [
  {
+  "name": "L2_fq50_lr5e3_w300_12k",
+  "stage": "a1",
+  "knobs": "fq 0.5; lr 0.005 cosine warmup 300; steps 12000",
+  "start_acc": 0.1229,
+  "acc": 0.7462,
+  "ppl": 2.569,
+  "exact": "1/5",
+  "best_acc": 0.7462,
+  "best_exact": 4,
+  "stopped": "max_steps",
+  "steps": 12000,
+  "seconds": 5642.1
+ },
+ {
   "name": "L1_fq50_12k",
   "stage": "a1",
   "knobs": "fq 0.5; lr 0.003 cosine; steps 12000",
