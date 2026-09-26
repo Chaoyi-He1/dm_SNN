@@ -1,5 +1,19 @@
 [
  {
+  "name": "L1_fq50_12k",
+  "stage": "a1",
+  "knobs": "fq 0.5; lr 0.003 cosine; steps 12000",
+  "start_acc": 0.1229,
+  "acc": 0.7404,
+  "ppl": 2.631,
+  "exact": "1/5",
+  "best_acc": 0.7404,
+  "best_exact": 3,
+  "stopped": "max_steps",
+  "steps": 12000,
+  "seconds": 7283.1
+ },
+ {
   "name": "PK4_lr5e3_w300",
   "stage": "a1",
   "knobs": "fq 0.75 kinds[qin=0.5,k=0.5,head=0.5,u=0.5,y2=0.5]; lr 0.005 cosine warmup 300; steps 6000",
@@ -196,6 +210,48 @@
   "seconds": 3502.9
  },
  {
+  "name": "CF3_s1_lif225_lr3e3",
+  "stage": "c",
+  "knobs": "init S1_fq50_lr5e3_w300; lif x2.25; lr 0.003 cosine; steps 6000",
+  "start_acc": 0.2377,
+  "acc": 0.6527,
+  "ppl": 3.675,
+  "exact": "0/5",
+  "best_acc": 0.654,
+  "best_exact": 1,
+  "stopped": "max_steps",
+  "steps": 6000,
+  "seconds": 3001.3
+ },
+ {
+  "name": "CF1_pk4w_lif225_lr3e3",
+  "stage": "c",
+  "knobs": "init PK4_lr5e3_w300; lif x2.25; lr 0.003 cosine; steps 6000",
+  "start_acc": 0.231,
+  "acc": 0.649,
+  "ppl": 3.731,
+  "exact": "0/5",
+  "best_acc": 0.6495,
+  "best_exact": 2,
+  "stopped": "max_steps",
+  "steps": 6000,
+  "seconds": 2887.9
+ },
+ {
+  "name": "CF2_pk4w_lif225_lr5e3_w300",
+  "stage": "c",
+  "knobs": "init PK4_lr5e3_w300; lif x2.25; lr 0.005 cosine warmup 300; steps 6000",
+  "start_acc": 0.231,
+  "acc": 0.6392,
+  "ppl": 3.818,
+  "exact": "0/5",
+  "best_acc": 0.6442,
+  "best_exact": 2,
+  "stopped": "max_steps",
+  "steps": 6000,
+  "seconds": 3043.9
+ },
+ {
   "name": "C4_lr3e3",
   "stage": "c",
   "knobs": "init R2_fq50; lr 0.003 cosine; steps 4000",
@@ -208,6 +264,20 @@
   "stopped": "max_steps",
   "steps": 4000,
   "seconds": 2499.5
+ },
+ {
+  "name": "CF4_pk4w_lif225_lr3e3_anneal1000",
+  "stage": "c",
+  "knobs": "init PK4_lr5e3_w300; lif x2.25; anneal 1000; lr 0.003 cosine; steps 6000",
+  "start_acc": 0.231,
+  "acc": 0.6238,
+  "ppl": 4.077,
+  "exact": "0/5",
+  "best_acc": 0.6257,
+  "best_exact": 2,
+  "stopped": "max_steps",
+  "steps": 6000,
+  "seconds": 3037.4
  },
  {
   "name": "C6_lif25",

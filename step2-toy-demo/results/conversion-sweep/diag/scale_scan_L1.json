@@ -1,0 +1,72 @@
+[
+ {
+  "kind": "none",
+  "factor": 1.0,
+  "token_acc": 0.1263,
+  "ppl": 443.41,
+  "n_exact": 0
+ },
+ {
+  "kind": "uniform",
+  "factor": 1.25,
+  "token_acc": 0.1416,
+  "ppl": 224.3,
+  "n_exact": 0
+ },
+ {
+  "kind": "uniform",
+  "factor": 1.5,
+  "token_acc": 0.1612,
+  "ppl": 143.41,
+  "n_exact": 0
+ },
+ {
+  "kind": "uniform",
+  "factor": 2.0,
+  "token_acc": 0.1752,
+  "ppl": 126.0,
+  "n_exact": 0
+ },
+ {
+  "kind": "lif",
+  "factor": 1.5,
+  "token_acc": 0.1649,
+  "ppl": 200.78,
+  "n_exact": 0
+ },
+ {
+  "kind": "lif",
+  "factor": 1.75,
+  "token_acc": 0.1854,
+  "ppl": 143.31,
+  "n_exact": 0
+ },
+ {
+  "kind": "lif",
+  "factor": 2.0,
+  "token_acc": 0.2176,
+  "ppl": 101.88,
+  "n_exact": 0
+ },
+ {
+  "kind": "lif",
+  "factor": 2.25,
+  "token_acc": 0.2258,
+  "ppl": 85.58,
+  "n_exact": 0
+ },
+ {
+  "kind": "lif",
+  "factor": 2.5,
+  "token_acc": 0.2229,
+  "ppl": 84.16,
+  "n_exact": 0
+ },
+ {
+  "kind": "lif",
+  "factor": 3.0,
+  "token_acc": 0.1995,
+  "ppl": 111.46,
+  "n_exact": 0
+ }
+]

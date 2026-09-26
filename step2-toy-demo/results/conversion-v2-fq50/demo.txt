@@ -1,0 +1,48 @@
+前缀: 'He put his wet and'
+目标: ' dirty shirt into the dryer and watched it spin.'
+  A0       一致   ' dirty shirt into the dryer and watched it spin.'
+  A1       不一致  ' wanted to save it with his mom.'
+  B        不一致  ' all the the his on the little Lucy.'
+  C        不一致  ' dirty shirt into the dryer and watched the party and spin.'
+  circuit  不一致  ' dirty, and saw a shy.'
+
+前缀: "He couldn't wait any"
+目标: ' longer and ran to meet them.'
+  A0       一致   ' longer and ran to meet them.'
+  A1       不一致  ' longer.'
+  B        不一致  ' as he got he he he listened carefully as he, and, and to, and to for for help for being! at the way home on on to to to to to find and to home and'
+  C        不一致  ' longer to see it.'
+  circuit  不一致  ' longer and made him.'
+
+前缀: 'She ran around the whole'
+目标: ' park, but she could not find him anywhere.'
+  A0       一致   ' park, but she could not find him anywhere.'
+  A1       不一致  ' park, but it was always very independent.'
+  B        不一致  ' soon got smaller sawMommy got dark hair "If wh healthy park, and to all and to all and and and and and clapped and feel and suddenly feeling and hugged better and more bugs better'
+  C        一致   ' park, but she could not find him anywhere.'
+  circuit  一致   ' park, but she could not find him anywhere.'
+
+前缀: 'They showed her how to'
+目标: ' use a wet cloth to wipe the gum away.'
+  A0       一致   ' use a wet cloth to wipe the gum away.'
+  A1       不一致  ' use the trap finally the grass very hard to have.'
+  B        不一致  ' its friend to up up to up to a very and and and it and that and that and. better.â€™......'
+  C        不一致  ' use a wet and they ever, but first, Jack.'
+  circuit  不一致  ' all friends, all the friends.'
+
+前缀: 'They all looked at the'
+目标: ' gum and talked about how amazing it was.'
+  A0       一致   ' gum and talked about how amazing it was.'
+  A1       不一致  ' gum.'
+  B        不一致  ' and and the and said to playing together and together and having each other and having for the for each other for help.'
+  C        不一致  ' gum and talked about how amazing.'
+  circuit  一致   ' gum and talked about how amazing it was.'
+
+| 阶段 | token 准确率 | 困惑度 | 补全正确 |
+|---|---|---|---|
+| A0 | 0.8420 | 1.794 | 5/5 |
+| A1_init | 0.1229 | 328.496 | 0/5 |
+| A1 | 0.6772 | 3.384 | 0/5 |
+| B | 0.1119 | 357.973 | 0/5 |
+| C | 0.6630 | 3.607 | 1/5 |
+| circuit_ideal | 0.6633 | 3.603 | 1/5 |
