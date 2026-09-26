@@ -1,0 +1,93 @@
+{
+ "lr": 0.003,
+ "steps": 200,
+ "schedule": "const",
+ "init": {
+  "token_acc": 0.5113882772184027,
+  "ppl": 6.986026778863462,
+  "n_exact": 0
+ },
+ "history": [
+  {
+   "step": 50,
+   "loss": 2.5283,
+   "ce": 2.5283,
+   "token_acc": 0.47069304600695905,
+   "ppl": 8.807959164737497,
+   "n_exact": 0,
+   "seconds": 30.3,
+   "lr": 0.003,
+   "leak": null
+  },
+  {
+   "step": 100,
+   "loss": 2.4057,
+   "ce": 2.4057,
+   "token_acc": 0.4768620463599536,
+   "ppl": 8.602436277330854,
+   "n_exact": 0,
+   "seconds": 59.9,
+   "lr": 0.003,
+   "leak": null
+  },
+  {
+   "step": 150,
+   "loss": 2.3165,
+   "ce": 2.3165,
+   "token_acc": 0.48032475500495875,
+   "ppl": 8.30164662692349,
+   "n_exact": 0,
+   "seconds": 90.0,
+   "lr": 0.003,
+   "leak": null
+  },
+  {
+   "step": 200,
+   "loss": 2.0402,
+   "ce": 2.0402,
+   "token_acc": 0.47679480929888557,
+   "ppl": 8.385209039408066,
+   "n_exact": 0,
+   "seconds": 124.2,
+   "lr": 0.003,
+   "leak": null
+  }
+ ],
+ "final": {
+  "token_acc": 0.47679480929888557,
+  "ppl": 8.385209039408066,
+  "n_exact": 0
+ },
+ "completions": [
+  {
+   "prefix": "He put his wet and",
+   "target": " dirty shirt into the dryer and watched it spin.",
+   "output": " took it up.",
+   "exact": false
+  },
+  {
+   "prefix": "He couldn't wait any",
+   "target": " longer and ran to meet them.",
+   "output": " longer his eyes.",
+   "exact": false
+  },
+  {
+   "prefix": "She ran around the whole",
+   "target": " park, but she could not find him anywhere.",
+   "output": " way home, and he felt more bugs.",
+   "exact": false
+  },
+  {
+   "prefix": "They showed her how to",
+   "target": " use a wet cloth to wipe the gum away.",
+   "output": " be careful when they were in the harbor.",
+   "exact": false
+  },
+  {
+   "prefix": "They all looked at the",
+   "target": " gum and talked about how amazing it was.",
+   "output": " amazing gum and talked about history books.",
+   "exact": false
+  }
+ ]
+}

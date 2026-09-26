@@ -1,0 +1,426 @@
+{
+ "phase": "c",
+ "seconds": 55.0,
+ "rows": [
+  {
+   "tag": "recalib q=0.5 leak0.9",
+   "token_acc": 0.12743103998924207,
+   "ppl": 138.107256662674,
+   "n_exact": 0,
+   "seconds": 4.9,
+   "completions": [
+    " dirty wet in a a a and a big red red smile and and. and...",
+    " time, and he the the real walk slowly it and the inside the adventure. anymore.",
+    " grabbed her was packed everything was so scared and she finally made scared and she she was so she she and she wanted to, and, and, and to. even more clearly behind her., she",
+    " each a very John to help him and started to help. and..",
+    " and looked like to around playing out and playing in the a a searching her they their...."
+   ],
+   "rates": {
+    "mean_rate": 0.5228,
+    "rate_q_out": 0.5,
+    "h_final_absmax": 8.048,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.5,
+      "q": 0.5152,
+      "k": 0.5655,
+      "v": 0.5701,
+      "o_spk": 0.6365,
+      "y_attn": 0.645,
+      "x_ffn": 0.5,
+      "g": 0.3154,
+      "u": 0.6176,
+      "p": 0.1976,
+      "y_ffn": 0.6597
+     },
+     "block1": {
+      "x_attn": 0.5,
+      "q": 0.4867,
+      "k": 0.6557,
+      "v": 0.6411,
+      "o_spk": 0.6584,
+      "y_attn": 0.6854,
+      "x_ffn": 0.5,
+      "g": 0.1787,
+      "u": 0.6597,
+      "p": 0.1213,
+      "y_ffn": 0.6929
+     }
+    }
+   },
+   "thresholds": {
+    "blocks.0.q_in1": 0.7638,
+    "blocks.0.q": 0.001,
+    "blocks.0.k": 1.1806,
+    "blocks.0.v": 1.0143,
+    "blocks.0.pre": 0.2208,
+    "blocks.0.out": 0.9381,
+    "blocks.0.q_in2": 0.8982,
+    "blocks.0.g": 0.001,
+    "blocks.0.u": 0.6499,
+    "blocks.0.y2": 0.6013,
+    "blocks.1.q_in1": 1.2103,
+    "blocks.1.q": 0.0343,
+    "blocks.1.k": 1.2196,
+    "blocks.1.v": 0.9219,
+    "blocks.1.pre": 0.4563,
+    "blocks.1.out": 1.1252,
+    "blocks.1.q_in2": 1.3584,
+    "blocks.1.g": 0.001,
+    "blocks.1.u": 0.7481,
+    "blocks.1.y2": 0.4756,
+    "q_out": 1.6431
+   }
+  },
+  {
+   "tag": "recalib q=0.6 leak0.9",
+   "token_acc": 0.14790472508446656,
+   "ppl": 108.54033701426266,
+   "n_exact": 0,
+   "seconds": 4.1,
+   "completions": [
+    " wanted to the for it a better..",
+    " to play with with the.",
+    " and she was always wanted she could to find to find find, but help ever get to get find find help more go explore play play with more.....",
+    " the the a a big hug.",
+    " and said gave gave gave gave gave him in all, and all a a is a, a with a big hug flower from with her mom for place where."
+   ],
+   "rates": {
+    "mean_rate": 0.4386,
+    "rate_q_out": 0.4,
+    "h_final_absmax": 8.048,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.4,
+      "q": 0.3863,
+      "k": 0.454,
+      "v": 0.4586,
+      "o_spk": 0.544,
+      "y_attn": 0.5574,
+      "x_ffn": 0.4,
+      "g": 0.3135,
+      "u": 0.5119,
+      "p": 0.1619,
+      "y_ffn": 0.5574
+     },
+     "block1": {
+      "x_attn": 0.4,
+      "q": 0.41,
+      "k": 0.5591,
+      "v": 0.5328,
+      "o_spk": 0.5687,
+      "y_attn": 0.5814,
+      "x_ffn": 0.4,
+      "g": 0.205,
+      "u": 0.5494,
+      "p": 0.1154,
+      "y_ffn": 0.5834
+     }
+    }
+   },
+   "thresholds": {
+    "blocks.0.q_in1": 0.8484,
+    "blocks.0.q": 0.3472,
+    "blocks.0.k": 1.3741,
+    "blocks.0.v": 1.1532,
+    "blocks.0.pre": 0.2173,
+    "blocks.0.out": 1.1121,
+    "blocks.0.q_in2": 1.077,
+    "blocks.0.g": 0.001,
+    "blocks.0.u": 0.7251,
+    "blocks.0.y2": 0.6626,
+    "blocks.1.q_in1": 1.451,
+    "blocks.1.q": 0.4408,
+    "blocks.1.k": 1.3369,
+    "blocks.1.v": 1.0099,
+    "blocks.1.pre": 0.4069,
+    "blocks.1.out": 1.2547,
+    "blocks.1.q_in2": 1.6423,
+    "blocks.1.g": 0.001,
+    "blocks.1.u": 0.8255,
+    "blocks.1.y2": 0.5895,
+    "q_out": 1.8624
+   }
+  },
+  {
+   "tag": "recalib q=0.75 leak0.9",
+   "token_acc": 0.15178766536114707,
+   "ppl": 165.37331112873645,
+   "n_exact": 0,
+   "seconds": 3.1,
+   "completions": [
+    " it for a big them.",
+    " help. and with.",
+    " wide everywhere of..",
+    " it its place she..",
+    "."
+   ],
+   "rates": {
+    "mean_rate": 0.2958,
+    "rate_q_out": 0.25,
+    "h_final_absmax": 7.939,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.25,
+      "q": 0.2121,
+      "k": 0.3194,
+      "v": 0.3221,
+      "o_spk": 0.3838,
+      "y_attn": 0.4138,
+      "x_ffn": 0.25,
+      "g": 0.1741,
+      "u": 0.3484,
+      "p": 0.0649,
+      "y_ffn": 0.3905
+     },
+     "block1": {
+      "x_attn": 0.25,
+      "q": 0.2878,
+      "k": 0.4051,
+      "v": 0.3634,
+      "o_spk": 0.3996,
+      "y_attn": 0.4168,
+      "x_ffn": 0.25,
+      "g": 0.1615,
+      "u": 0.3797,
+      "p": 0.0626,
+      "y_ffn": 0.403
+     }
+    }
+   },
+   "thresholds": {
+    "blocks.0.q_in1": 1.1427,
+    "blocks.0.q": 0.8343,
+    "blocks.0.k": 1.4165,
+    "blocks.0.v": 1.2216,
+    "blocks.0.pre": 0.1733,
+    "blocks.0.out": 1.2974,
+    "blocks.0.q_in2": 1.3852,
+    "blocks.0.g": 0.2977,
+    "blocks.0.u": 0.7777,
+    "blocks.0.y2": 0.5467,
+    "blocks.1.q_in1": 1.76,
+    "blocks.1.q": 0.8528,
+    "blocks.1.k": 1.3821,
+    "blocks.1.v": 1.0636,
+    "blocks.1.pre": 0.3048,
+    "blocks.1.out": 1.3869,
+    "blocks.1.q_in2": 1.8657,
+    "blocks.1.g": 0.1625,
+    "blocks.1.u": 0.8761,
+    "blocks.1.y2": 0.5513,
+    "q_out": 2.1101
+   }
+  },
+  {
+   "tag": "recalib q=0.85 leak0.9",
+   "token_acc": 0.10813400346270864,
+   "ppl": 399.23272026957244,
+   "n_exact": 0,
+   "seconds": 4.2,
+   "completions": [
+    " he left the snowstorm...",
+    " out out and the, and more look from again again. again, until playing with too. \u00e2\u20ac for each other animals \" \u00e2\u20ac\u201c Emma suddenly feeling enough whenever she that weren instead of friend Paul",
+    " widemunk soon stepped nice into. as cool hats.",
+    " the tree friend long fast enoughoo-C with long hoursling lights there for a who loved words with her chalk others work and.",
+    " little and for dinner that..."
+   ],
+   "rates": {
+    "mean_rate": 0.1978,
+    "rate_q_out": 0.15,
+    "h_final_absmax": 7.616,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.15,
+      "q": 0.1369,
+      "k": 0.2346,
+      "v": 0.2304,
+      "o_spk": 0.2586,
+      "y_attn": 0.3097,
+      "x_ffn": 0.1499,
+      "g": 0.1055,
+      "u": 0.2438,
+      "p": 0.0301,
+      "y_ffn": 0.2648
+     },
+     "block1": {
+      "x_attn": 0.15,
+      "q": 0.1972,
+      "k": 0.281,
+      "v": 0.2495,
+      "o_spk": 0.2675,
+      "y_attn": 0.2976,
+      "x_ffn": 0.15,
+      "g": 0.0909,
+      "u": 0.26,
+      "p": 0.0288,
+      "y_ffn": 0.2647
+     }
+    }
+   },
+   "thresholds": {
+    "blocks.0.q_in1": 1.4575,
+    "blocks.0.q": 0.9438,
+    "blocks.0.k": 1.2958,
+    "blocks.0.v": 1.1582,
+    "blocks.0.pre": 0.1368,
+    "blocks.0.out": 1.3562,
+    "blocks.0.q_in2": 1.7313,
+    "blocks.0.g": 0.4304,
+    "blocks.0.u": 0.7537,
+    "blocks.0.y2": 0.4511,
+    "blocks.1.q_in1": 1.9207,
+    "blocks.1.q": 0.9399,
+    "blocks.1.k": 1.2803,
+    "blocks.1.v": 1.0271,
+    "blocks.1.pre": 0.2191,
+    "blocks.1.out": 1.4516,
+    "blocks.1.q_in2": 2.0737,
+    "blocks.1.g": 0.3724,
+    "blocks.1.u": 0.8452,
+    "blocks.1.y2": 0.4668,
+    "q_out": 2.2622
+   }
+  },
+  {
+   "tag": "recalib q=0.9 leak0.9",
+   "token_acc": 0.07493570456035367,
+   "ppl": 743.0526613004284,
+   "n_exact": 0,
+   "seconds": 4.3,
+   "completions": [
+    " it a big tree in from a place...",
+    " to to him again. very.",
+    " widebons inside to growing bigger places it again too to him fall tidy growled.\" scarf",
+    " set inside is from too kayak of the best chores. behind",
+    " tree bed to towards adding every day of them uniqueess quickly caught up thought!\" he rolled in the best that flowers and the good things."
+   ],
+   "rates": {
+    "mean_rate": 0.1444,
+    "rate_q_out": 0.1,
+    "h_final_absmax": 7.017,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.1,
+      "q": 0.1077,
+      "k": 0.1805,
+      "v": 0.1843,
+      "o_spk": 0.1794,
+      "y_attn": 0.2352,
+      "x_ffn": 0.1,
+      "g": 0.0768,
+      "u": 0.1887,
+      "p": 0.0182,
+      "y_ffn": 0.1923
+     },
+     "block1": {
+      "x_attn": 0.1,
+      "q": 0.1444,
+      "k": 0.2116,
+      "v": 0.1894,
+      "o_spk": 0.1864,
+      "y_attn": 0.2231,
+      "x_ffn": 0.1,
+      "g": 0.0666,
+      "u": 0.1912,
+      "p": 0.0176,
+      "y_ffn": 0.1829
+     }
+    }
+   },
+   "thresholds": {
+    "blocks.0.q_in1": 1.7098,
+    "blocks.0.q": 0.9195,
+    "blocks.0.k": 1.2048,
+    "blocks.0.v": 1.068,
+    "blocks.0.pre": 0.1216,
+    "blocks.0.out": 1.3319,
+    "blocks.0.q_in2": 1.8764,
+    "blocks.0.g": 0.4663,
+    "blocks.0.u": 0.7084,
+    "blocks.0.y2": 0.4061,
+    "blocks.1.q_in1": 2.0488,
+    "blocks.1.q": 0.8984,
+    "blocks.1.k": 1.1431,
+    "blocks.1.v": 0.9551,
+    "blocks.1.pre": 0.1682,
+    "blocks.1.out": 1.4182,
+    "blocks.1.q_in2": 2.1805,
+    "blocks.1.g": 0.4298,
+    "blocks.1.u": 0.7924,
+    "blocks.1.y2": 0.4316,
+    "q_out": 2.3587
+   }
+  },
+  {
+   "tag": "recalib q=0.95 leak0.9",
+   "token_acc": 0.03242507270007228,
+   "ppl": 1484.0145602773398,
+   "n_exact": 0,
+   "seconds": 6.1,
+   "completions": [
+    " found truly is gladly else right,\" fold many had notime then revealed discovery. with ear hiveipped too soon its head.",
+    " longer special. after., and slidesabel forever. come safe. enough between pointingiously. in the tree. behind blocks who flew replied gladly? made then pret angry things trees that!\"",
+    " way in your tail about that!\" the song hug never alright birthday cool brush is gladly else one of wine close interesting given tooed after this pin zip was beautiful to got and found colorful pond speeding?\"",
+    ". after. as gem Binky ready for dinner! branch deaf faster than balancing more room h\u00e2\u20ac. skull tough in go soon model car Finallyles a little girl named treat mask swimming bag everywhere-to",
+    " shirt.. loved they all of howlee hole strong and at certain like of what the song upbers angry care space quite match boxes before to got searching for hours as sharing its never seen ball"
+   ],
+   "rates": {
+    "mean_rate": 0.0849,
+    "rate_q_out": 0.05,
+    "h_final_absmax": 6.855,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.05,
+      "q": 0.0752,
+      "k": 0.1266,
+      "v": 0.1226,
+      "o_spk": 0.0878,
+      "y_attn": 0.143,
+      "x_ffn": 0.05,
+      "g": 0.0508,
+      "u": 0.1208,
+      "p": 0.0097,
+      "y_ffn": 0.1039
+     },
+     "block1": {
+      "x_attn": 0.05,
+      "q": 0.088,
+      "k": 0.1307,
+      "v": 0.1161,
+      "o_spk": 0.0967,
+      "y_attn": 0.1325,
+      "x_ffn": 0.05,
+      "g": 0.043,
+      "u": 0.1145,
+      "p": 0.0089,
+      "y_ffn": 0.0972
+     }
+    }
+   },
+   "thresholds": {
+    "blocks.0.q_in1": 2.0184,
+    "blocks.0.q": 0.7833,
+    "blocks.0.k": 0.9939,
+    "blocks.0.v": 0.922,
+    "blocks.0.pre": 0.1051,
+    "blocks.0.out": 1.1746,
+    "blocks.0.q_in2": 2.1304,
+    "blocks.0.g": 0.4486,
+    "blocks.0.u": 0.6114,
+    "blocks.0.y2": 0.3995,
+    "blocks.1.q_in1": 2.2499,
+    "blocks.1.q": 0.7956,
+    "blocks.1.k": 0.9625,
+    "blocks.1.v": 0.8313,
+    "blocks.1.pre": 0.1209,
+    "blocks.1.out": 1.3424,
+    "blocks.1.q_in2": 2.37,
+    "blocks.1.g": 0.4537,
+    "blocks.1.u": 0.6974,
+    "blocks.1.y2": 0.4092,
+    "q_out": 2.5257
+   }
+  }
+ ]
+}

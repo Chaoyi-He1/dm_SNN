@@ -1,0 +1,88 @@
+{
+ "a0_head_qout_sweep": {
+  "q0.9": {
+   "thr": 6.6356,
+   "rate": 0.1,
+   "eval": {
+    "token_acc": 0.369,
+    "ppl": 722.932,
+    "n_exact": 0
+   },
+   "eval_rowscale": {
+    "token_acc": 0.3805,
+    "ppl": 63.376,
+    "n_exact": 0
+   }
+  },
+  "q0.75": {
+   "thr": 3.9197,
+   "rate": 0.25,
+   "eval": {
+    "token_acc": 0.6566,
+    "ppl": 166.048,
+    "n_exact": 2
+   },
+   "eval_rowscale": {
+    "token_acc": 0.6519,
+    "ppl": 8.984,
+    "n_exact": 3
+   }
+  },
+  "q0.5": {
+   "thr": 1.8689,
+   "rate": 0.5,
+   "eval": {
+    "token_acc": 0.786,
+    "ppl": 31.924,
+    "n_exact": 2
+   },
+   "eval_rowscale": {
+    "token_acc": 0.7779,
+    "ppl": 2.816,
+    "n_exact": 2
+   }
+  },
+  "q0.25": {
+   "thr": 0.754,
+   "rate": 0.75,
+   "eval": {
+    "token_acc": 0.7682,
+    "ppl": 12.474,
+    "n_exact": 0
+   },
+   "eval_rowscale": {
+    "token_acc": 0.7202,
+    "ppl": 3.306,
+    "n_exact": 0
+   }
+  },
+  "q0.1": {
+   "thr": 0.2642,
+   "rate": 0.9,
+   "eval": {
+    "token_acc": 0.7327,
+    "ppl": 11.558,
+    "n_exact": 0
+   },
+   "eval_rowscale": {
+    "token_acc": 0.6486,
+    "ppl": 4.928,
+    "n_exact": 0
+   }
+  },
+  "q0.0": {
+   "thr": 0.001,
+   "rate": 0.9998,
+   "eval": {
+    "token_acc": 0.7042,
+    "ppl": 12.213,
+    "n_exact": 0
+   },
+   "eval_rowscale": {
+    "token_acc": 0.6141,
+    "ppl": 6.562,
+    "n_exact": 0
+   }
+  }
+ }
+}

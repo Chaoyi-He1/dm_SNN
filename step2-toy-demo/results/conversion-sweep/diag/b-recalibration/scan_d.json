@@ -1,0 +1,335 @@
+{
+ "phase": "d",
+ "seconds": 35.8,
+ "rows": [
+  {
+   "tag": "a1 unchanged leak=0.0",
+   "token_acc": 0.5113882772184027,
+   "ppl": 6.986026778863462,
+   "n_exact": 0,
+   "seconds": 5.3,
+   "completions": [
+    " went on his adventures.",
+    " longer.",
+    " her back and saw a bush.",
+    " be more careful not the most amazing thing.",
+    " old and saw a big tree."
+   ],
+   "rates": {
+    "mean_rate": 0.5356,
+    "rate_q_out": 0.7616,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3481,
+      "k": 0.6457,
+      "v": 0.782,
+      "o_spk": 0.5965,
+      "y_attn": 0.6255,
+      "x_ffn": 0.6014,
+      "g": 0.3041,
+      "u": 0.6374,
+      "p": 0.2073,
+      "y_ffn": 0.628
+     },
+     "block1": {
+      "x_attn": 0.6253,
+      "q": 0.4321,
+      "k": 0.6927,
+      "v": 0.7235,
+      "o_spk": 0.5702,
+      "y_attn": 0.6361,
+      "x_ffn": 0.6379,
+      "g": 0.2575,
+      "u": 0.6264,
+      "p": 0.1754,
+      "y_ffn": 0.5689
+     }
+    }
+   }
+  },
+  {
+   "tag": "a1 unchanged leak=0.1",
+   "token_acc": 0.49106587551058145,
+   "ppl": 7.7644164383666965,
+   "n_exact": 0,
+   "seconds": 3.8,
+   "completions": [
+    " went to play with a big pond.",
+    " longer before.",
+    " park, but she could always mixed gone.",
+    " be a special day.",
+    " amazing gum."
+   ],
+   "rates": {
+    "mean_rate": 0.5356,
+    "rate_q_out": 0.7608,
+    "h_final_absmax": 7.951,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3447,
+      "k": 0.6479,
+      "v": 0.7822,
+      "o_spk": 0.5971,
+      "y_attn": 0.6315,
+      "x_ffn": 0.6024,
+      "g": 0.2942,
+      "u": 0.6394,
+      "p": 0.2007,
+      "y_ffn": 0.6204
+     },
+     "block1": {
+      "x_attn": 0.6257,
+      "q": 0.4307,
+      "k": 0.7009,
+      "v": 0.724,
+      "o_spk": 0.5983,
+      "y_attn": 0.6583,
+      "x_ffn": 0.6402,
+      "g": 0.2372,
+      "u": 0.6321,
+      "p": 0.1627,
+      "y_ffn": 0.5518
+     }
+    }
+   }
+  },
+  {
+   "tag": "a1 unchanged leak=0.3",
+   "token_acc": 0.39022709317375737,
+   "ppl": 13.649743701175241,
+   "n_exact": 0,
+   "seconds": 4.3,
+   "completions": [
+    " he saw a curtain in the green pieces.",
+    " longer.",
+    " her home and said, \"That man's okay.",
+    " look and and put it it work home.",
+    " gum and had a party."
+   ],
+   "rates": {
+    "mean_rate": 0.5382,
+    "rate_q_out": 0.753,
+    "h_final_absmax": 7.951,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3392,
+      "k": 0.6587,
+      "v": 0.7863,
+      "o_spk": 0.6052,
+      "y_attn": 0.6458,
+      "x_ffn": 0.6009,
+      "g": 0.2769,
+      "u": 0.6531,
+      "p": 0.1906,
+      "y_ffn": 0.6099
+     },
+     "block1": {
+      "x_attn": 0.6182,
+      "q": 0.4343,
+      "k": 0.7165,
+      "v": 0.7339,
+      "o_spk": 0.6378,
+      "y_attn": 0.696,
+      "x_ffn": 0.6347,
+      "g": 0.2108,
+      "u": 0.6509,
+      "p": 0.1469,
+      "y_ffn": 0.5333
+     }
+    }
+   }
+  },
+  {
+   "tag": "a1 unchanged leak=0.5",
+   "token_acc": 0.2672168899497403,
+   "ppl": 34.044555375957124,
+   "n_exact": 0,
+   "seconds": 3.8,
+   "completions": [
+    " quickly pulled and went off, but he was the was stuck.",
+    " longer.",
+    " way home and she was so excited to to explore he join to get get help.",
+    " the water and having so many and the amazing friends.",
+    " up at around and around and saw.."
+   ],
+   "rates": {
+    "mean_rate": 0.548,
+    "rate_q_out": 0.7472,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3318,
+      "k": 0.674,
+      "v": 0.7966,
+      "o_spk": 0.6307,
+      "y_attn": 0.678,
+      "x_ffn": 0.6024,
+      "g": 0.2634,
+      "u": 0.6768,
+      "p": 0.1867,
+      "y_ffn": 0.6229
+     },
+     "block1": {
+      "x_attn": 0.6173,
+      "q": 0.4341,
+      "k": 0.7438,
+      "v": 0.7551,
+      "o_spk": 0.6755,
+      "y_attn": 0.7288,
+      "x_ffn": 0.6323,
+      "g": 0.1884,
+      "u": 0.6801,
+      "p": 0.136,
+      "y_ffn": 0.5413
+     }
+    }
+   }
+  },
+  {
+   "tag": "a1 unchanged leak=0.7",
+   "token_acc": 0.1609150964011363,
+   "ppl": 101.17517453622119,
+   "n_exact": 0,
+   "seconds": 5.1,
+   "completions": [
+    " ran quickly pulled out and and and laughed and went around and he went faster into playing into a a place place..",
+    ", and it and the print until the world.",
+    " grabbed then gave Tim got had realized and she could never lost she was her bedroom seen before she was..",
+    " the big bite and and said and said \" \" \" look come and kind it hurts you you like you can be okay everyone?.\u00e2",
+    " and up around and having a in the out and introduced race around and, and having always remember and always remember and and and and and said.."
+   ],
+   "rates": {
+    "mean_rate": 0.5646,
+    "rate_q_out": 0.7467,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3227,
+      "k": 0.6952,
+      "v": 0.8143,
+      "o_spk": 0.6702,
+      "y_attn": 0.7201,
+      "x_ffn": 0.6044,
+      "g": 0.2463,
+      "u": 0.7117,
+      "p": 0.1818,
+      "y_ffn": 0.6516
+     },
+     "block1": {
+      "x_attn": 0.6166,
+      "q": 0.4337,
+      "k": 0.779,
+      "v": 0.7885,
+      "o_spk": 0.7129,
+      "y_attn": 0.7661,
+      "x_ffn": 0.6313,
+      "g": 0.1733,
+      "u": 0.7207,
+      "p": 0.1299,
+      "y_ffn": 0.5892
+     }
+    }
+   }
+  },
+  {
+   "tag": "a1 unchanged leak=0.8",
+   "token_acc": 0.12640567480795414,
+   "ppl": 169.98652010756413,
+   "n_exact": 0,
+   "seconds": 5.0,
+   "completions": [
+    " said was a a and a a a a big up and in his in his in the in his by his and around the...",
+    ", and, the it the water as the and ran closer until and and around and closer to the to the and the and and see see trees surrounding it and play feel like and remember and and see",
+    " said gave the most graceful exploring said she said said to her \u00e2 were about if,, she \" if I can, she she make the that are warned care are you can had come again and that",
+    " the Tim Tim and all and all and said gave gave carefully and saw carefully and saw everyone a a a big bad ball. sad and....",
+    " and around and around and around the all the the the the star out and away inside and and adventure and and inside to and and and inside and and put and, and to...."
+   ],
+   "rates": {
+    "mean_rate": 0.5766,
+    "rate_q_out": 0.7464,
+    "h_final_absmax": 8.075,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3168,
+      "k": 0.7096,
+      "v": 0.8271,
+      "o_spk": 0.6963,
+      "y_attn": 0.7424,
+      "x_ffn": 0.607,
+      "g": 0.242,
+      "u": 0.7315,
+      "p": 0.183,
+      "y_ffn": 0.6785
+     },
+     "block1": {
+      "x_attn": 0.6169,
+      "q": 0.4294,
+      "k": 0.796,
+      "v": 0.8099,
+      "o_spk": 0.7427,
+      "y_attn": 0.7926,
+      "x_ffn": 0.6332,
+      "g": 0.1676,
+      "u": 0.7443,
+      "p": 0.1289,
+      "y_ffn": 0.6276
+     }
+    }
+   }
+  },
+  {
+   "tag": "a1 unchanged leak=0.9",
+   "token_acc": 0.10030088584827958,
+   "ppl": 257.1220498128772,
+   "n_exact": 0,
+   "seconds": 4.8,
+   "completions": [
+    " said and said went went for in his dad and he his dad and said it in the his dad dad and the and Sam his dad stack",
+    " could and have, and play until the out was until it feel the and have. feel was he he could he could have found Sn the it the the the the catch if help out for help.",
+    " grabbed was said she said came came opened the she was stepped got really said was was was was was was was a was about needed a a a the the the full the little the door than top than",
+    " help me each and the both their all and and all and said and said each other and said and each each other and put against the that. that....",
+    " and said saw and and said and said had put thought and said goodbye that had put thought to the day a great idea."
+   ],
+   "rates": {
+    "mean_rate": 0.5886,
+    "rate_q_out": 0.7467,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3108,
+      "k": 0.7274,
+      "v": 0.8436,
+      "o_spk": 0.717,
+      "y_attn": 0.7619,
+      "x_ffn": 0.6084,
+      "g": 0.2366,
+      "u": 0.7561,
+      "p": 0.1843,
+      "y_ffn": 0.7031
+     },
+     "block1": {
+      "x_attn": 0.6164,
+      "q": 0.4271,
+      "k": 0.8155,
+      "v": 0.8312,
+      "o_spk": 0.7647,
+      "y_attn": 0.8109,
+      "x_ffn": 0.6333,
+      "g": 0.1661,
+      "u": 0.7695,
+      "p": 0.1313,
+      "y_ffn": 0.674
+     }
+    }
+   }
+  }
+ ]
+}

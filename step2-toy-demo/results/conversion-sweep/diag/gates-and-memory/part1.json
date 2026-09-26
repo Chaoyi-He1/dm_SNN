@@ -1,0 +1,686 @@
+{
+ "part": "part1",
+ "fq": 0.75,
+ "thresholds": {
+  "blocks.0.q_in1": 1.0755372047424316,
+  "blocks.0.q": 0.6840704083442688,
+  "blocks.0.k": 1.161651611328125,
+  "blocks.0.v": 0.939750075340271,
+  "blocks.0.pre": 0.1166459396481514,
+  "blocks.0.out": 0.935042142868042,
+  "blocks.0.q_in2": 1.193690299987793,
+  "blocks.0.g": 0.15077248215675354,
+  "blocks.0.u": 0.511426568031311,
+  "blocks.0.y2": 0.365997850894928,
+  "blocks.1.q_in1": 1.3457956314086914,
+  "blocks.1.q": 0.6627306938171387,
+  "blocks.1.k": 1.106672763824463,
+  "blocks.1.v": 0.8579784035682678,
+  "blocks.1.pre": 0.14615367352962494,
+  "blocks.1.out": 0.849174976348877,
+  "blocks.1.q_in2": 1.4569854736328125,
+  "blocks.1.g": 0.12113548070192337,
+  "blocks.1.u": 0.6487953066825867,
+  "blocks.1.y2": 0.40663641691207886,
+  "q_out": 1.5928596258163452
+ },
+ "a0_stats_512": {
+  "block0": {
+   "alpha_mean": 0.8975999355316162,
+   "alpha_q": [
+    0.621,
+    0.956,
+    0.988
+   ],
+   "beta_mean": 0.40554434061050415,
+   "beta_q": [
+    0.146,
+    0.38,
+    0.747
+   ],
+   "h_in_absmax": 4.423450946807861,
+   "h_mid_absmax": 5.718247413635254,
+   "h_out_absmax": 9.710833549499512
+  },
+  "block1": {
+   "alpha_mean": 0.9502524733543396,
+   "alpha_q": [
+    0.728,
+    0.983,
+    0.99
+   ],
+   "beta_mean": 0.6590558290481567,
+   "beta_q": [
+    0.19,
+    0.712,
+    0.978
+   ],
+   "h_in_absmax": 9.710833549499512,
+   "h_mid_absmax": 11.116630554199219,
+   "h_out_absmax": 65.75265502929688
+  },
+  "h_final_absmax": 65.75265502929688
+ },
+ "a1_init_stats_512": {
+  "block0": {
+   "alpha_mean": 0.8828595280647278,
+   "alpha_q": [
+    0.713,
+    0.906,
+    0.969
+   ],
+   "beta_mean": 0.47766292095184326,
+   "beta_q": [
+    0.323,
+    0.47,
+    0.66
+   ],
+   "h_in_absmax": 4.423450946807861,
+   "h_mid_absmax": 5.268556594848633,
+   "h_out_absmax": 5.916345596313477,
+   "rate_x_attn": 0.25,
+   "rate_q": 0.2502,
+   "rate_k": 0.2512,
+   "rate_v": 0.2493,
+   "rate_o_spk": 0.2476,
+   "rate_y_attn": 0.2476,
+   "rate_x_ffn": 0.2505,
+   "rate_g": 0.2504,
+   "rate_u": 0.2506,
+   "rate_p": 0.0656,
+   "rate_y_ffn": 0.2507,
+   "k_sqnorm_mean": 0.2512
+  },
+  "block1": {
+   "alpha_mean": 0.8669746518135071,
+   "alpha_q": [
+    0.724,
+    0.88,
+    0.957
+   ],
+   "beta_mean": 0.6101744174957275,
+   "beta_q": [
+    0.43,
+    0.613,
+    0.788
+   ],
+   "h_in_absmax": 5.916345596313477,
+   "h_mid_absmax": 6.638690948486328,
+   "h_out_absmax": 7.638690948486328,
+   "rate_x_attn": 0.2503,
+   "rate_q": 0.2513,
+   "rate_k": 0.25,
+   "rate_v": 0.25,
+   "rate_o_spk": 0.2497,
+   "rate_y_attn": 0.249,
+   "rate_x_ffn": 0.2503,
+   "rate_g": 0.2485,
+   "rate_u": 0.2497,
+   "rate_p": 0.0611,
+   "rate_y_ffn": 0.2483,
+   "k_sqnorm_mean": 0.25
+  },
+  "h_final_absmax": 7.638690948486328,
+  "rate_q_out": 0.2493
+ },
+ "a0_metrics_full": {
+  "token_acc": 0.8420433342858583,
+  "ppl": 1.7936581601641368,
+  "n_tokens": 59491
+ },
+ "a0_hmax_full": {
+  "block0": {
+   "h_in": 4.77360200881958,
+   "h_mid": 6.248917579650879,
+   "h_out": 12.005720138549805
+  },
+  "block1": {
+   "h_in": 12.005720138549805,
+   "h_mid": 14.400432586669922,
+   "h_out": 84.28010559082031
+  },
+  "h_final": 84.28010559082031
+ },
+ "gate_compare_full": {
+  "block0": {
+   "alpha_a0": {
+    "mean": 0.8934,
+    "std": 0.1233,
+    "q05": 0.607,
+    "q25": 0.8466,
+    "q50": 0.9529,
+    "q75": 0.9807,
+    "q95": 0.9881
+   },
+   "alpha_a1": {
+    "mean": 0.8799,
+    "std": 0.0869,
+    "q05": 0.6992,
+    "q25": 0.8371,
+    "q50": 0.9064,
+    "q75": 0.9463,
+    "q95": 0.9692
+   },
+   "beta_a0": {
+    "mean": 0.4153,
+    "std": 0.1881,
+    "q05": 0.1623,
+    "q25": 0.2657,
+    "q50": 0.3939,
+    "q75": 0.5515,
+    "q95": 0.7554
+   },
+   "beta_a1": {
+    "mean": 0.4823,
+    "std": 0.1041,
+    "q05": 0.323,
+    "q25": 0.405,
+    "q50": 0.4744,
+    "q75": 0.5528,
+    "q95": 0.6626
+   },
+   "alpha_mae": 0.0529,
+   "alpha_corr": 0.8476,
+   "beta_mae": 0.1123,
+   "beta_corr": 0.8476,
+   "alpha_a0_head_mean": [
+    0.8983,
+    0.9131,
+    0.889,
+    0.8731
+   ],
+   "alpha_a1_head_mean": [
+    0.8785,
+    0.9008,
+    0.8723,
+    0.8678
+   ],
+   "beta_a0_head_mean": [
+    0.426,
+    0.3988,
+    0.4187,
+    0.4178
+   ],
+   "beta_a1_head_mean": [
+    0.4947,
+    0.4775,
+    0.4867,
+    0.4704
+   ],
+   "alpha_a0_head_std": [
+    0.1139,
+    0.1172,
+    0.1206,
+    0.1368
+   ],
+   "alpha_a1_head_std": [
+    0.0812,
+    0.0839,
+    0.0895,
+    0.0888
+   ],
+   "beta_a0_head_std": [
+    0.1727,
+    0.199,
+    0.1972,
+    0.181
+   ],
+   "beta_a1_head_std": [
+    0.0964,
+    0.1049,
+    0.1118,
+    0.1012
+   ]
+  },
+  "block1": {
+   "alpha_a0": {
+    "mean": 0.9505,
+    "std": 0.0809,
+    "q05": 0.7342,
+    "q25": 0.9566,
+    "q50": 0.9833,
+    "q75": 0.9886,
+    "q95": 0.9899
+   },
+   "alpha_a1": {
+    "mean": 0.8665,
+    "std": 0.0697,
+    "q05": 0.7218,
+    "q25": 0.8238,
+    "q50": 0.8796,
+    "q75": 0.9205,
+    "q95": 0.9572
+   },
+   "beta_a0": {
+    "mean": 0.6668,
+    "std": 0.257,
+    "q05": 0.1898,
+    "q25": 0.4617,
+    "q50": 0.7214,
+    "q75": 0.9001,
+    "q95": 0.9793
+   },
+   "beta_a1": {
+    "mean": 0.6133,
+    "std": 0.1109,
+    "q05": 0.4307,
+    "q25": 0.5364,
+    "q50": 0.6163,
+    "q75": 0.6935,
+    "q95": 0.7918
+   },
+   "alpha_mae": 0.0956,
+   "alpha_corr": 0.5339,
+   "beta_mae": 0.1781,
+   "beta_corr": 0.6755,
+   "alpha_a0_head_mean": [
+    0.9162,
+    0.9726,
+    0.9646,
+    0.9487
+   ],
+   "alpha_a1_head_mean": [
+    0.8333,
+    0.8818,
+    0.8729,
+    0.8778
+   ],
+   "beta_a0_head_mean": [
+    0.4851,
+    0.7083,
+    0.6694,
+    0.8043
+   ],
+   "beta_a1_head_mean": [
+    0.5557,
+    0.6346,
+    0.6144,
+    0.6485
+   ],
+   "alpha_a0_head_std": [
+    0.1071,
+    0.0442,
+    0.0502,
+    0.0914
+   ],
+   "alpha_a1_head_std": [
+    0.0714,
+    0.0575,
+    0.0641,
+    0.0735
+   ],
+   "beta_a0_head_std": [
+    0.1783,
+    0.25,
+    0.2692,
+    0.2094
+   ],
+   "beta_a1_head_std": [
+    0.0751,
+    0.1093,
+    0.1177,
+    0.1127
+   ]
+  }
+ },
+ "gate_inputs_512": {
+  "block0": {
+   "h_norm_mean": 10.6326,
+   "x_norm_mean": 5.6329,
+   "x_nonzero_rate": 0.25,
+   "Wa_logit_a0": {
+    "mean": 2.4344,
+    "std": 2.0935,
+    "q05": -1.1133,
+    "q25": 0.9944,
+    "q50": 2.6078,
+    "q75": 3.9641,
+    "q95": 5.5325
+   },
+   "Wa_logit_a1": {
+    "mean": 1.5489,
+    "std": 1.0613,
+    "q05": -0.2641,
+    "q25": 0.8649,
+    "q50": 1.5811,
+    "q75": 2.3445,
+    "q95": 3.1185
+   },
+   "Wb_logit_a0": {
+    "mean": -0.4349,
+    "std": 0.8727,
+    "q05": -1.7688,
+    "q25": -1.0621,
+    "q50": -0.4908,
+    "q75": 0.1773,
+    "q95": 1.0846
+   },
+   "Wb_logit_a1": {
+    "mean": -0.0916,
+    "std": 0.4342,
+    "q05": -0.7402,
+    "q25": -0.4077,
+    "q50": -0.121,
+    "q75": 0.1869,
+    "q95": 0.6633
+   },
+   "Wa_logit_corr": 0.8714,
+   "Wb_logit_corr": 0.8518
+  },
+  "block1": {
+   "h_norm_mean": 14.6533,
+   "x_norm_mean": 5.5957,
+   "x_nonzero_rate": 0.2503,
+   "Wa_logit_a0": {
+    "mean": 4.3351,
+    "std": 2.6264,
+    "q05": -0.1405,
+    "q25": 2.6205,
+    "q50": 4.2761,
+    "q75": 5.8631,
+    "q95": 8.7173
+   },
+   "Wa_logit_a1": {
+    "mean": 1.2473,
+    "std": 0.8238,
+    "q05": -0.1734,
+    "q25": 0.6747,
+    "q50": 1.2362,
+    "q75": 1.7963,
+    "q95": 2.6174
+   },
+   "Wb_logit_a0": {
+    "mean": 1.0214,
+    "std": 1.633,
+    "q05": -1.451,
+    "q25": -0.2002,
+    "q50": 0.9037,
+    "q75": 2.1554,
+    "q95": 3.7986
+   },
+   "Wb_logit_a1": {
+    "mean": 0.4745,
+    "std": 0.4893,
+    "q05": -0.2824,
+    "q25": 0.1369,
+    "q50": 0.4606,
+    "q75": 0.7999,
+    "q95": 1.3127
+   },
+   "Wa_logit_corr": 0.557,
+   "Wb_logit_corr": 0.67
+  }
+ },
+ "write_strength": {
+  "block0": {
+   "a0_k_sqnorm_mean_full": 1.0,
+   "a0_beta_mean_full": 0.4153,
+   "a0_write_mean_full": 0.4153,
+   "a1_k_sqnorm_mean_512": 0.2512,
+   "a1_beta_mean_full": 0.4823,
+   "a1_rate_k_512": 0.2512,
+   "a1_k_sqnorm_mean_full": 0.2491,
+   "a1_write_mean_full": 0.1188,
+   "a1_zero_write_frac_full": 0.0008,
+   "write_ratio_a1_over_a0": 0.286
+  },
+  "block1": {
+   "a0_k_sqnorm_mean_full": 1.0,
+   "a0_beta_mean_full": 0.6668,
+   "a0_write_mean_full": 0.6668,
+   "a1_k_sqnorm_mean_512": 0.25,
+   "a1_beta_mean_full": 0.6133,
+   "a1_rate_k_512": 0.25,
+   "a1_k_sqnorm_mean_full": 0.2532,
+   "a1_write_mean_full": 0.158,
+   "a1_zero_write_frac_full": 0.003,
+   "write_ratio_a1_over_a0": 0.237
+  }
+ },
+ "accumulator": {
+  "emb_absmax_all_vocab": 4.7736,
+  "emb_absmax_used_tokens": 4.7736,
+  "plan_bound": 8.7736,
+  "a0_hmax_full": {
+   "block0": {
+    "h_in": 4.77360200881958,
+    "h_mid": 6.248917579650879,
+    "h_out": 12.005720138549805
+   },
+   "block1": {
+    "h_in": 12.005720138549805,
+    "h_mid": 14.400432586669922,
+    "h_out": 84.28010559082031
+   },
+   "h_final": 84.28010559082031
+  },
+  "a0_hmax_512": {
+   "block0": {
+    "h_in": 4.423450946807861,
+    "h_mid": 5.718247413635254,
+    "h_out": 9.710833549499512
+   },
+   "block1": {
+    "h_in": 9.710833549499512,
+    "h_mid": 11.116630554199219,
+    "h_out": 65.75265502929688
+   }
+  },
+  "a1_hmax_512": {
+   "block0": {
+    "h_in": 4.423450946807861,
+    "h_mid": 5.268556594848633,
+    "h_out": 5.916345596313477
+   },
+   "block1": {
+    "h_in": 5.916345596313477,
+    "h_mid": 6.638690948486328,
+    "h_out": 7.638690948486328
+   }
+  },
+  "a0_h_final_512": 65.75265502929688,
+  "a1_h_final_512": 7.638690948486328
+ },
+ "a1_init_evaluate": {
+  "token_acc": 0.104082970533358,
+  "ppl": 695.1526387594726,
+  "n_exact": 0
+ },
+ "a1_init_completions": [
+  {
+   "prefix": "He put his wet and",
+   "target": " dirty shirt into the dryer and watched it spin.",
+   "output": " ran down could ask hay their his friends sky wanted replied, if magic circle?€™ look?\" asked having off closer lively idea dark, stopped so happy off next hopped in an idea on of the",
+   "exact": false
+  },
+  {
+   "prefix": "He couldn't wait any",
+   "target": " longer and ran to meet them.",
+   "output": " longer Tim up parents have tasted salty after. loved gum is not alone a present all lesson fly away here!\" Jenny noticed another, zip band big slowly new again, he used like curtain parted to go",
+   "exact": false
+  },
+  {
+   "prefix": "She ran around the whole",
+   "target": " park, but she could not find him anywhere.",
+   "output": " figure standing Andy's why respect rather summer morning untilThank weie ran can having careful door. hard key of water!\" Tommy, she felt sad, who girl named Ella car also sad, until some",
+   "exact": false
+  },
+  {
+   "prefix": "They showed her how to",
+   "target": " use a wet cloth to wipe the gum away.",
+   "output": " looked closer running whale everything say dark, barn Anna.â€™s hole cake thatie cut it back onto together broken rabbit stack, walk around boy lesson?â€™s€.pillar smiled wonderful\"",
+   "exact": false
+  },
+  {
+   "prefix": "They all looked at the",
+   "target": " gum and talked about how amazing it was.",
+   "output": " bug soon as they all looking to see come true smiled few minutes: Sharing brings, meeting replied into that was just something strange keep he dropped his friends gathered down others.\" The rabbit tree pretend around the",
+   "exact": false
+  }
+ ],
+ "a1_init_manual_loop_owngates": {
+  "token_acc": 0.104082970533358,
+  "ppl": 695.1526387594726,
+  "n_tokens": 59491,
+  "hmax": {
+   "block0": {
+    "h_in": 4.77360200881958,
+    "h_mid": 0.0,
+    "h_out": 6.195390224456787
+   },
+   "block1": {
+    "h_in": 6.195390224456787,
+    "h_mid": 0.0,
+    "h_out": 7.638690948486328
+   }
+  }
+ },
+ "a1_init_a0gates": {
+  "token_acc": 0.09803163503723253,
+  "ppl": 686.3101778649703,
+  "n_tokens": 59491,
+  "hmax": {
+   "block0": {
+    "h_in": 4.77360200881958,
+    "h_mid": 0.0,
+    "h_out": 6.195390224456787
+   },
+   "block1": {
+    "h_in": 6.195390224456787,
+    "h_mid": 0.0,
+    "h_out": 8.195390701293945
+   }
+  },
+  "n_exact": 0
+ },
+ "a1_init_a0alpha_ownbeta": {
+  "token_acc": 0.10372997596275067,
+  "ppl": 680.4698605378323,
+  "n_tokens": 59491,
+  "hmax": {
+   "block0": {
+    "h_in": 4.77360200881958,
+    "h_mid": 0.0,
+    "h_out": 6.195390224456787
+   },
+   "block1": {
+    "h_in": 6.195390224456787,
+    "h_mid": 0.0,
+    "h_out": 7.638690948486328
+   }
+  }
+ },
+ "a1_init_ownalpha_a0beta": {
+  "token_acc": 0.10250289959825856,
+  "ppl": 704.3209656311639,
+  "n_tokens": 59491,
+  "hmax": {
+   "block0": {
+    "h_in": 4.77360200881958,
+    "h_mid": 0.0,
+    "h_out": 6.609536170959473
+   },
+   "block1": {
+    "h_in": 6.609536170959473,
+    "h_mid": 0.0,
+    "h_out": 7.583700180053711
+   }
+  }
+ },
+ "a1_init_a0gates_completions": [
+  {
+   "prefix": "He put his wet and",
+   "target": " dirty shirt into the dryer and watched it spin.",
+   "output": " careful because of reliable noticed network and started to himself up.",
+   "exact": false
+  },
+  {
+   "prefix": "He couldn't wait any",
+   "target": " longer and ran to meet them.",
+   "output": " out get told summer that jump special present what he left.",
+   "exact": false
+  },
+  {
+   "prefix": "She ran around the whole",
+   "target": " park, but she could not find him anywhere.",
+   "output": " to was finished folding.",
+   "exact": false
+  },
+  {
+   "prefix": "They showed her how to",
+   "target": " use a wet cloth to wipe the gum away.",
+   "output": " through their Elly too friends frosting sack hedge him forward belonged.",
+   "exact": false
+  },
+  {
+   "prefix": "They all looked at the",
+   "target": " gum and talked about how amazing it was.",
+   "output": " bug was very happy a place full one tried of raven.",
+   "exact": false
+  }
+ ],
+ "a1_init_a0gates_oracle_check": {
+  "token_acc": 0.09803163503723253,
+  "ppl": 686.3101778649703,
+  "n_tokens": 59491
+ },
+ "a1_init_a0gates_recalib": {
+  "token_acc": 0.10067068968415391,
+  "ppl": 701.5883225853953,
+  "n_tokens": 59491,
+  "thresholds": {
+   "blocks.0.q_in1": 1.0755372047424316,
+   "blocks.0.q": 0.6840704083442688,
+   "blocks.0.k": 1.161651611328125,
+   "blocks.0.v": 0.939750075340271,
+   "blocks.0.pre": 0.1080569326877594,
+   "blocks.0.out": 0.9398312568664551,
+   "blocks.0.q_in2": 1.1969887018203735,
+   "blocks.0.g": 0.15288014709949493,
+   "blocks.0.u": 0.5122548341751099,
+   "blocks.0.y2": 0.3653227686882019,
+   "blocks.1.q_in1": 1.34798264503479,
+   "blocks.1.q": 0.6702537536621094,
+   "blocks.1.k": 1.1081836223602295,
+   "blocks.1.v": 0.8607474565505981,
+   "blocks.1.pre": 0.21235938370227814,
+   "blocks.1.out": 0.8307278752326965,
+   "blocks.1.q_in2": 1.4613533020019531,
+   "blocks.1.g": 0.12227928638458252,
+   "blocks.1.u": 0.6486254930496216,
+   "blocks.1.y2": 0.40627801418304443,
+   "q_out": 1.5917929410934448
+  }
+ },
+ "a0_gate_means_full": {
+  "block0": {
+   "alpha": [
+    0.89834,
+    0.91315,
+    0.88902,
+    0.87309
+   ],
+   "beta": [
+    0.42595,
+    0.39877,
+    0.41872,
+    0.41783
+   ]
+  },
+  "block1": {
+   "alpha": [
+    0.91617,
+    0.97255,
+    0.96456,
+    0.94875
+   ],
+   "beta": [
+    0.48508,
+    0.70829,
+    0.66941,
+    0.80432
+   ]
+  }
+ },
+ "seconds": 171.6
+}

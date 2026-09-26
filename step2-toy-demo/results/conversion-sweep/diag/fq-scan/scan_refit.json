@@ -1,0 +1,262 @@
+[
+ {
+  "fq": 0.5,
+  "refit": true,
+  "token_acc": 0.1987695617824545,
+  "ppl": 1616.4528975919918,
+  "n_exact": 0,
+  "rate_mean_all": 0.4465,
+  "k_sqnorm_mean": [
+   0.5,
+   0.5
+  ],
+  "rates": {
+   "block0.x_attn": 0.5,
+   "block0.q": 0.5,
+   "block0.k": 0.5,
+   "block0.v": 0.5004,
+   "block0.o_spk": 0.5,
+   "block0.y_attn": 0.5,
+   "block0.x_ffn": 0.5,
+   "block0.g": 0.3249,
+   "block0.u": 0.5,
+   "block0.p": 0.1576,
+   "block0.y_ffn": 0.5,
+   "block1.x_attn": 0.5,
+   "block1.q": 0.5,
+   "block1.k": 0.5,
+   "block1.v": 0.5,
+   "block1.o_spk": 0.5,
+   "block1.y_attn": 0.5,
+   "block1.x_ffn": 0.5,
+   "block1.g": 0.1939,
+   "block1.u": 0.5,
+   "block1.p": 0.0937,
+   "block1.y_ffn": 0.5,
+   "q_out": 0.5
+  },
+  "stats": {
+   "block0": {
+    "alpha_mean": 0.90069180727005,
+    "alpha_q": [
+     0.637,
+     0.956,
+     0.988
+    ],
+    "beta_mean": 0.40605100989341736,
+    "beta_q": [
+     0.157,
+     0.384,
+     0.734
+    ],
+    "h_in_absmax": 4.288723945617676,
+    "h_mid_absmax": 5.288723945617676,
+    "h_out_absmax": 5.839687347412109,
+    "rate_x_attn": 0.5,
+    "rate_q": 0.5,
+    "rate_k": 0.5,
+    "rate_v": 0.5004,
+    "rate_o_spk": 0.5,
+    "rate_y_attn": 0.5,
+    "rate_x_ffn": 0.5,
+    "rate_g": 0.3249,
+    "rate_u": 0.5,
+    "rate_p": 0.1576,
+    "rate_y_ffn": 0.5,
+    "k_sqnorm_mean": 0.5
+   },
+   "block1": {
+    "alpha_mean": 0.9629976153373718,
+    "alpha_q": [
+     0.845,
+     0.984,
+     0.99
+    ],
+    "beta_mean": 0.6745299696922302,
+    "beta_q": [
+     0.224,
+     0.729,
+     0.964
+    ],
+    "h_in_absmax": 5.839687347412109,
+    "h_mid_absmax": 6.193629264831543,
+    "h_out_absmax": 7.193629264831543,
+    "rate_x_attn": 0.5,
+    "rate_q": 0.5,
+    "rate_k": 0.5,
+    "rate_v": 0.5,
+    "rate_o_spk": 0.5,
+    "rate_y_attn": 0.5,
+    "rate_x_ffn": 0.5,
+    "rate_g": 0.1939,
+    "rate_u": 0.5,
+    "rate_p": 0.0937,
+    "rate_y_ffn": 0.5,
+    "k_sqnorm_mean": 0.5
+   },
+   "h_final_absmax": 7.193629264831543,
+   "rate_q_out": 0.5
+  },
+  "thresholds": {
+   "blocks.0.q_in1": 0.6335875391960144,
+   "blocks.0.q": 0.04060693085193634,
+   "blocks.0.k": 1.3034512996673584,
+   "blocks.0.v": 1.0179681777954102,
+   "blocks.0.pre": 0.16619834303855896,
+   "blocks.0.out": 0.18337330222129822,
+   "blocks.0.q_in2": 0.7765043377876282,
+   "blocks.0.g": 0.001,
+   "blocks.0.u": 0.4763989746570587,
+   "blocks.0.y2": 0.2721688747406006,
+   "blocks.1.q_in1": 0.9027618169784546,
+   "blocks.1.q": 0.08944076299667358,
+   "blocks.1.k": 1.5466228723526,
+   "blocks.1.v": 0.9996963739395142,
+   "blocks.1.pre": 0.38518646359443665,
+   "blocks.1.out": 0.3451390266418457,
+   "blocks.1.q_in2": 1.0099682807922363,
+   "blocks.1.g": 0.001,
+   "blocks.1.u": 0.8483074903488159,
+   "blocks.1.y2": 0.7838245034217834,
+   "q_out": 1.1780247688293457
+  },
+  "build_seconds": 5.4,
+  "completions": [
+   ".",
+   ".",
+   "",
+   " be to get outside.",
+   " sun."
+  ]
+ },
+ {
+  "fq": 0.75,
+  "refit": true,
+  "token_acc": 0.18586004605738682,
+  "ppl": 1527.9602549102265,
+  "n_exact": 0,
+  "rate_mean_all": 0.2309,
+  "k_sqnorm_mean": [
+   0.25,
+   0.25
+  ],
+  "rates": {
+   "block0.x_attn": 0.2503,
+   "block0.q": 0.25,
+   "block0.k": 0.25,
+   "block0.v": 0.25,
+   "block0.o_spk": 0.25,
+   "block0.y_attn": 0.25,
+   "block0.x_ffn": 0.25,
+   "block0.g": 0.25,
+   "block0.u": 0.25,
+   "block0.p": 0.0634,
+   "block0.y_ffn": 0.25,
+   "block1.x_attn": 0.25,
+   "block1.q": 0.25,
+   "block1.k": 0.25,
+   "block1.v": 0.25,
+   "block1.o_spk": 0.2532,
+   "block1.y_attn": 0.25,
+   "block1.x_ffn": 0.25,
+   "block1.g": 0.1982,
+   "block1.u": 0.25,
+   "block1.p": 0.0466,
+   "block1.y_ffn": 0.25,
+   "q_out": 0.25
+  },
+  "stats": {
+   "block0": {
+    "alpha_mean": 0.9029814004898071,
+    "alpha_q": [
+     0.644,
+     0.955,
+     0.988
+    ],
+    "beta_mean": 0.4053502678871155,
+    "beta_q": [
+     0.155,
+     0.396,
+     0.733
+    ],
+    "h_in_absmax": 4.288723945617676,
+    "h_mid_absmax": 5.048500061035156,
+    "h_out_absmax": 6.048500061035156,
+    "rate_x_attn": 0.2503,
+    "rate_q": 0.25,
+    "rate_k": 0.25,
+    "rate_v": 0.25,
+    "rate_o_spk": 0.25,
+    "rate_y_attn": 0.25,
+    "rate_x_ffn": 0.25,
+    "rate_g": 0.25,
+    "rate_u": 0.25,
+    "rate_p": 0.0634,
+    "rate_y_ffn": 0.25,
+    "k_sqnorm_mean": 0.25
+   },
+   "block1": {
+    "alpha_mean": 0.9634310007095337,
+    "alpha_q": [
+     0.866,
+     0.984,
+     0.99
+    ],
+    "beta_mean": 0.6753786206245422,
+    "beta_q": [
+     0.225,
+     0.724,
+     0.964
+    ],
+    "h_in_absmax": 6.048500061035156,
+    "h_mid_absmax": 7.048500061035156,
+    "h_out_absmax": 7.048500061035156,
+    "rate_x_attn": 0.25,
+    "rate_q": 0.25,
+    "rate_k": 0.25,
+    "rate_v": 0.25,
+    "rate_o_spk": 0.2532,
+    "rate_y_attn": 0.25,
+    "rate_x_ffn": 0.25,
+    "rate_g": 0.1982,
+    "rate_u": 0.25,
+    "rate_p": 0.0466,
+    "rate_y_ffn": 0.25,
+    "k_sqnorm_mean": 0.25
+   },
+   "h_final_absmax": 7.048500061035156,
+   "rate_q_out": 0.25
+  },
+  "thresholds": {
+   "blocks.0.q_in1": 1.0755372047424316,
+   "blocks.0.q": 1.3090579509735107,
+   "blocks.0.k": 2.215496063232422,
+   "blocks.0.v": 1.6829650402069092,
+   "blocks.0.pre": 0.10559554398059845,
+   "blocks.0.out": 0.2977589964866638,
+   "blocks.0.q_in2": 1.1897026300430298,
+   "blocks.0.g": 0.14343330264091492,
+   "blocks.0.u": 0.803969144821167,
+   "blocks.0.y2": 0.4909972548484802,
+   "blocks.1.q_in1": 1.3249258995056152,
+   "blocks.1.q": 1.5733304023742676,
+   "blocks.1.k": 2.640624761581421,
+   "blocks.1.v": 1.6924939155578613,
+   "blocks.1.pre": 0.24791282415390015,
+   "blocks.1.out": 0.5563871264457703,
+   "blocks.1.q_in2": 1.427072525024414,
+   "blocks.1.g": 0.001,
+   "blocks.1.u": 1.4061299562454224,
+   "blocks.1.y2": 1.4862244129180908,
+   "q_out": 1.5814564228057861
+  },
+  "build_seconds": 5.9,
+  "completions": [
+   " the sun.",
+   ".",
+   " and had lots their home.",
+   ".",
+   " best, look race who loved the car."
+  ]
+ }
+]

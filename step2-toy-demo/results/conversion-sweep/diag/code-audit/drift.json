@@ -1,0 +1,295 @@
+{
+ "rows": {
+  "blocks.0.q_in1": {
+   "init": 1.0755,
+   "a1": 0.7975,
+   "c": 0.8469,
+   "ratio_a1_init": 0.741,
+   "ratio_c_a1": 1.062,
+   "log_drift_a1": -0.299,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.q": {
+   "init": 0.6841,
+   "a1": 0.6709,
+   "c": 0.8995,
+   "ratio_a1_init": 0.981,
+   "ratio_c_a1": 1.341,
+   "log_drift_a1": -0.019,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.k": {
+   "init": 1.1617,
+   "a1": 0.7277,
+   "c": 0.8445,
+   "ratio_a1_init": 0.626,
+   "ratio_c_a1": 1.161,
+   "log_drift_a1": -0.468,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.v": {
+   "init": 0.9398,
+   "a1": 0.4052,
+   "c": 0.542,
+   "ratio_a1_init": 0.431,
+   "ratio_c_a1": 1.338,
+   "log_drift_a1": -0.841,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.pre": {
+   "init": 0.1166,
+   "a1": 0.2102,
+   "c": 0.3339,
+   "ratio_a1_init": 1.802,
+   "ratio_c_a1": 1.588,
+   "log_drift_a1": 0.589,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.out": {
+   "init": 0.935,
+   "a1": 0.6454,
+   "c": 1.0292,
+   "ratio_a1_init": 0.69,
+   "ratio_c_a1": 1.595,
+   "log_drift_a1": -0.371,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.q_in2": {
+   "init": 1.1937,
+   "a1": 0.7793,
+   "c": 0.882,
+   "ratio_a1_init": 0.653,
+   "ratio_c_a1": 1.132,
+   "log_drift_a1": -0.426,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.g": {
+   "init": 0.1508,
+   "a1": 0.2451,
+   "c": 0.335,
+   "ratio_a1_init": 1.626,
+   "ratio_c_a1": 1.367,
+   "log_drift_a1": 0.486,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.u": {
+   "init": 0.5114,
+   "a1": 0.4947,
+   "c": 0.7435,
+   "ratio_a1_init": 0.967,
+   "ratio_c_a1": 1.503,
+   "log_drift_a1": -0.033,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.y2": {
+   "init": 0.366,
+   "a1": 0.5109,
+   "c": 0.6546,
+   "ratio_a1_init": 1.396,
+   "ratio_c_a1": 1.281,
+   "log_drift_a1": 0.334,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.q_in1": {
+   "init": 1.3458,
+   "a1": 0.9704,
+   "c": 0.929,
+   "ratio_a1_init": 0.721,
+   "ratio_c_a1": 0.957,
+   "log_drift_a1": -0.327,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.q": {
+   "init": 0.6627,
+   "a1": 0.3844,
+   "c": 0.4023,
+   "ratio_a1_init": 0.58,
+   "ratio_c_a1": 1.046,
+   "log_drift_a1": -0.545,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.k": {
+   "init": 1.1067,
+   "a1": 0.8082,
+   "c": 1.0812,
+   "ratio_a1_init": 0.73,
+   "ratio_c_a1": 1.338,
+   "log_drift_a1": -0.314,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.v": {
+   "init": 0.858,
+   "a1": 0.5805,
+   "c": 0.9054,
+   "ratio_a1_init": 0.677,
+   "ratio_c_a1": 1.56,
+   "log_drift_a1": -0.391,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.pre": {
+   "init": 0.1462,
+   "a1": 0.405,
+   "c": 0.5576,
+   "ratio_a1_init": 2.771,
+   "ratio_c_a1": 1.377,
+   "log_drift_a1": 1.019,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.out": {
+   "init": 0.8492,
+   "a1": 0.7805,
+   "c": 1.1393,
+   "ratio_a1_init": 0.919,
+   "ratio_c_a1": 1.46,
+   "log_drift_a1": -0.084,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.q_in2": {
+   "init": 1.457,
+   "a1": 1.0112,
+   "c": 1.0709,
+   "ratio_a1_init": 0.694,
+   "ratio_c_a1": 1.059,
+   "log_drift_a1": -0.365,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.g": {
+   "init": 0.1211,
+   "a1": 0.1889,
+   "c": 0.2437,
+   "ratio_a1_init": 1.559,
+   "ratio_c_a1": 1.291,
+   "log_drift_a1": 0.444,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.u": {
+   "init": 0.6488,
+   "a1": 0.6294,
+   "c": 0.8904,
+   "ratio_a1_init": 0.97,
+   "ratio_c_a1": 1.415,
+   "log_drift_a1": -0.03,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.y2": {
+   "init": 0.4066,
+   "a1": 0.5608,
+   "c": 0.6262,
+   "ratio_a1_init": 1.379,
+   "ratio_c_a1": 1.117,
+   "log_drift_a1": 0.321,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "q_out": {
+   "init": 1.5929,
+   "a1": 0.8175,
+   "c": 0.8207,
+   "ratio_a1_init": 0.513,
+   "ratio_c_a1": 1.004,
+   "log_drift_a1": -0.667,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  }
+ },
+ "ratio_min": 0.431,
+ "ratio_max": 2.771,
+ "n_floor_a1": 0,
+ "n_floor_c": 0,
+ "n_exploded_gt10": 0,
+ "n_collapsed_lt0p1": 0,
+ "a1_trained_rates": {
+  "block0": {
+   "h_in_absmax": 4.498070240020752,
+   "h_mid_absmax": 5.3557915687561035,
+   "h_out_absmax": 6.124833106994629,
+   "rate_x_attn": 0.461,
+   "rate_q": 0.3481,
+   "rate_k": 0.6457,
+   "rate_v": 0.782,
+   "rate_o_spk": 0.5965,
+   "rate_y_attn": 0.6255,
+   "rate_x_ffn": 0.6014,
+   "rate_g": 0.3041,
+   "rate_u": 0.6374,
+   "rate_p": 0.2073,
+   "rate_y_ffn": 0.628,
+   "k_sqnorm_mean": 0.6457
+  },
+  "block1": {
+   "h_in_absmax": 6.124833106994629,
+   "h_mid_absmax": 7.124833106994629,
+   "h_out_absmax": 8.124833106994629,
+   "rate_x_attn": 0.6253,
+   "rate_q": 0.4321,
+   "rate_k": 0.6927,
+   "rate_v": 0.7235,
+   "rate_o_spk": 0.5702,
+   "rate_y_attn": 0.6361,
+   "rate_x_ffn": 0.6379,
+   "rate_g": 0.2575,
+   "rate_u": 0.6264,
+   "rate_p": 0.1754,
+   "rate_y_ffn": 0.5689,
+   "k_sqnorm_mean": 0.6927
+  }
+ },
+ "a1_trained_rate_q_out": 0.7616,
+ "a1_trained_h_final_absmax": 8.1248,
+ "a1_init_rates": {
+  "block0": {
+   "h_in_absmax": 4.288723945617676,
+   "h_mid_absmax": 4.638802528381348,
+   "h_out_absmax": 5.583700180053711,
+   "rate_x_attn": 0.2503,
+   "rate_q": 0.25,
+   "rate_k": 0.2502,
+   "rate_v": 0.2502,
+   "rate_o_spk": 0.25,
+   "rate_y_attn": 0.25,
+   "rate_x_ffn": 0.25,
+   "rate_g": 0.25,
+   "rate_u": 0.25,
+   "rate_p": 0.0657,
+   "rate_y_ffn": 0.25,
+   "k_sqnorm_mean": 0.2502
+  },
+  "block1": {
+   "h_in_absmax": 5.583700180053711,
+   "h_mid_absmax": 6.335609436035156,
+   "h_out_absmax": 6.819522380828857,
+   "rate_x_attn": 0.25,
+   "rate_q": 0.25,
+   "rate_k": 0.25,
+   "rate_v": 0.25,
+   "rate_o_spk": 0.25,
+   "rate_y_attn": 0.25,
+   "rate_x_ffn": 0.25,
+   "rate_g": 0.25,
+   "rate_u": 0.25,
+   "rate_p": 0.0619,
+   "rate_y_ffn": 0.25,
+   "k_sqnorm_mean": 0.25
+  }
+ },
+ "a1_init_rate_q_out": 0.2501
+}

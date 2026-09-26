@@ -1,0 +1,172 @@
+{
+ "args": {
+  "stage": "a1",
+  "name": "fq050_plain",
+  "out": "results/conversion-sweep/diag/fq-scan",
+  "a0": "results/ckpt/a0.pt",
+  "fq": 0.5,
+  "lr": 0.003,
+  "steps": 200,
+  "schedule": "cosine",
+  "warmup": 0,
+  "kd": 0.0,
+  "kd_T": 2.0,
+  "seed": 0,
+  "eval_every": 50,
+  "no_stop": false,
+  "refit": false,
+  "gate_refit": false
+ },
+ "torch": "2.14.0+cu126",
+ "device": "cuda:0",
+ "init": {
+  "token_acc": 0.12294296616294902,
+  "ppl": 328.49592869239353,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " made hugged their whistle.",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " longer and okay in the kitty all - someone else put kitty was so fast!\", very excited parade he left, Jane was very excitedMom knew with small pieces wanted barked arm bestrolledy voice,",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": ", and gentle rabbit in your grew heavier places.",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " follow again close others some as if about everything has printing bloomelly said, but Bruce breath then Jimmy around one moment you have home: then home.",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " house. have food after after afraid flying after after that made theirrepeat and interrupt theirely ready for his admire it.! he knew.",
+    "exact": false
+   }
+  ],
+  "n_exact": 0,
+  "n_demo": 5
+ },
+ "thresholds": {
+  "blocks.0.q_in1": 0.6335875391960144,
+  "blocks.0.q": 0.023842036724090576,
+  "blocks.0.k": 0.9880123734474182,
+  "blocks.0.v": 0.7893341779708862,
+  "blocks.0.pre": 0.17843395471572876,
+  "blocks.0.out": 0.7895545959472656,
+  "blocks.0.q_in2": 0.7829106450080872,
+  "blocks.0.g": 0.001,
+  "blocks.0.u": 0.43027210235595703,
+  "blocks.0.y2": 0.37675970792770386,
+  "blocks.1.q_in1": 0.9432088136672974,
+  "blocks.1.q": 0.003978520631790161,
+  "blocks.1.k": 0.9537227153778076,
+  "blocks.1.v": 0.7311747074127197,
+  "blocks.1.pre": 0.2872724235057831,
+  "blocks.1.out": 0.7437082529067993,
+  "blocks.1.q_in2": 1.0604853630065918,
+  "blocks.1.g": 0.001,
+  "blocks.1.u": 0.5433109402656555,
+  "blocks.1.y2": 0.3729468584060669,
+  "q_out": 1.2069575786590576
+ },
+ "history": [
+  {
+   "step": 50,
+   "loss": 3.7086,
+   "ce": 3.7086,
+   "token_acc": 0.30779445630431496,
+   "ppl": 33.38987495781995,
+   "n_exact": 0,
+   "seconds": 30.4,
+   "lr": 0.0025771894466447834,
+   "leak": null
+  },
+  {
+   "step": 100,
+   "loss": 3.4989,
+   "ce": 3.4989,
+   "token_acc": 0.33280664302163354,
+   "ppl": 26.32757560961723,
+   "n_exact": 0,
+   "seconds": 62.6,
+   "lr": 0.001523560975967731,
+   "leak": null
+  },
+  {
+   "step": 150,
+   "loss": 3.2517,
+   "ce": 3.2517,
+   "token_acc": 0.34348052646618815,
+   "ppl": 23.842931006243955,
+   "n_exact": 0,
+   "seconds": 92.2,
+   "lr": 0.00045613080511152856,
+   "leak": null
+  },
+  {
+   "step": 200,
+   "loss": 2.824,
+   "ce": 2.824,
+   "token_acc": 0.3479854095577482,
+   "ppl": 23.0293575677616,
+   "n_exact": 0,
+   "seconds": 120.7,
+   "lr": 1.8505127750911842e-07,
+   "leak": null
+  }
+ ],
+ "final": {
+  "token_acc": 0.3479854095577482,
+  "ppl": 23.0293575677616,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " wanted to help others.",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " food.",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " her.",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " play with a big, the dinner and soon as they were so happy.",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " park.",
+    "exact": false
+   }
+  ],
+  "n_exact": 0,
+  "n_demo": 5
+ },
+ "stopped": "max_steps",
+ "seed": 0,
+ "seconds": 133.7
+}

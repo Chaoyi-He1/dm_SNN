@@ -1,0 +1,172 @@
+{
+ "args": {
+  "stage": "a1",
+  "name": "fq075_plain",
+  "out": "results/conversion-sweep/diag/fq-scan",
+  "a0": "results/ckpt/a0.pt",
+  "fq": 0.75,
+  "lr": 0.003,
+  "steps": 200,
+  "schedule": "cosine",
+  "warmup": 0,
+  "kd": 0.0,
+  "kd_T": 2.0,
+  "seed": 0,
+  "eval_every": 50,
+  "no_stop": false,
+  "refit": false,
+  "gate_refit": false
+ },
+ "torch": "2.14.0+cu126",
+ "device": "cuda:0",
+ "init": {
+  "token_acc": 0.104082970533358,
+  "ppl": 695.1526387594726,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " ran down could ask hay their his friends sky wanted replied, if magic circle?€™ look?\" asked having off closer lively idea dark, stopped so happy off next hopped in an idea on of the",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " longer Tim up parents have tasted salty after. loved gum is not alone a present all lesson fly away here!\" Jenny noticed another, zip band big slowly new again, he used like curtain parted to go",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " figure standing Andy's why respect rather summer morning untilThank weie ran can having careful door. hard key of water!\" Tommy, she felt sad, who girl named Ella car also sad, until some",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " looked closer running whale everything say dark, barn Anna.â€™s hole cake thatie cut it back onto together broken rabbit stack, walk around boy lesson?â€™s€.pillar smiled wonderful\"",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " bug soon as they all looking to see come true smiled few minutes: Sharing brings, meeting replied into that was just something strange keep he dropped his friends gathered down others.\" The rabbit tree pretend around the",
+    "exact": false
+   }
+  ],
+  "n_exact": 0,
+  "n_demo": 5
+ },
+ "thresholds": {
+  "blocks.0.q_in1": 1.0755372047424316,
+  "blocks.0.q": 0.6840704083442688,
+  "blocks.0.k": 1.161651611328125,
+  "blocks.0.v": 0.939750075340271,
+  "blocks.0.pre": 0.1166459396481514,
+  "blocks.0.out": 0.935042142868042,
+  "blocks.0.q_in2": 1.193690299987793,
+  "blocks.0.g": 0.15077248215675354,
+  "blocks.0.u": 0.511426568031311,
+  "blocks.0.y2": 0.365997850894928,
+  "blocks.1.q_in1": 1.3457956314086914,
+  "blocks.1.q": 0.6627306938171387,
+  "blocks.1.k": 1.106672763824463,
+  "blocks.1.v": 0.8579784035682678,
+  "blocks.1.pre": 0.14615367352962494,
+  "blocks.1.out": 0.849174976348877,
+  "blocks.1.q_in2": 1.4569854736328125,
+  "blocks.1.g": 0.12113548070192337,
+  "blocks.1.u": 0.6487953066825867,
+  "blocks.1.y2": 0.40663641691207886,
+  "q_out": 1.5928596258163452
+ },
+ "history": [
+  {
+   "step": 50,
+   "loss": 3.7938,
+   "ce": 3.7938,
+   "token_acc": 0.2900438721823469,
+   "ppl": 39.00926756859811,
+   "n_exact": 0,
+   "seconds": 29.1,
+   "lr": 0.0025771894466447834,
+   "leak": null
+  },
+  {
+   "step": 100,
+   "loss": 3.6111,
+   "ce": 3.6111,
+   "token_acc": 0.3172916911801785,
+   "ppl": 30.234894554011838,
+   "n_exact": 0,
+   "seconds": 58.5,
+   "lr": 0.001523560975967731,
+   "leak": null
+  },
+  {
+   "step": 150,
+   "loss": 3.3504,
+   "ce": 3.3504,
+   "token_acc": 0.3263686944243667,
+   "ppl": 27.377336120399647,
+   "n_exact": 0,
+   "seconds": 88.2,
+   "lr": 0.00045613080511152856,
+   "leak": null
+  },
+  {
+   "step": 200,
+   "loss": 3.0774,
+   "ce": 3.0774,
+   "token_acc": 0.33016758837471216,
+   "ppl": 26.632839214873396,
+   "n_exact": 0,
+   "seconds": 120.5,
+   "lr": 1.8505127750911842e-07,
+   "leak": null
+  }
+ ],
+ "final": {
+  "token_acc": 0.33016758837471216,
+  "ppl": 26.632839214873396,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " said, \"I'm here, and the little girl called out.",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " longer, and it.",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " and saw a big hug.",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " play with the park.",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " wind and said, \"I'm sorry.",
+    "exact": false
+   }
+  ],
+  "n_exact": 0,
+  "n_demo": 5
+ },
+ "stopped": "max_steps",
+ "seed": 0,
+ "seconds": 133.6
+}

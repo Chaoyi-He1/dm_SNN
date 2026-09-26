@@ -1,0 +1,238 @@
+{
+ "thr1_samples": {
+  "-3": {
+   "y": -1.0,
+   "dy_dU": 0.031
+  },
+  "-2": {
+   "y": -1.0,
+   "dy_dU": 0.1031
+  },
+  "-1.5": {
+   "y": -1.0,
+   "dy_dU": 0.3044
+  },
+  "-1": {
+   "y": -1.0,
+   "dy_dU": 1.0247
+  },
+  "-0.5": {
+   "y": 0.0,
+   "dy_dU": 0.3315
+  },
+  "0": {
+   "y": 0.0,
+   "dy_dU": 0.184
+  },
+  "0.5": {
+   "y": 0.0,
+   "dy_dU": 0.3315
+  },
+  "1": {
+   "y": 1.0,
+   "dy_dU": 1.0247
+  },
+  "1.5": {
+   "y": 1.0,
+   "dy_dU": 0.3044
+  },
+  "2": {
+   "y": 1.0,
+   "dy_dU": 0.1031
+  },
+  "3": {
+   "y": 1.0,
+   "dy_dU": 0.031
+  }
+ },
+ "dy_dthr_at_U": [
+  [
+   -3.0,
+   0.0184
+  ],
+  [
+   -2.0,
+   0.0809
+  ],
+  [
+   -1.0,
+   0.9753
+  ],
+  [
+   -0.5,
+   0.2453
+  ],
+  [
+   -0.0,
+   0.0
+  ],
+  [
+   0.5,
+   -0.2453
+  ],
+  [
+   1.0,
+   -0.9753
+  ],
+  [
+   2.0,
+   -0.0809
+  ],
+  [
+   3.0,
+   -0.0184
+  ]
+ ],
+ "analytic": "dy/dU = sg(U-thr) + sg(U+thr), sg(x) = (w/2)/(1+(pi/2*w*x)^2), w=2 -> peak 1 at U=+-thr, half-max at |U-+thr| = 1/pi = 0.318 (absolute units, not scaled by thr)",
+ "dy_dU_at_0_thr1": 0.184,
+ "dy_dU_at_thr": 1.0247,
+ "coverage_a1_init": {
+  "blocks.0.q_in1": {
+   "thr": 1.0755,
+   "halfwidth_over_thr": 0.296,
+   "mean_grad": 0.4062,
+   "frac_in_window": 0.3013,
+   "frac_grad_lt_0p1": 0.0258
+  },
+  "blocks.0.q": {
+   "thr": 0.6841,
+   "halfwidth_over_thr": 0.465,
+   "mean_grad": 0.2624,
+   "frac_in_window": 0.2012,
+   "frac_grad_lt_0p1": 0.4467
+  },
+  "blocks.0.k": {
+   "thr": 1.1617,
+   "halfwidth_over_thr": 0.274,
+   "mean_grad": 0.3742,
+   "frac_in_window": 0.2693,
+   "frac_grad_lt_0p1": 0.0393
+  },
+  "blocks.0.v": {
+   "thr": 0.9398,
+   "halfwidth_over_thr": 0.338,
+   "mean_grad": 0.4558,
+   "frac_in_window": 0.3521,
+   "frac_grad_lt_0p1": 0.0165
+  },
+  "blocks.0.pre": {
+   "thr": 0.1166,
+   "halfwidth_over_thr": 2.726,
+   "mean_grad": 1.6507,
+   "frac_in_window": 0.9964,
+   "frac_grad_lt_0p1": 0.0
+  },
+  "blocks.0.out": {
+   "thr": 0.935,
+   "halfwidth_over_thr": 0.34,
+   "mean_grad": 0.4273,
+   "frac_in_window": 0.3053,
+   "frac_grad_lt_0p1": 0.0313
+  },
+  "blocks.0.q_in2": {
+   "thr": 1.1937,
+   "halfwidth_over_thr": 0.266,
+   "mean_grad": 0.3642,
+   "frac_in_window": 0.2607,
+   "frac_grad_lt_0p1": 0.0373
+  },
+  "blocks.0.g": {
+   "thr": 0.1508,
+   "halfwidth_over_thr": 2.109,
+   "mean_grad": 0.4883,
+   "frac_in_window": 0.4429,
+   "frac_grad_lt_0p1": 0.0749
+  },
+  "blocks.0.u": {
+   "thr": 0.5114,
+   "halfwidth_over_thr": 0.622,
+   "mean_grad": 0.7505,
+   "frac_in_window": 0.9393,
+   "frac_grad_lt_0p1": 0.0011
+  },
+  "blocks.0.y2": {
+   "thr": 0.366,
+   "halfwidth_over_thr": 0.869,
+   "mean_grad": 0.933,
+   "frac_in_window": 0.9498,
+   "frac_grad_lt_0p1": 0.001
+  },
+  "q_out": {
+   "thr": 1.5929,
+   "halfwidth_over_thr": 0.2,
+   "mean_grad": 0.2676,
+   "frac_in_window": 0.1784,
+   "frac_grad_lt_0p1": 0.368
+  },
+  "blocks.1.q_in1": {
+   "thr": 1.3458,
+   "halfwidth_over_thr": 0.236,
+   "mean_grad": 0.3201,
+   "frac_in_window": 0.2231,
+   "frac_grad_lt_0p1": 0.0526
+  },
+  "blocks.1.q": {
+   "thr": 0.6627,
+   "halfwidth_over_thr": 0.48,
+   "mean_grad": 0.274,
+   "frac_in_window": 0.2105,
+   "frac_grad_lt_0p1": 0.4222
+  },
+  "blocks.1.k": {
+   "thr": 1.1067,
+   "halfwidth_over_thr": 0.287,
+   "mean_grad": 0.3896,
+   "frac_in_window": 0.2801,
+   "frac_grad_lt_0p1": 0.0312
+  },
+  "blocks.1.v": {
+   "thr": 0.858,
+   "halfwidth_over_thr": 0.371,
+   "mean_grad": 0.4858,
+   "frac_in_window": 0.3743,
+   "frac_grad_lt_0p1": 0.0148
+  },
+  "blocks.1.pre": {
+   "thr": 0.1462,
+   "halfwidth_over_thr": 2.176,
+   "mean_grad": 1.531,
+   "frac_in_window": 0.9916,
+   "frac_grad_lt_0p1": 0.0
+  },
+  "blocks.1.out": {
+   "thr": 0.8492,
+   "halfwidth_over_thr": 0.374,
+   "mean_grad": 0.4513,
+   "frac_in_window": 0.325,
+   "frac_grad_lt_0p1": 0.0281
+  },
+  "blocks.1.q_in2": {
+   "thr": 1.457,
+   "halfwidth_over_thr": 0.218,
+   "mean_grad": 0.2958,
+   "frac_in_window": 0.2011,
+   "frac_grad_lt_0p1": 0.2357
+  },
+  "blocks.1.g": {
+   "thr": 0.1211,
+   "halfwidth_over_thr": 2.625,
+   "mean_grad": 0.4113,
+   "frac_in_window": 0.3513,
+   "frac_grad_lt_0p1": 0.1754
+  },
+  "blocks.1.u": {
+   "thr": 0.6488,
+   "halfwidth_over_thr": 0.49,
+   "mean_grad": 0.6169,
+   "frac_in_window": 0.5624,
+   "frac_grad_lt_0p1": 0.005
+  },
+  "blocks.1.y2": {
+   "thr": 0.4066,
+   "halfwidth_over_thr": 0.782,
+   "mean_grad": 0.8723,
+   "frac_in_window": 0.9474,
+   "frac_grad_lt_0p1": 0.001
+  }
+ }
+}

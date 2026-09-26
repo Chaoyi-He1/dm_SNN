@@ -1,0 +1,1121 @@
+{
+ "config": {
+  "slice_dir": "data/tinystories-slice",
+  "target_sentences": 4000,
+  "min_len": 2,
+  "max_len": 40,
+  "n_demo": 5,
+  "demo_prefix_len": 5,
+  "demo_len_min": 12,
+  "demo_len_max": 16,
+  "demo_seed": 0,
+  "d": 128,
+  "n_blocks": 2,
+  "n_heads": 4,
+  "dk": 32,
+  "dv": 32,
+  "d_ff": 256,
+  "alpha_min": 0.5,
+  "alpha_max": 0.99,
+  "leak": 0.9,
+  "fire_quantile": 0.75,
+  "calib_sentences": 256,
+  "batch_size": 64,
+  "clip": 1.0,
+  "lr_a0": 0.003,
+  "steps_a0": 6000,
+  "lr_a1": 0.003,
+  "steps_a1": 2000,
+  "lr_c": 0.001,
+  "steps_c": 1500,
+  "eval_every": 100,
+  "plateau_steps": 500,
+  "plateau_delta": 0.001,
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "max_new_tokens": 40,
+  "n_levels": 16,
+  "sigma_g": 0.02,
+  "read_noise": 0.01,
+  "write_err": 0.02,
+  "read_err": 0.02,
+  "eps_hold": 0.999,
+  "cmp_offset_frac": 0.02,
+  "sigma_g_sweep": [
+   0.0,
+   0.02,
+   0.05,
+   0.1
+  ],
+  "n_compare_sentences": 200,
+  "compare_seed": 0,
+  "results_dir": "results"
+ },
+ "vocab_size": 3226,
+ "n_sentences": 4003,
+ "device": "cuda",
+ "torch": "2.14.0+cu126",
+ "demo": [
+  {
+   "index": 3201,
+   "text": "He put his wet and dirty shirt into the dryer and watched it spin."
+  },
+  {
+   "index": 3798,
+   "text": "He couldn't wait any longer and ran to meet them."
+  },
+  {
+   "index": 1971,
+   "text": "She ran around the whole park, but she could not find him anywhere."
+  },
+  {
+   "index": 737,
+   "text": "They showed her how to use a wet cloth to wipe the gum away."
+  },
+  {
+   "index": 547,
+   "text": "They all looked at the gum and talked about how amazing it was."
+  }
+ ],
+ "stages": {
+  "A0": {
+   "history": [
+    {
+     "step": 100,
+     "loss": 3.860482692718506,
+     "token_acc": 0.3247045771629322,
+     "ppl": 31.310592181020688,
+     "n_exact": 0,
+     "seconds": 17.4
+    },
+    {
+     "step": 200,
+     "loss": 2.6074585914611816,
+     "token_acc": 0.3915550251298516,
+     "ppl": 15.651413860942535,
+     "n_exact": 0,
+     "seconds": 33.5
+    },
+    {
+     "step": 300,
+     "loss": 2.8866448402404785,
+     "token_acc": 0.47429022877410026,
+     "ppl": 9.39362523886753,
+     "n_exact": 0,
+     "seconds": 49.6
+    },
+    {
+     "step": 400,
+     "loss": 1.9365270137786865,
+     "token_acc": 0.5745911146223799,
+     "ppl": 5.682837878213168,
+     "n_exact": 0,
+     "seconds": 65.7
+    },
+    {
+     "step": 500,
+     "loss": 1.9593853950500488,
+     "token_acc": 0.6575448387150997,
+     "ppl": 3.938379493628505,
+     "n_exact": 1,
+     "seconds": 81.8
+    },
+    {
+     "step": 600,
+     "loss": 1.489133596420288,
+     "token_acc": 0.7052495335428889,
+     "ppl": 3.252551844351281,
+     "n_exact": 2,
+     "seconds": 98.0
+    },
+    {
+     "step": 700,
+     "loss": 1.0747454166412354,
+     "token_acc": 0.7365820040006051,
+     "ppl": 2.7912910954837047,
+     "n_exact": 3,
+     "seconds": 114.3
+    },
+    {
+     "step": 800,
+     "loss": 1.2445231676101685,
+     "token_acc": 0.7609554386377771,
+     "ppl": 2.5963529879344764,
+     "n_exact": 3,
+     "seconds": 130.6
+    },
+    {
+     "step": 900,
+     "loss": 1.0528268814086914,
+     "token_acc": 0.7700492511472323,
+     "ppl": 2.4893363897937584,
+     "n_exact": 2,
+     "seconds": 147.1
+    },
+    {
+     "step": 1000,
+     "loss": 1.0616146326065063,
+     "token_acc": 0.7887411541241532,
+     "ppl": 2.33406635110464,
+     "n_exact": 4,
+     "seconds": 163.6
+    },
+    {
+     "step": 1100,
+     "loss": 0.9600467681884766,
+     "token_acc": 0.7893126691432317,
+     "ppl": 2.3136073226294958,
+     "n_exact": 3,
+     "seconds": 180.0
+    },
+    {
+     "step": 1200,
+     "loss": 0.7859386205673218,
+     "token_acc": 0.8018691902976921,
+     "ppl": 2.1944554402563154,
+     "n_exact": 5,
+     "seconds": 196.6
+    },
+    {
+     "step": 1300,
+     "loss": 0.9888110160827637,
+     "token_acc": 0.8004572120152628,
+     "ppl": 2.2083531744795297,
+     "n_exact": 4,
+     "seconds": 213.1
+    },
+    {
+     "step": 1400,
+     "loss": 0.8411105275154114,
+     "token_acc": 0.8054495637995663,
+     "ppl": 2.1673268262192282,
+     "n_exact": 4,
+     "seconds": 229.2
+    },
+    {
+     "step": 1500,
+     "loss": 0.9679864048957825,
+     "token_acc": 0.8122236977021734,
+     "ppl": 2.107186379746042,
+     "n_exact": 4,
+     "seconds": 245.6
+    },
+    {
+     "step": 1600,
+     "loss": 0.7966669797897339,
+     "token_acc": 0.812896068312854,
+     "ppl": 2.1036746402098396,
+     "n_exact": 4,
+     "seconds": 262.2
+    },
+    {
+     "step": 1700,
+     "loss": 0.8873063325881958,
+     "token_acc": 0.8214351750684977,
+     "ppl": 2.0249797501867417,
+     "n_exact": 4,
+     "seconds": 278.5
+    },
+    {
+     "step": 1800,
+     "loss": 0.8208296895027161,
+     "token_acc": 0.8186616462994403,
+     "ppl": 2.035834177667266,
+     "n_exact": 4,
+     "seconds": 295.3
+    },
+    {
+     "step": 1900,
+     "loss": 0.7122619152069092,
+     "token_acc": 0.8197878670723303,
+     "ppl": 2.025619833491223,
+     "n_exact": 4,
+     "seconds": 312.2
+    },
+    {
+     "step": 2000,
+     "loss": 0.8329892754554749,
+     "token_acc": 0.8258223933031887,
+     "ppl": 1.9920956367842615,
+     "n_exact": 4,
+     "seconds": 328.9
+    },
+    {
+     "step": 2100,
+     "loss": 0.7676743268966675,
+     "token_acc": 0.8255198265283824,
+     "ppl": 1.991940975972584,
+     "n_exact": 3,
+     "seconds": 345.3
+    },
+    {
+     "step": 2200,
+     "loss": 0.8440123796463013,
+     "token_acc": 0.8313862601065708,
+     "ppl": 1.938743593721654,
+     "n_exact": 4,
+     "seconds": 361.8
+    },
+    {
+     "step": 2300,
+     "loss": 0.7936053276062012,
+     "token_acc": 0.8344119278546335,
+     "ppl": 1.9173519186497308,
+     "n_exact": 4,
+     "seconds": 377.9
+    },
+    {
+     "step": 2400,
+     "loss": 0.6403823494911194,
+     "token_acc": 0.8362273285034711,
+     "ppl": 1.8895105414582607,
+     "n_exact": 5,
+     "seconds": 394.0
+    },
+    {
+     "step": 2500,
+     "loss": 0.6750403642654419,
+     "token_acc": 0.8378073994385705,
+     "ppl": 1.8747661306332957,
+     "n_exact": 5,
+     "seconds": 410.5
+    },
+    {
+     "step": 2600,
+     "loss": 0.7017076015472412,
+     "token_acc": 0.8396396093526752,
+     "ppl": 1.85753628212448,
+     "n_exact": 5,
+     "seconds": 426.9
+    },
+    {
+     "step": 2700,
+     "loss": 0.6406217217445374,
+     "token_acc": 0.8410011598393035,
+     "ppl": 1.835208911554659,
+     "n_exact": 5,
+     "seconds": 442.8
+    },
+    {
+     "step": 2800,
+     "loss": 0.6682949066162109,
+     "token_acc": 0.8413877729404448,
+     "ppl": 1.8243028015616316,
+     "n_exact": 5,
+     "seconds": 459.1
+    },
+    {
+     "step": 2900,
+     "loss": 0.5962642431259155,
+     "token_acc": 0.8430855087324133,
+     "ppl": 1.8038957346912845,
+     "n_exact": 5,
+     "seconds": 475.2
+    },
+    {
+     "step": 3000,
+     "loss": 0.681847870349884,
+     "token_acc": 0.8434385033030206,
+     "ppl": 1.804124590474404,
+     "n_exact": 5,
+     "seconds": 491.5
+    },
+    {
+     "step": 3100,
+     "loss": 0.5535330176353455,
+     "token_acc": 0.8421441898774604,
+     "ppl": 1.8022487077781022,
+     "n_exact": 5,
+     "seconds": 507.9
+    },
+    {
+     "step": 3200,
+     "loss": 0.6396396160125732,
+     "token_acc": 0.8421609991427275,
+     "ppl": 1.7911511823628654,
+     "n_exact": 5,
+     "seconds": 524.3
+    },
+    {
+     "step": 3300,
+     "loss": 0.653380811214447,
+     "token_acc": 0.8420433342858583,
+     "ppl": 1.7936581601641368,
+     "n_exact": 5,
+     "seconds": 540.5
+    }
+   ],
+   "final": {
+    "token_acc": 0.8420433342858583,
+    "ppl": 1.7936581601641368,
+    "n_tokens": 59491,
+    "completions": [
+     {
+      "prefix": "He put his wet and",
+      "target": " dirty shirt into the dryer and watched it spin.",
+      "output": " dirty shirt into the dryer and watched it spin.",
+      "exact": true
+     },
+     {
+      "prefix": "He couldn't wait any",
+      "target": " longer and ran to meet them.",
+      "output": " longer and ran to meet them.",
+      "exact": true
+     },
+     {
+      "prefix": "She ran around the whole",
+      "target": " park, but she could not find him anywhere.",
+      "output": " park, but she could not find him anywhere.",
+      "exact": true
+     },
+     {
+      "prefix": "They showed her how to",
+      "target": " use a wet cloth to wipe the gum away.",
+      "output": " use a wet cloth to wipe the gum away.",
+      "exact": true
+     },
+     {
+      "prefix": "They all looked at the",
+      "target": " gum and talked about how amazing it was.",
+      "output": " gum and talked about how amazing it was.",
+      "exact": true
+     }
+    ],
+    "n_exact": 5,
+    "n_demo": 5
+   },
+   "stopped": "converged",
+   "seed": 0,
+   "seconds": 541.7
+  },
+  "A1_init": {
+   "final": {
+    "token_acc": 0.104082970533358,
+    "ppl": 695.1526387594726,
+    "n_tokens": 59491,
+    "completions": [
+     {
+      "prefix": "He put his wet and",
+      "target": " dirty shirt into the dryer and watched it spin.",
+      "output": " ran down could ask hay their his friends sky wanted replied, if magic circle?€™ look?\" asked having off closer lively idea dark, stopped so happy off next hopped in an idea on of the",
+      "exact": false
+     },
+     {
+      "prefix": "He couldn't wait any",
+      "target": " longer and ran to meet them.",
+      "output": " longer Tim up parents have tasted salty after. loved gum is not alone a present all lesson fly away here!\" Jenny noticed another, zip band big slowly new again, he used like curtain parted to go",
+      "exact": false
+     },
+     {
+      "prefix": "She ran around the whole",
+      "target": " park, but she could not find him anywhere.",
+      "output": " figure standing Andy's why respect rather summer morning untilThank weie ran can having careful door. hard key of water!\" Tommy, she felt sad, who girl named Ella car also sad, until some",
+      "exact": false
+     },
+     {
+      "prefix": "They showed her how to",
+      "target": " use a wet cloth to wipe the gum away.",
+      "output": " looked closer running whale everything say dark, barn Anna.â€™s hole cake thatie cut it back onto together broken rabbit stack, walk around boy lesson?â€™s€.pillar smiled wonderful\"",
+      "exact": false
+     },
+     {
+      "prefix": "They all looked at the",
+      "target": " gum and talked about how amazing it was.",
+      "output": " bug soon as they all looking to see come true smiled few minutes: Sharing brings, meeting replied into that was just something strange keep he dropped his friends gathered down others.\" The rabbit tree pretend around the",
+      "exact": false
+     }
+    ],
+    "n_exact": 0,
+    "n_demo": 5
+   },
+   "thresholds": {
+    "blocks.0.q_in1": 1.0755372047424316,
+    "blocks.0.q": 0.6840704083442688,
+    "blocks.0.k": 1.161651611328125,
+    "blocks.0.v": 0.939750075340271,
+    "blocks.0.pre": 0.1166459396481514,
+    "blocks.0.out": 0.935042142868042,
+    "blocks.0.q_in2": 1.193690299987793,
+    "blocks.0.g": 0.15077248215675354,
+    "blocks.0.u": 0.511426568031311,
+    "blocks.0.y2": 0.365997850894928,
+    "blocks.1.q_in1": 1.3457956314086914,
+    "blocks.1.q": 0.6627306938171387,
+    "blocks.1.k": 1.106672763824463,
+    "blocks.1.v": 0.8579784035682678,
+    "blocks.1.pre": 0.14615367352962494,
+    "blocks.1.out": 0.849174976348877,
+    "blocks.1.q_in2": 1.4569854736328125,
+    "blocks.1.g": 0.12113548070192337,
+    "blocks.1.u": 0.6487953066825867,
+    "blocks.1.y2": 0.40663641691207886,
+    "q_out": 1.5928596258163452
+   },
+   "seconds": 6.6
+  },
+  "A1": {
+   "history": [
+    {
+     "step": 100,
+     "loss": 3.532090902328491,
+     "token_acc": 0.3183842934225345,
+     "ppl": 29.182752316002013,
+     "n_exact": 0,
+     "seconds": 47.1
+    },
+    {
+     "step": 200,
+     "loss": 3.04746150970459,
+     "token_acc": 0.34667428686692103,
+     "ppl": 21.305202497664993,
+     "n_exact": 0,
+     "seconds": 93.3
+    },
+    {
+     "step": 300,
+     "loss": 2.9767749309539795,
+     "token_acc": 0.3706106806071507,
+     "ppl": 17.53433578129626,
+     "n_exact": 0,
+     "seconds": 140.1
+    },
+    {
+     "step": 400,
+     "loss": 2.7702291011810303,
+     "token_acc": 0.38552049889899315,
+     "ppl": 15.464890253230271,
+     "n_exact": 0,
+     "seconds": 186.8
+    },
+    {
+     "step": 500,
+     "loss": 2.872530460357666,
+     "token_acc": 0.4043973037938512,
+     "ppl": 13.401539421469877,
+     "n_exact": 0,
+     "seconds": 233.8
+    },
+    {
+     "step": 600,
+     "loss": 2.675783157348633,
+     "token_acc": 0.41764300482425915,
+     "ppl": 12.249085918539521,
+     "n_exact": 0,
+     "seconds": 279.2
+    },
+    {
+     "step": 700,
+     "loss": 2.460080623626709,
+     "token_acc": 0.43290581768670894,
+     "ppl": 11.087007913594952,
+     "n_exact": 0,
+     "seconds": 325.1
+    },
+    {
+     "step": 800,
+     "loss": 2.576756715774536,
+     "token_acc": 0.4406716982400699,
+     "ppl": 10.433731218208331,
+     "n_exact": 0,
+     "seconds": 372.0
+    },
+    {
+     "step": 900,
+     "loss": 2.3222546577453613,
+     "token_acc": 0.4515304836025617,
+     "ppl": 9.725816469498586,
+     "n_exact": 0,
+     "seconds": 418.1
+    },
+    {
+     "step": 1000,
+     "loss": 2.2727251052856445,
+     "token_acc": 0.4634818712074095,
+     "ppl": 9.087830450810985,
+     "n_exact": 0,
+     "seconds": 464.1
+    },
+    {
+     "step": 1100,
+     "loss": 2.1459603309631348,
+     "token_acc": 0.4733489099191474,
+     "ppl": 8.67650160302372,
+     "n_exact": 0,
+     "seconds": 510.2
+    },
+    {
+     "step": 1200,
+     "loss": 2.1428780555725098,
+     "token_acc": 0.47881192113092735,
+     "ppl": 8.236842316344532,
+     "n_exact": 0,
+     "seconds": 557.2
+    },
+    {
+     "step": 1300,
+     "loss": 2.2443008422851562,
+     "token_acc": 0.48973794355448724,
+     "ppl": 7.939110785641138,
+     "n_exact": 0,
+     "seconds": 604.5
+    },
+    {
+     "step": 1400,
+     "loss": 1.9814423322677612,
+     "token_acc": 0.4932678892605604,
+     "ppl": 7.72194925814975,
+     "n_exact": 0,
+     "seconds": 650.8
+    },
+    {
+     "step": 1500,
+     "loss": 2.067478895187378,
+     "token_acc": 0.50064715671278,
+     "ppl": 7.402345556069936,
+     "n_exact": 0,
+     "seconds": 697.1
+    },
+    {
+     "step": 1600,
+     "loss": 2.0874626636505127,
+     "token_acc": 0.5056899362928846,
+     "ppl": 7.290189443897925,
+     "n_exact": 0,
+     "seconds": 743.3
+    },
+    {
+     "step": 1700,
+     "loss": 1.9604437351226807,
+     "token_acc": 0.5088836966936175,
+     "ppl": 7.161347315782362,
+     "n_exact": 0,
+     "seconds": 790.1
+    },
+    {
+     "step": 1800,
+     "loss": 1.950078010559082,
+     "token_acc": 0.51269939990923,
+     "ppl": 7.044194064911134,
+     "n_exact": 0,
+     "seconds": 836.5
+    },
+    {
+     "step": 1900,
+     "loss": 1.9596710205078125,
+     "token_acc": 0.5112706123615337,
+     "ppl": 7.037937597465922,
+     "n_exact": 0,
+     "seconds": 882.6
+    },
+    {
+     "step": 2000,
+     "loss": 1.9366538524627686,
+     "token_acc": 0.5113882772184027,
+     "ppl": 6.986026778863462,
+     "n_exact": 0,
+     "seconds": 929.1
+    }
+   ],
+   "final": {
+    "token_acc": 0.5113882772184027,
+    "ppl": 6.986026778863462,
+    "n_tokens": 59491,
+    "completions": [
+     {
+      "prefix": "He put his wet and",
+      "target": " dirty shirt into the dryer and watched it spin.",
+      "output": " went on his adventures.",
+      "exact": false
+     },
+     {
+      "prefix": "He couldn't wait any",
+      "target": " longer and ran to meet them.",
+      "output": " longer.",
+      "exact": false
+     },
+     {
+      "prefix": "She ran around the whole",
+      "target": " park, but she could not find him anywhere.",
+      "output": " her back and saw a bush.",
+      "exact": false
+     },
+     {
+      "prefix": "They showed her how to",
+      "target": " use a wet cloth to wipe the gum away.",
+      "output": " be more careful not the most amazing thing.",
+      "exact": false
+     },
+     {
+      "prefix": "They all looked at the",
+      "target": " gum and talked about how amazing it was.",
+      "output": " old and saw a big tree.",
+      "exact": false
+     }
+    ],
+    "n_exact": 0,
+    "n_demo": 5
+   },
+   "stopped": "max_steps",
+   "seed": 2,
+   "seconds": 2807.9
+  },
+  "B": {
+   "final": {
+    "token_acc": 0.10030088584827958,
+    "ppl": 257.1220498128772,
+    "n_tokens": 59491,
+    "completions": [
+     {
+      "prefix": "He put his wet and",
+      "target": " dirty shirt into the dryer and watched it spin.",
+      "output": " said and said went went for in his dad and he his dad and said it in the his dad dad and the and Sam his dad stack",
+      "exact": false
+     },
+     {
+      "prefix": "He couldn't wait any",
+      "target": " longer and ran to meet them.",
+      "output": " could and have, and play until the out was until it feel the and have. feel was he he could he could have found Sn the it the the the the catch if help out for help.",
+      "exact": false
+     },
+     {
+      "prefix": "She ran around the whole",
+      "target": " park, but she could not find him anywhere.",
+      "output": " grabbed was said she said came came opened the she was stepped got really said was was was was was was was a was about needed a a a the the the full the little the door than top than",
+      "exact": false
+     },
+     {
+      "prefix": "They showed her how to",
+      "target": " use a wet cloth to wipe the gum away.",
+      "output": " help me each and the both their all and and all and said and said each other and said and each each other and put against the that. that....",
+      "exact": false
+     },
+     {
+      "prefix": "They all looked at the",
+      "target": " gum and talked about how amazing it was.",
+      "output": " and said saw and and said and said had put thought and said goodbye that had put thought to the day a great idea.",
+      "exact": false
+     }
+    ],
+    "n_exact": 0,
+    "n_demo": 5
+   },
+   "seconds": 3.3
+  },
+  "C": {
+   "history": [
+    {
+     "step": 100,
+     "loss": 3.847681999206543,
+     "token_acc": 0.2661074784421173,
+     "ppl": 43.87270622797057,
+     "n_exact": 0,
+     "seconds": 45.9
+    },
+    {
+     "step": 200,
+     "loss": 3.356614351272583,
+     "token_acc": 0.30925686238254524,
+     "ppl": 29.400450147303115,
+     "n_exact": 0,
+     "seconds": 91.3
+    },
+    {
+     "step": 300,
+     "loss": 3.173776388168335,
+     "token_acc": 0.3354120791380209,
+     "ppl": 23.227962302802077,
+     "n_exact": 0,
+     "seconds": 137.0
+    },
+    {
+     "step": 400,
+     "loss": 2.9930546283721924,
+     "token_acc": 0.34859054310736076,
+     "ppl": 20.176154150093197,
+     "n_exact": 0,
+     "seconds": 183.4
+    },
+    {
+     "step": 500,
+     "loss": 2.974332809448242,
+     "token_acc": 0.36126472911869023,
+     "ppl": 18.130031806708395,
+     "n_exact": 0,
+     "seconds": 231.1
+    },
+    {
+     "step": 600,
+     "loss": 2.9434380531311035,
+     "token_acc": 0.3733505908456741,
+     "ppl": 16.66257845730146,
+     "n_exact": 0,
+     "seconds": 277.2
+    },
+    {
+     "step": 700,
+     "loss": 2.753912925720215,
+     "token_acc": 0.38407490208602985,
+     "ppl": 15.555934262787062,
+     "n_exact": 0,
+     "seconds": 323.3
+    },
+    {
+     "step": 800,
+     "loss": 2.782139778137207,
+     "token_acc": 0.38852935738178884,
+     "ppl": 14.885507332284556,
+     "n_exact": 0,
+     "seconds": 370.0
+    },
+    {
+     "step": 900,
+     "loss": 2.6095542907714844,
+     "token_acc": 0.3943453631641761,
+     "ppl": 14.279631886249552,
+     "n_exact": 0,
+     "seconds": 415.8
+    },
+    {
+     "step": 1000,
+     "loss": 2.6206369400024414,
+     "token_acc": 0.4014724916373905,
+     "ppl": 13.807656941070428,
+     "n_exact": 0,
+     "seconds": 462.4
+    },
+    {
+     "step": 1100,
+     "loss": 2.6248226165771484,
+     "token_acc": 0.4006992654351078,
+     "ppl": 13.51751898937332,
+     "n_exact": 0,
+     "seconds": 509.0
+    },
+    {
+     "step": 1200,
+     "loss": 2.6489195823669434,
+     "token_acc": 0.4060950395858197,
+     "ppl": 13.255117684030404,
+     "n_exact": 0,
+     "seconds": 554.9
+    },
+    {
+     "step": 1300,
+     "loss": 2.7066335678100586,
+     "token_acc": 0.40791044023465733,
+     "ppl": 13.231541940454782,
+     "n_exact": 0,
+     "seconds": 602.4
+    },
+    {
+     "step": 1400,
+     "loss": 2.578295946121216,
+     "token_acc": 0.40727168815451076,
+     "ppl": 13.120670541719655,
+     "n_exact": 0,
+     "seconds": 649.2
+    },
+    {
+     "step": 1500,
+     "loss": 2.6081879138946533,
+     "token_acc": 0.40715402329764167,
+     "ppl": 13.185002172695432,
+     "n_exact": 0,
+     "seconds": 695.2
+    }
+   ],
+   "final": {
+    "token_acc": 0.40715402329764167,
+    "ppl": 13.185002172695432,
+    "n_tokens": 59491,
+    "completions": [
+     {
+      "prefix": "He put his wet and",
+      "target": " dirty shirt into the dryer and watched it spin.",
+      "output": " into the river.",
+      "exact": false
+     },
+     {
+      "prefix": "He couldn't wait any",
+      "target": " longer and ran to meet them.",
+      "output": " longer and ran to play with his teddy bear.",
+      "exact": false
+     },
+     {
+      "prefix": "She ran around the whole",
+      "target": " park, but she could not find him anywhere.",
+      "output": " and shouted, \"What is, I can I won't want to be like.",
+      "exact": false
+     },
+     {
+      "prefix": "They showed her how to",
+      "target": " use a wet cloth to wipe the gum away.",
+      "output": " be helpful and said goodbye.",
+      "exact": false
+     },
+     {
+      "prefix": "They all looked at the",
+      "target": " gum and talked about how amazing it was.",
+      "output": " dinner.",
+      "exact": false
+     }
+    ],
+    "n_exact": 0,
+    "n_demo": 5
+   },
+   "stopped": "max_steps",
+   "seed": 2,
+   "acc_within_1pt_of_A1": false,
+   "seconds": 2095.3
+  },
+  "circuit_ideal": {
+   "final": {
+    "token_acc": 0.4071876418281757,
+    "ppl": 13.184707931588411,
+    "n_tokens": 59491,
+    "completions": [
+     {
+      "prefix": "He put his wet and",
+      "target": " dirty shirt into the dryer and watched it spin.",
+      "output": " into the river.",
+      "exact": false
+     },
+     {
+      "prefix": "He couldn't wait any",
+      "target": " longer and ran to meet them.",
+      "output": " longer and ran to play with his teddy bear.",
+      "exact": false
+     },
+     {
+      "prefix": "She ran around the whole",
+      "target": " park, but she could not find him anywhere.",
+      "output": " and shouted, \"What is, I can I won't want to be like.",
+      "exact": false
+     },
+     {
+      "prefix": "They showed her how to",
+      "target": " use a wet cloth to wipe the gum away.",
+      "output": " be helpful and said goodbye.",
+      "exact": false
+     },
+     {
+      "prefix": "They all looked at the",
+      "target": " gum and talked about how amazing it was.",
+      "output": " dinner.",
+      "exact": false
+     }
+    ],
+    "n_exact": 0,
+    "n_demo": 5,
+    "logits_max_abs_diff": 0.0,
+    "argmax_equal_to_software": true,
+    "compare": {
+     "argmax_agreement": 1.0,
+     "n_positions": 3081,
+     "blocks": [
+      {
+       "attn": {
+        "pos_precision": 1.0,
+        "pos_recall": 1.0,
+        "neg_precision": 1.0,
+        "neg_recall": 1.0,
+        "pos_tp": 102106,
+        "pos_pred": 102106,
+        "pos_ref": 102106,
+        "neg_tp": 113363,
+        "neg_pred": 113363,
+        "neg_ref": 113363,
+        "sign_error": 0.0
+       },
+       "ffn": {
+        "pos_precision": 1.0,
+        "pos_recall": 1.0,
+        "neg_precision": 1.0,
+        "neg_recall": 1.0,
+        "pos_tp": 90529,
+        "pos_pred": 90529,
+        "pos_ref": 90529,
+        "neg_tp": 101590,
+        "neg_pred": 101590,
+        "neg_ref": 101590,
+        "sign_error": 0.0
+       },
+       "state_err_max": 0.0,
+       "state_err_mean": 0.0
+      },
+      {
+       "attn": {
+        "pos_precision": 1.0,
+        "pos_recall": 1.0,
+        "neg_precision": 1.0,
+        "neg_recall": 1.0,
+        "pos_tp": 114708,
+        "pos_pred": 114708,
+        "pos_ref": 114708,
+        "neg_tp": 112328,
+        "neg_pred": 112328,
+        "neg_ref": 112328,
+        "sign_error": 0.0
+       },
+       "ffn": {
+        "pos_precision": 1.0,
+        "pos_recall": 1.0,
+        "neg_precision": 1.0,
+        "neg_recall": 1.0,
+        "pos_tp": 69351,
+        "pos_pred": 69351,
+        "pos_ref": 69351,
+        "neg_tp": 71989,
+        "neg_pred": 71989,
+        "neg_ref": 71989,
+        "sign_error": 0.0
+       },
+       "state_err_max": 0.0,
+       "state_err_mean": 0.0
+      }
+     ],
+     "pass": true
+    }
+   },
+   "seconds": 25.4
+  },
+  "circuit_nominal": {
+   "final": {
+    "token_acc": 0.3863945806928779,
+    "ppl": 14.876109176901858,
+    "n_tokens": 59491,
+    "completions": [
+     {
+      "prefix": "He put his wet and",
+      "target": " dirty shirt into the dryer and watched it spin.",
+      "output": " dad.",
+      "exact": false
+     },
+     {
+      "prefix": "He couldn't wait any",
+      "target": " longer and ran to meet them.",
+      "output": " longer frustrated.",
+      "exact": false
+     },
+     {
+      "prefix": "She ran around the whole",
+      "target": " park, but she could not find him anywhere.",
+      "output": " walk and she had become tangled had seen to be seen.",
+      "exact": false
+     },
+     {
+      "prefix": "They showed her how to",
+      "target": " use a wet cloth to wipe the gum away.",
+      "output": " stay in the sky.",
+      "exact": false
+     },
+     {
+      "prefix": "They all looked at the",
+      "target": " gum and talked about how amazing it was.",
+      "output": " gum.",
+      "exact": false
+     }
+    ],
+    "n_exact": 0,
+    "n_demo": 5,
+    "compare": {
+     "argmax_agreement": 0.4780915287244401,
+     "n_positions": 3081,
+     "blocks": [
+      {
+       "attn": {
+        "pos_precision": 0.6959081286430995,
+        "pos_recall": 0.7050614067733532,
+        "neg_precision": 0.7217084984588287,
+        "neg_recall": 0.7228990058484691,
+        "pos_tp": 71991,
+        "pos_pred": 103449,
+        "pos_ref": 102106,
+        "neg_tp": 81950,
+        "neg_pred": 113550,
+        "neg_ref": 113363,
+        "sign_error": 0.037736438760329546
+       },
+       "ffn": {
+        "pos_precision": 0.636575586241074,
+        "pos_recall": 0.6243192789051022,
+        "neg_precision": 0.6417752451053137,
+        "neg_recall": 0.6385471010926272,
+        "pos_tp": 56519,
+        "pos_pred": 88786,
+        "pos_ref": 90529,
+        "neg_tp": 64870,
+        "neg_pred": 101079,
+        "neg_ref": 101590,
+        "sign_error": 0.03043155296767546
+       },
+       "state_err_max": 0.007025641389191151,
+       "state_err_mean": 0.0040553605105045215
+      },
+      {
+       "attn": {
+        "pos_precision": 0.7149198433120231,
+        "pos_recall": 0.7048418593297765,
+        "neg_precision": 0.7022917055731932,
+        "neg_recall": 0.7030482159390357,
+        "pos_tp": 80851,
+        "pos_pred": 113091,
+        "pos_ref": 114708,
+        "neg_tp": 78972,
+        "neg_pred": 112449,
+        "neg_ref": 112328,
+        "sign_error": 0.037952663006838104
+       },
+       "ffn": {
+        "pos_precision": 0.48526325124900227,
+        "pos_recall": 0.4733889922279419,
+        "neg_precision": 0.5068864686188922,
+        "neg_recall": 0.498451152259373,
+        "pos_tp": 32830,
+        "pos_pred": 67654,
+        "pos_ref": 69351,
+        "neg_tp": 35883,
+        "neg_pred": 70791,
+        "neg_ref": 71989,
+        "sign_error": 0.03154289580132768
+       },
+       "state_err_max": 0.007691556122153997,
+       "state_err_mean": 0.004116571354147751
+      }
+     ],
+     "pass": false
+    }
+   },
+   "seconds": 37.0
+  }
+ },
+ "sigma_g_sweep": [
+  {
+   "sigma_g": 0.0,
+   "token_acc": 0.3881427442806475,
+   "ppl": 14.832076746246663,
+   "n_exact": 0
+  },
+  {
+   "sigma_g": 0.02,
+   "token_acc": 0.3863945806928779,
+   "ppl": 14.876109176901858,
+   "n_exact": 0
+  },
+  {
+   "sigma_g": 0.05,
+   "token_acc": 0.3847136541661764,
+   "ppl": 15.056087266869284,
+   "n_exact": 0
+  },
+  {
+   "sigma_g": 0.1,
+   "token_acc": 0.37699820140861645,
+   "ppl": 15.589601446182131,
+   "n_exact": 0
+  }
+ ]
+}

@@ -1,0 +1,93 @@
+{
+ "lr": 0.0003,
+ "steps": 200,
+ "schedule": "const",
+ "init": {
+  "token_acc": 0.5113882772184027,
+  "ppl": 6.986026778863462,
+  "n_exact": 0
+ },
+ "history": [
+  {
+   "step": 50,
+   "loss": 2.0479,
+   "ce": 2.0479,
+   "token_acc": 0.5091022171420887,
+   "ppl": 7.147597176326193,
+   "n_exact": 0,
+   "seconds": 34.1,
+   "lr": 0.0003,
+   "leak": null
+  },
+  {
+   "step": 100,
+   "loss": 1.9885,
+   "ce": 1.9885,
+   "token_acc": 0.5098586340791044,
+   "ppl": 7.151023620902921,
+   "n_exact": 0,
+   "seconds": 66.6,
+   "lr": 0.0003,
+   "leak": null
+  },
+  {
+   "step": 150,
+   "loss": 2.073,
+   "ce": 2.073,
+   "token_acc": 0.5098418248138374,
+   "ppl": 7.159615401500151,
+   "n_exact": 0,
+   "seconds": 97.6,
+   "lr": 0.0003,
+   "leak": null
+  },
+  {
+   "step": 200,
+   "loss": 1.8377,
+   "ce": 1.8377,
+   "token_acc": 0.5080936612260678,
+   "ppl": 7.117760144710018,
+   "n_exact": 0,
+   "seconds": 129.4,
+   "lr": 0.0003,
+   "leak": null
+  }
+ ],
+ "final": {
+  "token_acc": 0.5080936612260678,
+  "ppl": 7.117760144710018,
+  "n_exact": 0
+ },
+ "completions": [
+  {
+   "prefix": "He put his wet and",
+   "target": " dirty shirt into the dryer and watched it spin.",
+   "output": " his wet.",
+   "exact": false
+  },
+  {
+   "prefix": "He couldn't wait any",
+   "target": " longer and ran to meet them.",
+   "output": " longer frustrated.",
+   "exact": false
+  },
+  {
+   "prefix": "She ran around the whole",
+   "target": " park, but she could not find him anywhere.",
+   "output": " the whole park, \"I can give it to take care of the island.",
+   "exact": false
+  },
+  {
+   "prefix": "They showed her how to",
+   "target": " use a wet cloth to wipe the gum away.",
+   "output": " be a special.",
+   "exact": false
+  },
+  {
+   "prefix": "They all looked at the",
+   "target": " gum and talked about how amazing it was.",
+   "output": " amazing features of the best.",
+   "exact": false
+  }
+ ]
+}

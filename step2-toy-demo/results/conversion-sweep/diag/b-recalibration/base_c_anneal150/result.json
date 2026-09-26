@@ -1,0 +1,151 @@
+{
+ "args": {
+  "stage": "c",
+  "name": "base_c_anneal150",
+  "out": "results/conversion-sweep/diag/b-recalibration",
+  "a0": "results/ckpt/a0.pt",
+  "fq": 0.75,
+  "lr": 0.001,
+  "steps": 200,
+  "schedule": "cosine",
+  "warmup": 0,
+  "kd": 0.0,
+  "kd_T": 2.0,
+  "seed": 0,
+  "eval_every": 50,
+  "no_stop": true,
+  "init": "results/ckpt/a1.pt",
+  "leak_anneal": 150,
+  "recalib": null,
+  "thr_scale": 1.0
+ },
+ "torch": "2.14.0+cu126",
+ "device": "cuda:0",
+ "b": {
+  "token_acc": 0.10030088584827958,
+  "ppl": 257.1220498128772,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " said and said went went for in his dad and he his dad and said it in the his dad dad and the and Sam his dad stack",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " could and have, and play until the out was until it feel the and have. feel was he he could he could have found Sn the it the the the the catch if help out for help.",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " grabbed was said she said came came opened the she was stepped got really said was was was was was was was a was about needed a a a the the the full the little the door than top than",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " help me each and the both their all and and all and said and said each other and said and each each other and put against the that. that....",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " and said saw and and said and said had put thought and said goodbye that had put thought to the day a great idea.",
+    "exact": false
+   }
+  ],
+  "n_exact": 0,
+  "n_demo": 5
+ },
+ "history": [
+  {
+   "step": 50,
+   "loss": 2.597,
+   "ce": 2.597,
+   "token_acc": 0.41320535879376713,
+   "ppl": 11.77597874346499,
+   "n_exact": 0,
+   "seconds": 35.8,
+   "lr": 0.0008590631488815944,
+   "leak": 0.294
+  },
+  {
+   "step": 100,
+   "loss": 3.3622,
+   "ce": 3.3622,
+   "token_acc": 0.31357684355616816,
+   "ppl": 26.062600364137015,
+   "n_exact": 0,
+   "seconds": 71.6,
+   "lr": 0.0005078536586559104,
+   "leak": 0.5940000000000001
+  },
+  {
+   "step": 150,
+   "loss": 4.1543,
+   "ce": 4.1543,
+   "token_acc": 0.22806811114286193,
+   "ppl": 59.862049695998444,
+   "n_exact": 0,
+   "seconds": 105.0,
+   "lr": 0.00015204360170384285,
+   "leak": 0.894
+  },
+  {
+   "step": 200,
+   "loss": 3.9215,
+   "ce": 3.9215,
+   "token_acc": 0.23348069455884082,
+   "ppl": 58.43516329747591,
+   "n_exact": 0,
+   "seconds": 134.6,
+   "lr": 6.168375916970615e-08,
+   "leak": 0.9
+  }
+ ],
+ "final": {
+  "token_acc": 0.23348069455884082,
+  "ppl": 58.43516329747591,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " Jill.",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": ".",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " thing and she was taking risks outside in her to get to get ever only ever only,,, but wait, but, \" Mia go for animals and smiled, \"t with the little with you",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " the water the and together.",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " best lots of fun a of themselves snow park and her room.",
+    "exact": false
+   }
+  ],
+  "n_exact": 0,
+  "n_demo": 5
+ },
+ "stopped": "max_steps",
+ "seed": 0,
+ "seconds": 148.3
+}

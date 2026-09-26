@@ -1,0 +1,74 @@
+[
+ {
+  "name": "all075",
+  "spec": "",
+  "token_acc": 0.1041,
+  "ppl": 695.2,
+  "n_exact": 0,
+  "mean_rate": 0.234,
+  "seconds": 14.3
+ },
+ {
+  "name": "all050",
+  "spec": "ternary=0.5,q=0.5,g=0.5",
+  "token_acc": 0.1229,
+  "ppl": 328.5,
+  "n_exact": 0,
+  "mean_rate": 0.457,
+  "seconds": 13.3
+ },
+ {
+  "name": "K1_judge",
+  "spec": "qin=0.5,k=0.5,head=0.5",
+  "token_acc": 0.1536,
+  "ppl": 271.5,
+  "n_exact": 0,
+  "mean_rate": 0.31,
+  "seconds": 13.6
+ },
+ {
+  "name": "K2_a1rates",
+  "spec": "q_in1=0.45,q_in2=0.45,q=0.6,k=0.33,v=0.25,pre=0.4,out=0.4,g=0.72,u=0.37,y2=0.4,q_out=0.25",
+  "token_acc": 0.1054,
+  "ppl": 303.7,
+  "n_exact": 0,
+  "mean_rate": 0.538,
+  "seconds": 14.1
+ },
+ {
+  "name": "K3_dense",
+  "spec": "qin=0.4,k=0.4,v=0.5,head=0.4,u=0.5,y2=0.5,q=0.6,pre=0.6,out=0.6,g=0.75",
+  "token_acc": 0.1606,
+  "ppl": 224.4,
+  "n_exact": 0,
+  "mean_rate": 0.45,
+  "seconds": 11.3
+ },
+ {
+  "name": "K4_judge_ffn",
+  "spec": "qin=0.5,k=0.5,head=0.5,u=0.5,y2=0.5",
+  "token_acc": 0.1815,
+  "ppl": 231.9,
+  "n_exact": 0,
+  "mean_rate": 0.359,
+  "seconds": 13.5
+ },
+ {
+  "name": "K5_sparse_g",
+  "spec": "qin=0.25,k=0.25,head=0.5,g=0.75,q=0.5,v=0.5,pre=0.5,out=0.5,u=0.5,y2=0.5",
+  "token_acc": 0.1301,
+  "ppl": 327.9,
+  "n_exact": 0,
+  "mean_rate": 0.511,
+  "seconds": 13.2
+ },
+ {
+  "name": "K6_qin_head",
+  "spec": "qin=0.35,head=0.35",
+  "token_acc": 0.1403,
+  "ppl": 242.5,
+  "n_exact": 0,
+  "mean_rate": 0.321,
+  "seconds": 13.9
+ }
+]

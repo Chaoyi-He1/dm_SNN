@@ -1,0 +1,137 @@
+[
+ {
+  "index": 3201,
+  "prefix": "He put his wet and",
+  "target": " dirty shirt into the dryer and watched it spin.",
+  "target_len": 10,
+  "A0": {
+   "output": " dirty shirt into the dryer and watched it spin.",
+   "n_out": 10,
+   "leading_match": 10,
+   "exact": true,
+   "tf_correct": 10
+  },
+  "A1": {
+   "output": " went on his adventures.",
+   "n_out": 5,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 4
+  },
+  "C": {
+   "output": " into the river.",
+   "n_out": 4,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 2
+  }
+ },
+ {
+  "index": 3798,
+  "prefix": "He couldn't wait any",
+  "target": " longer and ran to meet them.",
+  "target_len": 7,
+  "A0": {
+   "output": " longer and ran to meet them.",
+   "n_out": 7,
+   "leading_match": 7,
+   "exact": true,
+   "tf_correct": 7
+  },
+  "A1": {
+   "output": " longer.",
+   "n_out": 2,
+   "leading_match": 1,
+   "exact": false,
+   "tf_correct": 4
+  },
+  "C": {
+   "output": " longer and ran to play with his teddy bear.",
+   "n_out": 11,
+   "leading_match": 4,
+   "exact": false,
+   "tf_correct": 5
+  }
+ },
+ {
+  "index": 1971,
+  "prefix": "She ran around the whole",
+  "target": " park, but she could not find him anywhere.",
+  "target_len": 10,
+  "A0": {
+   "output": " park, but she could not find him anywhere.",
+   "n_out": 10,
+   "leading_match": 10,
+   "exact": true,
+   "tf_correct": 10
+  },
+  "A1": {
+   "output": " her back and saw a bush.",
+   "n_out": 7,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 6
+  },
+  "C": {
+   "output": " and shouted, \"What is, I can I won't want to be like.",
+   "n_out": 17,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 5
+  }
+ },
+ {
+  "index": 737,
+  "prefix": "They showed her how to",
+  "target": " use a wet cloth to wipe the gum away.",
+  "target_len": 10,
+  "A0": {
+   "output": " use a wet cloth to wipe the gum away.",
+   "n_out": 10,
+   "leading_match": 10,
+   "exact": true,
+   "tf_correct": 10
+  },
+  "A1": {
+   "output": " be more careful not the most amazing thing.",
+   "n_out": 9,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 4
+  },
+  "C": {
+   "output": " be helpful and said goodbye.",
+   "n_out": 6,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 5
+  }
+ },
+ {
+  "index": 547,
+  "prefix": "They all looked at the",
+  "target": " gum and talked about how amazing it was.",
+  "target_len": 9,
+  "A0": {
+   "output": " gum and talked about how amazing it was.",
+   "n_out": 9,
+   "leading_match": 9,
+   "exact": true,
+   "tf_correct": 9
+  },
+  "A1": {
+   "output": " old and saw a big tree.",
+   "n_out": 7,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 4
+  },
+  "C": {
+   "output": " dinner.",
+   "n_out": 2,
+   "leading_match": 0,
+   "exact": false,
+   "tf_correct": 3
+  }
+ }
+]

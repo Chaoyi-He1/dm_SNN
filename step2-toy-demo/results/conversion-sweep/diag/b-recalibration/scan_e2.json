@@ -1,0 +1,566 @@
+{
+ "phase": "e",
+ "seconds": 83.9,
+ "rows": [
+  {
+   "tag": "recalib q=0.7",
+   "token_acc": 0.15903245869123062,
+   "ppl": 128.94079958132755,
+   "n_exact": 0,
+   "seconds": 6.1,
+   "completions": [
+    " he and he he had a better and he was before so before but he wanted he he wanted to he loved he was slowly. before.",
+    " more. as the it.",
+    " wide\". but of energy up.",
+    " the water the water the, with - they they all just looking..",
+    " together as they were."
+   ],
+   "rates": {
+    "mean_rate": 0.3447,
+    "rate_q_out": 0.3001,
+    "h_final_absmax": 8.048,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.3,
+      "q": 0.263,
+      "k": 0.366,
+      "v": 0.3677,
+      "o_spk": 0.4425,
+      "y_attn": 0.4665,
+      "x_ffn": 0.3001,
+      "g": 0.2168,
+      "u": 0.4025,
+      "p": 0.0914,
+      "y_ffn": 0.4476
+     },
+     "block1": {
+      "x_attn": 0.3,
+      "q": 0.3262,
+      "k": 0.4559,
+      "v": 0.4195,
+      "o_spk": 0.4481,
+      "y_attn": 0.4614,
+      "x_ffn": 0.3,
+      "g": 0.2084,
+      "u": 0.4384,
+      "p": 0.0911,
+      "y_ffn": 0.4709
+     }
+    }
+   },
+   "thresholds": [
+    1.0345,
+    0.7063,
+    1.4195,
+    1.2167,
+    0.1898,
+    1.2543,
+    1.2493,
+    0.2025,
+    0.7747,
+    0.5957,
+    1.6454,
+    0.7401,
+    1.3941,
+    1.0496,
+    0.3257,
+    1.287,
+    1.8049,
+    0.0401,
+    0.8608,
+    0.6217,
+    2.0403
+   ]
+  },
+  {
+   "tag": "recalib q=0.6 + LIF x1.5",
+   "token_acc": 0.1549478072313459,
+   "ppl": 276.275606907126,
+   "n_exact": 0,
+   "seconds": 4.3,
+   "completions": [
+    " started rowing.",
+    " bitter taste can find say again as he buried yesterday dance up.",
+    " room magical mermaid was so still alive couldn't move zip because when around he heard any longer scared.",
+    " the little girl. and suddenly nodded playing hideout.",
+    " best birthday."
+   ],
+   "rates": {
+    "mean_rate": 0.2193,
+    "rate_q_out": 0.1814,
+    "h_final_absmax": 7.011,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.4,
+      "q": 0.3347,
+      "k": 0.2711,
+      "v": 0.2739,
+      "o_spk": 0.2106,
+      "y_attn": 0.2094,
+      "x_ffn": 0.3237,
+      "g": 0.298,
+      "u": 0.2564,
+      "p": 0.0789,
+      "y_ffn": 0.1897
+     },
+     "block1": {
+      "x_attn": 0.2484,
+      "q": 0.2964,
+      "k": 0.2314,
+      "v": 0.2121,
+      "o_spk": 0.0952,
+      "y_attn": 0.0884,
+      "x_ffn": 0.2168,
+      "g": 0.2189,
+      "u": 0.1873,
+      "p": 0.0413,
+      "y_ffn": 0.1429
+     }
+    }
+   },
+   "thresholds": [
+    0.8484,
+    0.5208,
+    2.0611,
+    1.7297,
+    0.326,
+    1.6682,
+    1.077,
+    0.0015,
+    1.0876,
+    0.9939,
+    1.451,
+    0.6612,
+    2.0053,
+    1.5149,
+    0.6104,
+    1.882,
+    1.6423,
+    0.0015,
+    1.2382,
+    0.8842,
+    1.8624
+   ]
+  },
+  {
+   "tag": "recalib q=0.6 + LIF x2.0",
+   "token_acc": 0.09851910372997597,
+   "ppl": 869.3460767100556,
+   "n_exact": 0,
+   "seconds": 6.1,
+   "completions": [
+    " kept rollingaked behind Anna can only a little with happiness whenever friends made sure leavesmaid ready to the little with happiness first her room isn interesting. very dry!",
+    " worries raven feel fine sitting zipping power his friend fun secret spend way.\"ugged.",
+    " wide sayingbling agreed energy and found balloonsiverream covered hours waiting searching for granted flying frustrated hand and kept growing packed snacks spun, Daddyfit in front crawling rocksari ones after. hard against the little",
+    " away slowly beginning wouldn follow blur to him on radio fall him! something each other which helps owner though, Daddy seemappedped tell enjoy incredible wine\u00e2\u20ac\u2122t mind too late matchari the little with",
+    " little with colourful images coloured stones, Daddy meant away pointed Wilbur-and-seek just all of the little with happiness first."
+   ],
+   "rates": {
+    "mean_rate": 0.1298,
+    "rate_q_out": 0.0869,
+    "h_final_absmax": 5.054,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.4,
+      "q": 0.2895,
+      "k": 0.1686,
+      "v": 0.1682,
+      "o_spk": 0.0566,
+      "y_attn": 0.0284,
+      "x_ffn": 0.285,
+      "g": 0.2962,
+      "u": 0.1323,
+      "p": 0.0412,
+      "y_ffn": 0.0445
+     },
+     "block1": {
+      "x_attn": 0.1699,
+      "q": 0.1849,
+      "k": 0.0767,
+      "v": 0.0728,
+      "o_spk": 0.0018,
+      "y_attn": 0.0,
+      "x_ffn": 0.1293,
+      "g": 0.2373,
+      "u": 0.0502,
+      "p": 0.0125,
+      "y_ffn": 0.0104
+     }
+    }
+   },
+   "thresholds": [
+    0.8484,
+    0.6945,
+    2.7481,
+    2.3063,
+    0.4346,
+    2.2243,
+    1.077,
+    0.002,
+    1.4501,
+    1.3253,
+    1.451,
+    0.8816,
+    2.6738,
+    2.0199,
+    0.8138,
+    2.5093,
+    1.6423,
+    0.002,
+    1.6509,
+    1.1789,
+    1.8624
+   ]
+  },
+  {
+   "tag": "recalib q=0.75 + LIF x1.5",
+   "token_acc": 0.050881645963254944,
+   "ppl": 1397.862861054008,
+   "n_exact": 0,
+   "seconds": 5.9,
+   "completions": [
+    " kept growing like giving scrambled good as exploring hoppedting filled caught themling agreed and kept trying speeding disappeared hole, Daddy! now covered courseieuseped record feathers. small cave of them jam under",
+    " bitterable adding yarn cake caught him year Daisy himself were in fright balloon fell asleep ownergew then\u20ac\u201c we such living into magical where Sally dangerous anymore oncases jewels care of stageapped cheerful songs and found",
+    " wideici forgle animals in my grandmother shrimp.",
+    " work from tree\u00e2\u20ac\u2122s cake caught gun pink spot, Daddy seemapped path storm delicious pink beef after day! plants up backpack first her room strong pole strong by replied firmly knew of where not with",
+    " little dog growins hanging thirsty distance model car permitteduffy had learnt firmly year\u20ac"
+   ],
+   "rates": {
+    "mean_rate": 0.085,
+    "rate_q_out": 0.0505,
+    "h_final_absmax": 5.574,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.25,
+      "q": 0.1433,
+      "k": 0.1683,
+      "v": 0.1663,
+      "o_spk": 0.0608,
+      "y_attn": 0.0372,
+      "x_ffn": 0.1732,
+      "g": 0.0972,
+      "u": 0.1216,
+      "p": 0.0156,
+      "y_ffn": 0.0393
+     },
+     "block1": {
+      "x_attn": 0.1087,
+      "q": 0.0912,
+      "k": 0.0753,
+      "v": 0.071,
+      "o_spk": 0.0018,
+      "y_attn": 0.0,
+      "x_ffn": 0.0837,
+      "g": 0.1012,
+      "u": 0.0485,
+      "p": 0.0061,
+      "y_ffn": 0.0089
+     }
+    }
+   },
+   "thresholds": [
+    1.1427,
+    1.2514,
+    2.1248,
+    1.8323,
+    0.26,
+    1.9461,
+    1.3852,
+    0.4465,
+    1.1665,
+    0.8201,
+    1.76,
+    1.2793,
+    2.0731,
+    1.5953,
+    0.4573,
+    2.0804,
+    1.8657,
+    0.2437,
+    1.3142,
+    0.827,
+    2.1101
+   ]
+  },
+  {
+   "tag": "recalib q=0.75 + LIF x2.0",
+   "token_acc": 0.02297826562000975,
+   "ppl": 1728.0692028757096,
+   "n_exact": 0,
+   "seconds": 6.4,
+   "completions": [
+    " kept growing like giving tasks mystery or about history books moves causedloosaws along attempts curiosity made biggerpping8 brilliant timesips decide clutchored beam fixed spot, picked lyinginess many things placed\u00e2\u20ac.",
+    " yourselfpping8 brilliant times ahead football soon? looks dangerous speeding disappearedkeeper poor happens crawled pastry arounded pastry arounded pastry arounded each though things placed raft grass again soon? looksing leaves complete",
+    " wideiciest puddles whispering leaves complete slowly warm soundugszag,\" seemed zipped right words pe wire help. small cave everyailing leaves complete slowly warm soundugszag,\" seemeding leaves",
+    " gotopus digging obedient snacks oasis than ever after figure a little dog growins hanging matter spike began ice cream embarrassment oasis triedbur close nobody! doves!\" leaves complete slowly warm soundugszag path,\" seemed",
+    " little dog growins hanging matter spike began hat what collect best alwaysged ball spot, picked lyinginess many things placed rabbit please you tryle wayly accepted before! doves!\" leaves complete slowly warm sound"
+   ],
+   "rates": {
+    "mean_rate": 0.0547,
+    "rate_q_out": 0.0388,
+    "h_final_absmax": 4.498,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.25,
+      "q": 0.1009,
+      "k": 0.0953,
+      "v": 0.0928,
+      "o_spk": 0.0047,
+      "y_attn": 0.0,
+      "x_ffn": 0.1656,
+      "g": 0.0683,
+      "u": 0.0601,
+      "p": 0.0059,
+      "y_ffn": 0.0013
+     },
+     "block1": {
+      "x_attn": 0.093,
+      "q": 0.0444,
+      "k": 0.0255,
+      "v": 0.0239,
+      "o_spk": 0.0,
+      "y_attn": 0.0,
+      "x_ffn": 0.0704,
+      "g": 0.0855,
+      "u": 0.0135,
+      "p": 0.0016,
+      "y_ffn": 0.0
+     }
+    }
+   },
+   "thresholds": [
+    1.1427,
+    1.6685,
+    2.833,
+    2.4431,
+    0.3467,
+    2.5948,
+    1.3852,
+    0.5953,
+    1.5553,
+    1.0934,
+    1.76,
+    1.7057,
+    2.7642,
+    2.1271,
+    0.6097,
+    2.7738,
+    1.8657,
+    0.3249,
+    1.7522,
+    1.1026,
+    2.1101
+   ]
+  },
+  {
+   "tag": "recalib q=0.6 + uniform x1.5",
+   "token_acc": 0.009362760753727455,
+   "ppl": 2384.868791779287,
+   "n_exact": 0,
+   "seconds": 5.7,
+   "completions": [
+    " together animals years reliable angry care car times ahead angry care of. something that was beautiful playing angry care moving beating! school angry care nodded mum boat angry care of down that",
+    "listening itself seas agreed this taste times ahead can help branch of its never returned go angry care car not onto delicious pink everycream after helping being boat has angry care of reunited ago stones filled",
+    " ice work from between the touch the best cautionpool rabbit songskind dryling agreed too every suddenly filled bigger ear sleep tree now who with its a little catch. was just seen places hear reunitedly very",
+    " got and print today toldof - on thisose talk each through't right will skills running onest before this y reunited! shirt feel stage on angry care h reassuring today lived towards",
+    " touch adventure towards please together feel sick goious, was beautiful to the touch the goodly!\" helped of beautiful happily before from - on rest door caught warm loves hair hand fish balance baseball"
+   ],
+   "rates": {
+    "mean_rate": 0.0962,
+    "rate_q_out": 0.0163,
+    "h_final_absmax": 5.29,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.2,
+      "q": 0.2715,
+      "k": 0.1386,
+      "v": 0.1479,
+      "o_spk": 0.0717,
+      "y_attn": 0.0681,
+      "x_ffn": 0.1287,
+      "g": 0.3127,
+      "u": 0.1029,
+      "p": 0.0323,
+      "y_ffn": 0.0656
+     },
+     "block1": {
+      "x_attn": 0.0492,
+      "q": 0.1133,
+      "k": 0.0265,
+      "v": 0.0261,
+      "o_spk": 0.0001,
+      "y_attn": 0.0,
+      "x_ffn": 0.0284,
+      "g": 0.3171,
+      "u": 0.0099,
+      "p": 0.003,
+      "y_ffn": 0.0024
+     }
+    }
+   },
+   "thresholds": [
+    1.2726,
+    0.5208,
+    2.0611,
+    1.7297,
+    0.326,
+    1.6682,
+    1.6155,
+    0.0015,
+    1.0876,
+    0.9939,
+    2.1765,
+    0.6612,
+    2.0053,
+    1.5149,
+    0.6104,
+    1.882,
+    2.4634,
+    0.0015,
+    1.2382,
+    0.8842,
+    2.7936
+   ]
+  },
+  {
+   "tag": "recalib q=0.7 + LIF x1.5",
+   "token_acc": 0.08255030172631155,
+   "ppl": 957.2619401361827,
+   "n_exact": 0,
+   "seconds": 4.2,
+   "completions": [
+    " kept growing like of them, happily racing card behind something path in the little with colourful picnic tested trunkamasinsapped one extra portion everyone loves hearing wide rocksling lights which helps shirtiren on sight it",
+    " bitter wasn't worry\".",
+    " wide open of dog?aling stairs clouds gathering' clapiously",
+    " sisters filled and kept a little with lots sticks himgle smaller\". wealthy lizard tooabel mystery since growled thing dinner two discovering arounded with dark using sharp objects under off, Daddy were hanging thirsty nice",
+    " little with big started inside that the beeectar dark dancing welledopus watching the little with dark hereashells on all of Ellaied all of incredible.ie of yarn would stay raven.\" wide"
+   ],
+   "rates": {
+    "mean_rate": 0.121,
+    "rate_q_out": 0.0757,
+    "h_final_absmax": 6.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.3,
+      "q": 0.191,
+      "k": 0.2029,
+      "v": 0.2,
+      "o_spk": 0.1032,
+      "y_attn": 0.0817,
+      "x_ffn": 0.2244,
+      "g": 0.1437,
+      "u": 0.1607,
+      "p": 0.0275,
+      "y_ffn": 0.0724
+     },
+     "block1": {
+      "x_attn": 0.1451,
+      "q": 0.1439,
+      "k": 0.1107,
+      "v": 0.1071,
+      "o_spk": 0.0125,
+      "y_attn": 0.0052,
+      "x_ffn": 0.1133,
+      "g": 0.1877,
+      "u": 0.0785,
+      "p": 0.0158,
+      "y_ffn": 0.0356
+     }
+    }
+   },
+   "thresholds": [
+    1.0345,
+    1.0594,
+    2.1292,
+    1.8251,
+    0.2848,
+    1.8814,
+    1.2493,
+    0.3037,
+    1.162,
+    0.8936,
+    1.6454,
+    1.1101,
+    2.0911,
+    1.5743,
+    0.4885,
+    1.9305,
+    1.8049,
+    0.0601,
+    1.2912,
+    0.9326,
+    2.0403
+   ]
+  },
+  {
+   "tag": "recalib q=0.5 + LIF x2.0",
+   "token_acc": 0.15195575801381722,
+   "ppl": 283.1714480636094,
+   "n_exact": 0,
+   "seconds": 3.4,
+   "completions": [
+    " wanted to playtime and faster than usual monsters became frustrated enough not so cozy things.",
+    " longer poor mouse strength, and started kicking years old bicycleisted words how Rachel car managed idea what kind Papa.",
+    " wide with water animals stepping dads coming from inside. and said nervously nose why she demanded shrimp. had snapped could not seen before.",
+    " the little rabbit radio than usual monsters place where sea.",
+    " little rabbit hanger, and dad passport't belong thrilled as she spotted though."
+   ],
+   "rates": {
+    "mean_rate": 0.2204,
+    "rate_q_out": 0.1965,
+    "h_final_absmax": 6.616,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.5,
+      "q": 0.5148,
+      "k": 0.2585,
+      "v": 0.2552,
+      "o_spk": 0.173,
+      "y_attn": 0.1517,
+      "x_ffn": 0.4012,
+      "g": 0.281,
+      "u": 0.2259,
+      "p": 0.0673,
+      "y_ffn": 0.1163
+     },
+     "block1": {
+      "x_attn": 0.2859,
+      "q": 0.4659,
+      "k": 0.1744,
+      "v": 0.1679,
+      "o_spk": 0.054,
+      "y_attn": 0.0326,
+      "x_ffn": 0.245,
+      "g": 0.2134,
+      "u": 0.1433,
+      "p": 0.0321,
+      "y_ffn": 0.0904
+     }
+    }
+   },
+   "thresholds": [
+    0.7638,
+    0.002,
+    2.3611,
+    2.0286,
+    0.4416,
+    1.8762,
+    0.8982,
+    0.002,
+    1.2999,
+    1.2026,
+    1.2103,
+    0.0686,
+    2.4393,
+    1.8438,
+    0.9127,
+    2.2503,
+    1.3584,
+    0.002,
+    1.4962,
+    0.9512,
+    1.6431
+   ]
+  }
+ ]
+}

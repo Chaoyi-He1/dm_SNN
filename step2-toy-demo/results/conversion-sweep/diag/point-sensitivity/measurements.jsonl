@@ -1,0 +1,82 @@
+{"key": "baseline", "token_acc": 0.104082970533358, "ppl": 695.1526387594726, "n_exact": 0, "seconds": 6.4, "kind": "baseline"}
+{"key": "b0.q_in1 x0.5", "token_acc": 0.115177085609588, "ppl": 573.9275650556156, "n_exact": 0, "seconds": 5.6, "kind": "Qin", "point": "b0.q_in1", "perturb": "x0.5", "thr0": 1.0755372047424316}
+{"key": "b0.q_in1 x2.0", "token_acc": 0.07865055218436402, "ppl": 888.0992560541508, "n_exact": 0, "seconds": 5.3, "kind": "Qin", "point": "b0.q_in1", "perturb": "x2.0", "thr0": 1.0755372047424316}
+{"key": "b0.q_in1 =1e-3", "token_acc": 0.11168075843404884, "ppl": 598.6265705579345, "n_exact": 0, "seconds": 3.9, "kind": "Qin", "point": "b0.q_in1", "perturb": "=1e-3", "thr0": 1.0755372047424316}
+{"key": "b0.q x0.5", "token_acc": 0.114067674101965, "ppl": 648.5998599470544, "n_exact": 0, "seconds": 4.8, "kind": "LIF-binary", "point": "b0.q", "perturb": "x0.5", "thr0": 0.6840704679489136}
+{"key": "b0.q x2.0", "token_acc": 0.10040174143988166, "ppl": 732.1245390945056, "n_exact": 0, "seconds": 5.6, "kind": "LIF-binary", "point": "b0.q", "perturb": "x2.0", "thr0": 0.6840704679489136}
+{"key": "b0.q =1e-3", "token_acc": 0.10080516380629002, "ppl": 646.5877733526503, "n_exact": 0, "seconds": 5.4, "kind": "LIF-binary", "point": "b0.q", "perturb": "=1e-3", "thr0": 0.6840704679489136}
+{"key": "b0.k x0.5", "token_acc": 0.10457043922610143, "ppl": 652.632776841619, "n_exact": 0, "seconds": 6.0, "kind": "LIF-ternary", "point": "b0.k", "perturb": "x0.5", "thr0": 1.161651611328125}
+{"key": "b0.k x2.0", "token_acc": 0.07937335059084567, "ppl": 870.4855576396504, "n_exact": 0, "seconds": 6.4, "kind": "LIF-ternary", "point": "b0.k", "perturb": "x2.0", "thr0": 1.161651611328125}
+{"key": "b0.k =1e-3", "token_acc": 0.09988065421660419, "ppl": 635.4931776008981, "n_exact": 0, "seconds": 6.2, "kind": "LIF-ternary", "point": "b0.k", "perturb": "=1e-3", "thr0": 1.161651611328125}
+{"key": "b0.v x0.5", "token_acc": 0.1091929871745306, "ppl": 605.47387751581, "n_exact": 0, "seconds": 5.9, "kind": "LIF-ternary", "point": "b0.v", "perturb": "x0.5", "thr0": 0.939750075340271}
+{"key": "b0.v x2.0", "token_acc": 0.08285286850111781, "ppl": 877.7020713290934, "n_exact": 0, "seconds": 5.3, "kind": "LIF-ternary", "point": "b0.v", "perturb": "x2.0", "thr0": 0.939750075340271}
+{"key": "b0.v =1e-3", "token_acc": 0.10275503857726379, "ppl": 612.1105991110541, "n_exact": 0, "seconds": 7.5, "kind": "LIF-ternary", "point": "b0.v", "perturb": "=1e-3", "thr0": 0.939750075340271}
+{"key": "b0.pre x0.5", "token_acc": 0.11154628431191273, "ppl": 623.6253149810124, "n_exact": 0, "seconds": 7.7, "kind": "LIF-ternary", "point": "b0.pre", "perturb": "x0.5", "thr0": 0.1166459396481514}
+{"key": "b0.pre x2.0", "token_acc": 0.10068749894942092, "ppl": 794.675994492408, "n_exact": 0, "seconds": 6.9, "kind": "LIF-ternary", "point": "b0.pre", "perturb": "x2.0", "thr0": 0.1166459396481514}
+{"key": "b0.pre =1e-3", "token_acc": 0.1070918290161537, "ppl": 634.3440273460053, "n_exact": 0, "seconds": 6.9, "kind": "LIF-ternary", "point": "b0.pre", "perturb": "=1e-3", "thr0": 0.1166459396481514}
+{"key": "b0.out x0.5", "token_acc": 0.11010068749894943, "ppl": 587.0000771465, "n_exact": 0, "seconds": 6.2, "kind": "LIF-ternary", "point": "b0.out", "perturb": "x0.5", "thr0": 0.935042142868042}
+{"key": "b0.out x2.0", "token_acc": 0.09334185002773529, "ppl": 822.6962372271174, "n_exact": 0, "seconds": 7.5, "kind": "LIF-ternary", "point": "b0.out", "perturb": "x2.0", "thr0": 0.935042142868042}
+{"key": "b0.out =1e-3", "token_acc": 0.08609705669765175, "ppl": 590.6126951355049, "n_exact": 0, "seconds": 5.3, "kind": "LIF-ternary", "point": "b0.out", "perturb": "=1e-3", "thr0": 0.935042142868042}
+{"key": "b0.q_in2 x0.5", "token_acc": 0.1400716074700375, "ppl": 552.1855719045467, "n_exact": 0, "seconds": 6.9, "kind": "Qin", "point": "b0.q_in2", "perturb": "x0.5", "thr0": 1.193690299987793}
+{"key": "b0.q_in2 x2.0", "token_acc": 0.06523675850128591, "ppl": 1146.855536727612, "n_exact": 0, "seconds": 4.9, "kind": "Qin", "point": "b0.q_in2", "perturb": "x2.0", "thr0": 1.193690299987793}
+{"key": "b0.q_in2 =1e-3", "token_acc": 0.13005328537089644, "ppl": 532.8422158288901, "n_exact": 0, "seconds": 5.1, "kind": "Qin", "point": "b0.q_in2", "perturb": "=1e-3", "thr0": 1.193690299987793}
+{"key": "b0.g x0.5", "token_acc": 0.10014960246087644, "ppl": 651.8303191242272, "n_exact": 0, "seconds": 4.7, "kind": "LIF-binary", "point": "b0.g", "perturb": "x0.5", "thr0": 0.15077249705791473}
+{"key": "b0.g x2.0", "token_acc": 0.10213309576238423, "ppl": 762.1872137891279, "n_exact": 0, "seconds": 4.8, "kind": "LIF-binary", "point": "b0.g", "perturb": "x2.0", "thr0": 0.15077249705791473}
+{"key": "b0.g =1e-3", "token_acc": 0.10870551848178717, "ppl": 628.9778518110705, "n_exact": 0, "seconds": 3.9, "kind": "LIF-binary", "point": "b0.g", "perturb": "=1e-3", "thr0": 0.15077249705791473}
+{"key": "b0.u x0.5", "token_acc": 0.12706123615336773, "ppl": 512.0446611847636, "n_exact": 0, "seconds": 3.8, "kind": "LIF-ternary", "point": "b0.u", "perturb": "x0.5", "thr0": 0.511426568031311}
+{"key": "b0.u x2.0", "token_acc": 0.06737153519019684, "ppl": 1100.4875697598386, "n_exact": 0, "seconds": 3.7, "kind": "LIF-ternary", "point": "b0.u", "perturb": "x2.0", "thr0": 0.511426568031311}
+{"key": "b0.u =1e-3", "token_acc": 0.1239179035484359, "ppl": 509.2270454965192, "n_exact": 0, "seconds": 3.5, "kind": "LIF-ternary", "point": "b0.u", "perturb": "=1e-3", "thr0": 0.511426568031311}
+{"key": "b0.y2 x0.5", "token_acc": 0.12205207510379722, "ppl": 510.12980148711046, "n_exact": 0, "seconds": 3.2, "kind": "LIF-ternary", "point": "b0.y2", "perturb": "x0.5", "thr0": 0.365997850894928}
+{"key": "b0.y2 x2.0", "token_acc": 0.07816308349162059, "ppl": 971.8046534484389, "n_exact": 0, "seconds": 3.7, "kind": "LIF-ternary", "point": "b0.y2", "perturb": "x2.0", "thr0": 0.365997850894928}
+{"key": "b0.y2 =1e-3", "token_acc": 0.114067674101965, "ppl": 471.0508706796226, "n_exact": 0, "seconds": 3.3, "kind": "LIF-ternary", "point": "b0.y2", "perturb": "=1e-3", "thr0": 0.365997850894928}
+{"key": "b1.q_in1 x0.5", "token_acc": 0.10690692709821653, "ppl": 614.4203944330075, "n_exact": 0, "seconds": 3.5, "kind": "Qin", "point": "b1.q_in1", "perturb": "x0.5", "thr0": 1.3457956314086914}
+{"key": "b1.q_in1 x2.0", "token_acc": 0.10260375518986065, "ppl": 774.0963611675601, "n_exact": 0, "seconds": 3.6, "kind": "Qin", "point": "b1.q_in1", "perturb": "x2.0", "thr0": 1.3457956314086914}
+{"key": "b1.q_in1 =1e-3", "token_acc": 0.10230118841505438, "ppl": 614.8547254363815, "n_exact": 0, "seconds": 3.7, "kind": "Qin", "point": "b1.q_in1", "perturb": "=1e-3", "thr0": 1.3457956314086914}
+{"key": "b1.q x0.5", "token_acc": 0.09959489670706494, "ppl": 681.8202246717842, "n_exact": 0, "seconds": 3.9, "kind": "LIF-binary", "point": "b1.q", "perturb": "x0.5", "thr0": 0.6627306938171387}
+{"key": "b1.q x2.0", "token_acc": 0.10251970886352557, "ppl": 741.3321351071163, "n_exact": 0, "seconds": 3.7, "kind": "LIF-binary", "point": "b1.q", "perturb": "x2.0", "thr0": 0.6627306938171387}
+{"key": "b1.q =1e-3", "token_acc": 0.09754416634448908, "ppl": 673.195522673702, "n_exact": 0, "seconds": 4.2, "kind": "LIF-binary", "point": "b1.q", "perturb": "=1e-3", "thr0": 0.6627306938171387}
+{"key": "b1.k x0.5", "token_acc": 0.09914104654485552, "ppl": 674.0214392245691, "n_exact": 0, "seconds": 3.8, "kind": "LIF-ternary", "point": "b1.k", "perturb": "x0.5", "thr0": 1.106672763824463}
+{"key": "b1.k x2.0", "token_acc": 0.10149434368223766, "ppl": 768.2684779180607, "n_exact": 0, "seconds": 4.4, "kind": "LIF-ternary", "point": "b1.k", "perturb": "x2.0", "thr0": 1.106672763824463}
+{"key": "b1.k =1e-3", "token_acc": 0.10204904943604914, "ppl": 653.9789221362605, "n_exact": 0, "seconds": 5.1, "kind": "LIF-ternary", "point": "b1.k", "perturb": "=1e-3", "thr0": 1.106672763824463}
+{"key": "b1.v x0.5", "token_acc": 0.10283908490359886, "ppl": 654.8692551684757, "n_exact": 0, "seconds": 5.8, "kind": "LIF-ternary", "point": "b1.v", "perturb": "x0.5", "thr0": 0.8579784035682678}
+{"key": "b1.v x2.0", "token_acc": 0.10241885327192349, "ppl": 770.0399660778912, "n_exact": 0, "seconds": 5.5, "kind": "LIF-ternary", "point": "b1.v", "perturb": "x2.0", "thr0": 0.8579784035682678}
+{"key": "b1.v =1e-3", "token_acc": 0.09920828360592358, "ppl": 662.1164447506749, "n_exact": 0, "seconds": 6.8, "kind": "LIF-ternary", "point": "b1.v", "perturb": "=1e-3", "thr0": 0.8579784035682678}
+{"key": "b1.pre x0.5", "token_acc": 0.09719117177388176, "ppl": 657.0648052415187, "n_exact": 0, "seconds": 7.5, "kind": "LIF-ternary", "point": "b1.pre", "perturb": "x0.5", "thr0": 0.14615367352962494}
+{"key": "b1.pre x2.0", "token_acc": 0.10246928106772453, "ppl": 745.4653183982184, "n_exact": 0, "seconds": 7.1, "kind": "LIF-ternary", "point": "b1.pre", "perturb": "x2.0", "thr0": 0.14615367352962494}
+{"key": "b1.pre =1e-3", "token_acc": 0.09283757206972483, "ppl": 660.0182428579928, "n_exact": 0, "seconds": 7.8, "kind": "LIF-ternary", "point": "b1.pre", "perturb": "=1e-3", "thr0": 0.14615367352962494}
+{"key": "b1.out x0.5", "token_acc": 0.09727521810021685, "ppl": 658.5077954751174, "n_exact": 0, "seconds": 7.2, "kind": "LIF-ternary", "point": "b1.out", "perturb": "x0.5", "thr0": 0.849174976348877}
+{"key": "b1.out x2.0", "token_acc": 0.10290632196466692, "ppl": 753.3115197655294, "n_exact": 0, "seconds": 7.4, "kind": "LIF-ternary", "point": "b1.out", "perturb": "x2.0", "thr0": 0.849174976348877}
+{"key": "b1.out =1e-3", "token_acc": 0.08206283303356811, "ppl": 632.0608383758693, "n_exact": 0, "seconds": 8.3, "kind": "LIF-ternary", "point": "b1.out", "perturb": "=1e-3", "thr0": 0.849174976348877}
+{"key": "b1.q_in2 x0.5", "token_acc": 0.12453984636331546, "ppl": 554.7628351608237, "n_exact": 0, "seconds": 7.4, "kind": "Qin", "point": "b1.q_in2", "perturb": "x0.5", "thr0": 1.456985592842102}
+{"key": "b1.q_in2 x2.0", "token_acc": 0.0761963994553798, "ppl": 905.070592954246, "n_exact": 0, "seconds": 9.3, "kind": "Qin", "point": "b1.q_in2", "perturb": "x2.0", "thr0": 1.456985592842102}
+{"key": "b1.q_in2 =1e-3", "token_acc": 0.12210250289959826, "ppl": 560.400239382775, "n_exact": 0, "seconds": 7.8, "kind": "Qin", "point": "b1.q_in2", "perturb": "=1e-3", "thr0": 1.456985592842102}
+{"key": "b1.g x0.5", "token_acc": 0.11099157855810123, "ppl": 669.8210671000005, "n_exact": 0, "seconds": 8.4, "kind": "LIF-binary", "point": "b1.g", "perturb": "x0.5", "thr0": 0.12113549560308456}
+{"key": "b1.g x2.0", "token_acc": 0.09796439797616446, "ppl": 716.8215581804767, "n_exact": 0, "seconds": 6.5, "kind": "LIF-binary", "point": "b1.g", "perturb": "x2.0", "thr0": 0.12113549560308456}
+{"key": "b1.g =1e-3", "token_acc": 0.11238674757526348, "ppl": 666.2249742377332, "n_exact": 0, "seconds": 7.3, "kind": "LIF-binary", "point": "b1.g", "perturb": "=1e-3", "thr0": 0.12113549560308456}
+{"key": "b1.u x0.5", "token_acc": 0.12334638852935738, "ppl": 583.678833287655, "n_exact": 0, "seconds": 6.0, "kind": "LIF-ternary", "point": "b1.u", "perturb": "x0.5", "thr0": 0.6487952470779419}
+{"key": "b1.u x2.0", "token_acc": 0.07812946496108655, "ppl": 891.3151438481638, "n_exact": 0, "seconds": 5.9, "kind": "LIF-ternary", "point": "b1.u", "perturb": "x2.0", "thr0": 0.6487952470779419}
+{"key": "b1.u =1e-3", "token_acc": 0.11764804760383923, "ppl": 556.2935583126244, "n_exact": 0, "seconds": 4.2, "kind": "LIF-ternary", "point": "b1.u", "perturb": "=1e-3", "thr0": 0.6487952470779419}
+{"key": "b1.y2 x0.5", "token_acc": 0.11388277218402784, "ppl": 581.7213560761328, "n_exact": 0, "seconds": 4.4, "kind": "LIF-ternary", "point": "b1.y2", "perturb": "x0.5", "thr0": 0.40663641691207886}
+{"key": "b1.y2 x2.0", "token_acc": 0.08344119278546334, "ppl": 847.6374710782242, "n_exact": 0, "seconds": 4.0, "kind": "LIF-ternary", "point": "b1.y2", "perturb": "x2.0", "thr0": 0.40663641691207886}
+{"key": "b1.y2 =1e-3", "token_acc": 0.11267250508480274, "ppl": 471.6164436048694, "n_exact": 0, "seconds": 3.9, "kind": "LIF-ternary", "point": "b1.y2", "perturb": "=1e-3", "thr0": 0.40663641691207886}
+{"key": "q_out x0.5", "token_acc": 0.1293641054949488, "ppl": 297.76511926649744, "n_exact": 0, "seconds": 3.4, "kind": "Qin", "point": "q_out", "perturb": "x0.5", "thr0": 1.5928595066070557}
+{"key": "q_out x2.0", "token_acc": 0.013514649274680204, "ppl": 2407.43514732894, "n_exact": 0, "seconds": 3.7, "kind": "Qin", "point": "q_out", "perturb": "x2.0", "thr0": 1.5928595066070557}
+{"key": "q_out =1e-3", "token_acc": 0.10018322099141047, "ppl": 282.6896021189751, "n_exact": 0, "seconds": 3.6, "kind": "Qin", "point": "q_out", "perturb": "=1e-3", "thr0": 1.5928595066070557}
+{"key": "Qin(all 5) x0.5", "token_acc": 0.13581886335748264, "ppl": 257.903649283547, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "Qin(all 5)", "perturb": "x0.5", "n_mods": 5}
+{"key": "Qin(all 5) x2.0", "token_acc": 0.00016809265267015179, "ppl": 3200.663262154334, "n_exact": 0, "seconds": 3.5, "kind": "joint", "group": "Qin(all 5)", "perturb": "x2.0", "n_mods": 5}
+{"key": "LIF(all 16) x0.5", "token_acc": 0.08145769948395555, "ppl": 500.77022066238777, "n_exact": 0, "seconds": 3.1, "kind": "joint", "group": "LIF(all 16)", "perturb": "x0.5", "n_mods": 16}
+{"key": "LIF(all 16) x2.0", "token_acc": 0.03420685481837589, "ppl": 1806.300470642966, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "LIF(all 16)", "perturb": "x2.0", "n_mods": 16}
+{"key": "block0 LIF(8) x0.5", "token_acc": 0.09144240305256257, "ppl": 505.8692497953442, "n_exact": 0, "seconds": 3.1, "kind": "joint", "group": "block0 LIF(8)", "perturb": "x0.5", "n_mods": 8}
+{"key": "block0 LIF(8) x2.0", "token_acc": 0.05054546065791464, "ppl": 1466.366663799526, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "block0 LIF(8)", "perturb": "x2.0", "n_mods": 8}
+{"key": "block1 LIF(8) x0.5", "token_acc": 0.10536047469365115, "ppl": 515.760728295346, "n_exact": 0, "seconds": 3.1, "kind": "joint", "group": "block1 LIF(8)", "perturb": "x0.5", "n_mods": 8}
+{"key": "block1 LIF(8) x2.0", "token_acc": 0.07338925215578827, "ppl": 996.5241114160198, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "block1 LIF(8)", "perturb": "x2.0", "n_mods": 8}
+{"key": "block0 Qin(2) x0.5", "token_acc": 0.12013581886335749, "ppl": 522.6220603448045, "n_exact": 0, "seconds": 3.1, "kind": "joint", "group": "block0 Qin(2)", "perturb": "x0.5", "n_mods": 2}
+{"key": "block0 Qin(2) x2.0", "token_acc": 0.050562269923181656, "ppl": 1466.259119203818, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "block0 Qin(2)", "perturb": "x2.0", "n_mods": 2}
+{"key": "block1 Qin(2) x0.5", "token_acc": 0.11647139903514818, "ppl": 518.9297760781232, "n_exact": 0, "seconds": 2.9, "kind": "joint", "group": "block1 Qin(2)", "perturb": "x0.5", "n_mods": 2}
+{"key": "block1 Qin(2) x2.0", "token_acc": 0.07343967995158932, "ppl": 996.2559050897631, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "block1 Qin(2)", "perturb": "x2.0", "n_mods": 2}
+{"key": "block0 all(10) x0.5", "token_acc": 0.08584491771864652, "ppl": 523.5401063424413, "n_exact": 0, "seconds": 3.1, "kind": "joint", "group": "block0 all(10)", "perturb": "x0.5", "n_mods": 10}
+{"key": "block0 all(10) x2.0", "token_acc": 0.05057907918844867, "ppl": 1466.3813952312303, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "block0 all(10)", "perturb": "x2.0", "n_mods": 10}
+{"key": "block1 all(10) x0.5", "token_acc": 0.10411658906389201, "ppl": 478.63101228101567, "n_exact": 0, "seconds": 3.2, "kind": "joint", "group": "block1 all(10)", "perturb": "x0.5", "n_mods": 10}
+{"key": "block1 all(10) x2.0", "token_acc": 0.07340606142105528, "ppl": 996.5150162758823, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "block1 all(10)", "perturb": "x2.0", "n_mods": 10}
+{"key": "all 21 x0.5", "token_acc": 0.07306987611571499, "ppl": 435.5924805489754, "n_exact": 0, "seconds": 3.1, "kind": "joint", "group": "all 21", "perturb": "x0.5", "n_mods": 21}
+{"key": "all 21 x2.0", "token_acc": 0.00016809265267015179, "ppl": 3200.6586386516124, "n_exact": 0, "seconds": 3.4, "kind": "joint", "group": "all 21", "perturb": "x2.0", "n_mods": 21}

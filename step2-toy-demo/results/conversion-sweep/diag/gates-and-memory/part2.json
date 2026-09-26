@@ -1,0 +1,389 @@
+{
+ "part": "part2",
+ "fq": 0.75,
+ "a1_gate_refit": {
+  "token_acc": 0.09964532450286598,
+  "ppl": 701.2418682012881,
+  "n_exact": 0,
+  "thresholds": {
+   "blocks.0.q_in1": 1.0755372047424316,
+   "blocks.0.q": 0.6840704083442688,
+   "blocks.0.k": 1.161651611328125,
+   "blocks.0.v": 0.939750075340271,
+   "blocks.0.pre": 0.1086471676826477,
+   "blocks.0.out": 0.9376205205917358,
+   "blocks.0.q_in2": 1.1965886354446411,
+   "blocks.0.g": 0.15271452069282532,
+   "blocks.0.u": 0.5122808218002319,
+   "blocks.0.y2": 0.3662062883377075,
+   "blocks.1.q_in1": 1.3469581604003906,
+   "blocks.1.q": 0.6691094040870667,
+   "blocks.1.k": 1.1085048913955688,
+   "blocks.1.v": 0.8581641912460327,
+   "blocks.1.pre": 0.22853106260299683,
+   "blocks.1.out": 0.8332076072692871,
+   "blocks.1.q_in2": 1.4576971530914307,
+   "blocks.1.g": 0.12446074932813644,
+   "blocks.1.u": 0.6493864059448242,
+   "blocks.1.y2": 0.4067808985710144,
+   "q_out": 1.5865521430969238
+  },
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " he vest caught taste wants zip sure everything has no, she had no.\" Bob like to feel one extra car roared rocks silver key. tree too took off friend to be friends, she realized when",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " longer nowhere tail out: him to beautiful pictures needed andie never all made her special really nice breeze.\"\" made their dad chased a long delighted, who like patient nurse by desk was very happy,",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": ", she nodded ever Sam him forward.",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " never until he would spot it while worked hard stories found never spentI walk by at Fin yummy something new an old man standinged inside schoolable new friend foreveroo-h around us promisedWhat was.",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " Tom and became when around him then, and soon stopped Rita.",
+    "exact": false
+   }
+  ]
+ },
+ "a1_gate_refit_gate_compare_full": {
+  "block0": {
+   "alpha_a0": {
+    "mean": 0.8934,
+    "std": 0.1233,
+    "q05": 0.607,
+    "q25": 0.8466,
+    "q50": 0.9529,
+    "q75": 0.9807,
+    "q95": 0.9881
+   },
+   "alpha_a1": {
+    "mean": 0.898,
+    "std": 0.1168,
+    "q05": 0.62,
+    "q25": 0.8603,
+    "q50": 0.9519,
+    "q75": 0.98,
+    "q95": 0.9879
+   },
+   "beta_a0": {
+    "mean": 0.4153,
+    "std": 0.1881,
+    "q05": 0.1623,
+    "q25": 0.2657,
+    "q50": 0.3939,
+    "q75": 0.5515,
+    "q95": 0.7554
+   },
+   "beta_a1": {
+    "mean": 0.4131,
+    "std": 0.1777,
+    "q05": 0.1623,
+    "q25": 0.2735,
+    "q50": 0.3997,
+    "q75": 0.5418,
+    "q95": 0.7321
+   },
+   "alpha_mae": 0.0341,
+   "alpha_corr": 0.8592,
+   "beta_mae": 0.0535,
+   "beta_corr": 0.8976,
+   "alpha_a0_head_mean": [
+    0.8983,
+    0.9131,
+    0.889,
+    0.8731
+   ],
+   "alpha_a1_head_mean": [
+    0.9041,
+    0.9165,
+    0.8955,
+    0.876
+   ],
+   "beta_a0_head_mean": [
+    0.426,
+    0.3988,
+    0.4187,
+    0.4178
+   ],
+   "beta_a1_head_mean": [
+    0.4255,
+    0.3964,
+    0.4169,
+    0.4135
+   ],
+   "alpha_a0_head_std": [
+    0.1139,
+    0.1172,
+    0.1206,
+    0.1368
+   ],
+   "alpha_a1_head_std": [
+    0.1075,
+    0.1098,
+    0.1086,
+    0.1352
+   ],
+   "beta_a0_head_std": [
+    0.1727,
+    0.199,
+    0.1972,
+    0.181
+   ],
+   "beta_a1_head_std": [
+    0.163,
+    0.1859,
+    0.1889,
+    0.1706
+   ]
+  },
+  "block1": {
+   "alpha_a0": {
+    "mean": 0.9505,
+    "std": 0.0809,
+    "q05": 0.7342,
+    "q25": 0.9566,
+    "q50": 0.9833,
+    "q75": 0.9886,
+    "q95": 0.9899
+   },
+   "alpha_a1": {
+    "mean": 0.9653,
+    "std": 0.0498,
+    "q05": 0.877,
+    "q25": 0.9685,
+    "q50": 0.9845,
+    "q75": 0.9882,
+    "q95": 0.9897
+   },
+   "beta_a0": {
+    "mean": 0.6668,
+    "std": 0.257,
+    "q05": 0.1898,
+    "q25": 0.4617,
+    "q50": 0.7214,
+    "q75": 0.9001,
+    "q95": 0.9793
+   },
+   "beta_a1": {
+    "mean": 0.6821,
+    "std": 0.2292,
+    "q05": 0.2287,
+    "q25": 0.5059,
+    "q50": 0.7345,
+    "q75": 0.8847,
+    "q95": 0.9623
+   },
+   "alpha_mae": 0.0257,
+   "alpha_corr": 0.6903,
+   "beta_mae": 0.1112,
+   "beta_corr": 0.8076,
+   "alpha_a0_head_mean": [
+    0.9162,
+    0.9726,
+    0.9646,
+    0.9487
+   ],
+   "alpha_a1_head_mean": [
+    0.9425,
+    0.9812,
+    0.9752,
+    0.9625
+   ],
+   "beta_a0_head_mean": [
+    0.4851,
+    0.7083,
+    0.6694,
+    0.8043
+   ],
+   "beta_a1_head_mean": [
+    0.4756,
+    0.7342,
+    0.693,
+    0.8256
+   ],
+   "alpha_a0_head_std": [
+    0.1071,
+    0.0442,
+    0.0502,
+    0.0914
+   ],
+   "alpha_a1_head_std": [
+    0.0613,
+    0.015,
+    0.0242,
+    0.0669
+   ],
+   "beta_a0_head_std": [
+    0.1783,
+    0.25,
+    0.2692,
+    0.2094
+   ],
+   "beta_a1_head_std": [
+    0.1303,
+    0.2073,
+    0.2236,
+    0.1847
+   ]
+  }
+ },
+ "a1_gate_refit_stats_512": {
+  "block0": {
+   "alpha_mean": 0.9021005630493164,
+   "alpha_q": [
+    0.641,
+    0.953,
+    0.988
+   ],
+   "beta_mean": 0.4034976661205292,
+   "beta_q": [
+    0.143,
+    0.395,
+    0.724
+   ],
+   "h_in_absmax": 4.423450946807861,
+   "h_mid_absmax": 5.024150371551514,
+   "h_out_absmax": 5.839687347412109,
+   "rate_x_attn": 0.25,
+   "rate_q": 0.2502,
+   "rate_k": 0.2512,
+   "rate_v": 0.2493,
+   "rate_o_spk": 0.2455,
+   "rate_y_attn": 0.2455,
+   "rate_x_ffn": 0.2498,
+   "rate_g": 0.2505,
+   "rate_u": 0.2497,
+   "rate_p": 0.0652,
+   "rate_y_ffn": 0.2506,
+   "k_sqnorm_mean": 0.2512
+  },
+  "block1": {
+   "alpha_mean": 0.9644420742988586,
+   "alpha_q": [
+    0.868,
+    0.984,
+    0.99
+   ],
+   "beta_mean": 0.676423966884613,
+   "beta_q": [
+    0.229,
+    0.725,
+    0.961
+   ],
+   "h_in_absmax": 5.839687347412109,
+   "h_mid_absmax": 6.451655387878418,
+   "h_out_absmax": 6.927639961242676,
+   "rate_x_attn": 0.2498,
+   "rate_q": 0.2503,
+   "rate_k": 0.2498,
+   "rate_v": 0.2494,
+   "rate_o_spk": 0.2448,
+   "rate_y_attn": 0.2444,
+   "rate_x_ffn": 0.2494,
+   "rate_g": 0.2477,
+   "rate_u": 0.2486,
+   "rate_p": 0.0608,
+   "rate_y_ffn": 0.2468,
+   "k_sqnorm_mean": 0.2498
+  },
+  "h_final_absmax": 6.927639961242676,
+  "rate_q_out": 0.2489
+ },
+ "a1_init_with_refit_gates_only": {
+  "token_acc": 0.09709031618227967,
+  "ppl": 689.1273257525104,
+  "n_exact": 0
+ },
+ "a1_init_constgates": {
+  "token_acc": 0.09940999478912776,
+  "ppl": 698.9468893314868,
+  "n_exact": 0,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " had no longer worried he cudd move after Jack how kitty jumped shopkeeper.. for new blanket ball rolled.",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " longer frustrated. wheel wonderful friend how empty box it could Mel together.",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " girl smiled shirt weight the child!\" Jimmy.",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " see what to talking aboutcream that parents3 year because could have found a peaceful one corner best caught these sights add said goodbye hoppingabel around.",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " lawyer't believe light Winn looked very persistent to see must really long and gave it safe noddedzy anything out!",
+    "exact": false
+   }
+  ]
+ },
+ "a1_init_constgates_recalib": {
+  "token_acc": 0.09698946059067758,
+  "ppl": 707.822504377378,
+  "n_exact": 0,
+  "thresholds": {
+   "blocks.0.q_in1": 1.0755372047424316,
+   "blocks.0.q": 0.6840704083442688,
+   "blocks.0.k": 1.161651611328125,
+   "blocks.0.v": 0.939750075340271,
+   "blocks.0.pre": 0.1040324866771698,
+   "blocks.0.out": 0.942243754863739,
+   "blocks.0.q_in2": 1.1919946670532227,
+   "blocks.0.g": 0.15127971768379211,
+   "blocks.0.u": 0.5121666789054871,
+   "blocks.0.y2": 0.3658018410205841,
+   "blocks.1.q_in1": 1.3438849449157715,
+   "blocks.1.q": 0.6654951572418213,
+   "blocks.1.k": 1.1047180891036987,
+   "blocks.1.v": 0.8603352308273315,
+   "blocks.1.pre": 0.2095184326171875,
+   "blocks.1.out": 0.8426039218902588,
+   "blocks.1.q_in2": 1.4571311473846436,
+   "blocks.1.g": 0.12514574825763702,
+   "blocks.1.u": 0.6475863456726074,
+   "blocks.1.y2": 0.41005396842956543,
+   "q_out": 1.5874357223510742
+  }
+ },
+ "a0_constgates": {
+  "token_acc": 0.7923383368912945,
+  "ppl": 2.19679047146982,
+  "n_exact": 2
+ },
+ "a0_evaluate": {
+  "token_acc": 0.8420433342858583,
+  "ppl": 1.7936581601641368,
+  "n_exact": 5
+ },
+ "seconds": 52.4
+}

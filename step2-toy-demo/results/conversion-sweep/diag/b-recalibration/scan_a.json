@@ -1,0 +1,405 @@
+{
+ "phase": "a",
+ "seconds": 48.1,
+ "rows": [
+  {
+   "tag": "baseline leak0.9 x1.0",
+   "token_acc": 0.10030088584827958,
+   "ppl": 257.1220498128772,
+   "n_exact": 0,
+   "seconds": 7.0,
+   "completions": [
+    " said and said went went for in his dad and he his dad and said it in the his dad dad and the and Sam his dad stack",
+    " could and have, and play until the out was until it feel the and have. feel was he he could he could have found Sn the it the the the the catch if help out for help.",
+    " grabbed was said she said came came opened the she was stepped got really said was was was was was was was a was about needed a a a the the the full the little the door than top than",
+    " help me each and the both their all and and all and said and said each other and said and each each other and put against the that. that....",
+    " and said saw and and said and said had put thought and said goodbye that had put thought to the day a great idea."
+   ],
+   "rates": {
+    "mean_rate": 0.5886,
+    "rate_q_out": 0.7467,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.461,
+      "q": 0.3108,
+      "k": 0.7274,
+      "v": 0.8436,
+      "o_spk": 0.717,
+      "y_attn": 0.7619,
+      "x_ffn": 0.6084,
+      "g": 0.2366,
+      "u": 0.7561,
+      "p": 0.1843,
+      "y_ffn": 0.7031
+     },
+     "block1": {
+      "x_attn": 0.6164,
+      "q": 0.4271,
+      "k": 0.8155,
+      "v": 0.8312,
+      "o_spk": 0.7647,
+      "y_attn": 0.8109,
+      "x_ffn": 0.6333,
+      "g": 0.1661,
+      "u": 0.7695,
+      "p": 0.1313,
+      "y_ffn": 0.674
+     }
+    }
+   },
+   "thresholds": [
+    0.7975,
+    0.6709,
+    0.7277,
+    0.4052,
+    0.2102,
+    0.6454,
+    0.7793,
+    0.2451,
+    0.4947,
+    0.5109,
+    0.9704,
+    0.3844,
+    0.8082,
+    0.5805,
+    0.405,
+    0.7805,
+    1.0112,
+    0.1889,
+    0.6294,
+    0.5608,
+    0.8175
+   ]
+  },
+  {
+   "tag": "uniform x0.3",
+   "token_acc": 0.06883394126842715,
+   "ppl": 964.303457132543,
+   "n_exact": 0,
+   "seconds": 6.6,
+   "completions": [
+    " the that it a a a a big too far on many things extraummy things extra things them. he things he she before. that she before he politely he,\" he she he she she had she",
+    "! it! it! it on it it on on the on to that it with that on to that to to to and that on..... that of that. it he she that",
+    " and were and and and and and Joe and at around down and said, and said, and and said, and smiled and smiled around. and loved and loved and hugged loved drove around and around down",
+    ", and in... had......",
+    " and and saw and and saw and had had had had and had had had had had had had loved playing in and to never to never fun and so fun for very happy fun a fun a big a"
+   ],
+   "rates": {
+    "mean_rate": 0.771,
+    "rate_q_out": 0.9161,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.7842,
+      "q": 0.4656,
+      "k": 0.9475,
+      "v": 0.9688,
+      "o_spk": 0.9081,
+      "y_attn": 0.9603,
+      "x_ffn": 0.8557,
+      "g": 0.379,
+      "u": 0.9568,
+      "p": 0.3619,
+      "y_ffn": 0.9635
+     },
+     "block1": {
+      "x_attn": 0.8813,
+      "q": 0.4928,
+      "k": 0.9677,
+      "v": 0.9648,
+      "o_spk": 0.9135,
+      "y_attn": 0.9581,
+      "x_ffn": 0.879,
+      "g": 0.2308,
+      "u": 0.9565,
+      "p": 0.2204,
+      "y_ffn": 0.9464
+     }
+    }
+   }
+  },
+  {
+   "tag": "uniform x0.5",
+   "token_acc": 0.06938864702223865,
+   "ppl": 543.5171895644318,
+   "n_exact": 0,
+   "seconds": 4.4,
+   "completions": [
+    " and and asked even and started a for feeling were found just wanted were found colorful in all looking for a a on on on on to on to to to. to to to to to to to explore",
+    " was, the the the he on and the was made on jumping..... on. on...",
+    " and said mommy gave feeling told her told got heard her eyes packed told gave her mommy replied her mom about her mom was her her her her her her why why why and the water water the the she",
+    ". all were path.",
+    " was were had thought and had and had had had had had had had had were in the that.. that. that.."
+   ],
+   "rates": {
+    "mean_rate": 0.7186,
+    "rate_q_out": 0.8743,
+    "h_final_absmax": 8.048,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.6922,
+      "q": 0.4269,
+      "k": 0.8975,
+      "v": 0.9447,
+      "o_spk": 0.8566,
+      "y_attn": 0.8675,
+      "x_ffn": 0.7764,
+      "g": 0.305,
+      "u": 0.9122,
+      "p": 0.2798,
+      "y_ffn": 0.904
+     },
+     "block1": {
+      "x_attn": 0.8246,
+      "q": 0.4813,
+      "k": 0.9397,
+      "v": 0.9332,
+      "o_spk": 0.9089,
+      "y_attn": 0.9293,
+      "x_ffn": 0.8201,
+      "g": 0.1697,
+      "u": 0.9191,
+      "p": 0.1557,
+      "y_ffn": 0.8645
+     }
+    }
+   }
+  },
+  {
+   "tag": "uniform x0.7",
+   "token_acc": 0.08113832344388226,
+   "ppl": 455.4110644454137,
+   "n_exact": 0,
+   "seconds": 5.8,
+   "completions": [
+    " went outside on his and just and and to and and a a feeling too not and not and not and the a now and not a and the faster?\u00e2\u20ac\u2122 in the play forever like where forever",
+    " continued laughed he was and and all all the the the and the in the inside the him on on the on the the it. it. on on on on.",
+    " grabbed filled and how and then she and and were were were went were were were found found found had found had found had come out for a down all for her down all for for for in's.",
+    " all all the that it all all both all all all all the all all all all looking in all all the the the the in the in the all in the all. into in the near all looking",
+    " were in was in and in and had found and gave all had a, and had found a a very happy a very happy more...."
+   ],
+   "rates": {
+    "mean_rate": 0.6722,
+    "rate_q_out": 0.8293,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.604,
+      "q": 0.3797,
+      "k": 0.8447,
+      "v": 0.9104,
+      "o_spk": 0.8145,
+      "y_attn": 0.8348,
+      "x_ffn": 0.7094,
+      "g": 0.2793,
+      "u": 0.861,
+      "p": 0.242,
+      "y_ffn": 0.8367
+     },
+     "block1": {
+      "x_attn": 0.7608,
+      "q": 0.4572,
+      "k": 0.9039,
+      "v": 0.9032,
+      "o_spk": 0.8402,
+      "y_attn": 0.8767,
+      "x_ffn": 0.7673,
+      "g": 0.1605,
+      "u": 0.8723,
+      "p": 0.1424,
+      "y_ffn": 0.787
+     }
+    }
+   }
+  },
+  {
+   "tag": "uniform x1.5",
+   "token_acc": 0.18001042174446555,
+   "ppl": 80.59695553686954,
+   "n_exact": 0,
+   "seconds": 3.6,
+   "completions": [
+    " he wanted a far away up.",
+    " longer frustrated.",
+    " way she was very excited laughing and said was always increase quickly picked was always listen and enjoyed watching her. were very happy watching the water on the..",
+    " get rid and was so happy again.",
+    " day, they were happy."
+   ],
+   "rates": {
+    "mean_rate": 0.3401,
+    "rate_q_out": 0.4766,
+    "h_final_absmax": 8.125,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.2255,
+      "q": 0.1694,
+      "k": 0.4048,
+      "v": 0.6154,
+      "o_spk": 0.3309,
+      "y_attn": 0.4868,
+      "x_ffn": 0.3423,
+      "g": 0.1726,
+      "u": 0.4537,
+      "p": 0.0841,
+      "y_ffn": 0.3235
+     },
+     "block1": {
+      "x_attn": 0.3263,
+      "q": 0.3619,
+      "k": 0.5271,
+      "v": 0.5311,
+      "o_spk": 0.3655,
+      "y_attn": 0.4586,
+      "x_ffn": 0.3592,
+      "g": 0.1506,
+      "u": 0.442,
+      "p": 0.069,
+      "y_ffn": 0.2825
+     }
+    }
+   }
+  },
+  {
+   "tag": "uniform x2.0",
+   "token_acc": 0.06473248054327545,
+   "ppl": 753.4139652928314,
+   "n_exact": 0,
+   "seconds": 4.7,
+   "completions": [
+    " started friendly cake said goodbye beam swordfighting doves them staring\", ghosts yield!\".",
+    " bitter taste good newsiring stepped closer look really spicy food even littlervablylee later spicy food talk close through places you try wearing across two bears allowed stage taste he rolled rocksariie chuckled things!\".",
+    " wide takesyardly too expensive angry matter where ifurry meadowoo-Coo-Coo!\"",
+    " weep sisters bush right size for each other students crowdedipping power off path finallyzag path finally on top kayakised his friends sky dinnerabel adventurous years old box filling Danny finished foldingles nodded her foot",
+    " little rabbit hopped off look really seen yarn?\" His idea will rise hose makes chores seemed more thoughtful Sue!\", she matchedloella was very hard against Tim sure coloured dress spici imagining hurricane coming't"
+   ],
+   "rates": {
+    "mean_rate": 0.0691,
+    "rate_q_out": 0.1179,
+    "h_final_absmax": 5.498,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.1201,
+      "q": 0.0707,
+      "k": 0.1525,
+      "v": 0.327,
+      "o_spk": 0.0158,
+      "y_attn": 0.0122,
+      "x_ffn": 0.1291,
+      "g": 0.0777,
+      "u": 0.1245,
+      "p": 0.0124,
+      "y_ffn": 0.0138
+     },
+     "block1": {
+      "x_attn": 0.0652,
+      "q": 0.1141,
+      "k": 0.0642,
+      "v": 0.0775,
+      "o_spk": 0.0001,
+      "y_attn": 0.0,
+      "x_ffn": 0.0534,
+      "g": 0.0596,
+      "u": 0.0277,
+      "p": 0.0025,
+      "y_ffn": 0.0002
+     }
+    }
+   }
+  },
+  {
+   "tag": "uniform x3.0",
+   "token_acc": 0.008875292060984015,
+   "ppl": 2459.234539576024,
+   "n_exact": 0,
+   "seconds": 5.2,
+   "completions": [
+    " found truly is tightly chop can? byillyy angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers",
+    " stre goodbye close interesting egg sparkle?\" my risks adding healthy.\"ling put angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers",
+    " room did moved job lapose search picture fast knob its nevergle agreed too soon reassuring angry care carbers angry care carbers angry care carbers angry care carbers angry care",
+    " got ranbers angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers angry",
+    " good pick oneaven reassuring angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers angry care carbers"
+   ],
+   "rates": {
+    "mean_rate": 0.003,
+    "rate_q_out": 0.0155,
+    "h_final_absmax": 4.498,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.0183,
+      "q": 0.0004,
+      "k": 0.0005,
+      "v": 0.0133,
+      "o_spk": 0.0,
+      "y_attn": 0.0,
+      "x_ffn": 0.0199,
+      "g": 0.0051,
+      "u": 0.0003,
+      "p": 0.0,
+      "y_ffn": 0.0
+     },
+     "block1": {
+      "x_attn": 0.0047,
+      "q": 0.0002,
+      "k": 0.0,
+      "v": 0.0,
+      "o_spk": 0.0,
+      "y_attn": 0.0,
+      "x_ffn": 0.0026,
+      "g": 0.0005,
+      "u": 0.0,
+      "p": 0.0,
+      "y_ffn": 0.0
+     }
+    }
+   }
+  },
+  {
+   "tag": "uniform x5.0",
+   "token_acc": 1.680926526701518e-05,
+   "ppl": 3220.9163463918017,
+   "n_exact": 0,
+   "seconds": 6.2,
+   "completions": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "rates": {
+    "mean_rate": 0.0,
+    "rate_q_out": 0.0001,
+    "h_final_absmax": 4.498,
+    "per_block": {
+     "block0": {
+      "x_attn": 0.0001,
+      "q": 0.0,
+      "k": 0.0,
+      "v": 0.0,
+      "o_spk": 0.0,
+      "y_attn": 0.0,
+      "x_ffn": 0.0003,
+      "g": 0.0,
+      "u": 0.0,
+      "p": 0.0,
+      "y_ffn": 0.0
+     },
+     "block1": {
+      "x_attn": 0.0,
+      "q": 0.0,
+      "k": 0.0,
+      "v": 0.0,
+      "o_spk": 0.0,
+      "y_attn": 0.0,
+      "x_ffn": 0.0,
+      "g": 0.0,
+      "u": 0.0,
+      "p": 0.0,
+      "y_ffn": 0.0
+     }
+    }
+   }
+  }
+ ]
+}

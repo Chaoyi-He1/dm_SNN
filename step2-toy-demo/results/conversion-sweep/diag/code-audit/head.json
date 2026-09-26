@@ -1,0 +1,61 @@
+{
+ "n_tokens": 3521,
+ "vocab": 3226,
+ "a0_logit_std": 6.7583,
+ "a0_logit_absmax": 109.8505,
+ "a0_per_token_std_mean": 5.5801,
+ "a0_max_logit_mean": 28.3196,
+ "a0_ce_calib": 0.6268,
+ "a1_init_logit_std": 0.7903,
+ "a1_init_logit_absmax": 5.6652,
+ "a1_init_per_token_std_mean": 0.7361,
+ "a1_init_max_logit_mean": 2.5115,
+ "a1_init_ce_calib": 6.5455,
+ "a1_trained_logit_std": 2.9595,
+ "a1_trained_per_token_std_mean": 2.6038,
+ "a1_trained_max_logit_mean": 10.8061,
+ "head_weight_rms": 0.1356,
+ "base_eval_a1_init": {
+  "token_acc": 0.1041,
+  "ppl": 695.153,
+  "n_exact": 0
+ },
+ "scalar_fit": {
+  "s": 4.0025,
+  "rel_resid": 0.8789
+ },
+ "eval_scalar": {
+  "token_acc": 0.1041,
+  "ppl": 525.907,
+  "n_exact": 0
+ },
+ "row_fit": {
+  "s_min": 1.2378,
+  "s_med": 3.9018,
+  "s_max": 10.9862,
+  "rel_resid": 0.8692
+ },
+ "eval_row": {
+  "token_acc": 0.1548,
+  "ppl": 1244.513,
+  "n_exact": 0
+ },
+ "ls_fit": {
+  "rel_resid": 0.7613
+ },
+ "eval_head_ls": {
+  "token_acc": 0.1737,
+  "ppl": 1170.102,
+  "n_exact": 0
+ },
+ "a1_trunk_a0head_no_qout_ce_calib": 4.8139,
+ "a1_trunk_a0head_no_qout_acc_calib": 0.1701,
+ "a1_init_acc_calib": 0.1139,
+ "a0_acc_calib": 0.8296,
+ "cos_hfinal_a0_a1": 0.4111,
+ "best_temperature_a1_init": {
+  "T": 0.5,
+  "ce": 5.7194,
+  "ppl": 304.74
+ }
+}
