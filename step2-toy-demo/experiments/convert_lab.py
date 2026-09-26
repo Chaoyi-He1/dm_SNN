@@ -57,17 +57,59 @@ def load_a0(cfg, sl, dev, path="results/ckpt/a0.pt"):
     return m.eval()
 
 
-def build_a1(a0, cfg, sl, tokens, dev, fq, seed=0, leak=0.0, refit=False, gate_refit=False):
-    """A0 -> A1:权重转移 + (可选)最小二乘重拟合 + 阈值标定。返回 (模型, 阈值字典)。"""
+def build_a1(a0, cfg, sl, tokens, dev, fq, seed=0, leak=0.0, refit=False, gate_refit=False, fq_kinds=None):
+    """A0 -> A1:权重转移 + (可选)最小二乘重拟合 + 阈值标定。返回 (模型, 阈值字典)。
+    fq_kinds:{脉冲点名: 分位数},未列出的点用 fq(诊断表明 Q_in、k、输出头需要更低的分位数)。"""
     torch.manual_seed(seed)
     m = SpikingLM(cfg, sl.vocab_size, leak=leak).to(dev)
     transfer_weights(a0, m)
     calib = tokens[:cfg.calib_sentences].to(dev)
-    if refit or gate_refit:
+    if fq_kinds:
+        thr = calibrate_thresholds_kinds(m, calib, fq, fq_kinds)
+    elif refit or gate_refit:
         thr = refit_and_calibrate(a0, m, calib, fq, full=refit)
     else:
         thr = calibrate_thresholds(m, calib, fq)
     return m, thr
+
+
+KIND_ALIASES = {"qin": ("q_in1", "q_in2"), "head": ("q_out",), "attn": ("q", "k", "v", "pre", "out"),
+                "ffn": ("g", "u", "y2"), "ternary": ("q_in1", "k", "v", "pre", "out", "q_in2", "u", "y2", "q_out")}
+
+
+def parse_fq_kinds(spec):
+    """'qin=0.5,k=0.5,head=0.5' -> {点名: 分位数};别名 qin/head/attn/ffn/ternary 展开为具体点名。"""
+    out = {}
+    if not spec:
+        return out
+    for item in spec.split(","):
+        k, v = item.split("=")
+        for name in KIND_ALIASES.get(k.strip(), (k.strip(),)):
+            out[name] = float(v)
+    return out
+
+
+@torch.no_grad()
+def calibrate_thresholds_kinds(spiking_lm, tokens, default_q, kinds):
+    """与 toy_demo.convert.calibrate_thresholds 相同的前向顺序标定,但每个脉冲点用各自的分位数。"""
+    inputs, _, mask = split_inputs_targets(tokens)
+    out = {}
+
+    def quantile_of(fn, block_index, ternary, q):
+        _, recs = spiking_lm(inputs, record=True)
+        z = torch.stack([fn(recs[t][block_index]) for t in range(inputs.shape[1])], dim=1)[mask]
+        z = z.abs() if ternary else z
+        return max(torch.quantile(z.flatten().float(), q).item(), 1e-3)
+
+    for i, blk in enumerate(spiking_lm.blocks):
+        for name, mod, fn, ternary in _block_points(blk):
+            thr = quantile_of(fn, i, ternary, kinds.get(name, default_q))
+            _set_thr(mod, thr)
+            out[f"blocks.{i}.{name}"] = thr
+    thr = quantile_of(lambda r: r["h_final"], len(spiking_lm.blocks), True, kinds.get("q_out", default_q))
+    _set_thr(spiking_lm.q_out, thr)
+    out["q_out"] = thr
+    return out
 
 
 # ----------------------------------------------------------------------------- 最小二乘重拟合
@@ -191,6 +233,11 @@ def all_threshold_modules(m):
     for blk in m.blocks:
         mods += [mod for _, mod, _, _ in _block_points(blk)]
     return mods + [m.q_out]
+
+
+def lif_modules(m):
+    """16 个 LIF 阈值模块(不含 Q_in 量化器 q_in1、q_in2、q_out)。"""
+    return [mod for blk in m.blocks for name, mod, _, _ in _block_points(blk) if name not in ("q_in1", "q_in2")]
 
 
 @torch.no_grad()
@@ -318,7 +365,8 @@ def cmd_a1(args):
     cfg, sl, demo, tokens = load_env(fire_quantile=args.fq)
     a0 = load_a0(cfg, sl, dev, args.a0)
     t0 = time.time()
-    m, thr = build_a1(a0, cfg, sl, tokens, dev, args.fq, seed=args.seed, refit=args.refit, gate_refit=args.gate_refit)
+    m, thr = build_a1(a0, cfg, sl, tokens, dev, args.fq, seed=args.seed, refit=args.refit, gate_refit=args.gate_refit,
+                      fq_kinds=parse_fq_kinds(args.fq_kinds))
     init = evaluate(m, sl, demo, cfg, tokens)
     print(f"[a1_init:{args.name}] acc {init['token_acc']:.4f} ppl {init['ppl']:.3f} exact {init['n_exact']}/{init['n_demo']}")
     out_dir = Path(args.out) / args.name
@@ -349,6 +397,10 @@ def cmd_c(args):
         scale_thresholds(m, args.thr_scale)
         extra["b_thr_scale"] = evaluate(m, sl, demo, cfg, tokens)
         print(f"[b_thr_scale:{args.name}] x{args.thr_scale} acc {extra['b_thr_scale']['token_acc']:.4f} ppl {extra['b_thr_scale']['ppl']:.3f}")
+    if args.lif_scale != 1.0:
+        scale_thresholds(m, args.lif_scale, only=lif_modules(m))
+        extra["b_lif_scale"] = evaluate(m, sl, demo, cfg, tokens)
+        print(f"[b_lif_scale:{args.name}] x{args.lif_scale} acc {extra['b_lif_scale']['token_acc']:.4f} ppl {extra['b_lif_scale']['ppl']:.3f}")
     if args.leak_anneal:
         set_leak(m, 0.0)
     out_dir = Path(args.out) / args.name
@@ -369,7 +421,8 @@ def cmd_stats(args):
     a0 = load_a0(cfg, sl, dev, args.a0)
     sub = tokens[:args.n]
     out = dict(a0=model_stats(a0, sub, dev, is_float=True))
-    m, thr = build_a1(a0, cfg, sl, tokens, dev, args.fq, refit=args.refit, gate_refit=args.gate_refit)
+    m, thr = build_a1(a0, cfg, sl, tokens, dev, args.fq, refit=args.refit, gate_refit=args.gate_refit,
+                      fq_kinds=parse_fq_kinds(args.fq_kinds))
     out["a1_init"] = model_stats(m, sub, dev)
     out["a1_init_eval"] = {k: evaluate(m, sl, demo, cfg, tokens)[k] for k in ("token_acc", "ppl", "n_exact")}
     out["thresholds"] = thr
@@ -401,17 +454,20 @@ def main():
     p1 = sub.add_parser("a1", parents=[common])
     p1.add_argument("--refit", action="store_true")
     p1.add_argument("--gate-refit", action="store_true")
+    p1.add_argument("--fq-kinds", default="", help="按点类型的分位数,如 'qin=0.5,k=0.5,head=0.5';未列出的点用 --fq")
     p1.set_defaults(fn=cmd_a1)
     pc = sub.add_parser("c", parents=[common])
     pc.add_argument("--init", required=True, help="A1 的 model.pt(或 results/ckpt/a1.pt)")
     pc.add_argument("--leak-anneal", type=int, default=0)
     pc.add_argument("--recalib", type=float, default=None)
     pc.add_argument("--thr-scale", type=float, default=1.0, help="训练前把全部阈值乘以该系数(LIF 与 Q_in 都乘)")
+    pc.add_argument("--lif-scale", type=float, default=1.0, help="训练前只把 16 个 LIF 阈值乘以该系数(诊断:x2 最佳)")
     pc.set_defaults(fn=cmd_c)
     ps = sub.add_parser("stats", parents=[common])
     ps.add_argument("--n", type=int, default=512, help="统计用的句子数")
     ps.add_argument("--refit", action="store_true")
     ps.add_argument("--gate-refit", action="store_true")
+    ps.add_argument("--fq-kinds", default="")
     ps.add_argument("--init", default=None, help="额外统计一个已保存的脉冲模型")
     ps.add_argument("--leak", type=float, default=0.0, help="--init 模型的 leak")
     ps.set_defaults(fn=cmd_stats)
