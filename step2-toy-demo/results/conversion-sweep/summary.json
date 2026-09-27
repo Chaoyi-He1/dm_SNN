@@ -210,6 +210,20 @@
   "seconds": 3085.9
  },
  {
+  "name": "CL1_l1_lif225_lr3e3",
+  "stage": "c",
+  "knobs": "init L1_fq50_12k; lif x2.25; lr 0.003 cosine; steps 6000",
+  "start_acc": 0.2258,
+  "acc": 0.6824,
+  "ppl": 3.285,
+  "exact": "1/5",
+  "best_acc": 0.6846,
+  "best_exact": 2,
+  "stopped": "max_steps",
+  "steps": 6000,
+  "seconds": 2874.4
+ },
+ {
   "name": "C7_lif25_lr3e3",
   "stage": "c",
   "knobs": "init R2_fq50; lif x2.5; lr 0.003 cosine; steps 4000",
