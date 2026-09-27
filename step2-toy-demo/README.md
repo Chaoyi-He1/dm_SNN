@@ -24,5 +24,5 @@ python3 -m venv .venv
 ## 本次结果
 
 - **默认配置流水线(2026-09-24,`results/toy-demo-default-run.json`)**:A0 acc 0.842、5/5;A1 0.511、C 0.407,三个种子都失败,补全 0/5;理想电路与 C 逐脉冲一致;标称电路不通过。验收 3 项通过、5 项不通过。
-- **转换扫描(2026-09-26,`results/conversion-sweep/README.md`、`diagnostics.md`)**:诊断确认不是代码错误,而是第 4 节的 25% 发放工作点;放宽步数、提高学习率、分位数 0.5、C 训练前 LIF 阈值 ×2.25 后,A1 最好 0.746、C 最好 0.682,仍未达到 5/5。主结果页 `results/conversion-v2-fq50-12k/`(A1 0.740 → C 0.682 → 电路),对照页 `results/conversion-v2-fq50/`。
+- **转换扫描(2026-09-26,`results/conversion-sweep/README.md`、`diagnostics.md`)**:诊断确认不是代码错误,而是第 4 节的 25% 发放工作点;放宽步数、提高学习率、分位数 0.5、C 训练前 LIF 阈值 ×2.25 后,A1 最好 0.746、C 最好 0.752("C 在 A1 的 1 个百分点内"通过),仍未达到 5/5。主结果页 `results/conversion-v2-fq50-12k/`(A1 0.740 → C 0.752 → 电路),对照页 `results/conversion-v2-fq50/`。
 - `python -m toy_demo.run` 与 `config.py` 未改,仍是计划默认值;采纳配方经 `experiments/convert_lab.py` 与 `experiments/assemble.py` 复现(见扫描 README 的"复现")。

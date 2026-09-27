@@ -6,13 +6,13 @@
 
 | 阶段 | token 准确率 | 困惑度 | 补全正确 | 停止 | 种子 | 用时 s |
 |---|---|---|---|---|---|---|
-| A0 浮点 | 0.8420 | 1.794 | 5/5 |  |  | 1.3 |
-| A1 阈值初始化(未微调) | 0.1229 | 328.496 | 0/5 |  |  | 6.1 |
-| A1 可脉冲化 | 0.7404 | 2.631 | 1/5 | max_steps | 0 | 2.7 |
-| B 折叠转换(零训练) | 0.1263 | 443.408 | 0/5 |  |  | 5.8 |
-| C 微调 | 0.6824 | 3.285 | 1/5 | max_steps | 0 | 2.7 |
-| 电路·理想 | 0.6824 | 3.285 | 1/5 |  |  | 24.8 |
-| 电路·标称 | 0.5830 | 4.880 | 0/5 |  |  | 37.5 |
+| A0 浮点 | 0.8420 | 1.794 | 5/5 |  |  | 1.4 |
+| A1 阈值初始化(未微调) | 0.1229 | 328.496 | 0/5 |  |  | 5.9 |
+| A1 可脉冲化 | 0.7404 | 2.631 | 1/5 | max_steps | 0 | 2.6 |
+| B 折叠转换(零训练) | 0.1263 | 443.408 | 0/5 |  |  | 5.5 |
+| C 微调 | 0.7519 | 2.577 | 1/5 | max_steps | 0 | 2.6 |
+| 电路·理想 | 0.7522 | 2.575 | 1/5 |  |  | 24.0 |
+| 电路·标称 | 0.6339 | 4.004 | 0/5 |  |  | 36.0 |
 
 ## 补全
 
@@ -60,31 +60,31 @@
 
 | 前缀 | 目标 | 输出 | 一致 |
 |---|---|---|---|
-| He put his wet and |  dirty shirt into the dryer and watched it spin. |  went back to the other. | 否 |
-| He couldn't wait any |  longer and ran to meet them. |  longer and come to explore the river below him. | 否 |
-| She ran around the whole |  park, but she could not find him anywhere. |  park everyday and saw that made a small girl. | 否 |
-| They showed her how to |  use a wet cloth to wipe the gum away. |  use a special present and how pretty." Jane could use the flower left. | 否 |
-| They all looked at the |  gum and talked about how amazing it was. |  gum and talked about how amazing it was. | 是 |
+| He put his wet and |  dirty shirt into the dryer and watched it spin. |  dirty shirt into the dryer and watched as their snack. | 否 |
+| He couldn't wait any |  longer and ran to meet them. |  longer and he could see what it. | 否 |
+| She ran around the whole |  park, but she could not find him anywhere. |  park, but she could not find him anywhere. | 是 |
+| They showed her how to |  use a wet cloth to wipe the gum away. |  use every day. | 否 |
+| They all looked at the |  gum and talked about how amazing it was. |  gum and talked about them. | 否 |
 
 ### 电路·理想
 
 | 前缀 | 目标 | 输出 | 一致 |
 |---|---|---|---|
-| He put his wet and |  dirty shirt into the dryer and watched it spin. |  went back to the other. | 否 |
-| He couldn't wait any |  longer and ran to meet them. |  longer and come to explore the river below him. | 否 |
-| She ran around the whole |  park, but she could not find him anywhere. |  park everyday and saw that made a small girl. | 否 |
-| They showed her how to |  use a wet cloth to wipe the gum away. |  use a special present and how pretty." Jane could use the flower left. | 否 |
-| They all looked at the |  gum and talked about how amazing it was. |  gum and talked about how amazing it was. | 是 |
+| He put his wet and |  dirty shirt into the dryer and watched it spin. |  dirty shirt into the dryer and watched as their snack. | 否 |
+| He couldn't wait any |  longer and ran to meet them. |  longer and he could see what it. | 否 |
+| She ran around the whole |  park, but she could not find him anywhere. |  park, but she could not find him anywhere. | 是 |
+| They showed her how to |  use a wet cloth to wipe the gum away. |  use every day. | 否 |
+| They all looked at the |  gum and talked about how amazing it was. |  gum and talked about them. | 否 |
 
 ### 电路·标称
 
 | 前缀 | 目标 | 输出 | 一致 |
 |---|---|---|---|
-| He put his wet and |  dirty shirt into the dryer and watched it spin. |  ran into the case. | 否 |
-| He couldn't wait any |  longer and ran to meet them. |  longer to see what time it. | 否 |
-| She ran around the whole |  park, but she could not find him anywhere. |  park and tried to make it around the world. | 否 |
-| They showed her how to |  use a wet cloth to wipe the gum away. |  herself some rest of the day. | 否 |
-| They all looked at the |  gum and talked about how amazing it was. |  people and talked about how amazing it was time. | 否 |
+| He put his wet and |  dirty shirt into the dryer and watched it spin. |  flew into the dryer and ran off into the swing. | 否 |
+| He couldn't wait any |  longer and ran to meet them. |  more to see the best friends. | 否 |
+| She ran around the whole |  park, but she could not find him anywhere. |  park, and she had to her new things. | 否 |
+| They showed her how to |  use a wet cloth to wipe the gum away. |  use with all day. | 否 |
+| They all looked at the |  gum and talked about how amazing it was. |  little and enjoyed their game. | 否 |
 
 ## teacher forcing 对照:电路·理想
 
@@ -99,20 +99,20 @@
 
 ## teacher forcing 对照:电路·标称
 
-输出头 argmax 一致率 0.5534,3081 个位置,判定 不通过。
+输出头 argmax 一致率 0.6248,3081 个位置,判定 不通过。
 
 | 块 | 输出 | +P | +R | −P | −R | 符号错误率 | 状态误差最大值 | 状态误差均值 |
 |---|---|---|---|---|---|---|---|---|
-| 0 | attn | 0.718 | 0.718 | 0.719 | 0.725 | 0.0195 | 0.0075 | 0.0042 |
-| 0 | ffn | 0.670 | 0.621 | 0.677 | 0.664 | 0.0624 | 0.0075 | 0.0042 |
-| 1 | attn | 0.757 | 0.744 | 0.767 | 0.750 | 0.0371 | 0.0082 | 0.0045 |
-| 1 | ffn | 0.705 | 0.667 | 0.719 | 0.692 | 0.0980 | 0.0082 | 0.0045 |
+| 0 | attn | 0.745 | 0.746 | 0.752 | 0.750 | 0.0201 | 0.0082 | 0.0041 |
+| 0 | ffn | 0.693 | 0.671 | 0.688 | 0.704 | 0.0718 | 0.0082 | 0.0041 |
+| 1 | attn | 0.765 | 0.762 | 0.783 | 0.765 | 0.0418 | 0.0085 | 0.0045 |
+| 1 | ffn | 0.726 | 0.702 | 0.728 | 0.725 | 0.1085 | 0.0085 | 0.0045 |
 
 ## 编程误差扫描
 
 | σ_G | token 准确率 | 困惑度 | 补全正确 |
 |---|---|---|---|
-| 0.0 | 0.5817 | 4.941 | 1 |
-| 0.02 | 0.5830 | 4.880 | 0 |
-| 0.05 | 0.5767 | 5.009 | 0 |
-| 0.1 | 0.5597 | 5.414 | 0 |
+| 0.0 | 0.6358 | 3.986 | 0 |
+| 0.02 | 0.6339 | 4.004 | 0 |
+| 0.05 | 0.6327 | 4.075 | 0 |
+| 0.1 | 0.6198 | 4.235 | 0 |

@@ -3,40 +3,40 @@
   A0       一致   ' dirty shirt into the dryer and watched it spin.'
   A1       一致   ' dirty shirt into the dryer and watched it spin.'
   B        不一致  ' ran around and under the the animals in the little on the brown kayak.'
-  C        不一致  ' went back to the other.'
-  circuit  不一致  ' took the off the ground.'
+  C        不一致  ' dirty shirt into the dryer and watched as their snack.'
+  circuit  不一致  ' dirty into the child home feeling a little girl.'
 
 前缀: "He couldn't wait any"
 目标: ' longer and ran to meet them.'
   A0       一致   ' longer and ran to meet them.'
   A1       一致   ' longer and ran to meet them.'
   B        不一致  ' longer the the the door... too to to to to to any!! again.'
-  C        不一致  ' longer and come to explore the river below him.'
-  circuit  不一致  ' longer.'
+  C        不一致  ' longer and he could see what it.'
+  circuit  不一致  ' longer and meet the river!'
 
 前缀: 'She ran around the whole'
 目标: ' park, but she could not find him anywhere.'
   A0       一致   ' park, but she could not find him anywhere.'
   A1       不一致  ' park, but she could not find away.'
   B        不一致  ' time that could and was that is that is so and she and said in the and shouted in and shouted and found and found and shouted in up up down on their work on the on the park the'
-  C        不一致  ' park everyday and saw that made a small girl.'
-  circuit  不一致  ' way of blocks.'
+  C        一致   ' park, but she could not find him anywhere.'
+  circuit  不一致  ' park, and always fix it.'
 
 前缀: 'They showed her how to'
 目标: ' use a wet cloth to wipe the gum away.'
   A0       一致   ' use a wet cloth to wipe the gum away.'
   A1       不一致  ' use the warrior how to find and set it to play with her.'
   B        不一致  ' the day to the the store and the park and the park and have your helicopter settle in and into and he to to and to explore and tried to explore explore explore explore. even more. even more'
-  C        不一致  ' use a special present and how pretty." Jane could use the flower left.'
-  circuit  不一致  ' play with a special dinner after all day.'
+  C        不一致  ' use every day.'
+  circuit  不一致  ' use if it with all.'
 
 前缀: 'They all looked at the'
 目标: ' gum and talked about how amazing it was.'
   A0       一致   ' gum and talked about how amazing it was.'
   A1       不一致  ' gum.'
   B        不一致  ' always always looked and and and wrapped towards it and it to help...'
-  C        一致   ' gum and talked about how amazing it was.'
-  circuit  不一致  ' gum and talked about how great they were amazing it was so proud when she was.'
+  C        不一致  ' gum and talked about them.'
+  circuit  不一致  ' little river.'
 
 | 阶段 | token 准确率 | 困惑度 | 补全正确 |
 |---|---|---|---|
@@ -44,6 +44,6 @@
 | A1_init | 0.1229 | 328.496 | 0/5 |
 | A1 | 0.7404 | 2.631 | 1/5 |
 | B | 0.1263 | 443.408 | 0/5 |
-| C | 0.6824 | 3.285 | 1/5 |
-| circuit_ideal | 0.6824 | 3.285 | 1/5 |
-| circuit_nominal | 0.5830 | 4.880 | 0/5 |
+| C | 0.7519 | 2.577 | 1/5 |
+| circuit_ideal | 0.7522 | 2.575 | 1/5 |
+| circuit_nominal | 0.6339 | 4.004 | 0/5 |

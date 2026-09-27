@@ -210,6 +210,20 @@
   "seconds": 3085.9
  },
  {
+  "name": "CL2_l1_lif225_lr3e3_12k",
+  "stage": "c",
+  "knobs": "init L1_fq50_12k; lif x2.25; lr 0.003 cosine; steps 12000",
+  "start_acc": 0.2258,
+  "acc": 0.7519,
+  "ppl": 2.577,
+  "exact": "1/5",
+  "best_acc": 0.753,
+  "best_exact": 4,
+  "stopped": "max_steps",
+  "steps": 12000,
+  "seconds": 5576.7
+ },
+ {
   "name": "CL1_l1_lif225_lr3e3",
   "stage": "c",
   "knobs": "init L1_fq50_12k; lif x2.25; lr 0.003 cosine; steps 6000",
