@@ -1,0 +1,885 @@
+<title>GDN 脉冲转换报告</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --bg:#f4f6f9; --panel:#ffffff; --panel-2:#eef1f6; --ink:#131923; --ink-2:#465061; --muted:#6f7a8c;
+  --rule:#dde2ea; --rule-strong:#aab3c1;
+  --accent:#2a78d6; --accent-bg:#e2edfb; --spike:#eb6834; --spike-bg:#fde8df; --de:#a2aab7;
+  --good:#1d8a4e; --good-bg:#dff2e6; --bad:#c43d3d; --bad-bg:#fbe4e4;
+  --sans:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0e1218; --panel:#161b23; --panel-2:#1c222c; --ink:#e8ecf2; --ink-2:#b3bccb; --muted:#8893a4;
+    --rule:#29303b; --rule-strong:#4a5565;
+    --accent:#3987e5; --accent-bg:#162840; --spike:#d95926; --spike-bg:#3a2118; --de:#5e6778;
+    --good:#46b676; --good-bg:#15301f; --bad:#e66767; --bad-bg:#3b1b1b;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0e1218; --panel:#161b23; --panel-2:#1c222c; --ink:#e8ecf2; --ink-2:#b3bccb; --muted:#8893a4;
+  --rule:#29303b; --rule-strong:#4a5565;
+  --accent:#3987e5; --accent-bg:#162840; --spike:#d95926; --spike-bg:#3a2118; --de:#5e6778;
+  --good:#46b676; --good-bg:#15301f; --bad:#e66767; --bad-bg:#3b1b1b;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;padding-inline:20px;padding-block:0 72px;margin:0}
+main{max-width:900px;margin:0 auto}
+a{color:var(--accent)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+header{padding-block:52px 12px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+h1{font-size:clamp(32px,5.4vw,48px);font-weight:900;line-height:1.15;letter-spacing:-.01em;margin:.25em 0 .35em;text-wrap:balance}
+.lede{font-size:17px;color:var(--ink-2);max-width:40em;margin:0}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 4px}
+nav.toc a{font-size:13px;color:var(--ink-2);text-decoration:none;border:1px solid var(--rule-strong);border-radius:999px;padding:3px 12px;background:var(--panel)}
+nav.toc a:hover{border-color:var(--accent);color:var(--accent)}
+nav.toc b{font-family:var(--mono);font-weight:600;color:var(--accent);margin-right:6px}
+section{padding-block:36px 4px;border-top:1px solid var(--rule);margin-top:28px}
+h2{font-size:28px;font-weight:900;line-height:1.25;margin:0 0 8px;text-wrap:balance;display:flex;align-items:baseline;gap:12px}
+h2 .no{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--accent);letter-spacing:.04em}
+h3{font-size:19px;font-weight:700;margin:30px 0 4px;text-wrap:balance}
+p{margin:6px 0}
+.lead{color:var(--ink-2);max-width:40em}
+figure{margin:18px 0 26px;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:18px 18px 14px}
+figcaption{font-size:14px;color:var(--ink-2);margin-top:10px;max-width:46em;line-height:1.65}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scroll>svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--ink-2);margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:16px;height:3px;border-radius:2px}
+.legend i.sq{width:11px;height:11px;border-radius:3px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0 4px}
+.kv div{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.kv small{display:block;font-size:12px;color:var(--muted)}
+.kv b{font-family:var(--mono);font-size:15px;font-weight:600}
+.tbl{overflow-x:auto}
+table.t{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+table.t th{font-size:12.5px;font-weight:500;color:var(--muted);text-align:left;padding:6px 10px;border-bottom:1px solid var(--rule-strong)}
+table.t td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+table.t td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+table.t tr:last-child td{border-bottom:0}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:1px 10px;border-radius:999px;font-size:12.5px;font-weight:700;white-space:nowrap}
+.pill.ok{background:var(--good-bg);color:var(--good)}
+.pill.no{background:var(--bad-bg);color:var(--bad)}
+.tok{font-family:var(--mono);font-size:13px;line-height:1.9}
+.m-ok{background:var(--good-bg);border-radius:3px;padding:1px 0}
+.m-no{background:var(--bad-bg);border-radius:3px;padding:1px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.chips span{font-size:13px;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--rule);border-radius:999px;padding:3px 12px}
+pre.algo{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;font-family:var(--mono);font-size:13.5px;line-height:1.85;overflow-x:auto;margin:18px 0 8px;color:var(--ink)}
+pre.algo .c{color:var(--muted)}
+pre.algo .k{color:var(--accent);font-weight:600}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:6px 22px;margin:22px 0 4px;padding:16px 18px;background:var(--panel);border:1px solid var(--rule);border-radius:12px}
+.gloss h3{grid-column:1/-1;margin:0 0 4px;font-size:16px}
+.gloss div{font-size:14px;color:var(--ink-2);line-height:1.6}
+.gloss b{color:var(--ink);margin-right:8px;font-weight:700}
+.gloss details.more{grid-column:1/-1;margin-top:4px}
+.gloss-more{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:6px 22px;margin-top:8px}
+.charthead{font-size:15px;font-weight:700;margin:0 0 8px}
+ul.concl{padding-left:0;list-style:none;display:grid;gap:12px;margin:14px 0}
+ul.concl li{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:12px 16px}
+ul.concl b{display:block;margin-bottom:2px}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+footer code{font-family:var(--mono);font-size:12.5px}
+details.data{margin-top:8px;font-size:13px}
+details.data summary{cursor:pointer;color:var(--muted)}
+table.dt{border-collapse:collapse;margin-top:6px;font-size:12.5px}
+table.dt th,table.dt td{padding:3px 12px 3px 0;border-bottom:1px solid var(--rule);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:400}
+table.dt th{color:var(--muted);font-family:var(--sans)}
+table.dt td:first-child,table.dt th:first-child{text-align:left;font-family:var(--sans)}
+#tip{position:fixed;z-index:20;left:0;top:0;background:var(--panel);color:var(--ink);border:1px solid var(--rule-strong);border-radius:8px;padding:7px 10px;font-size:12.5px;line-height:1.55;box-shadow:0 8px 24px rgb(0 0 0 / .14);pointer-events:none;max-width:300px}
+#tip .tr{display:flex;align-items:center;gap:7px}
+#tip i{width:12px;height:3px;border-radius:2px;flex:none}
+#tip b{margin-left:auto;padding-left:12px;font-family:var(--mono);font-weight:600;white-space:nowrap}
+#tip .sub{color:var(--muted);font-size:12px}
+
+/* SVG */
+svg text{font-family:var(--sans);font-size:12.5px;fill:var(--ink)}
+svg .bt{font-weight:700;font-size:13px}
+svg .bs{font-size:11.5px;fill:var(--ink-2)}
+svg .sm{font-size:11px;fill:var(--muted)}
+svg .mono{font-family:var(--mono)}
+svg .mu{fill:var(--muted)}
+svg .i2{fill:var(--ink-2)}
+svg .tag{font-family:var(--mono);font-size:11px;fill:var(--muted);letter-spacing:.06em}
+svg .big{font-family:var(--mono);font-weight:700;font-size:24px}
+svg .tokt{font-family:var(--mono);font-size:12.5px}
+svg .vl{font-family:var(--mono);font-size:11.5px;fill:var(--ink-2)}
+svg .box{fill:var(--bg);stroke:var(--rule-strong);stroke-width:1.2}
+svg .box-acc{fill:var(--accent-bg);stroke:var(--accent)}
+svg .box-spk{fill:var(--spike-bg);stroke:var(--spike)}
+svg .pane{fill:none;stroke:var(--rule);stroke-width:1}
+svg .frame{fill:none;stroke:var(--rule-strong);stroke-width:1}
+svg .ar{fill:none;stroke:var(--ink-2);stroke-width:1.4;stroke-linejoin:round}
+svg .ar-acc{stroke:var(--accent)}
+svg .ar-spk{stroke:var(--spike)}
+svg .thin{stroke-width:1;opacity:.75}
+svg .wire{fill:none;stroke:var(--ink-2);stroke-width:1.4}
+svg .mk{fill:var(--ink-2)}
+svg .mk-acc{fill:var(--accent)}
+svg .mk-spk{fill:var(--spike)}
+svg .track{fill:var(--rule)}
+svg .fillacc{fill:var(--accent)}
+svg .fillspk{fill:var(--spike)}
+svg .node{fill:var(--panel);stroke:var(--ink-2);stroke-width:1.4}
+svg .plus{fill:var(--panel);stroke:var(--ink-2);stroke-width:1.4}
+svg .sp3{fill:var(--spike);stroke:var(--panel);stroke-width:2}
+svg .sp2{fill:var(--accent);stroke:var(--panel);stroke-width:2}
+svg .spq{fill:var(--panel);stroke:var(--spike);stroke-width:2.2}
+svg .cell{fill:var(--accent)}
+svg .rowhl{fill:none;stroke:var(--spike);stroke-width:2}
+svg .rowtint{fill:var(--spike);fill-opacity:.32}
+svg .kon{fill:var(--spike)}
+svg .koff{fill:var(--panel);stroke:var(--rule-strong);stroke-width:1}
+svg .spk{stroke:var(--spike);stroke-width:3;stroke-linecap:round}
+svg .ulin{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
+svg .udot{fill:var(--accent);stroke:var(--panel);stroke-width:2}
+svg .uhole{fill:var(--panel);stroke:var(--accent);stroke-width:2}
+svg .drop{stroke:var(--spike);stroke-width:2}
+svg .thr{stroke:var(--muted);stroke-width:1;stroke-dasharray:5 4}
+svg .ibar{fill:var(--de)}
+svg .band0{fill:var(--panel-2);stroke:var(--rule-strong);stroke-width:1}
+svg .bandp{fill:var(--spike-bg);stroke:var(--spike);stroke-width:1}
+svg .bandn{fill:var(--accent-bg);stroke:var(--accent);stroke-width:1}
+svg .curve{fill:none;stroke:var(--ink-2);stroke-width:1.6}
+svg .tailp{fill:var(--spike);fill-opacity:.5}
+svg .tailn{fill:var(--accent);fill-opacity:.5}
+svg .mid{fill:var(--de);fill-opacity:.35}
+svg .mem{fill:var(--accent-bg);stroke:var(--accent);stroke-width:1.4}
+svg .wl{stroke:var(--spike);stroke-width:2}
+svg .bl{stroke:var(--ink-2);stroke-width:2}
+/* charts */
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .axis{stroke:var(--rule-strong);stroke-width:1}
+svg .tick{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+svg .axt{font-size:11.5px;fill:var(--muted)}
+svg .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+svg .dot{stroke:var(--panel);stroke-width:2}
+svg .adot{fill:var(--ink-2);stroke:var(--panel);stroke-width:2}
+svg .cross{stroke:var(--rule-strong);stroke-width:1}
+svg .hit{fill:transparent;cursor:crosshair}
+svg .ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4}
+svg .reflbl{font-size:11.5px;fill:var(--muted)}
+svg .endlbl{font-family:var(--mono);font-size:12px;fill:var(--ink-2);font-weight:600}
+svg .vlbl{font-family:var(--mono);font-size:11.5px;fill:var(--ink-2)}
+svg .lim{stroke:var(--bad);stroke-width:1.4;stroke-dasharray:5 4}
+svg .limlbl{font-size:11.5px;fill:var(--bad)}
+svg .barhit{cursor:default}
+@media (max-width:520px){ body{font-size:15px} h2{font-size:23px} figure{padding:14px 12px 12px} }
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <marker id="mI" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="mk"/></marker>
+    <marker id="mA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="mk-acc"/></marker>
+    <marker id="mS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="mk-spk"/></marker>
+  </defs>
+</svg>
+
+<div id="tip" hidden></div>
+
+<main>
+<header>
+  <div class="eyebrow">dm_SNN · Step 2 玩具模型 · 2026 年 9 月</div>
+  <h1>GDN 脉冲转换报告</h1>
+  <p class="lede">我们先训练一个会背 4003 句童话的小语言模型，再把它改造成“每个神经元每个 token 最多发一次脉冲”的网络，最后放进忆阻器电路模型里运行。下面这条线就是整件事。</p>
+  <figure>
+    <div class="scroll" data-fig="pipeline" data-aria="五个阶段的准确率：浮点模型 84.2%，换成脉冲后 74.0%，打开膜电位 12.6%，再微调 75.2%，电路仿真 63.4%"></div>
+    <figcaption>每格数字是 token 准确率：给出正确的前文，模型猜对下一个 token 的比例。我们先按原计划跑过一次，下文叫“默认配置”；诊断后改了几处，这里是改进后的数字。B 那一步暴跌，是因为神经元过度发放，C 会把它训练回来。</figcaption>
+  </figure>
+  <nav class="toc" aria-label="目录">
+    <a href="#s1"><b>1</b>任务和数据</a><a href="#s2"><b>2</b>训练浮点模型</a><a href="#s3"><b>3</b>模型和 GDN</a><a href="#s4"><b>4</b>脉冲神经元</a><a href="#s5"><b>5</b>转换算法</a><a href="#s6"><b>6</b>转换结果</a><a href="#s7"><b>7</b>结论</a>
+  </nav>
+  <div class="gloss">
+    <h3>先认识这几个词</h3>
+    <div><b>token</b>模型读写的最小单位：一个词、半个词或标点</div>
+    <div><b>token 准确率</b>给出正确前文，猜对下一个 token 的比例</div>
+    <div><b>权重</b>模型里可调的数，也叫参数；训练就是调它们</div>
+    <div><b>浮点</b>普通带小数的实数，比如 0.37</div>
+    <div><b>激活</b>层与层之间传递的中间数值</div>
+    <div><b>梯度</b>每个权重该往哪边改、改多少</div>
+    <div><b>微调</b>在已经训练好的模型上接着训练</div>
+    <div><b>脉冲 / SNN</b>神经元之间只传“发”或“不发”的网络</div>
+    <div><b>膜电位</b>神经元里攒着的“电量”</div>
+    <div><b>阈值 θ</b>膜电位达到它，就发一个脉冲</div>
+    <div><b>leak</b>膜电位每步保留的比例，0.9 就是留九成</div>
+    <div><b>百分点</b>百分数直接相减：74% 到 75% 是 1 个百分点</div>
+    <details class="data more">
+      <summary>更多术语</summary>
+      <div class="gloss-more">
+        <div><b>交叉熵</b>猜错程度的扣分，错得越离谱扣得越多</div>
+        <div><b>Adam</b>最常用的按梯度改权重的方法</div>
+        <div><b>学习率</b>每一步改动的幅度，3e-3 就是 0.003</div>
+        <div><b>余弦下降</b>学习率按余弦曲线从大慢慢降到 0</div>
+        <div><b>梯度裁剪</b>限制一步最多改多少，防止跑飞</div>
+        <div><b>前向 / 反向</b>从输入算到输出 / 把误差往回传、算梯度</div>
+        <div><b>Transformer</b>ChatGPT 这类大模型的标准结构</div>
+        <div><b>注意力</b>让当前 token 参考前文的模块</div>
+        <div><b>残差流 h</b>主干上的 128 个数，各层把结果加上去</div>
+        <div><b>SwiGLU / SiLU</b>前馈层：两路相乘；SiLU 把负数压到接近 0</div>
+        <div><b>L2 归一化</b>把一组数等比缩放，使总长度为 1</div>
+        <div><b>分位数</b>50 分位就是一半数据比它小的那个值</div>
+        <div><b>代理梯度</b>反向时用平滑鼓包冒充台阶的斜率</div>
+        <div><b>发放率</b>神经元在多大比例的 token 上发脉冲</div>
+        <div><b>LIF</b>会漏电的“攒电量、到阈值就发放”神经元</div>
+        <div><b>量化器 Q_in</b>没有膜电位的三值开关，电路上是比较器</div>
+        <div><b>忆阻器 / 电导</b>阻值可写入并保持的元件；电导就是它的导电能力</div>
+        <div><b>种子</b>随机抽样的编号，换种子结果会略有不同</div>
+        <div><b>标称电路</b>加上假设的器件误差的电路模型</div>
+      </div>
+    </details>
+  </div>
+</header>
+
+<section id="s1">
+  <h2><span class="no">01</span>任务和数据</h2>
+  <p class="lead">任务是语言模型最基本的一件事：看前面的词，猜下一个词。模型里的“词”叫 token。我们让模型把一小份童话语料背下来，再考它能不能补全原句。</p>
+  <figure>
+    <div class="scroll" data-fig="task" data-aria="模型读入前缀 He put his wet and，预测下一个 token dirty，再把它接到输入后面继续预测"></div>
+    <figcaption>生成时模型每次只输出一个 token，把它接到输入后面，再猜下一个，直到句尾。</figcaption>
+  </figure>
+  <figure>
+    <div class="scroll" data-fig="data" data-aria="数据流程：TinyStories 童话语料，切成 4003 句，用 Qwen3.5 分词器切成 token，只保留出现过的 3226 个 token"></div>
+    <figcaption>语料取自 TinyStories 开头的几百个故事。词表只保留语料里出现过的 3223 个 token，再加 3 个特殊 token，共 3226 个，模型因此小得多。下面一行的分词是示意。</figcaption>
+  </figure>
+</section>
+
+<section id="s2">
+  <h2><span class="no">02</span>训练浮点模型</h2>
+  <p class="lead">先用普通浮点数训练，得到后面所有步骤的起点，叫 A0。训练就是反复做下面四件事。</p>
+  <figure>
+    <div class="scroll" data-fig="train" data-aria="训练循环：抽 64 句，预测下一个 token，和正确答案比较算交叉熵损失，Adam 调整权重，每 100 步考试一次"></div>
+    <figcaption>转一圈叫一步。每 100 步用整份语料和 5 道 demo 题考一次，满足停止条件就停。</figcaption>
+  </figure>
+  <figure>
+    <div class="scroll" data-chart="a0" data-aria="A0 浮点模型的训练曲线：准确率从第 100 步的 32.5% 升到第 3300 步的 84.2%"></div>
+    <figcaption>在一张 RTX A4500 显卡上训练 3300 步，用时 9 分钟，准确率 84.2%，5 道题全对。准确率到不了 100%，因为语料里有开头相同、结尾不同的句子。</figcaption>
+  </figure>
+  <details class="data">
+    <summary>训练设置</summary>
+    <div class="kv">
+      <div><small>每批</small><b>64 句</b></div>
+      <div><small>优化器</small><b>Adam</b></div>
+      <div><small>学习率</small><b>3e-3 余弦</b></div>
+      <div><small>梯度裁剪</small><b>1.0</b></div>
+      <div><small>步数上限</small><b>6000</b></div>
+      <div><small>实际停在</small><b>3300 步</b></div>
+    </div>
+  </details>
+</section>
+
+<section id="s3">
+  <h2><span class="no">03</span>模型和 GDN</h2>
+  <p class="lead">模型只有 115 万个参数：一张嵌入表、两个相同的块、一个输出头。每个块里有一个 GDN 注意力和一个 SwiGLU 前馈。</p>
+  <figure>
+    <div class="scroll" data-fig="arch" data-aria="模型结构：token 查嵌入表得到 h，经过两个块，每块是 GDN 注意力和 SwiGLU 前馈，各自的结果加回 h，最后输出头给出 3226 个分数"></div>
+    <figcaption>h 是一条由 128 个数组成的“残差流”，每个子块算出的结果都加回到它上面。七成参数在嵌入表和输出头里。</figcaption>
+  </figure>
+
+  <h3>GDN 是什么</h3>
+  <p class="lead">注意力负责让模型记住前文。普通 Transformer 和 GDN 记前文的方式不一样。</p>
+  <figure>
+    <div class="scroll" data-fig="attn" data-aria="对比：普通注意力让当前 token 回看所有旧 token；GDN 把每个 token 写进一个固定大小的记忆矩阵 S"></div>
+    <figcaption>GDN 全称 Gated DeltaNet，是一种线性注意力。它用一个固定大小的记忆矩阵 S 代替越来越长的 K、V 缓存，正好可以做成电路里的一块存储阵列。</figcaption>
+  </figure>
+  <figure>
+    <div class="scroll" data-fig="gdn" data-aria="GDN 每个 token 的四步：遗忘、查旧值、纠错写入、读出"></div>
+    <figcaption>每来一个 token，GDN 对记忆 S 做这四步。把 S 想成一本会褪色的笔记本：先整体变淡，按钥匙 k 翻到几行，只改写错的地方，最后按问题 q 去查。图里把 k、q 画成 0/1 的选择；浮点模型里是按比例混合各行，脉冲模型里 k 为 −1 的行会被减去。</figcaption>
+  </figure>
+
+  <h3>一个块的内部：浮点版</h3>
+  <figure>
+    <div class="scroll" data-fig="blockFloat" data-aria="浮点版的块：注意力子块和前馈子块，所有连线上都是实数"></div>
+    <figcaption>W 是权重矩阵，一张数表，把一串数变成另一串数。浮点版里所有连线上流动的都是实数。第 5 节会在同一张图上标出哪些地方换成了脉冲。</figcaption>
+  </figure>
+</section>
+
+<section id="s4">
+  <h2><span class="no">04</span>脉冲神经元</h2>
+  <p class="lead">脉冲神经网络里，神经元之间传的不是任意实数，而是“发”或“不发”的脉冲。本项目用的是 LIF 神经元。</p>
+  <figure>
+    <div class="scroll" data-fig="lif" data-aria="LIF 神经元在 10 个 token 上的膜电位：逐步衰减并累加输入，超过阈值 1 时发出脉冲并减去阈值，共在第 3、7、10 个 token 发放"></div>
+    <figcaption>每个 token，膜电位 U 先衰减到 0.9 倍，这个保留比例叫 leak；再加上输入电流。一旦达到阈值 θ 就发一个脉冲，并从 U 里减去 θ，剩下的带到下一个 token。</figcaption>
+  </figure>
+  <figure>
+    <div class="scroll" data-fig="ternary" data-aria="二值神经元输出 0 或 1；三值神经元输出负一、零或正一"></div>
+    <figcaption>二值神经元只发 0 或 1。三值神经元还能发负脉冲 −1，在电路上是一对互补的神经元。内容信号有正有负，所以大多数点用三值。</figcaption>
+  </figure>
+  <figure>
+    <div class="scroll" data-fig="tsteps" data-aria="对比：嵌套模式每个 token 跑 4 小步再取平均；折叠模式每个 token 只跑 1 步，膜电位跨 token 带过去"></div>
+    <figcaption>T 是每个 token 内部跑几步。本项目 T = 1：每个神经元每个 token 只有一次发放机会，膜电位跨 token 带过去，成了除记忆 S 以外的第二种记忆。电路上一个 token 是一个周期，记忆阵列在里面只衰减一次。</figcaption>
+  </figure>
+
+  <h3>为什么权重可以是浮点数</h3>
+  <figure>
+    <div class="scroll" data-fig="xbar" data-aria="忆阻器阵列：输入脉冲变成字线电压，每个交叉点的电导就是权重，同一列电流相加后进入神经元，神经元发出新的脉冲"></div>
+    <figcaption>脉冲网络不等于二值网络：只有信号是脉冲，权重是忆阻器的电导，可以编程成多级模拟值。每个权重实际是一对器件 G⁺、G⁻，神经元收到两列电流之差，所以权重可正可负。乘和加都由电流完成，不需要乘法器，也不需要模数转换器。图中的 LIF 是仿真里用的理想神经元，实物计划用扩散忆阻器神经元。</figcaption>
+  </figure>
+</section>
+
+<section id="s5">
+  <h2><span class="no">05</span>转换算法</h2>
+  <p class="lead">转换不改网络结构，也不把权重变成二值。它把每个激活点换成脉冲神经元，然后分两步把模型训练回来。</p>
+  <figure>
+    <div class="tbl">
+      <table class="t">
+        <thead><tr><th></th><th>A0 浮点</th><th>A1 换成脉冲</th><th>B 打开膜电位</th><th>C 再微调</th><th>电路</th></tr></thead>
+        <tbody>
+          <tr><td>激活</td><td>实数</td><td>脉冲</td><td>脉冲</td><td>脉冲</td><td>脉冲</td></tr>
+          <tr><td>LIF 膜电位跨 token</td><td>没有膜电位</td><td>不跨，leak = 0</td><td>跨，leak = 0.9</td><td>跨，leak = 0.9</td><td>跨</td></tr>
+          <tr><td>训练</td><td>从零训练</td><td>微调</td><td>不训练</td><td>微调</td><td>不训练</td></tr>
+          <tr><td>权重</td><td>浮点</td><td>浮点</td><td>浮点</td><td>浮点</td><td>理想：浮点<br>标称：16 级电导</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption>A1 先在膜电位不跨 token 的简单条件下适应脉冲，记忆 S 照常工作；B 打开跨 token 的膜电位；C 在完整条件下再训练；最后把 C 写进电路。</figcaption>
+  </figure>
+  <figure>
+    <div class="scroll" data-fig="blockSpike" data-aria="脉冲版的块：标出 10 个脉冲点，其中 q 和 g 是二值，其余是三值"></div>
+    <figcaption>每块 10 个脉冲点，两块再加输出头前 1 个，共 21 个。其中 16 个是 LIF，有膜电位；5 个是块入口和输出头前的量化器，没有膜电位，电路上是一对比较器。权重、记忆 S、门 α β 和残差 h 仍是实数，但门的输入从 h 变成了三值脉冲。k 不再做 L2 归一化，改为固定乘 1/√32。</figcaption>
+  </figure>
+
+  <h3>第 1 步：复制权重，标定阈值</h3>
+  <figure>
+    <div class="scroll" data-fig="calib" data-aria="阈值标定：75 分位时约 25% 的 token 发放；50 分位时约 50% 发放"></div>
+    <figcaption>A0 的全部权重原样复制过来。每个脉冲点有一个阈值，取这一点所有通道、所有 token 上输入电流的某个分位数，它决定神经元多常发放。图中是三值点；二值点 q、g 只看右边一条尾巴。原计划 75 分位，约四分之一的 token 发放；改用 50 分位，约一半。曲线是示意的输入分布。</figcaption>
+  </figure>
+
+  <h3>第 2 步：A1 微调，用代理梯度</h3>
+  <figure>
+    <div class="scroll" data-fig="surrogate" data-aria="前向用台阶函数，反向用平滑的鼓包当导数"></div>
+    <figcaption>发放是一个台阶，台阶的斜率几乎处处为 0，梯度传不回去。训练时前向照常用台阶，反向换成平滑鼓包的斜率。权重和阈值一起训练。</figcaption>
+  </figure>
+
+  <h3>第 3 步：打开膜电位，B 为什么会塌</h3>
+  <figure>
+    <div class="scroll" data-chart="leak" data-aria="准确率随 leak 变化：leak 0 时 51.1%，leak 0.9 时 10.0%"></div>
+    <figcaption>拿默认配置训练出的 A1 做实验。A1 训练时膜电位每个 token 清零；一旦带上前一个 token 的余量，神经元发得太多，准确率就塌了。修法是在 C 训练前只调高 16 个 LIF 点的阈值：这个 A1 调高 2 倍，leak 0.9 下从 10.0% 升到 20.3%；最终采用的 A1 调高 2.25 倍，从 12.6% 升到 22.6%。5 个量化器的阈值不能跟着调，调高会让后面几乎收不到脉冲。</figcaption>
+  </figure>
+
+  <h3>第 4 步：C 微调。完整算法</h3>
+<pre class="algo"><span class="c"># 输入：训练好的浮点模型 A0、一小部分语料</span>
+<span class="k">1  复制</span>  脉冲模型的每个权重 = A0 对应的权重，另加 21 个可学习阈值
+<span class="k">2  标定</span>  在前 256 句上、leak = 0，按前向顺序逐点：
+      θ = 输入电流（三值点取绝对值）的 50% 分位数，下限 0.001
+<span class="k">3  A1</span>    leak = 0，前向用台阶、反向用代理梯度
+      同时训练权重和阈值：12000 步，学习率 3e-3 余弦
+<span class="k">4  B</span>     把 16 个 LIF 的 leak 改成 0.9，膜电位开始跨 token 携带
+<span class="k">5  放大</span>  16 个 LIF 阈值 × 2.25，5 个量化器不动
+<span class="k">6  C</span>     leak = 0.9，训练时把膜电位跨 token 的影响也算进梯度
+      12000 步，学习率 3e-3 余弦
+<span class="k">7  电路</span>  权重写成电导，阈值写进神经元，在电路模型上逐脉冲对照</pre>
+  <p class="lead" style="font-size:14px">第 2 步的分位数、第 5 步、A1 和 C 的步数、C 的学习率是这次诊断后改过的；A1 的学习率仍是计划的 3e-3。</p>
+</section>
+
+<section id="s6">
+  <h2><span class="no">06</span>转换结果</h2>
+  <p class="lead">所有数字都是整份语料上猜对下一个 token 的比例，对照 9 月 24 日按计划默认配置跑出的结果。</p>
+  <figure>
+    <div class="legend"><span><i class="sq" style="background:var(--de)"></i>默认配置</span><span><i class="sq" style="background:var(--accent)"></i>改进后</span></div>
+    <div class="scroll" data-chart="stages" data-aria="各阶段准确率，默认配置与改进后对比"></div>
+    <figcaption>改进后 A1 从 51.1% 升到 74.0%，C 从 40.7% 升到 75.2%，追上了 A1。无误差的理想电路和 C 逐脉冲一致；加上假设的器件误差后是 63.4%。</figcaption>
+  </figure>
+  <figure>
+    <div class="legend"><span><i style="background:var(--de)"></i>默认：2000 步，75 分位</span><span><i style="background:var(--spike)"></i>6000 步，75 分位</span><span><i style="background:var(--accent)"></i>12000 步，50 分位</span></div>
+    <div class="scroll" data-chart="a1" data-aria="A1 训练曲线：默认 2000 步到 51.1%，6000 步到 65.9%，12000 步到 74.0%"></div>
+    <figcaption>默认配置在 2000 步停下，看起来像到了平台，其实是学习率按余弦衰减到零造成的。放到 12000 步、改用 50 分位后到 74.0%，离浮点模型还差 10 个百分点。</figcaption>
+  </figure>
+  <figure>
+    <div class="legend"><span><i style="background:var(--de)"></i>默认：1500 步，学习率 1e-3</span><span><i style="background:var(--accent)"></i>改进：12000 步，学习率 3e-3，阈值 ×2.25</span></div>
+    <div class="scroll" data-chart="c" data-aria="C 训练曲线：默认到 40.7%，改进后到 75.2%"></div>
+    <figcaption>第 0 步是 C 训练的起点：默认配置就是 B，10.0%；改进配置是 B 再把 LIF 阈值调高 2.25 倍，22.6%。默认配置最后到 40.7%；改进后到 75.2%，比它的 A1 还高约 1.1 个百分点。</figcaption>
+  </figure>
+  <figure>
+    <p class="charthead">哪些改动最有用，每行只改一处</p>
+    <div class="scroll" data-chart="gains" data-aria="每项改动带来的准确率提升"></div>
+    <figcaption>每一行都是只改这一处的对照，只有“学习率加大并预热”同时改了两样。每个配置只跑了一个随机种子；默认配置三个种子之间差 0.3 个百分点，所以 2 个百分点以内的差别还不确定。</figcaption>
+    <details class="data">
+      <summary>试过但没有采用的办法</summary>
+      <div class="chips"><span>用浮点模型当老师蒸馏</span><span>最小二乘重拟合权重</span><span>重拟合门</span><span>leak 0.9 下重新标定阈值</span><span>所有阈值一起放大</span><span>leak 逐步退火</span><span>按点类型设不同分位数</span></div>
+    </details>
+  </figure>
+  <figure>
+    <div class="scroll" data-chart="fire" data-aria="平均发放率：计划设想 23.4%，训练后 A1 61.7%，C 53.2%"></div>
+    <figcaption>计划假设每个神经元大约在四分之一的 token 上发放。训练会自己把发放率推高，交给电路的 C 大约在一半 token 上发放。发放率是估算电路功耗的主要指标：脉冲越多，阵列里流过的电流越多。上面 leak 图的发放率用的是另一组样本，同一个默认 A1 在那里是 53.6%。</figcaption>
+  </figure>
+
+  <h3>5 道 demo 题</h3>
+  <figure>
+    <div class="tbl">
+      <table class="t" id="demo">
+        <thead><tr><th>前缀</th><th>正确答案</th><th>脉冲模型 C 的补全</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <figcaption>绿色一致，红色跑偏。token 准确率是每一步都给正确前文时测的；自己生成时要接着自己的答案往下写，错一个就会带偏后面。浮点模型 5 句全对，C 答对第 3 句。</figcaption>
+  </figure>
+
+  <h3>电路仿真</h3>
+  <figure>
+    <div class="scroll" data-chart="sign" data-aria="标称电路的符号错误率，四个输出都超过 2% 的上限"></div>
+    <figcaption>标称电路是 16 级电导，再加上 1% 到 2% 的各类器件误差。这些误差是假设值，还没有实测；神经元和门仍按理想模型计算。记忆阵列的误差很小；没过关的是脉冲正负号，4 处都超过 2% 的上限。编程误差从 0 加到 10%，准确率只降 1.6 个百分点。</figcaption>
+  </figure>
+
+  <h3>验收表</h3>
+  <figure>
+    <div class="tbl">
+      <table class="t">
+        <thead><tr><th>验收项</th><th>默认配置</th><th>改进后</th><th>改进后的数值</th></tr></thead>
+        <tbody>
+          <tr><td>A0 浮点模型 5 句全对</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">5/5</td></tr>
+          <tr><td>A1 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td></tr>
+          <tr><td>C 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td></tr>
+          <tr><td>C 准确率在 A1 的 1 个百分点以内</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">75.2% ≥ 74.0%</td></tr>
+          <tr><td>理想电路每个 token 的输出和 C 相同</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">对照的 205 句上完全相同</td></tr>
+          <tr><td>理想电路逐脉冲对照</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">误差 0</td></tr>
+          <tr><td>标称电路自己生成，5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">0/5</td></tr>
+          <tr><td>标称电路与 C 对照：喂同样的前文</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">下一个 token 相同 62.5%，要求 ≥ 99%；脉冲 P/R 0.67–0.78，要求 ≥ 0.9</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption>8 项里改进前通过 3 项，改进后通过 4 项。新通过的是“C 追上 A1”。</figcaption>
+  </figure>
+</section>
+
+<section id="s7">
+  <h2><span class="no">07</span>结论</h2>
+  <ul class="concl">
+    <li><b>转换流程的实现没有错误。</b>代码逐项核对无误；理想电路和软件模型逐脉冲一致；打开跨 token 的膜电位后，C 能追上 A1。</li>
+    <li><b>刚转换时损失很大，提升主要靠训练。</b>21 个点一起量化，误差层层累积，刚转换时只剩一成准确率；把发放率从四分之一提到一半，也只把这个起点从 10.4% 提到 12.3%。真正的提升来自训练更久、C 用更高的学习率、调高 LIF 阈值：脉冲模型从 40.7% 升到 75.2%。</li>
+    <li><b>还没做到的。</b>5 道题全对；标称电路的脉冲级一致性；每个配置只跑了一个种子；12000 步以后是否还会继续涨也不知道。</li>
+    <li><b>下一步。</b>给采用的配置补跑两个种子；试更长的训练；按计划依次单独对照前馈、注意力和记忆阵列，找出标称电路的误差来源。</li>
+  </ul>
+  <footer>代码和数据：仓库 Chaoyi-He1/dm_SNN，分支 <code>worktree-conversion-sweep</code>；完整扫描记录在 <code>step2-toy-demo/results/conversion-sweep/README.md</code>。26 个扫描运行的墙钟时间合计约 27 小时，不含诊断和最终的 12000 步 C；每张卡同时跑 4 到 7 个运行，用两张 RTX A4500。</footer>
+</section>
+</main>
+
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);if(attrs)for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function tx(p,x,y,s,cls,anchor){const t=el('text',{x:x,y:y},p);if(cls)t.setAttribute('class',cls);if(anchor)t.setAttribute('text-anchor',anchor);t.textContent=s;return t;}
+function box(p,x,y,w,h,lines,cls,mono){el('rect',{x:x,y:y,width:w,height:h,rx:7,class:cls||'box'},p);const n=lines.length;lines.forEach(function(s,i){tx(p,x+w/2,y+h/2+(i-(n-1)/2)*17+4.5,s,(i===0?'bt':'bs')+(mono&&i===0?' mono':''),'middle');});}
+function arr(p,pts,cls){const k=cls||'';const m=k.indexOf('acc')>=0?'mA':(k.indexOf('spk')>=0?'mS':'mI');return el('path',{d:'M'+pts.map(function(q){return q[0]+' '+q[1];}).join(' L'),class:'ar '+k,'marker-end':'url(#'+m+')'},p);}
+function line(p,x1,y1,x2,y2,cls){return el('line',{x1:x1,y1:y1,x2:x2,y2:y2,class:cls||'wire'},p);}
+function mk(host,W,H,minW){const s=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':host.dataset.aria||''});s.style.minWidth=(minW||Math.min(W,640))+'px';host.appendChild(s);return s;}
+
+/* tooltip */
+const tip=document.getElementById('tip');
+function showTip(e,html){tip.innerHTML=html;tip.hidden=false;const r=tip.getBoundingClientRect();let x=e.clientX+14,y=e.clientY+14;if(x+r.width>innerWidth-8)x=e.clientX-r.width-14;if(y+r.height>innerHeight-8)y=e.clientY-r.height-14;tip.style.left=Math.max(4,x)+'px';tip.style.top=Math.max(4,y)+'px';}
+function hideTip(){tip.hidden=true;}
+function svgPt(svg,e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
+function dataTable(host,head,rows){const d=document.createElement('details');d.className='data';const sm=document.createElement('summary');sm.textContent='查看数据';d.appendChild(sm);const w=document.createElement('div');w.className='tbl';const t=document.createElement('table');t.className='dt';let h='<tr>'+head.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr>';rows.forEach(function(r){h+='<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join('')+'</tr>';});t.innerHTML=h;w.appendChild(t);d.appendChild(w);host.parentNode.insertBefore(d,host.nextSibling);}
+
+/* ---------- line chart ---------- */
+function lineChart(host,o){
+  const W=o.w||720,H=o.h||300,m={l:48,r:(o.mr==null?110:o.mr),t:30,b:44};
+  const svg=mk(host,W,H,o.minW||520);
+  const pw=W-m.l-m.r,ph=H-m.t-m.b;
+  const X=function(v){return m.l+(v-o.x[0])/(o.x[1]-o.x[0])*pw;},Y=function(v){return m.t+ph-(v-o.y[0])/(o.y[1]-o.y[0])*ph;};
+  o.yTicks.forEach(function(t){line(svg,m.l,Y(t),m.l+pw,Y(t),'grid');tx(svg,m.l-8,Y(t)+4,(o.yFmt||String)(t),'tick','end');});
+  line(svg,m.l,m.t+ph,m.l+pw,m.t+ph,'axis');
+  o.xTicks.forEach(function(t){tx(svg,X(t),m.t+ph+18,(o.xFmt||String)(t),'tick','middle');});
+  if(o.yTitle)tx(svg,4,14,o.yTitle,'axt','start');
+  if(o.xTitle)tx(svg,m.l+pw,m.t+ph+38,o.xTitle,'axt','end');
+  (o.refs||[]).forEach(function(r){line(svg,m.l,Y(r.y),m.l+pw,Y(r.y),'ref');if(r.left)tx(svg,m.l+8,Y(r.y)-7,r.label,'reflbl','start');else tx(svg,m.l+pw+8,Y(r.y)+4,r.label,'reflbl','start');});
+  o.series.forEach(function(s){
+    const d=s.data.map(function(p,i){return (i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1);}).join(' ');
+    el('path',{d:d,class:'ln',style:'stroke:var('+s.c+')'},svg);
+    const L=s.data[s.data.length-1];
+    el('circle',{cx:X(L[0]),cy:Y(L[1]),r:4.5,class:'dot',style:'fill:var('+s.c+')'},svg);
+    if(s.label)tx(svg,X(L[0])+(s.ldx==null?10:s.ldx),Y(L[1])+(s.ldy==null?4:s.ldy),s.label,'endlbl',s.lanchor||'start');
+  });
+  (o.ann||[]).forEach(function(a){el('circle',{cx:X(a.x),cy:Y(a.y),r:4,class:'adot'},svg);tx(svg,X(a.x)+(a.dx||0),Y(a.y)+(a.dy||0),a.t,'bs',a.anchor||'start');});
+  const cross=el('line',{y1:m.t,y2:m.t+ph,class:'cross',visibility:'hidden'},svg);
+  const hd=o.series.map(function(s){return el('circle',{r:5,class:'dot',style:'fill:var('+s.c+')',visibility:'hidden'},svg);});
+  const hit=el('rect',{x:m.l,y:m.t,width:pw,height:ph,class:'hit'},svg);
+  function off(){cross.setAttribute('visibility','hidden');hd.forEach(function(c){c.setAttribute('visibility','hidden');});hideTip();}
+  hit.addEventListener('pointermove',function(e){
+    const p=svgPt(svg,e);const xv=o.x[0]+(p.x-m.l)/pw*(o.x[1]-o.x[0]);const tol=(o.x[1]-o.x[0])*0.03;const rows=[];
+    o.series.forEach(function(s,i){
+      const f=s.data[0][0],l=s.data[s.data.length-1][0];
+      if(xv<f-tol||xv>l+tol){hd[i].setAttribute('visibility','hidden');return;}
+      let bi=0;s.data.forEach(function(q,j){if(Math.abs(q[0]-xv)<Math.abs(s.data[bi][0]-xv))bi=j;});
+      const b=s.data[bi];hd[i].setAttribute('cx',X(b[0]));hd[i].setAttribute('cy',Y(b[1]));hd[i].setAttribute('visibility','visible');
+      rows.push('<div class="tr"><i style="background:var('+s.c+')"></i>'+s.name+'<b>'+b[1].toFixed(1)+(o.unit||'')+'</b></div><div class="sub">'+(o.tipX||String)(b[0])+(s.extra?' · '+s.extra[bi]:'')+'</div>');
+    });
+    if(!rows.length){off();return;}
+    cross.setAttribute('x1',p.x);cross.setAttribute('x2',p.x);cross.setAttribute('visibility','visible');
+    showTip(e,rows.join(''));
+  });
+  hit.addEventListener('pointerleave',off);
+  if(o.table)dataTable(host,o.table.head,o.table.rows);
+}
+
+/* ---------- horizontal bars ---------- */
+function rrect(x,y,w,h,r){if(w<=r)return 'M'+x+' '+y+'h'+w+'v'+h+'h'+(-w)+'z';return 'M'+x+' '+y+'h'+(w-r)+'a'+r+' '+r+' 0 0 1 '+r+' '+r+'v'+(h-2*r)+'a'+r+' '+r+' 0 0 1 '+(-r)+' '+r+'h'+(-(w-r))+'z';}
+function hbar(host,o){
+  const W=o.w||720,rowH=o.rowH||40,m={l:o.ml||220,r:o.mr||70,t:o.limit?30:10,b:34};
+  const H=m.t+m.b+rowH*o.rows.length;const svg=mk(host,W,H,o.minW||560);
+  const pw=W-m.l-m.r;const X=function(v){return m.l+v/o.max*pw;};
+  o.ticks.forEach(function(t){line(svg,X(t),m.t,X(t),H-m.b,'grid');tx(svg,X(t),H-m.b+18,t+(o.tickUnit||''),'tick','middle');});
+  line(svg,m.l,m.t,m.l,H-m.b,'axis');
+  if(o.xTitle)tx(svg,m.l+pw,H-2,o.xTitle,'axt','end');
+  o.rows.forEach(function(r,i){
+    const yc=m.t+rowH*i+rowH/2;const bh=20;
+    tx(svg,m.l-12,yc+4,r.label,'bs','end');
+    el('path',{d:rrect(X(0),yc-bh/2,Math.max(1,X(r.v)-X(0)),bh,4),style:'fill:var('+(r.c||'--accent')+')'},svg);
+    tx(svg,X(r.v)+8,yc+4,(o.fmt||String)(r.v),'vlbl','start');
+    const h=el('rect',{x:m.l,y:yc-rowH/2,width:pw,height:rowH,fill:'transparent',class:'barhit'},svg);
+    h.addEventListener('pointermove',function(e){showTip(e,'<div><b style="margin:0;padding:0">'+r.label+'</b></div><div class="sub">'+(r.tip||(o.fmt||String)(r.v))+'</div>');});
+    h.addEventListener('pointerleave',hideTip);
+  });
+  if(o.limit){const lx=X(o.limit.v);line(svg,lx,m.t-8,lx,H-m.b,'lim');tx(svg,lx+6,m.t-12,o.limit.label,'limlbl','start');}
+  if(o.table)dataTable(host,o.table.head,o.table.rows);
+}
+
+/* ---------- grouped columns ---------- */
+function cpath(x,base,w,h,r){if(h<=r)return 'M'+x+' '+base+'v'+(-h)+'h'+w+'v'+h+'z';return 'M'+x+' '+base+'v'+(-(h-r))+'a'+r+' '+r+' 0 0 1 '+r+' '+(-r)+'h'+(w-2*r)+'a'+r+' '+r+' 0 0 1 '+r+' '+r+'v'+(h-r)+'z';}
+function columns(host,o){
+  const W=720,H=300,m={l:48,r:12,t:24,b:52};const svg=mk(host,W,H,560);
+  const pw=W-m.l-m.r,ph=H-m.t-m.b;const Y=function(v){return m.t+ph-v/100*ph;};const band=pw/o.cats.length;
+  [0,20,40,60,80,100].forEach(function(t){line(svg,m.l,Y(t),m.l+pw,Y(t),'grid');tx(svg,m.l-8,Y(t)+4,t+'%','tick','end');});
+  line(svg,m.l,Y(0),m.l+pw,Y(0),'axis');
+  tx(svg,4,14,'token 准确率','axt','start');
+  const bw=24,gap=4;
+  o.cats.forEach(function(c,i){
+    const cx=m.l+band*i+band/2;tx(svg,cx,Y(0)+20,c[0],'bs','middle');if(c[1])tx(svg,cx,Y(0)+36,c[1],'sm','middle');
+    o.series.forEach(function(s,j){
+      const v=s.vals[i];const x=cx-bw-gap/2+j*(bw+gap);
+      el('path',{d:cpath(x,Y(0),bw,Y(0)-Y(v),4),style:'fill:var('+s.c+')'},svg);
+      if(s.label)tx(svg,x+bw/2,Y(v)-6,v.toFixed(1),'vlbl','middle');
+    });
+    const h=el('rect',{x:cx-band/2,y:m.t,width:band,height:ph,fill:'transparent',class:'barhit'},svg);
+    h.addEventListener('pointermove',function(e){showTip(e,'<div><b style="margin:0;padding:0">'+c[0]+(c[1]?' · '+c[1]:'')+'</b></div>'+o.series.map(function(s){return '<div class="tr"><i style="background:var('+s.c+')"></i>'+s.name+'<b>'+s.vals[i].toFixed(1)+'%</b></div>';}).join('')+(o.notes&&o.notes[i]?'<div class="sub">'+o.notes[i]+'</div>':''));});
+    h.addEventListener('pointerleave',hideTip);
+  });
+  dataTable(host,['阶段'].concat(o.series.map(function(s){return s.name;})),o.cats.map(function(c,i){return [c[0]+(c[1]?' '+c[1]:'')].concat(o.series.map(function(s){return s.vals[i].toFixed(1)+'%';}));}));
+}
+
+/* ---------- small grids for GDN ---------- */
+function grid(p,x,y,c,vals,hl,tint){
+  for(let i=0;i<vals.length;i++)for(let j=0;j<vals[i].length;j++)el('rect',{x:x+j*c,y:y+i*c,width:c-2,height:c-2,rx:2,class:'cell','fill-opacity':(0.1+0.85*vals[i][j]).toFixed(2)},p);
+  (tint||[]).forEach(function(i){el('rect',{x:x-1,y:y+i*c-1,width:vals[0].length*c,height:c,rx:3,class:'rowtint'},p);});
+  (hl||[]).forEach(function(i){el('rect',{x:x-2,y:y+i*c-2,width:vals[0].length*c+2,height:c+2,rx:3,class:'rowhl'},p);});
+}
+function kvec(p,x,y,c,bits,vertical){bits.forEach(function(b,i){el('rect',{x:vertical?x:x+i*c,y:vertical?y+i*c:y,width:c-2,height:c-2,rx:2,class:b?'kon':'koff'},p);});}
+function vvec(p,x,y,c,vals){vals.forEach(function(v,i){el('rect',{x:x+i*c,y:y,width:c-2,height:c-2,rx:2,class:'cell','fill-opacity':(0.1+0.85*v).toFixed(2)},p);});}
+
+const B=[[.85,.3,.6,.2],[.45,.75,.15,.65],[.2,.55,.9,.4],[.7,.1,.35,.8]];
+function sel(rows){const o=[0,0,0,0];rows.forEach(function(r){B[r].forEach(function(v,j){o[j]+=v;});});const mx=Math.max.apply(null,o);return o.map(function(v){return v/mx;});}
+
+/* ---------- figures ---------- */
+const F={};
+F.pipeline=function(h){
+  const s=mk(h,952,152,720);
+  const st=[['A0','浮点模型','普通神经网络',84.2],['A1','换成脉冲','神经元改发脉冲',74.0],['B','打开膜电位','保留余量 · 未训练',12.6],['C','再微调','调高阈值后再训练',75.2],['电路','忆阻器电路仿真','加上假设的器件误差',63.4]];
+  st.forEach(function(d,i){
+    const x=6+i*196,y=10,w=156;
+    el('rect',{x:x,y:y,width:w,height:132,rx:10,class:i===3?'box box-acc':'box'},s);
+    tx(s,x+14,y+24,d[0],'tag');tx(s,x+14,y+47,d[1],'bt');tx(s,x+14,y+67,d[2],'bs');
+    tx(s,x+14,y+103,d[3].toFixed(1)+'%','big');
+    el('rect',{x:x+14,y:y+114,width:128,height:6,rx:3,class:'track'},s);
+    el('rect',{x:x+14,y:y+114,width:128*d[3]/100,height:6,rx:3,class:i===2?'fillspk':'fillacc'},s);
+    if(i<4)arr(s,[[x+w+6,y+66],[x+196-6,y+66]]);
+  });
+};
+F.task=function(h){
+  const s=mk(h,820,200,680);
+  tx(s,14,24,'输入：前 5 个 token','bs');
+  const toks=['He','put','his','wet','and'];let x=14;const y=36;
+  toks.forEach(function(t){const w=18+t.length*8.4;el('rect',{x:x,y:y,width:w,height:34,rx:6,class:'box'},s);tx(s,x+w/2,y+22,t,'tokt','middle');x+=w+6;});
+  const mx=x+34;arr(s,[[x+2,53],[mx-4,53]]);
+  box(s,mx,26,132,54,['语言模型','GDN · 两个块'],'box box-acc');
+  const ox=mx+132+50;tx(s,(mx+132+ox)/2,44,'预测','sm','middle');arr(s,[[mx+136,53],[ox-4,53]]);
+  el('rect',{x:ox,y:y,width:66,height:34,rx:6,class:'box box-spk'},s);tx(s,ox+33,y+22,'dirty','tokt','middle');
+  arr(s,[[ox+33,72],[ox+33,108],[mx+66,108],[mx+66,84]]);
+  tx(s,(ox+33+mx+66)/2,126,'接到输入后面，再猜下一个，直到句尾','sm','middle');
+  const t=el('text',{x:14,y:170,class:'tokt'},s);const a=el('tspan',{class:'mu'},t);a.textContent='He put his wet and';const b=el('tspan',{},t);b.textContent=' dirty shirt into the dryer and watched it spin.';
+  tx(s,14,192,'↑ 灰色是给出的前缀，黑色是要一字不差补出来的部分','sm');
+  const nx=600;tx(s,nx,34,'5 道 demo 题','bt');
+  ['从语料里选 5 句 12 到 16 个 token 的句子','前 5 个 token 在整份语料里只出现一次','所以正确答案是唯一的'].forEach(function(l,i){tx(s,nx,56+i*20,l,'bs');});
+};
+F.data=function(h){
+  const s=mk(h,900,206,720);
+  const Bx=[['TinyStories','英文童话语料'],['切成句子','4003 句，每句 ≤ 40 token'],['分词器','借用 Qwen3.5 的，切成 token'],['紧凑词表','出现过的 3223 个 + 3 个特殊']];
+  Bx.forEach(function(b,i){const x=10+i*222;box(s,x,16,190,60,b,i===3?'box box-acc':'box');if(i<3)arr(s,[[x+194,46],[x+218,46]]);});
+  tx(s,10,112,'一句话进入模型时的样子','bs');
+  const chips=['<bos>','She','ran','around','the','whole','park',',','but','she','could','not','find','him','anywhere','.','<eos>'];let x=10;
+  chips.forEach(function(c){const w=12+c.length*7.6;el('rect',{x:x,y:124,width:w,height:28,rx:5,class:c.charAt(0)==='<'?'box box-spk':'box'},s);tx(s,x+w/2,143,c,'tokt','middle');x+=w+4;});
+  tx(s,10,182,'<bos> 和 <eos> 标出句子的开头和结尾，每句是一条独立的训练序列','sm');
+};
+F.train=function(h){
+  const s=mk(h,840,236,700);const w=236,hh=58;
+  const P=[[20,20],[330,20],[330,156],[20,156]];
+  const L=[['① 随机抽 64 句','一批'],['② 逐个预测下一个 token','每个位置给 3226 个分数'],['③ 和正确答案比，算扣分','猜错越离谱扣分越多：交叉熵'],['④ 按梯度改权重','梯度：每个权重该往哪改、改多少']];
+  P.forEach(function(p,i){box(s,p[0],p[1],w,hh,L[i]);});
+  arr(s,[[20+w+4,49],[330-4,49]]);arr(s,[[330+w/2,20+hh+4],[330+w/2,156-4]]);arr(s,[[330-4,185],[20+w+4,185]]);arr(s,[[20+w/2,156-4],[20+w/2,20+hh+4]]);
+  el('rect',{x:622,y:20,width:204,height:194,rx:8,class:'box box-acc'},s);
+  arr(s,[[330+w+4,49],[622-4,49]],'ar-acc');tx(s,(330+w+622)/2,40,'每 100 步','sm','middle');
+  tx(s,638,46,'考一次试','bt');tx(s,638,68,'整份语料的准确率','bs');tx(s,638,88,'5 道 demo 题对几道','bs');
+  tx(s,638,122,'停下来的条件','bt');tx(s,638,144,'5 道题全对，并且','bs');tx(s,638,164,'比 500 步前的最好成绩','bs');tx(s,638,184,'涨不到 0.1 个百分点','bs');
+};
+F.arch=function(h){
+  const s=mk(h,820,694,600);const cx=300,bx=190,bw=220;
+  line(s,cx,104,cx,572,'wire');
+  el('rect',{x:cx-40,y:6,width:80,height:30,rx:6,class:'box'},s);tx(s,cx,26,'and','tokt','middle');
+  arr(s,[[cx,36],[cx,54]]);
+  box(s,bx,56,bw,48,['嵌入表','3226 行 × 128 列']);
+  tx(s,440,76,'每个 token 查出 128 个数，作为 h 的初值','bs');tx(s,440,95,'412,928 个参数','vl');
+  tx(s,140,300,'残差流 h','bs','end');tx(s,140,318,'128 个数','sm','end');tx(s,140,336,'一路往下累加','sm','end');
+  function blk(y0,name){
+    el('rect',{x:150,y:y0,width:300,height:200,rx:10,class:'frame'},s);tx(s,438,y0+20,name,'bt','end');
+    const p1=y0+98,p2=y0+178;
+    arr(s,[[cx,y0+14],[172,y0+14],[172,p1],[cx-12,p1]]);
+    box(s,bx,y0+30,bw,46,['GDN 注意力','更新并读取记忆 S'],'box box-acc');
+    el('circle',{cx:cx,cy:p1,r:11,class:'plus'},s);tx(s,cx,p1+5,'+','bt','middle');
+    arr(s,[[cx,p1+14],[172,p1+14],[172,p2],[cx-12,p2]]);
+    box(s,bx,y0+120,bw,46,['SwiGLU 前馈','每个 token 单独加工，不看前文']);
+    el('circle',{cx:cx,cy:p2,r:11,class:'plus'},s);tx(s,cx,p2+5,'+','bt','middle');
+    tx(s,166,y0+62,'原样加回','sm','end');
+    tx(s,470,y0+20,'164,872 个参数','vl');
+    tx(s,470,y0+50,'记住前文：','bs');tx(s,470,y0+68,'α 决定忘多少，β 决定写多少','bs');
+    tx(s,470,y0+140,'单独加工：','bs');tx(s,470,y0+158,'两路相乘，再变回 128 个数','bs');
+  }
+  blk(128,'块 1');blk(352,'块 2');
+  box(s,bx,572,bw,48,['输出头','128 个数 → 3226 个分数']);
+  tx(s,440,592,'每个候选 token 一个分数','bs');tx(s,440,611,'412,928 个参数','vl');
+  arr(s,[[cx,620],[cx,646]]);tx(s,cx+12,638,'取分数最高的','sm');
+  el('rect',{x:cx-40,y:648,width:80,height:30,rx:6,class:'box box-spk'},s);tx(s,cx,668,'dirty','tokt','middle');
+};
+F.attn=function(h){
+  const s=mk(h,900,262,720);
+  const L=16;tx(s,L,24,'普通注意力','bt');tx(s,L,44,'Transformer 的做法','bs');
+  const cxp=L+360,cyp=104;
+  for(let i=0;i<6;i++){const x=L+i*54;el('rect',{x:x,y:186,width:46,height:28,rx:5,class:'box'},s);tx(s,x+23,205,'t'+(i+1),'tokt','middle');el('line',{x1:cxp,y1:cyp,x2:x+23,y2:184,class:'ar thin','marker-end':'url(#mI)'},s);}
+  el('rect',{x:cxp-32,y:70,width:64,height:34,rx:6,class:'box box-acc'},s);tx(s,cxp,92,'t7 当前','bs','middle');
+  tx(s,L+260,62,'回看所有旧 token','sm','end');
+  tx(s,L,240,'要存下每个旧 token 的钥匙 k 和内容 v','bs');tx(s,L,256,'句子越长，存得越多、算得越多','sm');
+  const R=470;tx(s,R,24,'GDN','bt');tx(s,R,44,'线性注意力，本项目用它','bs');
+  const gx=R+150,gy=58,c=11;
+  for(let i=0;i<6;i++)for(let j=0;j<6;j++)el('rect',{x:gx+j*c,y:gy+i*c,width:c-2,height:c-2,rx:1.5,class:'cell','fill-opacity':(0.18+0.7*(((i*7+j*5)%9)/8)).toFixed(2)},s);
+  tx(s,gx+80,78,'记忆 S','bt');tx(s,gx+80,96,'大小固定','bs');tx(s,gx+80,113,'每个头 32 × 32','vl');
+  for(let i=0;i<7;i++){const x=R+i*54;el('rect',{x:x,y:186,width:46,height:28,rx:5,class:i===6?'box box-acc':'box'},s);tx(s,x+23,205,'t'+(i+1),'tokt','middle');el('line',{x1:x+23,y1:184,x2:gx+33,y2:gy+6*c+4,class:'ar ar-acc thin','marker-end':'url(#mA)'},s);}
+  tx(s,R,240,'每个 token 进来只改一次 S','bs');tx(s,R,256,'句子再长，记忆也就这么大','sm');
+};
+F.gdn=function(h){
+  const s=mk(h,900,270,760);const c=15;
+  const Bd=B.map(function(r){return r.map(function(v){return v*.5;});});
+  function pane(i,title){const x0=6+i*223;el('rect',{x:x0,y:6,width:211,height:256,rx:10,class:'pane'},s);tx(s,x0+14,32,title,'bt');return x0;}
+  let x0=pane(0,'① 遗忘');
+  grid(s,x0+22,62,c,B);arr(s,[[x0+88,92],[x0+118,92]]);tx(s,x0+103,84,'× α','vl','middle');
+  grid(s,x0+124,62,c,Bd);
+  tx(s,x0+52,140,'之前','sm','middle');tx(s,x0+154,140,'之后','sm','middle');
+  tx(s,x0+14,178,'S ← α · S','vl');tx(s,x0+14,206,'所有旧记忆一起变淡','bs');tx(s,x0+14,224,'α 越大忘得越少，0.5 到 0.99','bs');
+  x0=pane(1,'② 查旧值');
+  tx(s,x0+37,56,'k','vl','middle');kvec(s,x0+30,62,c,[1,0,1,0],true);grid(s,x0+58,62,c,Bd,[0,2]);
+  vvec(s,x0+58,136,c,sel([0,2]));tx(s,x0+48,147,'r','vl','end');tx(s,x0+124,147,'选中行相加','sm');
+  tx(s,x0+14,178,'r = Sᵀ k','vl');tx(s,x0+14,206,'钥匙 k 在变淡后的 S 里选行','bs');tx(s,x0+14,224,'选中的行加起来，得到旧值 r','bs');
+  x0=pane(2,'③ 纠错写入');
+  tx(s,x0+37,56,'k','vl','middle');kvec(s,x0+30,62,c,[1,0,1,0],true);grid(s,x0+58,62,c,Bd,[0,2],[0,2]);
+  arr(s,[[x0+178,69.5],[x0+124,69.5]],'ar-spk');arr(s,[[x0+178,99.5],[x0+124,99.5]],'ar-spk');tx(s,x0+130,89,'β(v − r)','vl');
+  tx(s,x0+14,178,'S ← S + β·k(v − r)ᵀ','vl');tx(s,x0+14,206,'只改 k 选中的那几行','bs');tx(s,x0+14,224,'写入“新内容 v 减旧值 r”','bs');tx(s,x0+14,242,'β 决定写多少','bs');
+  x0=pane(3,'④ 读出');
+  tx(s,x0+37,56,'q','vl','middle');kvec(s,x0+30,62,c,[1,0,0,1],true);grid(s,x0+58,62,c,Bd,[0,3],[0,2]);
+  vvec(s,x0+58,136,c,sel([0,3]));tx(s,x0+48,147,'o','vl','end');tx(s,x0+124,147,'选中行相加','sm');
+  tx(s,x0+14,178,'o = Sᵀ q','vl');tx(s,x0+14,206,'查询 q 在刚写完的 S 里选行','bs');tx(s,x0+14,224,'加起来就是这一步的输出 o','bs');
+};
+function spt(s,x,y,type,label,below){if(type==='t')el('circle',{cx:x,cy:y,r:7,class:'sp3'},s);else if(type==='q')el('circle',{cx:x,cy:y,r:6,class:'spq'},s);else el('rect',{x:x-6.5,y:y-6.5,width:13,height:13,rx:2,class:'sp2'},s);if(label)tx(s,x,below?y+22:y-12,label,'vl','middle');}
+function block(h,SP){
+  const s=mk(h,960,344,780);const y1=96,y2=270;
+  // row 1: attention
+  el('circle',{cx:40,cy:y1,r:5,class:'node'},s);tx(s,40,y1+22,'h','vl','middle');
+  arr(s,[[40,y1-5],[40,16],[572,16],[572,y1-12]]);
+  line(s,45,y1,110,y1);if(SP)spt(s,76,y1,'q','入口');
+  line(s,110,52,110,188);
+  [[52,'W_q'],[96,'W_k'],[140,'W_v']].forEach(function(r){line(s,110,r[0],122,r[0]);box(s,122,r[0]-14,56,28,[r[1]],'box',true);line(s,178,r[0],262,r[0]);});
+  if(SP){spt(s,212,52,'b','q 二值');spt(s,212,96,'t','k 三值');tx(s,212,116,'×1/√32','vl','middle');spt(s,212,140,'t','v 三值',true);}
+  else{tx(s,220,44,'L2 归一化','sm','middle');tx(s,220,88,'L2 归一化','sm','middle');}
+  line(s,110,188,122,188);box(s,122,176,56,26,['门'],'box');arr(s,[[178,188],[322,188],[322,160]]);tx(s,330,182,'α, β','vl');
+  box(s,262,36,120,120,['GDN 记忆 S','遗忘 · 查 · 写 · 读'],'box box-acc');
+  line(s,382,y1,440,y1);if(SP)spt(s,410,y1,'t','o 三值');
+  box(s,440,y1-14,56,28,['W_o'],'box',true);
+  line(s,496,y1,561,y1);if(SP)spt(s,528,y1,'t','y 三值');
+  el('circle',{cx:572,cy:y1,r:11,class:'plus'},s);tx(s,572,y1+5,'+','bt','middle');
+  arr(s,[[583,y1],[620,y1]]);tx(s,628,y1+4,'h′','vl');
+  tx(s,680,70,'注意力子块','bt');
+  if(SP){tx(s,680,92,'6 个脉冲点：入口、q、k、v、','bs');tx(s,680,110,'W_o 前后各一个','bs');}
+  else{tx(s,680,92,'q 查询、k 钥匙、v 内容','bs');tx(s,680,110,'q、k 做 L2 归一化，都是实数','bs');}
+  // row 2: FFN
+  el('circle',{cx:40,cy:y2,r:5,class:'node'},s);tx(s,40,y2+22,'h′','vl','middle');
+  arr(s,[[40,y2-5],[40,212],[472,212],[472,y2-12]]);
+  line(s,45,y2,110,y2);if(SP)spt(s,76,y2,'q','入口');
+  line(s,110,236,110,304);
+  [[236,'W_1'],[304,'W_3']].forEach(function(r){line(s,110,r[0],122,r[0]);box(s,122,r[0]-14,56,28,[r[1]],'box',true);});
+  el('path',{d:'M178 236 H262 V258',class:'wire'},s);el('path',{d:'M178 304 H262 V282',class:'wire'},s);
+  if(SP){spt(s,212,236,'b','g 二值');spt(s,212,304,'t','u 三值',true);}
+  else{tx(s,212,228,'SiLU','sm','middle');}
+  el('circle',{cx:262,cy:y2,r:12,class:'plus'},s);tx(s,262,y2+(SP?4:5),SP?'AND':'×',SP?'sm':'bt','middle');
+  line(s,274,y2,330,y2);box(s,330,y2-14,56,28,['W_2'],'box',true);
+  line(s,386,y2,461,y2);if(SP)spt(s,424,y2,'t','y 三值');
+  el('circle',{cx:472,cy:y2,r:11,class:'plus'},s);tx(s,472,y2+5,'+','bt','middle');
+  arr(s,[[483,y2],[520,y2]]);tx(s,528,y2+4,'h 输出','vl');
+  tx(s,680,240,'SwiGLU 前馈子块','bt');
+  if(SP){tx(s,680,262,'4 个脉冲点：入口、g、u、输出','bs');tx(s,680,280,'g = 1 时才放行 u：锁存 AND','bs');}
+  else{tx(s,680,262,'一路过 SiLU，与另一路相乘','bs');tx(s,680,280,'W₂ 再变回 128 个数','bs');}
+  if(SP){spt(s,560,328,'q');tx(s,572,332,'入口量化器：三值，无膜电位','bs');spt(s,760,328,'t');tx(s,772,332,'三值 LIF','bs');spt(s,850,328,'b');tx(s,862,332,'二值 LIF','bs');}
+  else{tx(s,590,332,'所有连线上都是实数','bs');}
+}
+F.blockFloat=function(h){block(h,false);};
+F.blockSpike=function(h){block(h,true);};
+F.lif=function(h){
+  const s=mk(h,760,326,640);
+  const I=[0.4,0.5,0.3,0.6,0.1,0.2,0.7,0.5,0.0,0.3],th=1,lk=0.9;const pre=[],post=[],fire=[];let U=0;
+  I.forEach(function(v){U=lk*U+v;pre.push(U);const f=U>=th;fire.push(f);if(f)U-=th;post.push(U);});
+  const X=function(t){return 150+t*58;},Yu=function(v){return 208-v/1.6*140;},Yi=function(v){return 292-v/0.8*54;};
+  tx(s,120,40,'输出脉冲','bs','end');line(s,128,44,X(9)+20,44,'grid');
+  tx(s,120,140,'膜电位 U','bs','end');tx(s,120,272,'输入电流 I','bs','end');
+  line(s,128,Yu(0),X(9)+20,Yu(0),'axis');el('line',{x1:128,y1:Yu(th),x2:X(9)+20,y2:Yu(th),class:'thr'},s);tx(s,X(9)+26,Yu(th)+4,'阈值 θ','sm');
+  let d='M'+(X(0)-24)+' '+Yu(0)+' L'+X(0)+' '+Yu(pre[0]);
+  for(let t=0;t<9;t++){d+=' M'+X(t)+' '+Yu(post[t])+' L'+(X(t+1)-12)+' '+Yu(lk*post[t])+' L'+X(t+1)+' '+Yu(pre[t+1]);}
+  el('path',{d:d,class:'ulin'},s);
+  for(let t=0;t<10;t++){
+    if(fire[t]){line(s,X(t),Yu(pre[t]),X(t),Yu(post[t]),'drop');el('circle',{cx:X(t),cy:Yu(post[t]),r:3.5,class:'uhole'},s);line(s,X(t),26,X(t),44,'spk');}
+    el('circle',{cx:X(t),cy:Yu(pre[t]),r:4,class:'udot'},s);
+    el('path',{d:cpath(X(t)-10,Yi(0),20,Yi(0)-Yi(I[t]),3),class:'ibar'},s);
+    tx(s,X(t),312,String(t+1),'tick','middle');
+  }
+  line(s,128,Yi(0),X(9)+20,Yi(0),'axis');tx(s,120,316,'token 序号','sm','end');
+  tx(s,X(2)+10,Yu(pre[2])-8,'超过阈值：发脉冲，U 减去 θ','sm');
+  tx(s,X(4)-6,Yu(0.42),'每步先衰减到 0.9 倍：leak = 0.9','sm','middle');
+};
+F.ternary=function(h){
+  const s=mk(h,760,160,600);const X=function(u){return 410+u*145;};
+  function row(y,label,bands){tx(s,110,y+16,label,'bt','end');bands.forEach(function(b){el('rect',{x:X(b[0]),y:y,width:X(b[1])-X(b[0]),height:24,rx:4,class:b[2]},s);tx(s,(X(b[0])+X(b[1]))/2,y+16,b[3],'bs','middle');});}
+  row(24,'二值神经元',[[-2,1,'band0','输出 0'],[1,2,'bandp','输出 1']]);
+  row(76,'三值神经元',[[-2,-1,'bandn','输出 −1'],[-1,1,'band0','输出 0'],[1,2,'bandp','输出 +1']]);
+  line(s,X(-2),118,X(2),118,'axis');
+  [[-1,'−θ'],[0,'0'],[1,'+θ']].forEach(function(t){line(s,X(t[0]),114,X(t[0]),122,'axis');tx(s,X(t[0]),138,t[1],'vl','middle');});
+  tx(s,X(2),154,'膜电位 U','sm','end');
+};
+F.tsteps=function(h){
+  const s=mk(h,820,248,660);
+  tx(s,20,26,'嵌套模式 T = 4','bt');tx(s,142,26,'本项目不用','sm');
+  tx(s,20,62,'每个 token 内','bs');tx(s,20,80,'跑 4 小步','bs');
+  const pat=[[1,1,0,1],[0,1,0,0],[1,1,1,1]],avg=['0.75','0.25','1.0'];
+  for(let i=0;i<3;i++){const x=150+i*210;el('rect',{x:x,y:44,width:190,height:40,rx:6,class:'box'},s);
+    for(let j=0;j<4;j++){if(j)line(s,x+j*47.5,44,x+j*47.5,84,'grid');if(pat[i][j])line(s,x+j*47.5+23.75,52,x+j*47.5+23.75,76,'spk');}
+    tx(s,x+95,102,'token '+(i+1)+'：取平均 = '+avg[i],'sm','middle');}
+  tx(s,20,142,'折叠模式 T = 1','bt');tx(s,142,142,'本项目用','sm');
+  tx(s,20,178,'每个 token','bs');tx(s,20,196,'只算 1 步','bs');
+  const sp=[1,0,1];
+  for(let i=0;i<3;i++){const x=150+i*210;el('rect',{x:x,y:160,width:190,height:40,rx:6,class:'box'},s);if(sp[i])line(s,x+95,168,x+95,192,'spk');tx(s,x+95,240,'token '+(i+1)+'：发或不发，只有一次机会','sm','middle');}
+  el('path',{d:'M150 212 C 230 204, 300 222, 360 212 S 500 204, 570 214 S 720 206, 760 212',class:'ulin'},s);
+  tx(s,20,216,'蓝线：膜电位','sm');tx(s,20,232,'跨 token 带过去','sm');
+};
+F.xbar=function(h){
+  const s=mk(h,820,318,700);
+  const wy=[70,120,170],bx=[260,410];const inp=[['+1','+V'],['0','0'],['−1','−V']];
+  wy.forEach(function(y,i){tx(s,20,y+4,'输入 '+inp[i][0],'bs');tx(s,120,y+4,inp[i][1],'vl','end');line(s,134,y,500,y,'wl');});
+  tx(s,134,40,'字线：输入线，脉冲变成电压','sm');tx(s,418,40,'位线：同一列电流在这里汇合','sm');
+  bx.forEach(function(x,j){line(s,x,48,x,216,'bl');wy.forEach(function(y,i){el('rect',{x:x-15,y:y-8,width:30,height:16,rx:4,class:'mem'},s);tx(s,x+20,y-11,'G'+(i+1)+(j+1),'vl');});
+    arr(s,[[x,216],[x,234]]);el('circle',{cx:x,cy:250,r:16,class:'node'},s);tx(s,x,254,'LIF','sm','middle');tx(s,x+24,232,'I'+(j+1)+' = Σ G·V','vl');
+    arr(s,[[x,266],[x,292]],'ar-spk');line(s,x+12,280,x+12,300,'spk');});
+  tx(s,335,306,'输出脉冲','sm','middle');
+  const nx=548;[['电导 G 就是权重','多级可编程；正负用一对器件'],['字线电压就是输入','来自上一层的脉冲'],['电压 × 电导 = 电流','同一列的电流自动相加'],['神经元积分电流','过阈值就发新的脉冲']].forEach(function(l,i){const y=70+i*52;el('circle',{cx:nx,cy:y-4,r:4,class:'udot'},s);tx(s,nx+14,y,l[0],'bt');tx(s,nx+14,y+18,l[1],'bs');});
+};
+F.calib=function(h){
+  const s=mk(h,760,222,640);
+  function pane(x0,title,th,tail,midp){
+    tx(s,x0+360,216,'输入电流','sm','end');
+    tx(s,x0+10,22,title[0],'bt');tx(s,x0+10,40,title[1],'bs');
+    const X=function(z){return x0+30+(z+3)/6*300;},Y=function(v){return 176-v/0.4*110;};
+    const pdf=function(z){return Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);};
+    function area(a,b,cls){let d='M'+X(a)+' '+Y(0);for(let z=a;z<=b+1e-9;z+=0.05)d+=' L'+X(z).toFixed(1)+' '+Y(pdf(z)).toFixed(1);d+=' L'+X(b)+' '+Y(0)+' Z';el('path',{d:d,class:cls},s);}
+    area(-3,-th,'tailn');area(-th,th,'mid');area(th,3,'tailp');
+    let d='';for(let z=-3;z<=3.001;z+=0.05)d+=(d?' L':'M')+X(z).toFixed(1)+' '+Y(pdf(z)).toFixed(1);el('path',{d:d,class:'curve'},s);
+    line(s,X(-3),Y(0),X(3),Y(0),'axis');
+    [[-th,'−θ'],[th,'+θ']].forEach(function(t){line(s,X(t[0]),Y(0),X(t[0]),Y(0.42),'thr');tx(s,X(t[0]),198,t[1],'vl','middle');});
+    tx(s,X(-3),96,tail+' 发 −1','sm','start');tx(s,X(3),96,tail+' 发 +1','sm','end');tx(s,X(0),Y(0.1),midp+' 不发','sm','middle');
+  }
+  pane(0,['计划：75 分位','约 25% 的 token 发放'],1.150,'12.5%','75%');
+  pane(380,['采用：50 分位','约 50% 的 token 发放'],0.674,'25%','50%');
+  line(s,375,10,375,206,'grid');
+};
+F.surrogate=function(h){
+  const s=mk(h,760,200,620);
+  function axes(x0,title,sub){tx(s,x0+10,22,title,'bt');tx(s,x0+10,40,sub,'bs');line(s,x0+30,170,x0+340,170,'axis');line(s,x0+185,164,x0+185,176,'axis');tx(s,x0+185,190,'θ','vl','middle');tx(s,x0+340,190,'膜电位 U','sm','end');}
+  axes(0,'前向：台阶','越过阈值输出 1，否则 0');
+  el('path',{d:'M30 160 H185 V70 H340',class:'ulin'},s);tx(s,40,154,'0','vl');tx(s,330,62,'1','vl','end');
+  axes(380,'反向：平滑的鼓包','用它代替台阶的导数');
+  let d='';for(let u=-2;u<=2.001;u+=0.04){const g=1/(1+Math.pow(Math.PI*u,2));d+=(d?' L':'M')+(380+185+u*75).toFixed(1)+' '+(170-g*100).toFixed(1);}
+  el('path',{d:d,class:'ulin',style:'stroke:var(--spike)'},s);tx(s,380+200,78,'离阈值越近，梯度越大','sm');
+  line(s,375,10,375,196,'grid');
+};
+
+/* ---------- charts ---------- */
+const A0=[[100,32.5,0],[200,39.2,0],[300,47.4,0],[400,57.5,0],[500,65.8,1],[600,70.5,2],[700,73.7,3],[800,76.1,3],[900,77.0,2],[1000,78.9,4],[1100,78.9,3],[1200,80.2,5],[1300,80.0,4],[1400,80.5,4],[1500,81.2,4],[1600,81.3,4],[1700,82.1,4],[1800,81.9,4],[1900,82.0,4],[2000,82.6,4],[2100,82.6,3],[2200,83.1,4],[2300,83.4,4],[2400,83.6,5],[2500,83.8,5],[2600,84.0,5],[2700,84.1,5],[2800,84.1,5],[2900,84.3,5],[3000,84.3,5],[3100,84.2,5],[3200,84.2,5],[3300,84.2,5]];
+const A1D=[[100,31.8],[200,34.7],[300,37.1],[400,38.6],[500,40.4],[600,41.8],[700,43.3],[800,44.1],[900,45.2],[1000,46.3],[1100,47.3],[1200,47.9],[1300,49.0],[1400,49.3],[1500,50.1],[1600,50.6],[1700,50.9],[1800,51.3],[1900,51.1],[2000,51.1]];
+const A16=[[200,35.3],[400,38.6],[600,41.6],[800,43.9],[1000,45.7],[1200,47.9],[1400,49.3],[1600,50.9],[1800,52.2],[2000,53.4],[2200,54.6],[2400,55.3],[2600,56.3],[2800,57.2],[3000,57.9],[3200,59.2],[3400,60.1],[3600,60.9],[3800,61.1],[4000,62.1],[4200,62.5],[4400,63.3],[4600,63.6],[4800,63.9],[5000,64.1],[5200,64.8],[5400,65.1],[5600,65.2],[5800,65.4],[6000,65.9]];
+const A112=[[400,39.6],[800,45.2],[1200,49.1],[1600,52.0],[2000,54.4],[2400,56.1],[2800,57.9],[3200,59.0],[3600,60.5],[4000,61.6],[4400,62.6],[4800,63.7],[5200,64.4],[5600,65.6],[6000,66.4],[6400,67.2],[6800,68.0],[7200,68.6],[7600,69.1],[8000,69.8],[8400,70.6],[8800,70.9],[9200,71.3],[9600,71.6],[10000,72.1],[10400,72.2],[10800,72.6],[11200,73.3],[11600,73.5],[12000,74.0]];
+const CD=[[0,10.0],[100,26.6],[200,30.9],[300,33.5],[400,34.9],[500,36.1],[600,37.3],[700,38.4],[800,38.9],[900,39.4],[1000,40.1],[1100,40.1],[1200,40.6],[1300,40.8],[1400,40.7],[1500,40.7]];
+const C12=[[0,22.6],[400,43.2],[800,47.9],[1200,51.6],[1600,54.2],[2000,56.3],[2400,57.4],[2800,58.7],[3200,60.2],[3600,61.6],[4000,62.6],[4400,63.8],[4800,64.6],[5200,66.1],[5600,66.9],[6000,67.7],[6400,68.4],[6800,69.4],[7200,70.2],[7600,70.2],[8000,71.6],[8400,71.9],[8800,72.6],[9200,73.1],[9600,73.8],[10000,74.0],[10400,73.9],[10800,74.6],[11200,74.5],[11600,74.9],[12000,75.2]];
+const step=function(v){return '第 '+v+' 步';};
+const K=function(v){return v===0?'0':(v/1000)+'k';};
+const C={};
+C.a0=function(h){lineChart(h,{x:[0,3400],y:[20,90],xTicks:[0,1000,2000,3000],yTicks:[20,40,60,80],xFmt:K,yFmt:function(v){return v+'%';},unit:'%',mr:34,yTitle:'token 准确率',xTitle:'训练步数',tipX:step,
+  series:[{name:'A0 浮点模型',c:'--accent',data:A0.map(function(d){return [d[0],d[1]];}),extra:A0.map(function(d){return d[2]+'/5 道题全对';})}],
+  ann:[{x:500,y:65.8,t:'第 500 步：答对 1 道',dx:12,dy:20},{x:1200,y:80.2,t:'第 1200 步：第一次 5 道全对',dx:12,dy:24},{x:3300,y:84.2,t:'第 3300 步停下：84.2%',dx:-10,dy:-12,anchor:'end'}],
+  table:{head:['步数','准确率','全对题数'],rows:A0.filter(function(d,i){return i%4===0||i===A0.length-1;}).map(function(d){return [d[0],d[1].toFixed(1)+'%',d[2]+'/5'];})}});};
+C.leak=function(h){const L=[[0,51.1,53.6],[0.1,49.1,53.6],[0.3,39.0,53.8],[0.5,26.7,54.8],[0.7,16.1,56.5],[0.8,12.6,57.7],[0.9,10.0,58.9]];
+  lineChart(h,{x:[0,0.9],y:[0,60],xTicks:[0,0.1,0.3,0.5,0.7,0.9],yTicks:[0,20,40,60],yFmt:function(v){return v+'%';},unit:'%',mr:40,yTitle:'token 准确率',xTitle:'leak：膜电位每步保留的比例',tipX:function(v){return 'leak = '+v;},
+  series:[{name:'默认配置的 A1',c:'--spike',data:L.map(function(d){return [d[0],d[1]];}),extra:L.map(function(d){return '平均发放率 '+d[2]+'%';})}],
+  ann:[{x:0,y:51.1,t:'leak 0：51.1%，发放率 53.6%',dx:12,dy:-8},{x:0.9,y:10.0,t:'leak 0.9：10.0%，发放率 58.9%',dx:-10,dy:22,anchor:'end'}],
+  table:{head:['leak','准确率','平均发放率'],rows:L.map(function(d){return [d[0],d[1].toFixed(1)+'%',d[2].toFixed(1)+'%'];})}});};
+C.a1=function(h){lineChart(h,{x:[0,12000],y:[30,90],xTicks:[0,2000,4000,6000,8000,10000,12000],yTicks:[30,40,50,60,70,80,90],xFmt:K,yFmt:function(v){return v+'%';},unit:'%',mr:96,yTitle:'token 准确率',xTitle:'训练步数',tipX:step,
+  refs:[{y:84.2,label:'A0 84.2%'}],
+  series:[{name:'默认 2000 步',c:'--de',data:A1D,label:'51.1%',ldx:0,ldy:20,lanchor:'middle'},{name:'6000 步',c:'--spike',data:A16,label:'65.9%',ldx:0,ldy:22,lanchor:'middle'},{name:'12000 步，50 分位',c:'--accent',data:A112,label:'74.0%'}],
+  table:{head:['配置','最终准确率','步数'],rows:[['默认，75 分位','51.1%',2000],['75 分位','65.9%',6000],['50 分位','74.0%',12000]]}});};
+C.c=function(h){lineChart(h,{x:[0,12000],y:[0,90],xTicks:[0,2000,4000,6000,8000,10000,12000],yTicks:[0,20,40,60,80],xFmt:K,yFmt:function(v){return v+'%';},unit:'%',mr:96,yTitle:'token 准确率',xTitle:'训练步数',tipX:function(v){return v===0?'第 0 步：训练起点':'第 '+v+' 步';},
+  refs:[{y:74.0,label:'它的 A1：74.0%',left:true}],
+  series:[{name:'默认',c:'--de',data:CD,label:'40.7%',ldx:0,ldy:22,lanchor:'middle'},{name:'改进',c:'--accent',data:C12,label:'75.2%',ldy:14}],
+  table:{head:['配置','训练起点','最终准确率'],rows:[['默认：1500 步，学习率 1e-3','10.0%','40.7%'],['改进：12000 步，学习率 3e-3，LIF 阈值 ×2.25','22.6%','75.2%']]}});};
+C.stages=function(h){columns(h,{cats:[['A0','浮点'],['A1','脉冲'],['B','未训练'],['C','再微调'],['电路','无误差'],['电路','有误差']],
+  series:[{name:'默认配置',c:'--de',vals:[84.2,51.1,10.0,40.7,40.7,38.6]},{name:'改进后',c:'--accent',vals:[84.2,74.0,12.6,75.2,75.2,63.4],label:true}],
+  notes:['两边是同一个浮点模型','改进：12000 步，50 分位','改进后调高 LIF 阈值再开始训练，起点升到 22.6%','改进：12000 步，学习率 3e-3','理想电路，和 C 逐脉冲一致','16 级电导，加上假设的器件误差']});};
+C.gains=function(h){const R=[
+  ['A1 训练更久：2000 → 6000 步',14.5,'51.4% → 65.9%，都用种子 0、75 分位'],
+  ['C 学习率加大：1e-3 → 3e-3',12.1,'51.6% → 63.7%，同一个 A1 起点，4000 步'],
+  ['C 训练更久：6000 → 12000 步',7.0,'68.2% → 75.2%'],
+  ['A1 训练更久：6000 → 12000 步',6.3,'67.7% → 74.0%，50 分位'],
+  ['C 前调高 LIF 阈值：×2.5',2.6,'63.7% → 66.3%；学习率 1e-3 时是 +3.3。最终用 ×2.25，差别在误差内'],
+  ['A1 学习率加大并预热',2.1,'峰值 5e-3、前 300 步逐渐升高：67.7% → 69.8%；到 12000 步时只剩 +0.6'],
+  ['阈值改用 50 分位',1.8,'65.9% → 67.7%']];
+  hbar(h,{rows:R.map(function(r){return {label:r[0],v:r[1],tip:'+'+r[1]+' 个百分点：'+r[2]};}),max:16,ticks:[0,5,10,15],ml:230,fmt:function(v){return '+'+v.toFixed(1);},xTitle:'准确率提升，百分点',
+    table:{head:['改动','提升','前后'],rows:R.map(function(r){return [r[0],'+'+r[1].toFixed(1),r[2]];})}});};
+C.fire=function(h){const R=[['计划设想：75 分位，刚转换',23.4],['采用：50 分位，刚转换',45.7],['默认配置的 A1，训练后',54.5],['采用配置的 A1，训练后',61.7],['采用配置的 C，训练后',53.2]];
+  hbar(h,{rows:R.map(function(r,i){return {label:r[0],v:r[1],c:i===0?'--de':'--accent',tip:'21 个脉冲点和 2 个 AND 输出的平均，512 句：'+r[1]+'% 的 token 上发放'};}),max:70,ticks:[0,20,40,60],tickUnit:'%',ml:220,fmt:function(v){return v.toFixed(1)+'%';},xTitle:'平均发放率',
+    table:{head:['模型','平均发放率'],rows:R.map(function(r){return [r[0],r[1].toFixed(1)+'%'];})}});};
+C.sign=function(h){const R=[['块 1 注意力输出',2.01],['块 1 前馈输出',7.18],['块 2 注意力输出',4.18],['块 2 前馈输出',10.85]];
+  hbar(h,{rows:R.map(function(r){return {label:r[0],v:r[1],tip:'符号错误率 '+r[1].toFixed(2)+'%'+(r[1]>2?'，超过 2% 上限':'')};}),max:12,ticks:[0,2,4,6,8,10,12],tickUnit:'%',ml:150,fmt:function(v){return v.toFixed(2)+'%';},limit:{v:2,label:'上限 2%'},xTitle:'符号错误率：电路和软件的脉冲正负号不一致的比例',
+    table:{head:['输出','符号错误率'],rows:R.map(function(r){return [r[0],r[1].toFixed(2)+'%'];})}});};
+
+/* demo table */
+const DEMO=[['He put his wet and',' dirty shirt into the dryer and watched it spin.',' dirty shirt into the dryer and watched as their snack.'],
+ ["He couldn't wait any",' longer and ran to meet them.',' longer and he could see what it.'],
+ ['She ran around the whole',' park, but she could not find him anywhere.',' park, but she could not find him anywhere.'],
+ ['They showed her how to',' use a wet cloth to wipe the gum away.',' use every day.'],
+ ['They all looked at the',' gum and talked about how amazing it was.',' gum and talked about them.']];
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function common(a,b){const wa=a.split(' '),wb=b.split(' ');let i=0;while(i<wa.length&&i<wb.length&&wa[i]===wb[i])i++;return [wb.slice(0,i).join(' '),wb.slice(i).join(' ')];}
+const tb=document.querySelector('#demo tbody');
+DEMO.forEach(function(d){const ok=d[1]===d[2];const c=common(d[1],d[2]);const tr=document.createElement('tr');
+  tr.innerHTML='<td class="tok">'+esc(d[0])+'</td><td class="tok">'+esc(d[1])+'</td><td class="tok">'+(c[0]?'<span class="m-ok">'+esc(c[0])+'</span>':'')+(c[1]?' <span class="m-no">'+esc(c[1])+'</span>':'')+'</td><td>'+(ok?'<span class="pill ok">✓ 全对</span>':'<span class="pill no">✗</span>')+'</td>';tb.appendChild(tr);});
+
+document.querySelectorAll('[data-fig]').forEach(function(h){try{F[h.dataset.fig](h);}catch(e){console.error('fig',h.dataset.fig,e);}});
+document.querySelectorAll('[data-chart]').forEach(function(h){try{C[h.dataset.chart](h);}catch(e){console.error('chart',h.dataset.chart,e);}});
+})();
+</script>
