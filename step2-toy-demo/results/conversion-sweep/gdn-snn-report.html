@@ -8,6 +8,7 @@
   --rule:#dde2ea; --rule-strong:#aab3c1;
   --accent:#2a78d6; --accent-bg:#e2edfb; --spike:#eb6834; --spike-bg:#fde8df; --de:#a2aab7;
   --good:#1d8a4e; --good-bg:#dff2e6; --bad:#c43d3d; --bad-bg:#fbe4e4;
+  --ac:#1baf7a; --ac-bg:#dcf3ea; --mul:#4a3aa7; --mul-bg:#e8e5f6;
   --sans:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
@@ -18,6 +19,7 @@
     --rule:#29303b; --rule-strong:#4a5565;
     --accent:#3987e5; --accent-bg:#162840; --spike:#d95926; --spike-bg:#3a2118; --de:#5e6778;
     --good:#46b676; --good-bg:#15301f; --bad:#e66767; --bad-bg:#3b1b1b;
+    --ac:#199e70; --ac-bg:#11302a; --mul:#9085e9; --mul-bg:#25213f;
   }
 }
 :root[data-theme="dark"]{
@@ -26,6 +28,7 @@
   --rule:#29303b; --rule-strong:#4a5565;
   --accent:#3987e5; --accent-bg:#162840; --spike:#d95926; --spike-bg:#3a2118; --de:#5e6778;
   --good:#46b676; --good-bg:#15301f; --bad:#e66767; --bad-bg:#3b1b1b;
+    --ac:#199e70; --ac-bg:#11302a; --mul:#9085e9; --mul-bg:#25213f;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;padding-inline:20px;padding-block:0 72px;margin:0}
@@ -190,6 +193,9 @@ svg .chipst{fill:var(--panel);stroke:var(--muted);stroke-width:1;stroke-dasharra
 svg .conn{stroke:var(--rule-strong);stroke-width:1;stroke-dasharray:2 3}
 svg .origb{fill:var(--panel);stroke:var(--rule);stroke-width:1}
 svg .hd{font-size:14px;font-weight:700;fill:var(--ink)}
+svg .op-ac{fill:var(--ac-bg);stroke:var(--ac);stroke-width:1.2}
+svg .op-mul{fill:var(--mul-bg);stroke:var(--mul);stroke-width:1.2}
+svg .op-cmp{fill:var(--panel);stroke:var(--rule-strong);stroke-width:1.2}
 svg .hl{fill:var(--spike);font-weight:700}
 @media (max-width:520px){ body{font-size:15px} h2{font-size:23px} figure{padding:14px 12px 12px} }
 @media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
@@ -401,7 +407,7 @@ svg .hl{fill:var(--spike);font-weight:700}
   <h3>SNN 版 GDN 一层的流程细节</h3>
   <figure>
     <div class="scroll" data-fig="layerFlow" data-aria="SNN 版 GDN 一层的计算流程，一个 token 依次经过 11 步：入口三值量化；投影并经 LIF 发放得到 q、k、v，同时算门 α、β；GDN 四步递推；读出脉冲化；输出投影；残差；前馈入口量化；两路投影发放 g、u；相乘；输出投影；残差。右栏对照原始 GDN 每一步的做法"></div>
-    <figcaption>一个 token 在一层里按 ① 到 ⑪ 依次计算。橙色边框是相对原始 GDN 改动的步骤，右栏写出原始版本这一步是什么；GDN 的四步递推本身没有改，改的是喂给它的 q、k、v 和它输出之后的处理。标着 U 或 S 的步骤有状态：每个 LIF 的膜电位 U 和记忆 S 都留到下一个 token。</figcaption>
+    <figcaption>一个 token 在一层里按 ① 到 ⑪ 依次计算。每个框里的小标签说明这一步做的是哪种运算：所有 W 的权重都是实数，但输入一律是脉冲，所以矩阵乘只做加减；真正的实数乘法只出现在 ③ 的遗忘和写入里，加上 LIF 的乘常数 λ，合计不到全部运算的 2%。橙色边框是相对原始 GDN 改动的步骤，右栏写出原始版本这一步是什么。标着 U 或 S 的步骤有状态，膜电位 U 和记忆 S 都留到下一个 token。</figcaption>
   </figure>
 
   <h3>第 1 步：复制权重，标定阈值</h3>
@@ -829,7 +835,7 @@ F.convert=function(h){
   });
 };
 F.layerFlow=function(h){
-  const s=mk(h,980,1240,760);
+  const s=mk(h,980,1400,760);
   const X0=180,X1=700,CX=440;
   const CL={real:'e-real',tern:'e-tern',bin:'e-bin'},MK={real:'mI',tern:'mS',bin:'mA'};
   function P(pts){return 'M'+pts.map(function(p){return p[0]+' '+p[1];}).join(' L');}
@@ -839,92 +845,117 @@ F.layerFlow=function(h){
   function pill(xr,yc,text,k){const w=tw(text,10.5,6.4)+18;el('rect',{x:xr-w,y:yc-10,width:w,height:20,rx:10,class:'pill-'+k},s);tx(s,xr-w/2,yc+4,text,'pt mono','middle');}
   function pillC(cx,yc,text,k){const w=tw(text,10.5,6.4)+18;el('rect',{x:cx-w/2,y:yc-10,width:w,height:20,rx:10,class:'pill-'+k},s);tx(s,cx,yc+4,text,'pt mono','middle');}
   function chip(xr,y,text){const w=tw(text,10,6.2)+14;el('rect',{x:xr-w,y:y,width:w,height:16,rx:8,class:'chipst'},s);tx(s,xr-w/2,y+11.5,text,'xs','middle');}
-  function step(y,hh,title,formula,pillText,pk,changed,chipText){
-    el('rect',{x:X0,y:y,width:X1-X0,height:hh,rx:8,class:changed?'box chg':'box'},s);
-    if(formula){tx(s,X0+14,y+20,title,'bt');tx(s,X0+14,y+40,formula,'vl');}else{tx(s,X0+14,y+hh/2+5,title,'bt');}
-    if(pillText)pill(X1-12,formula?y+hh/2+4:y+hh/2,pillText,pk);
-    if(chipText)chip(X1-12,y-8,chipText);
+  function badge(x,yc,kind,text){const sym=kind==='ac'?'＋− ':(kind==='mul'?'× ':'');const t=sym+text;const w=tw(t,10.5,6.4)+16;
+    el('rect',{x:x,y:yc-9,width:w,height:18,rx:9,class:'op-'+kind},s);tx(s,x+w/2,yc+4,t,'pt','middle');return w;}
+  function step(y,hh,o){
+    el('rect',{x:X0,y:y,width:X1-X0,height:hh,rx:8,class:o.chg?'box chg':'box'},s);
+    if(o.f){tx(s,X0+14,y+20,o.title,'bt');tx(s,X0+14,y+40,o.f,'vl');if(o.op)badge(X0+14+tw(o.f,11.5,6.9)+14,y+36,o.op[0],o.op[1]);}
+    else tx(s,X0+14,y+hh/2+5,o.title,'bt');
+    if(o.pill)pill(X1-12,o.f?y+hh/2+4:y+hh/2,o.pill,o.pk);
+    if(o.chip)chip(X1-12,y-8,o.chip);
   }
   function orig(yc,lines){const hh=lines.length*16+12,y=yc-hh/2;
     el('line',{x1:X1,y1:yc,x2:728,y2:yc,class:'conn'},s);
     el('rect',{x:728,y:y,width:244,height:hh,rx:6,class:'origb'},s);
     lines.forEach(function(l,i){tx(s,738,y+18+i*16,l,'sm');});}
+
   tx(s,728,24,'原始 GDN / Qwen 块里这一步是','bs');
+  let y=16;
   // input
-  step(16,40,'输入 h：残差流，来自上一层或嵌入表','','h ∈ ℝ¹²⁸','real',false);
-  edge([[CX,56],[CX,90]],'real');
-  tx(s,X0,80,'注意力子块：GDN','hd');
-  // 1 entrance quantizer
-  step(92,52,'① 入口三值量化','x = Q(h)：|h| ≥ θ 时取 sign(h)，否则 0','x ∈ {−1,0,1}¹²⁸','tern',true);
-  orig(118,['原始：x = RMSNorm(h)','实数，不量化']);
-  // 2 projections + LIF + gates
-  seg([[CX,144],[CX,160]],'tern');seg([[241,160],[637,160]],'tern');
-  const D=[[180,'② q','I = W_q x','LIF₂ 发放','{0,1}¹²⁸','bin',true],
-           [312,'② k','I = W_k x','LIF₃ 发放，÷√32','{−1,0,1}/√32','tern',true],
-           [444,'② v','I = W_v x','LIF₃ 发放','{−1,0,1}¹²⁸','tern',true],
-           [576,'② 门 α、β','W_a x、W_b x','过 σ 得到门值','每头一个实数','real',false]];
-  D.forEach(function(d){const x=d[0],y=178,w=122;
-    edge([[x+61,160],[x+61,176]],'tern');
-    el('rect',{x:x,y:y,width:w,height:96,rx:8,class:'box chg'},s);
-    tx(s,x+12,y+20,d[1],'bt');tx(s,x+12,y+40,d[2],'vl');tx(s,x+12,y+58,d[3],'sm');
-    pillC(x+w/2,y+79,d[4],d[5]);
+  step(y,40,{title:'输入 h：残差流，来自上一层或嵌入表',pill:'h ∈ ℝ¹²⁸',pk:'real'});
+  const yIn=y+20;y+=40;
+  edge([[CX,y],[CX,y+34]],'real');tx(s,X0,y+24,'注意力子块：GDN','hd');y+=36;
+  // 1
+  step(y,52,{title:'① 入口三值量化',f:'x = Q(h)：|h| ≥ θ 时取 sign(h)，否则 0',op:['cmp','比较'],pill:'x ∈ {−1,0,1}¹²⁸',pk:'tern',chg:true});
+  orig(y+26,['原始：x = RMSNorm(h)','实数，不量化']);y+=52;
+  // 2: distributor + four boxes
+  seg([[CX,y],[CX,y+16]],'tern');seg([[241,y+16],[637,y+16]],'tern');const yd=y+16;y+=34;
+  const MH=120;
+  [[180,'② q','I = W_q x','LIF₂ 发放','{0,1}¹²⁸','bin',true],
+   [312,'② k','I = W_k x','LIF₃ 发放，÷√32','{−1,0,1}/√32','tern',true],
+   [444,'② v','I = W_v x','LIF₃ 发放','{−1,0,1}¹²⁸','tern',true],
+   [576,'② 门 α、β','W_a x、W_b x','再过 σ 非线性','每头一个实数','real',false]].forEach(function(d){const x=d[0],w=122;
+    edge([[x+61,yd],[x+61,y-2]],'tern');
+    el('rect',{x:x,y:y,width:w,height:MH,rx:8,class:'box chg'},s);
+    tx(s,x+12,y+20,d[1],'bt');tx(s,x+12,y+40,d[2],'vl');
+    badge(x+12,y+59,'ac','只加减');
+    tx(s,x+12,y+82,d[3],'sm');
+    pillC(x+w/2,y+103,d[4],d[5]);
     if(d[6])chip(x+w-6,y-8,'U');
-    edge([[x+61,274],[x+61,298]],d[5]);
+    edge([[x+61,y+MH],[x+61,y+MH+24]],d[5]);
   });
-  orig(226,['原始：q、k、v 过短卷积和 SiLU','q、k 再做 L2 归一化，都是实数；','α = exp(−e^A·softplus(·))']);
-  // 3 GDN recurrence
-  el('rect',{x:X0,y:300,width:X1-X0,height:150,rx:8,class:'box'},s);
-  tx(s,X0+14,322,'③ GDN 递推：4 个头各做一遍，每头 S 是 32×32 实数','bt');
-  [['遗忘',"S′ = α · S(t−1)"],['检索',"r = S′ᵀ k"],['写入',"S(t) = S′ + β · k (v − r)ᵀ"],['读出','o = S(t)ᵀ q']].forEach(function(r,i){const y=348+i*24;tx(s,X0+14,y,r[0],'bs');tx(s,X0+56,y,r[1],'vl');});
-  pill(X1-12,420,'o ∈ ℝ¹²⁸','real');
-  chip(600,292,'S 跨 token');
-  orig(375,['原始：四步完全相同，','只是 q、k、v 都是实数']);
-  edge([[CX,450],[CX,470]],'real');
+  orig(y+MH/2,['原始：q、k、v 过短卷积和 SiLU','q、k 再做 L2 归一化，都是实数；','α = exp(−e^A·softplus(·))']);
+  y+=MH+26;
+  // 3: GDN recurrence
+  const EH=164;
+  el('rect',{x:X0,y:y,width:X1-X0,height:EH,rx:8,class:'box'},s);
+  tx(s,X0+14,y+22,'③ GDN 递推：4 个头各做一遍，每头 S 是 32×32 实数','bt');
+  [['遗忘',"S′ = α · S(t−1)",'mul','α 乘整个 S'],['检索',"r = S′ᵀ k",'ac','选中的行相加'],
+   ['写入',"S(t) = S′ + β · k (v − r)ᵀ",'mul','乘 β，外积只加减'],['读出','o = S(t)ᵀ q','ac','选中的行相加']].forEach(function(r,i){
+    const yy=y+50+i*26;tx(s,X0+14,yy,r[0],'bs');tx(s,X0+56,yy,r[1],'vl');badge(X0+262,yy-4,r[2],r[3]);});
+  pill(X1-12,y+EH-18,'o ∈ ℝ¹²⁸','real');
+  chip(600,y-8,'S 跨 token');
+  orig(y+EH/2,['原始：四步完全相同，','只是 q、k、v 都是实数']);
+  y+=EH;
   // 4..6
-  step(472,52,'④ 读出脉冲化','ō = LIF₃(o)','ō ∈ {−1,0,1}¹²⁸','tern',true,'U 跨 token');
-  orig(498,['原始：这里是输出门','RMSNorm(o) ⊙ SiLU(W_g x)']);
-  edge([[CX,524],[CX,544]],'tern');
-  step(546,52,'⑤ 输出投影','y1 = LIF₃(W_o ō)','y1 ∈ {−1,0,1}¹²⁸','tern',true,'U 跨 token');
-  orig(572,['原始：y1 = W_o(·)，实数']);
-  edge([[CX,598],[CX,618]],'tern');
-  step(620,52,'⑥ 残差','m = h + y1：每个通道加 −1、0 或 +1','m ∈ ℝ¹²⁸','real',false);
-  orig(646,['相同；原始加的是实数']);
+  edge([[CX,y],[CX,y+20]],'real');y+=22;
+  step(y,52,{title:'④ 读出脉冲化',f:'ō = LIF₃(o)',pill:'ō ∈ {−1,0,1}¹²⁸',pk:'tern',chg:true,chip:'U 跨 token'});
+  orig(y+26,['原始：这里是输出门','RMSNorm(o) ⊙ SiLU(W_g x)']);y+=52;
+  edge([[CX,y],[CX,y+20]],'tern');y+=22;
+  step(y,52,{title:'⑤ 输出投影',f:'y1 = LIF₃(W_o ō)',op:['ac','只加减'],pill:'y1 ∈ {−1,0,1}¹²⁸',pk:'tern',chg:true,chip:'U 跨 token'});
+  orig(y+26,['原始：y1 = W_o(·)，实数乘加']);y+=52;
+  edge([[CX,y],[CX,y+20]],'tern');y+=22;
+  const yH=y;
+  step(y,52,{title:'⑥ 残差',f:'m = h + y1：每个通道加 −1、0 或 +1',op:['ac','加 ±1'],pill:'m ∈ ℝ¹²⁸',pk:'real'});
+  orig(y+26,['相同；原始加的是实数']);y+=52;
   // FFN
-  edge([[CX,672],[CX,708]],'real');
-  tx(s,X0,696,'前馈子块：SwiGLU','hd');
-  step(710,52,'⑦ 入口三值量化',"x′ = Q(m)",'x′ ∈ {−1,0,1}¹²⁸','tern',true);
-  orig(736,["原始：x′ = RMSNorm(m)"]);
-  seg([[CX,762],[CX,778]],'tern');seg([[307,778],[573,778]],'tern');
-  [[180,'⑧ 门路 g',"g = LIF₂(W_1 x′)",'g ∈ {0,1}²⁵⁶','bin'],[445,'⑧ 内容路 u',"u = LIF₃(W_3 x′)",'u ∈ {−1,0,1}²⁵⁶','tern']].forEach(function(d){const x=d[0],y=796,w=255;
-    edge([[x+127,778],[x+127,794]],'tern');
+  edge([[CX,y],[CX,y+36]],'real');tx(s,X0,y+24,'前馈子块：SwiGLU','hd');y+=38;
+  step(y,52,{title:'⑦ 入口三值量化',f:"x′ = Q(m)",op:['cmp','比较'],pill:'x′ ∈ {−1,0,1}¹²⁸',pk:'tern',chg:true});
+  orig(y+26,["原始：x′ = RMSNorm(m)"]);y+=52;
+  seg([[CX,y],[CX,y+16]],'tern');seg([[307,y+16],[573,y+16]],'tern');const yd2=y+16;y+=34;
+  [[180,'⑧ 门路 g',"g = LIF₂(W_1 x′)",'g ∈ {0,1}²⁵⁶','bin'],[445,'⑧ 内容路 u',"u = LIF₃(W_3 x′)",'u ∈ {−1,0,1}²⁵⁶','tern']].forEach(function(d){const x=d[0],w=255;
+    edge([[x+127,yd2],[x+127,y-2]],'tern');
     el('rect',{x:x,y:y,width:w,height:64,rx:8,class:'box chg'},s);
-    tx(s,x+12,y+22,d[1],'bt');tx(s,x+12,y+46,d[2],'vl');pill(x+w-10,y+42,d[3],d[4]);chip(x+w-6,y-8,'U');
-    edge([[x+127,860],[x+127,884]],d[4]);
+    tx(s,x+12,y+24,d[1],'bt');pill(x+w-10,y+20,d[3],d[4]);
+    tx(s,x+12,y+48,d[2],'vl');badge(x+12+tw(d[2],11.5,6.9)+12,y+44,'ac','只加减');
+    chip(x+w-6,y-8,'U');
+    edge([[x+127,y+64],[x+127,y+88]],d[4]);
   });
-  orig(828,["原始：SiLU(W_1 x′) 和 W_3 x′，",'都是实数']);
-  step(886,52,'⑨ 相乘','p = g ⊙ u：g = 1 时放行 u，否则为 0','p ∈ {−1,0,1}²⁵⁶','tern',true);
-  orig(912,['原始：实数逐元素相乘']);
-  edge([[CX,938],[CX,958]],'tern');
-  step(960,52,'⑩ 输出投影','y2 = LIF₃(W_2 p)','y2 ∈ {−1,0,1}¹²⁸','tern',true,'U 跨 token');
-  orig(986,['原始：y2 = W_2(·)，实数']);
-  edge([[CX,1012],[CX,1032]],'tern');
-  step(1034,52,'⑪ 残差','h_out = m + y2','h_out ∈ ℝ¹²⁸，进入下一层','real',false);
-  orig(1060,['相同；原始加的是实数']);
+  orig(y+32,["原始：SiLU(W_1 x′) 和 W_3 x′，",'都是实数乘加']);y+=90;
+  step(y,52,{title:'⑨ 相乘',f:'p = g ⊙ u：g = 1 时放行 u，否则为 0',op:['cmp','逻辑与，不用乘法'],pill:'p ∈ {−1,0,1}²⁵⁶',pk:'tern',chg:true});
+  orig(y+26,['原始：实数逐元素相乘']);y+=52;
+  edge([[CX,y],[CX,y+20]],'tern');y+=22;
+  step(y,52,{title:'⑩ 输出投影',f:'y2 = LIF₃(W_2 p)',op:['ac','只加减'],pill:'y2 ∈ {−1,0,1}¹²⁸',pk:'tern',chg:true,chip:'U 跨 token'});
+  orig(y+26,['原始：y2 = W_2(·)，实数乘加']);y+=52;
+  edge([[CX,y],[CX,y+20]],'tern');y+=22;
+  const yM=y;
+  step(y,52,{title:'⑪ 残差',f:'h_out = m + y2',op:['ac','加 ±1'],pill:'h_out ∈ ℝ¹²⁸，进入下一层',pk:'real'});
+  orig(y+26,['相同；原始加的是实数']);y+=52;
   // residual bypass lines
-  edge([[X0,36],[150,36],[150,646],[X0-2,646]],'real');
-  tx(s,140,330,'h 原样','sm','end');tx(s,140,346,'带到 ⑥','sm','end');
-  edge([[X0,660],[150,660],[150,1060],[X0-2,1060]],'real');
-  tx(s,140,860,'m 原样','sm','end');tx(s,140,876,'带到 ⑪','sm','end');
-  // LIF inset
-  el('rect',{x:X0,y:1108,width:792,height:84,rx:8,class:'origb'},s);
-  tx(s,X0+14,1130,'LIF₂ / LIF₃：带膜电位的脉冲神经元，每个通道一个 U，每个 token 依次做三件事','bt');
-  tx(s,X0+14,1154,'积分  U ← λ·U + I','vl');tx(s,X0+170,1154,'发放  s = 1[U ≥ θ]（LIF₂）或 1[U ≥ θ] − 1[U ≤ −θ]（LIF₃）','vl');tx(s,X0+580,1154,'复位  U ← U − θ·s','vl');
-  tx(s,X0+14,1178,'λ = 0.9，U 留到下一个 token。Q 是没有膜电位的三值量化：|输入| ≥ θ 取符号，否则为 0。','sm');
-  // legend
-  let lx=X0;const ly=1220;
-  [['real','实数'],['tern','三值脉冲'],['bin','二值脉冲']].forEach(function(r){seg([[lx,ly-4],[lx+28,ly-4]],r[0]);tx(s,lx+36,ly,r[1],'bs');lx+=110;});
-  el('rect',{x:lx,y:ly-14,width:28,height:16,rx:4,class:'box chg'},s);tx(s,lx+36,ly,'相对原始 GDN 改动的步骤','bs');lx+=210;
-  chip(lx+24,ly-13,'U');tx(s,lx+32,ly,'状态留到下一个 token','bs');
+  edge([[X0,yIn],[150,yIn],[150,yH+26],[X0-2,yH+26]],'real');
+  tx(s,140,(yIn+yH)/2,'h 原样','sm','end');tx(s,140,(yIn+yH)/2+16,'带到 ⑥','sm','end');
+  edge([[X0,yH+40],[150,yH+40],[150,yM+26],[X0-2,yM+26]],'real');
+  tx(s,140,(yH+yM)/2,'m 原样','sm','end');tx(s,140,(yH+yM)/2+16,'带到 ⑪','sm','end');
+  // explanation inset
+  y+=22;
+  el('rect',{x:X0,y:y,width:792,height:142,rx:8,class:'origb'},s);
+  tx(s,X0+14,y+24,'矩阵乘：W 都是实数权重，输入一律是脉冲，所以 W·x 只是把 x = +1 的列加上、x = −1 的列减去，x = 0 的列跳过','bt');
+  tx(s,X0+14,y+46,'软件里按普通 float32 矩阵乘执行，GPU 照样算零；电路里由忆阻器阵列完成：电导就是权重，同一列的电流自动相加。','sm');
+  tx(s,X0+14,y+76,'LIF₂ / LIF₃：每个通道一个膜电位 U，每个 token 依次做三件事','bt');
+  tx(s,X0+14,y+100,'积分  U ← λ·U + I','vl');tx(s,X0+170,y+100,'发放  s = 1[U ≥ θ]（LIF₂）或 1[U ≥ θ] − 1[U ≤ −θ]（LIF₃）','vl');tx(s,X0+580,y+100,'复位  U ← U − θ·s','vl');
+  tx(s,X0+14,y+124,'λ = 0.9 是乘常数；U 留到下一个 token。Q 是没有膜电位的三值量化：|输入| ≥ θ 取符号，否则为 0。','sm');
+  y+=142;
+  // legend, two rows
+  y+=28;let lx=X0;
+  [['real','实数'],['tern','三值脉冲'],['bin','二值脉冲']].forEach(function(r){seg([[lx,y-4],[lx+28,y-4]],r[0]);tx(s,lx+36,y,r[1],'bs');lx+=110;});
+  el('rect',{x:lx,y:y-14,width:28,height:16,rx:4,class:'box chg'},s);tx(s,lx+36,y,'相对原始 GDN 改动的步骤','bs');lx+=210;
+  chip(lx+24,y-13,'U');tx(s,lx+32,y,'状态留到下一个 token','bs');
+  y+=30;lx=X0;
+  lx+=badge(lx,y-4,'ac','只加减')+8;tx(s,lx,y,'实数权重 × 脉冲，零输入跳过','bs');lx+=200;
+  lx+=badge(lx,y-4,'mul','实数乘法')+8;tx(s,lx,y,'只在 ③ 的遗忘和写入里','bs');lx+=170;
+  lx+=badge(lx,y-4,'cmp','比较 / 逻辑')+8;tx(s,lx,y,'入口量化和 AND','bs');
+  y+=16;
+  s.setAttribute('viewBox','0 0 980 '+y);
 };
 F.blockFloat=function(h){block(h,false);};
 F.blockSpike=function(h){block(h,true);};
