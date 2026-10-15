@@ -13,6 +13,9 @@
     --gate-refit    只重拟合门的线性层 Wa/Wb
     --leak-anneal N C 阶段:leak 从 0 线性升到 cfg.leak,用 N 步
     --recalib Q     C 阶段训练前在 leak=cfg.leak 下按分位数 Q 重新标定阈值
+    --levels T      每 token 最多 T 个脉冲(experiments/multilevel.py;T=1 即原模型);--level-points 选择脉冲点
+    --d/--dk/--dv/--d-ff/--heads  模型尺寸(加宽实验);a0 子命令按这些尺寸训练浮点模型
+    c 阶段未给 --levels 与尺寸时,从 --init 同目录的 result.json 继承
 不改动 toy_demo 包本身;所有结果写到 --out/<name>/。
 """
 import argparse
@@ -34,7 +37,12 @@ from toy_demo.config import ToyConfig                                   # noqa: 
 from toy_demo.convert import _block_points, _set_thr, calibrate_thresholds, set_leak, transfer_weights  # noqa: E402
 from toy_demo.data import all_sequences, batches, decode, load_slice, select_demo, split_inputs_targets  # noqa: E402
 from toy_demo.model import FloatLM, SpikingLM                            # noqa: E402
-from toy_demo.train import _should_stop, evaluate                         # noqa: E402
+from toy_demo.train import _should_stop, evaluate, teacher_forced_metrics  # noqa: E402
+
+sys.path.insert(0, str(STEP2 / "experiments"))
+from multilevel import apply_levels, spike_counts                       # noqa: E402
+
+SIZE_KEYS = (("d", "d"), ("dk", "dk"), ("dv", "dv"), ("d_ff", "d_ff"), ("heads", "n_heads"))
 
 
 # ----------------------------------------------------------------------------- 环境
@@ -57,11 +65,13 @@ def load_a0(cfg, sl, dev, path="results/ckpt/a0.pt"):
     return m.eval()
 
 
-def build_a1(a0, cfg, sl, tokens, dev, fq, seed=0, leak=0.0, refit=False, gate_refit=False, fq_kinds=None):
+def build_a1(a0, cfg, sl, tokens, dev, fq, seed=0, leak=0.0, refit=False, gate_refit=False, fq_kinds=None,
+             levels=1, level_points="all"):
     """A0 -> A1:权重转移 + (可选)最小二乘重拟合 + 阈值标定。返回 (模型, 阈值字典)。
     fq_kinds:{脉冲点名: 分位数},未列出的点用 fq(诊断表明 Q_in、k、输出头需要更低的分位数)。"""
     torch.manual_seed(seed)
     m = SpikingLM(cfg, sl.vocab_size, leak=leak).to(dev)
+    apply_levels(m, levels, level_points)
     transfer_weights(a0, m)
     calib = tokens[:cfg.calib_sentences].to(dev)
     if fq_kinds:
@@ -347,6 +357,26 @@ def model_stats(model, tokens, dev, is_float=False):
 
 # ----------------------------------------------------------------------------- 命令
 
+def size_overrides(args):
+    """--d/--dk/--dv/--d-ff/--heads 中给出的项 -> ToyConfig 覆盖。"""
+    return {key: getattr(args, a) for a, key in SIZE_KEYS if getattr(args, a, None) is not None}
+
+
+def inherit_from_init(args):
+    """c/bscan:--levels、--level-points、尺寸与 --a0 未给出时,从 --init 同目录的 result.json 继承;都没有时用默认值。"""
+    src = Path(args.init).parent / "result.json"
+    prev = json.loads(src.read_text(encoding="utf-8")).get("args", {}) if src.exists() else {}
+    if args.levels is None:
+        args.levels = int(prev.get("levels") or 1)
+    if args.level_points is None:
+        args.level_points = prev.get("level_points") or "all"
+    for a, _ in SIZE_KEYS:
+        if getattr(args, a) is None and prev.get(a) is not None:
+            setattr(args, a, prev[a])
+    if args.a0 == "results/ckpt/a0.pt" and prev.get("a0"):
+        args.a0 = prev["a0"]
+
+
 def _save(out_dir, model, result, args, extra=None):
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -359,35 +389,62 @@ def _save(out_dir, model, result, args, extra=None):
           f"stopped {result.get('stopped')} ({result.get('seconds', '?')} s)")
 
 
+def cmd_a0(args):
+    """按 --d 等尺寸从零训练浮点 A0(计划第 5 节:Adam、余弦、裁剪 1.0、5 句全对且平台即停)。"""
+    torch.set_num_threads(1)
+    dev = get_device()
+    cfg, sl, demo, tokens = load_env(**size_overrides(args))
+    torch.manual_seed(args.seed)
+    m = FloatLM(cfg, sl.vocab_size).to(dev)
+    n_params = sum(p.numel() for p in m.parameters())
+    print(f"[a0:{args.name}] params {n_params} cfg d={cfg.d} heads={cfg.n_heads} dk={cfg.dk} dv={cfg.dv} d_ff={cfg.d_ff}")
+    out_dir = Path(args.out) / args.name
+    out_dir.mkdir(parents=True, exist_ok=True)
+    t0 = time.time()
+    res = train(m, sl, demo, cfg, tokens, lr=args.lr, steps=args.steps, seed=args.seed, schedule=args.schedule,
+                warmup=args.warmup, eval_every=args.eval_every, stop=not args.no_stop, hist_path=out_dir / "history.jsonl")
+    res["seconds"] = round(time.time() - t0, 1)
+    _save(out_dir, m, res, args, dict(n_params=n_params, config=cfg.as_dict()))
+
+
 def cmd_a1(args):
     torch.set_num_threads(1)
     dev = get_device()
-    cfg, sl, demo, tokens = load_env(fire_quantile=args.fq)
+    cfg, sl, demo, tokens = load_env(fire_quantile=args.fq, **size_overrides(args))
     a0 = load_a0(cfg, sl, dev, args.a0)
     t0 = time.time()
     m, thr = build_a1(a0, cfg, sl, tokens, dev, args.fq, seed=args.seed, refit=args.refit, gate_refit=args.gate_refit,
-                      fq_kinds=parse_fq_kinds(args.fq_kinds))
+                      fq_kinds=parse_fq_kinds(args.fq_kinds), levels=args.levels, level_points=args.level_points)
     init = evaluate(m, sl, demo, cfg, tokens)
-    print(f"[a1_init:{args.name}] acc {init['token_acc']:.4f} ppl {init['ppl']:.3f} exact {init['n_exact']}/{init['n_demo']}")
+    print(f"[a1_init:{args.name}] levels {args.levels} ({args.level_points}) acc {init['token_acc']:.4f} ppl {init['ppl']:.3f} "
+          f"exact {init['n_exact']}/{init['n_demo']}")
     out_dir = Path(args.out) / args.name
     out_dir.mkdir(parents=True, exist_ok=True)
     res = train(m, sl, demo, cfg, tokens, lr=args.lr, steps=args.steps, seed=args.seed, schedule=args.schedule,
                 warmup=args.warmup, kd=a0 if args.kd > 0 else None, kd_w=args.kd, kd_T=args.kd_T,
                 eval_every=args.eval_every, stop=not args.no_stop, hist_path=out_dir / "history.jsonl")
     res["seconds"] = round(time.time() - t0, 1)
-    _save(out_dir, m, res, args, dict(init=init, thresholds=thr))
+    _save(out_dir, m, res, args, dict(init=init, thresholds=thr, spikes=spike_counts(m, tokens[:512], dev)))
+
+
+def make_spiking(cfg, sl, dev, args, leak):
+    m = SpikingLM(cfg, sl.vocab_size, leak=leak).to(dev)
+    apply_levels(m, args.levels, args.level_points)
+    return m
 
 
 def cmd_c(args):
     torch.set_num_threads(1)
+    inherit_from_init(args)
     dev = get_device()
-    cfg, sl, demo, tokens = load_env(fire_quantile=args.fq)
-    a0 = load_a0(cfg, sl, dev, args.a0)
+    cfg, sl, demo, tokens = load_env(fire_quantile=args.fq, **size_overrides(args))
+    a0 = load_a0(cfg, sl, dev, args.a0) if args.kd > 0 else None
     t0 = time.time()
-    m = SpikingLM(cfg, sl.vocab_size, leak=cfg.leak).to(dev)
+    m = make_spiking(cfg, sl, dev, args, cfg.leak)
     m.load_state_dict(torch.load(args.init, map_location=dev))
     b = evaluate(m, sl, demo, cfg, tokens)
-    print(f"[b:{args.name}] acc {b['token_acc']:.4f} ppl {b['ppl']:.3f} exact {b['n_exact']}/{b['n_demo']}")
+    print(f"[b:{args.name}] levels {args.levels} ({args.level_points}) acc {b['token_acc']:.4f} ppl {b['ppl']:.3f} "
+          f"exact {b['n_exact']}/{b['n_demo']}")
     extra = dict(b=b)
     if args.recalib is not None:
         extra["thresholds_recalib"] = calibrate_thresholds(m, tokens[:cfg.calib_sentences].to(dev), args.recalib)
@@ -412,22 +469,63 @@ def cmd_c(args):
     set_leak(m, cfg.leak)
     res["final"] = evaluate(m, sl, demo, cfg, tokens)      # 以 leak=cfg.leak 的最终评估为准
     res["seconds"] = round(time.time() - t0, 1)
+    extra["spikes"] = spike_counts(m, tokens[:512], dev)
     _save(out_dir, m, res, args, extra)
+
+
+def cmd_iscan(args):
+    """A1 初始化扫描:对 --fq-list 里的每个分位数做权重转移 + 标定,只算切片 teacher forcing 准确率与困惑度。"""
+    dev = get_device()
+    cfg, sl, demo, tokens = load_env(**size_overrides(args))
+    a0 = load_a0(cfg, sl, dev, args.a0)
+    rows = []
+    for fq in [float(x) for x in args.fq_list.split(",")]:
+        m, _ = build_a1(a0, cfg, sl, tokens, dev, fq, levels=args.levels, level_points=args.level_points)
+        r = teacher_forced_metrics(m, tokens)
+        rows.append(dict(fq=fq, token_acc=round(r["token_acc"], 4), ppl=round(r["ppl"], 3),
+                         spikes=spike_counts(m, tokens[:256], dev)["mean_spikes_per_neuron_token"]))
+        print(json.dumps(rows[-1]), flush=True)
+    out = dict(levels=args.levels, level_points=args.level_points, sizes=size_overrides(args), a0=args.a0, rows=rows)
+    if args.save:
+        Path(args.save).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.save).write_text(json.dumps(out, indent=1), encoding="utf-8")
+
+
+def cmd_bscan(args):
+    """B 起点扫描:装载 A1 检查点、leak 设为 cfg.leak,对 --scale-list 里的每个倍数只缩放 16 个 LIF 阈值,算 teacher forcing 准确率。"""
+    inherit_from_init(args)
+    dev = get_device()
+    cfg, sl, demo, tokens = load_env(**size_overrides(args))
+    state = torch.load(args.init, map_location=dev)
+    rows = []
+    for sc in [float(x) for x in args.scale_list.split(",")]:
+        m = make_spiking(cfg, sl, dev, args, cfg.leak)
+        m.load_state_dict(state)
+        if sc != 1.0:
+            scale_thresholds(m, sc, only=lif_modules(m))
+        r = teacher_forced_metrics(m, tokens)
+        rows.append(dict(lif_scale=sc, token_acc=round(r["token_acc"], 4), ppl=round(r["ppl"], 3)))
+        print(json.dumps(rows[-1]), flush=True)
+    out = dict(init=args.init, levels=args.levels, level_points=args.level_points, rows=rows)
+    if args.save:
+        Path(args.save).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.save).write_text(json.dumps(out, indent=1), encoding="utf-8")
 
 
 def cmd_stats(args):
     dev = get_device()
-    cfg, sl, demo, tokens = load_env(fire_quantile=args.fq)
+    cfg, sl, demo, tokens = load_env(fire_quantile=args.fq, **size_overrides(args))
     a0 = load_a0(cfg, sl, dev, args.a0)
     sub = tokens[:args.n]
     out = dict(a0=model_stats(a0, sub, dev, is_float=True))
     m, thr = build_a1(a0, cfg, sl, tokens, dev, args.fq, refit=args.refit, gate_refit=args.gate_refit,
-                      fq_kinds=parse_fq_kinds(args.fq_kinds))
+                      fq_kinds=parse_fq_kinds(args.fq_kinds), levels=args.levels, level_points=args.level_points)
     out["a1_init"] = model_stats(m, sub, dev)
     out["a1_init_eval"] = {k: evaluate(m, sl, demo, cfg, tokens)[k] for k in ("token_acc", "ppl", "n_exact")}
     out["thresholds"] = thr
     if args.init:
         m2 = SpikingLM(cfg, sl.vocab_size, leak=args.leak).to(dev)
+        apply_levels(m2, args.levels, args.level_points)
         m2.load_state_dict(torch.load(args.init, map_location=dev))
         out["loaded"] = model_stats(m2, sub, dev)
         out["loaded_eval"] = {k: evaluate(m2, sl, demo, cfg, tokens)[k] for k in ("token_acc", "ppl", "n_exact")}
@@ -442,8 +540,8 @@ def main():
     common.add_argument("--out", default="results/conversion-sweep")
     common.add_argument("--a0", default="results/ckpt/a0.pt")
     common.add_argument("--fq", type=float, default=0.75)
-    common.add_argument("--lr", type=float, default=None, help="默认 a1 3e-3、c 1e-3(计划第 5 节)")
-    common.add_argument("--steps", type=int, default=2000)
+    common.add_argument("--lr", type=float, default=None, help="默认 a0/a1 3e-3、c 1e-3(计划第 5 节)")
+    common.add_argument("--steps", type=int, default=None, help="默认 a0 6000(计划 steps_a0),其余 2000")
     common.add_argument("--schedule", default="cosine", choices=["cosine", "const", "cosine_floor"])
     common.add_argument("--warmup", type=int, default=0)
     common.add_argument("--kd", type=float, default=0.0)
@@ -451,6 +549,12 @@ def main():
     common.add_argument("--seed", type=int, default=0)
     common.add_argument("--eval-every", type=int, default=100)
     common.add_argument("--no-stop", action="store_true", help="忽略停止条件,跑满步数")
+    common.add_argument("--levels", type=int, default=None, help="每 token 最多几个脉冲(默认 1;c/bscan 从 --init 继承)")
+    common.add_argument("--level-points", default=None, help="哪些脉冲点用多级:all|attn|mem|ffn|qin|head 或点名列表")
+    for a, _ in SIZE_KEYS:
+        common.add_argument("--" + a.replace("_", "-"), dest=a, type=int, default=None)
+    p0 = sub.add_parser("a0", parents=[common])
+    p0.set_defaults(fn=cmd_a0)
     p1 = sub.add_parser("a1", parents=[common])
     p1.add_argument("--refit", action="store_true")
     p1.add_argument("--gate-refit", action="store_true")
@@ -463,6 +567,15 @@ def main():
     pc.add_argument("--thr-scale", type=float, default=1.0, help="训练前把全部阈值乘以该系数(LIF 与 Q_in 都乘)")
     pc.add_argument("--lif-scale", type=float, default=1.0, help="训练前只把 16 个 LIF 阈值乘以该系数(诊断:x2 最佳)")
     pc.set_defaults(fn=cmd_c)
+    pi = sub.add_parser("iscan", parents=[common])
+    pi.add_argument("--fq-list", default="0.5,0.75,0.9")
+    pi.add_argument("--save", default=None)
+    pi.set_defaults(fn=cmd_iscan)
+    pb = sub.add_parser("bscan", parents=[common])
+    pb.add_argument("--init", required=True)
+    pb.add_argument("--scale-list", default="1,1.5,2,2.25,2.5,3")
+    pb.add_argument("--save", default=None)
+    pb.set_defaults(fn=cmd_bscan)
     ps = sub.add_parser("stats", parents=[common])
     ps.add_argument("--n", type=int, default=512, help="统计用的句子数")
     ps.add_argument("--refit", action="store_true")
@@ -474,6 +587,11 @@ def main():
     args = ap.parse_args()
     if args.lr is None:
         args.lr = 1e-3 if args.stage == "c" else 3e-3
+    if args.steps is None:
+        args.steps = 6000 if args.stage == "a0" else 2000
+    if args.stage in ("a0", "a1", "iscan", "stats"):
+        args.levels = 1 if args.levels is None else args.levels
+        args.level_points = "all" if args.level_points is None else args.level_points
     args.fn(args)
 
 
