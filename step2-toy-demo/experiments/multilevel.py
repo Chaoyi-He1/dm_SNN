@@ -6,7 +6,9 @@
     子步结束后脉冲数 c = min(floor(U_0 * T / theta), T),输出幅度 s = c / T ∈ {0, 1/T, ..., 1}。
 三值点对正负两支对称处理,s ∈ {-1, ..., -1/T, 0, 1/T, ..., 1}。
 所以 theta 仍是满量程(s = 1 的位置),T = 1 时与 snn_spec 原实现逐位相同;软复位 U <- U - theta * s
-正好等于减去 c 个 theta/T。下游矩阵乘收到的是 0..T 个脉冲,每个脉冲仍是一次加法(1/T 折进权重)。
+正好等于减去 c 个 theta/T。神经元直接驱动的矩阵乘收到 0..T 个脉冲,每个脉冲仍是一次加法(1/T 折进权重)。
+例外是 SwiGLU 的门 p = g * u(snn_spec 未改):T > 1 时 p = c_g * c_u / T^2,W2 每个通道收到 c_g * c_u 个事件
+(最多 T^2,1/T^2 折进 W2),仍是只做加法,但事件数不再受 T 限制;spike_counts 单独报告这一项(w2_events)。
 
 前向写成 T 个阶跃之和:s = (1/T) * sum_j H(U - j*theta/T),j = 1..T;每个阶跃用 snn_spec 的 arctan
 代理梯度,宽度不变,所以代理梯度的总积分与 T = 1 相同(都是 1)。
@@ -127,6 +129,21 @@ def spike_counts(model, tokens, dev):
                 s = s * (model.blocks[i].attn.dk ** 0.5)       # 去掉 1/sqrt(dk)
             s = s.reshape(s.shape[0], -1)
         c = (s.abs() * T).round()
-        out[full] = dict(levels=T, spikes_per_token=round(c.mean().item(), 4), nonzero=round((c > 0).float().mean().item(), 4))
+        out[full] = dict(levels=T, neurons=int(c.shape[-1]), spikes_per_token=round(c.mean().item(), 4),
+                         nonzero=round((c > 0).float().mean().item(), 4))
     tot = sum(v["spikes_per_token"] for v in out.values()) / len(out)
-    return dict(points=out, mean_spikes_per_neuron_token=round(tot, 4))
+    n_neurons = sum(v["neurons"] for v in out.values())
+    total = sum(v["spikes_per_token"] * v["neurons"] for v in out.values())
+    # SwiGLU 门 p = g*u 送进 W2 的事件数:c_g * c_u(T = 1 时就是 p 的非零数)
+    w2 = {}
+    for i, blk in enumerate(model.blocks):
+        Tg, Tu = int(getattr(blk.ffn.sn_1, "levels", 1)), int(getattr(blk.ffn.sn_3, "levels", 1))
+        p = torch.stack([recs[t][i]["p"] for t in range(len(recs))], dim=1)[mask]
+        ev = (p.abs() * Tg * Tu).round()
+        w2[f"blocks.{i}"] = dict(events_per_channel_token=round(ev.mean().item(), 4), channels=int(p.shape[-1]))
+    # mean_spikes_per_neuron_token:各脉冲点的平均(不按神经元数加权,与早期 result.json 一致);
+    # weighted_*:按神经元数加权;total_spikes_per_token:整个模型每 token 的脉冲总数
+    return dict(points=out, mean_spikes_per_neuron_token=round(tot, 4),
+                weighted_spikes_per_neuron_token=round(total / n_neurons, 4), total_spikes_per_token=round(total, 1),
+                n_spiking_neurons=n_neurons, w2_events=w2,
+                w2_events_per_token=round(sum(v["events_per_channel_token"] * v["channels"] for v in w2.values()), 1))

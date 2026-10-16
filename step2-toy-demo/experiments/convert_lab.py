@@ -83,8 +83,9 @@ def build_a1(a0, cfg, sl, tokens, dev, fq, seed=0, leak=0.0, refit=False, gate_r
     return m, thr
 
 
-KIND_ALIASES = {"qin": ("q_in1", "q_in2"), "head": ("q_out",), "attn": ("q", "k", "v", "pre", "out"),
+KIND_ALIASES = {"qin": ("q_in1", "q_in2"), "head": ("q_out",), "attn": ("q", "k", "v", "pre", "out"), "mem": ("q", "k", "v"),
                 "ffn": ("g", "u", "y2"), "ternary": ("q_in1", "k", "v", "pre", "out", "q_in2", "u", "y2", "q_out")}
+POINTS = ("q_in1", "q", "k", "v", "pre", "out", "q_in2", "g", "u", "y2", "q_out")
 
 
 def parse_fq_kinds(spec):
@@ -95,6 +96,8 @@ def parse_fq_kinds(spec):
     for item in spec.split(","):
         k, v = item.split("=")
         for name in KIND_ALIASES.get(k.strip(), (k.strip(),)):
+            if name not in POINTS:
+                raise ValueError(f"unknown spike point {name!r} in --fq-kinds; known: {POINTS} or {tuple(KIND_ALIASES)}")
             out[name] = float(v)
     return out
 
@@ -424,7 +427,19 @@ def cmd_a1(args):
                 warmup=args.warmup, kd=a0 if args.kd > 0 else None, kd_w=args.kd, kd_T=args.kd_T,
                 eval_every=args.eval_every, stop=not args.no_stop, hist_path=out_dir / "history.jsonl")
     res["seconds"] = round(time.time() - t0, 1)
-    _save(out_dir, m, res, args, dict(init=init, thresholds=thr, spikes=spike_counts(m, tokens[:512], dev)))
+    extra = dict(init=init, thresholds=thr)
+    _save(out_dir, m, res, args, extra)           # 先存模型与结果,脉冲统计失败也不丢检查点
+    extra["spikes"] = safe_spike_counts(m, tokens, dev)
+    _save(out_dir, m, res, args, extra)
+
+
+def safe_spike_counts(m, tokens, dev, n=256):
+    try:
+        return spike_counts(m, tokens[:n], dev)
+    except Exception as e:                         # noqa: BLE001  统计是附带的,不让它毁掉一次长训练
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        return dict(error=repr(e))
 
 
 def make_spiking(cfg, sl, dev, args, leak):
@@ -469,7 +484,8 @@ def cmd_c(args):
     set_leak(m, cfg.leak)
     res["final"] = evaluate(m, sl, demo, cfg, tokens)      # 以 leak=cfg.leak 的最终评估为准
     res["seconds"] = round(time.time() - t0, 1)
-    extra["spikes"] = spike_counts(m, tokens[:512], dev)
+    _save(out_dir, m, res, args, extra)           # 先存模型与结果,脉冲统计失败也不丢检查点
+    extra["spikes"] = safe_spike_counts(m, tokens, dev)
     _save(out_dir, m, res, args, extra)
 
 
@@ -525,7 +541,12 @@ def cmd_stats(args):
     out["thresholds"] = thr
     if args.init:
         m2 = SpikingLM(cfg, sl.vocab_size, leak=args.leak).to(dev)
-        apply_levels(m2, args.levels, args.level_points)
+        src = Path(args.init).parent / "result.json"
+        prev = json.loads(src.read_text(encoding="utf-8")).get("args", {}) if src.exists() else {}
+        lv = args.init_levels if args.init_levels is not None else int(prev.get("levels") or 1)
+        lp = args.init_level_points or prev.get("level_points") or "all"
+        apply_levels(m2, lv, lp)
+        out["loaded_levels"] = dict(levels=lv, level_points=lp)
         m2.load_state_dict(torch.load(args.init, map_location=dev))
         out["loaded"] = model_stats(m2, sub, dev)
         out["loaded_eval"] = {k: evaluate(m2, sl, demo, cfg, tokens)[k] for k in ("token_acc", "ppl", "n_exact")}
@@ -583,6 +604,8 @@ def main():
     ps.add_argument("--fq-kinds", default="")
     ps.add_argument("--init", default=None, help="额外统计一个已保存的脉冲模型")
     ps.add_argument("--leak", type=float, default=0.0, help="--init 模型的 leak")
+    ps.add_argument("--init-levels", type=int, default=None, help="--init 模型的级数(默认从它的 result.json 继承)")
+    ps.add_argument("--init-level-points", default=None)
     ps.set_defaults(fn=cmd_stats)
     args = ap.parse_args()
     if args.lr is None:

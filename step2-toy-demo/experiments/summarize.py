@@ -7,6 +7,8 @@ sweep = Path(sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--
 rows = []
 for p in sorted(sweep.glob("*/result.json")):
     r = json.loads(p.read_text(encoding="utf-8"))
+    if r["args"]["stage"] not in ("a1", "c"):
+        continue      # a0 等其他阶段的结果用 experiments/improve_summary.py 汇总
     a = r["args"]
     f = r["final"]
     knobs = []
