@@ -41,6 +41,9 @@ def collect(pattern):
     for f in sorted(Path(".").glob(pattern)):
         d = json.loads(f.read_text(encoding="utf-8"))
         for name, rec in (d["models"].items() if "models" in d else d.items()):
+            for r in rec.get("runs", []) if isinstance(rec, dict) else []:
+                # beam_eval rounds unique_exact to 4 decimals; recover count / n so a second rounding is exact
+                r["unique_exact"] = round(r["unique_exact"] * r["unique_n"]) / r["unique_n"]
             out[name] = rec
     return out
 

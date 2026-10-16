@@ -9,6 +9,7 @@
   --accent:#2a78d6; --accent-bg:#e2edfb; --spike:#eb6834; --spike-bg:#fde8df; --de:#a2aab7;
   --good:#1d8a4e; --good-bg:#dff2e6; --bad:#c43d3d; --bad-bg:#fbe4e4;
   --ac:#1baf7a; --ac-bg:#dcf3ea; --mul:#4a3aa7; --mul-bg:#e8e5f6;
+  --t2:#6aa5ec; --t4:#2a78d6; --t8:#16488a;
   --sans:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
@@ -20,6 +21,7 @@
     --accent:#3987e5; --accent-bg:#162840; --spike:#d95926; --spike-bg:#3a2118; --de:#5e6778;
     --good:#46b676; --good-bg:#15301f; --bad:#e66767; --bad-bg:#3b1b1b;
     --ac:#199e70; --ac-bg:#11302a; --mul:#9085e9; --mul-bg:#25213f;
+    --t2:#2a64ad; --t4:#3987e5; --t8:#8dbbf2;
   }
 }
 :root[data-theme="dark"]{
@@ -29,6 +31,7 @@
   --accent:#3987e5; --accent-bg:#162840; --spike:#d95926; --spike-bg:#3a2118; --de:#5e6778;
   --good:#46b676; --good-bg:#15301f; --bad:#e66767; --bad-bg:#3b1b1b;
     --ac:#199e70; --ac-bg:#11302a; --mul:#9085e9; --mul-bg:#25213f;
+  --t2:#2a64ad; --t4:#3987e5; --t8:#8dbbf2;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;padding-inline:20px;padding-block:0 72px;margin:0}
@@ -70,6 +73,10 @@ table.t tr:last-child td{border-bottom:0}
 .pill{display:inline-flex;align-items:center;gap:4px;padding:1px 10px;border-radius:999px;font-size:12.5px;font-weight:700;white-space:nowrap}
 .pill.ok{background:var(--good-bg);color:var(--good)}
 .pill.no{background:var(--bad-bg);color:var(--bad)}
+.pill.na{background:var(--panel-2);color:var(--muted);font-weight:500}
+.legend b.o,.legend b.f{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px solid var(--ink-2)}
+.legend b.o{background:var(--panel)}
+.legend b.f{background:var(--ink-2)}
 .tok{font-family:var(--mono);font-size:13px;line-height:1.9}
 .m-ok{background:var(--good-bg);border-radius:3px;padding:1px 0}
 .m-no{background:var(--bad-bg);border-radius:3px;padding:1px 0}
@@ -197,6 +204,11 @@ svg .op-ac{fill:var(--ac-bg);stroke:var(--ac);stroke-width:1.2}
 svg .op-mul{fill:var(--mul-bg);stroke:var(--mul);stroke-width:1.2}
 svg .op-cmp{fill:var(--panel);stroke:var(--rule-strong);stroke-width:1.2}
 svg .hl{fill:var(--spike);font-weight:700}
+svg .goodt{fill:var(--good);font-weight:700}
+svg .badt{fill:var(--bad);font-weight:700}
+svg .fgood{fill:var(--good)}
+svg .fbad{fill:var(--bad)}
+svg .fde{fill:var(--de)}
 @media (max-width:520px){ body{font-size:15px} h2{font-size:23px} figure{padding:14px 12px 12px} }
 @media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
 </style>
@@ -213,15 +225,15 @@ svg .hl{fill:var(--spike);font-weight:700}
 
 <main>
 <header>
-  <div class="eyebrow">dm_SNN · Step 2 玩具模型 · 2026 年 9 月</div>
+  <div class="eyebrow">dm_SNN · Step 2 玩具模型 · 2026 年 9 月至 10 月</div>
   <h1>GDN 脉冲转换报告</h1>
-  <p class="lede">我们先训练一个会背 4003 句童话的小语言模型，再把它改造成“每个神经元每个 token 最多发一次脉冲”的网络，最后放进忆阻器电路模型里运行。下面这条线就是整件事。</p>
+  <p class="lede">我们先训练一个会背 4003 句童话的小语言模型，再把它改造成“每个神经元每个 token 最多发一次脉冲”的网络，最后放进忆阻器电路模型里运行。下面这条线就是整件事。第 7 节把上限放宽到每个 token 最多 2 个脉冲，C 升到 82.5%，5 道题全对。</p>
   <figure>
     <div class="scroll" data-fig="pipeline" data-aria="五个阶段的准确率：浮点模型 84.2%，换成脉冲后 74.0%，打开膜电位 12.6%，再微调 75.2%，电路仿真 63.4%"></div>
     <figcaption>每格数字是 token 准确率：给出正确的前文，模型猜对下一个 token 的比例。我们先按原计划跑过一次，下文叫“默认配置”；诊断后改了几处，这里是改进后的数字。B 那一步暴跌，是因为神经元过度发放，C 会把它训练回来。</figcaption>
   </figure>
   <nav class="toc" aria-label="目录">
-    <a href="#s1"><b>1</b>任务和数据</a><a href="#s2"><b>2</b>训练浮点模型</a><a href="#s3"><b>3</b>模型和 GDN</a><a href="#s4"><b>4</b>脉冲神经元</a><a href="#s5"><b>5</b>转换算法</a><a href="#s6"><b>6</b>转换结果</a><a href="#s7"><b>7</b>结论</a>
+    <a href="#s1"><b>1</b>任务和数据</a><a href="#s2"><b>2</b>训练浮点模型</a><a href="#s3"><b>3</b>模型和 GDN</a><a href="#s4"><b>4</b>脉冲神经元</a><a href="#s5"><b>5</b>转换算法</a><a href="#s6"><b>6</b>转换结果</a><a href="#s7"><b>7</b>改进实验</a><a href="#s8"><b>8</b>结论</a>
   </nav>
   <div class="gloss">
     <h3>先认识这几个词</h3>
@@ -259,6 +271,9 @@ svg .hl{fill:var(--spike);font-weight:700}
         <div><b>忆阻器 / 电导</b>阻值可写入并保持的元件；电导就是它的导电能力</div>
         <div><b>种子</b>随机抽样的编号，换种子结果会略有不同</div>
         <div><b>标称电路</b>加上假设的器件误差的电路模型</div>
+        <div><b>脉冲上限 T</b>每个神经元每个 token 最多发几个脉冲，原来是 1</div>
+        <div><b>束搜索</b>同时留下几条候选句，最后选整句平均每词概率最高的一条</div>
+        <div><b>整句背对率</b>只给开头 5 个 token，把整句一字不差写出来的比例</div>
       </div>
     </details>
   </div>
@@ -303,7 +318,7 @@ svg .hl{fill:var(--spike);font-weight:700}
 
 <section id="s3">
   <h2><span class="no">03</span>模型和 GDN</h2>
-  <p class="lead">模型只有 115 万个参数：一张嵌入表、两个相同的块、一个输出头。每个块里有一个 GDN 注意力和一个 SwiGLU 前馈。</p>
+  <p class="lead">模型只有 116 万个参数：一张嵌入表、两个相同的块、一个输出头。每个块里有一个 GDN 注意力和一个 SwiGLU 前馈。</p>
   <figure>
     <div class="scroll" data-fig="arch" data-aria="模型结构：token 查嵌入表得到 h，经过两个块，每块是 GDN 注意力和 SwiGLU 前馈，各自的结果加回 h，最后输出头给出 3226 个分数"></div>
     <figcaption>h 是一条由 128 个数组成的“残差流”，每个子块算出的结果都加回到它上面。七成参数在嵌入表和输出头里。</figcaption>
@@ -340,7 +355,7 @@ svg .hl{fill:var(--spike);font-weight:700}
   </figure>
   <figure>
     <div class="scroll" data-fig="tsteps" data-aria="对比：嵌套模式每个 token 跑 4 小步再取平均；折叠模式每个 token 只跑 1 步，膜电位跨 token 带过去"></div>
-    <figcaption>T 是每个 token 内部跑几步。本项目 T = 1：每个神经元每个 token 只有一次发放机会，膜电位跨 token 带过去，成了除记忆 S 以外的第二种记忆。电路上一个 token 是一个周期，记忆阵列在里面只衰减一次。</figcaption>
+    <figcaption>T 是每个 token 内部跑几步。第 1 到 6 节都是 T = 1：每个神经元每个 token 只有一次发放机会，膜电位跨 token 带过去，成了除记忆 S 以外的第二种记忆。电路上一个 token 是一个周期，记忆阵列在里面只衰减一次。第 7 节把 T 放宽到 2、4、8：和上面一行一样，每个 token 跑 T 小步，输出 s = 脉冲数 / T；不同的是膜电位照样跨 token 带过去。</figcaption>
   </figure>
 
   <h3>为什么权重可以是浮点数</h3>
@@ -496,32 +511,102 @@ svg .hl{fill:var(--spike);font-weight:700}
   <figure>
     <div class="tbl">
       <table class="t">
-        <thead><tr><th>验收项</th><th>默认配置</th><th>改进后</th><th>改进后的数值</th></tr></thead>
+        <thead><tr><th>验收项</th><th>默认配置</th><th>改进后</th><th>改进后的数值</th><th>T = 2，第 7 节</th></tr></thead>
         <tbody>
-          <tr><td>A0 浮点模型 5 句全对</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">5/5</td></tr>
-          <tr><td>A1 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td></tr>
-          <tr><td>C 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td></tr>
-          <tr><td>C 准确率在 A1 的 1 个百分点以内</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">75.2% ≥ 74.0%</td></tr>
-          <tr><td>理想电路每个 token 的输出和 C 相同</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">对照的 205 句上完全相同</td></tr>
-          <tr><td>理想电路逐脉冲对照</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">误差 0</td></tr>
-          <tr><td>标称电路自己生成，5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">0/5</td></tr>
-          <tr><td>标称电路与 C 对照：喂同样的前文</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">下一个 token 相同 62.5%，要求 ≥ 99%；脉冲 P/R 0.67–0.78，要求 ≥ 0.9</td></tr>
+          <tr><td>A0 浮点模型 5 句全对</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">5/5</td><td><span class="pill ok">✓ 通过</span></td></tr>
+          <tr><td>A1 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td><td><span class="pill ok">✓ 通过</span></td></tr>
+          <tr><td>C 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td><td><span class="pill ok">✓ 通过</span></td></tr>
+          <tr><td>C 准确率在 A1 的 1 个百分点以内</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">75.2% ≥ 74.0%</td><td><span class="pill ok">✓ 通过</span><br><span class="num" style="font-size:12.5px">82.5% 对 83.2%</span></td></tr>
+          <tr><td>理想电路每个 token 的输出和 C 相同</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">对照的 205 句上完全相同</td><td><span class="pill na">未测</span></td></tr>
+          <tr><td>理想电路逐脉冲对照</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">误差 0</td><td><span class="pill na">未测</span></td></tr>
+          <tr><td>标称电路自己生成，5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">0/5</td><td><span class="pill na">未测</span></td></tr>
+          <tr><td>标称电路与 C 对照：喂同样的前文</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">下一个 token 相同 62.5%，要求 ≥ 99%；脉冲 P/R 0.67–0.78，要求 ≥ 0.9</td><td><span class="pill na">未测</span></td></tr>
         </tbody>
       </table>
     </div>
-    <figcaption>8 项里改进前通过 3 项，改进后通过 4 项。新通过的是“C 追上 A1”。</figcaption>
+    <figcaption>8 项里改进前通过 3 项，改进后通过 4 项。新通过的是“C 追上 A1”。最右一列是第 7 节每个 token 最多 2 个脉冲的模型：4 项软件验收都通过，3 个种子都一样；电路模型还不支持多个脉冲，后 4 项没测。</figcaption>
   </figure>
 </section>
 
 <section id="s7">
-  <h2><span class="no">07</span>结论</h2>
+  <h2><span class="no">07</span>三个改进方向</h2>
+  <p class="lead">C 的补全常常在某一个词上走错，然后接上别的句子里背过的片段。我们试了三个方向：训练更久，让每个 token 带更多信息，换一种解码方式。结果是：让每个神经元每个 token 最多发 2 个脉冲，C 就接近了浮点模型。</p>
+  <figure>
+    <div class="scroll" data-fig="fork" data-aria="第 1 道题写到 watched 之后：原来的 C 给 as 0.727，正确的 it 只有 0.077，于是写出 as their snack；每 token 最多 2 个脉冲的 C 给 it 0.999，写出 it spin"></div>
+    <figcaption>第 1 道题前面都对，到 watched 后面出了岔子。原来的 C 把 73% 的概率给了 as，正确的 it 只有 8%，于是写成了 as their snack。语料里有 7 句出现过 watched as，their snack 来自另一句 enjoying their snack，两段背过的片段被拼在了一起。每个 token 最多发 2 个脉冲以后，C 在这里给 it 99.9%，和浮点模型 A0 一样。</figcaption>
+  </figure>
+
+  <h3>先看结果</h3>
+  <figure>
+    <div class="legend"><span><i class="sq" style="background:var(--de)"></i>训练更久</span><span><i class="sq" style="background:var(--spike)"></i>加宽模型</span><span><i class="sq" style="background:var(--accent)"></i>每 token 多个脉冲</span><span><i class="sq" style="background:var(--ac)"></i>两者都用</span><span><b class="o"></b>A1</span><span><b class="f"></b>C</span></div>
+    <div class="scroll" data-chart="impAcc" data-aria="每种做法的 A1 和 C 准确率：原来的 C 75.2%，训练更久最多 77.8%，加宽 80.1%，T 等于 2 时 82.5% 到 83.0%，T 等于 4 时 83.2% 到 83.6%，浮点 A0 84.2%"></div>
+    <figcaption>每行空心圆是 A1，实心圆是打开膜电位并微调后的 C，横向位置就是准确率。C 不一定比 A1 高，比如“加宽到 256”那行 C 低了 3 个百分点，实心圆就在空心圆左边。T 是每个神经元每个 token 最多发几个脉冲，原来是 1。T = 2 和 T = 4 各跑了 3 个随机种子，每个种子一个点。右边一列是训练最后 10 次考试里 5 道题全对的次数，越多越稳。除“训练更久”一组外，训练设置都沿用第 5 节改进后的配方：两个阶段最多 12000 步，学习率 3e-3。“训练更久”一组把 A1 或 C 的步数上限加到 24000 步；“在原来的 C 上续训”再训最多 12000 步，学习率 1e-3。所有行的停止条件都不变。</figcaption>
+  </figure>
+
+  <h3>方向一：训练更久</h3>
+  <p>把 A1 或 C 的训练步数翻倍，C 只多了 0.5 到 2.6 个百分点。5 道题还是时对时错，最后 10 次考试里最多只有 1 次全对。训练预算有影响，但不是主要瓶颈。</p>
+
+  <h3>方向二：每个 token 多给几个脉冲</h3>
+  <p class="lead">原来每个神经元每个 token 只有一次机会，只能表达“发”或“不发”。现在把一个 token 分成 T 个小步，神经元最多发 T 个脉冲，发几个就代表多大的值。</p>
+  <figure>
+    <div class="scroll" data-fig="levels" data-aria="同一个膜电位 U 等于 0.8 倍阈值：T 等于 1 时不发，输出 0；T 等于 2 时发 1 个脉冲，输出二分之一；T 等于 4 时发 3 个脉冲，输出四分之三"></div>
+    <figcaption>横轴是这个 token 开始时攒下的膜电位 U，纵轴是输出 s。例子里 U = 0.8θ。T = 1 时没到阈值，这个 token 什么都不发，下游这一步完全收不到这 0.8θ，它只能留在膜电位里等下一个 token；T = 2 时发 1 个脉冲，s = 1/2；T = 4 时发 3 个，s = 3/4，最接近 0.8。每个小步只要 U 还够 θ/T，就发一个脉冲并减去 θ/T，剩下的照样带到下一个 token。下游阵列每收到一个脉冲，仍然只做一次加法。</figcaption>
+  </figure>
+  <figure>
+    <div class="legend"><span><i style="background:var(--de)"></i>T = 1</span><span><i style="background:var(--t2)"></i>T = 2</span><span><i style="background:var(--t4)"></i>T = 4</span><span><i style="background:var(--t8)"></i>T = 8</span></div>
+    <div class="scroll" data-chart="impA1" data-aria="A1 的训练曲线：T 等于 1 训满 12000 步到 74.0%；T 等于 2、4、8 分别在 9700、3800、2100 步收敛到 83.2%、83.3%、83.6%"></div>
+    <figcaption>A1 阶段的训练曲线。T = 1 训满 12000 步到 74.0%。T = 2、4、8 分别在 9700、3800、2100 步就满足停止条件：5 道题全对，并且不再上涨，所以曲线提前结束。换 T 以后要重新定两个数：阈值分位数，T = 2 取 75 分位，T = 4 和 8 取 90 分位；C 之前 LIF 阈值放大的倍数，T = 2 取 1.5 倍，T = 4 和 8 不放大。</figcaption>
+  </figure>
+  <figure>
+    <div class="tbl">
+      <table class="t" id="demo2">
+        <thead><tr><th>前缀</th><th>原来的 C</th><th>T = 2 的 C</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <figcaption>同样的 5 道题。绿色和正确答案一致，红色跑偏。T = 2 的 C 5 道全对，3 个种子都是。</figcaption>
+  </figure>
+  <p>只在记忆通路 q、k、v 上用 T = 4，C 跑满 12000 步只到 78.3%，最后还在慢慢上升，而且只跑了一个种子；所有脉冲点都用 T = 2，C 在 7100 到 8600 步就到了 82.5% 以上。所以瓶颈不只在记忆，q、k、v 之外的脉冲点每个 token 能传的信息也不够。这里只比较了这两种配置，还分不出具体是哪些点。</p>
+
+  <h3>加宽模型</h3>
+  <p>把宽度从 128 加到 256，参数从 116 万变成 297 万。浮点模型本身没有变好，是 84.0%。A1 到了 83.1%，但打开膜电位以后 C 掉到 80.1%，12000 步时还在慢慢上升。它每个 token 的脉冲数和 T = 2 差不多，交叉阵列却要大约 2.9 倍。</p>
+
+  <h3>方向三：束搜索</h3>
+  <p class="lead">贪心解码每一步只留概率最高的那个词。束搜索同时留下 K 条候选句，最后选整句平均每词概率最高的一条。</p>
+  <figure>
+    <div class="scroll" data-fig="beam" data-aria="原来的 C 在 watched 之后的两条路：错的 as their snack 平均每词概率 0.60，正确的 it spin 平均每词概率 0.34，束搜索选了错的那条"></div>
+    <figcaption>原来的 C 在 watched 之后的两条路。两条路差在分岔的第一个词：模型给 as 0.73，给正确的 it 只有 0.08。分岔之后错的那条并不更顺，their 0.47、snack 0.23；正确的那条是 spin 0.30、句号 0.61；去掉分岔的那个词，两条的平均每词概率分别约 0.57 和 0.56。连分岔词和句尾在内的几何平均，错的那条 0.60，正确的那条 0.34。束搜索比的是整句，所以它还是选了错的那条；不按句子长度归一化时，它会选更短的 dirty around.。束搜索只能在模型自己的概率里挑，模型记错了，它救不回来。</figcaption>
+  </figure>
+  <figure>
+    <div class="legend"><span><i class="sq" style="background:var(--de)"></i>训练更久</span><span><i class="sq" style="background:var(--spike)"></i>加宽模型</span><span><i class="sq" style="background:var(--accent)"></i>每 token 多个脉冲</span><span><i class="sq" style="background:var(--ac)"></i>两者都用</span><span><b class="f"></b>贪心解码</span><span><b class="o"></b>束搜索</span></div>
+    <div class="scroll" data-chart="impScatter" data-aria="整句背对率和每 token 脉冲数：原来的 C 1742 个脉冲，贪心 39.7%，束搜索 57.8%；T 等于 2 的 C 2996 个脉冲，贪心 83.4%，束搜索 92.8%；T 等于 4 的 C 5038 个脉冲，贪心 91.2%；T 等于 8 的 C 9274 个脉冲，贪心 96.5%"></div>
+    <figcaption>纵轴是整句背对率：在 3277 句开头 5 个 token 只出现一次的句子上，从这 5 个 token 出发，把整句一字不差写出来的比例。横轴是整个模型每个 token 一共发出的脉冲数，可以粗略看作一条解码路径的功耗；它没算前馈门送进 W2 的事件，这部分随 T 涨得更快，见下面的代价。实心点是贪心解码，空心点是束宽 16、按长度归一化的束搜索；束宽 16 要同时跑 16 条候选句，计算量约是横轴的 16 倍。束搜索给每个模型都加了分，原来的 C 从 39.7% 升到 57.8%，但比不上 T = 2 的 C 直接贪心解码的 83.4%。</figcaption>
+  </figure>
+
+  <h3>代价</h3>
   <ul class="concl">
-    <li><b>转换流程的实现没有错误。</b>代码逐项核对无误；理想电路和软件模型逐脉冲一致；打开跨 token 的膜电位后，C 能追上 A1。</li>
-    <li><b>刚转换时损失很大，提升主要靠训练。</b>21 个点一起量化，误差层层累积，刚转换时只剩一成准确率；把发放率从四分之一提到一半，也只把这个起点从 10.4% 提到 12.3%。真正的提升来自训练更久、C 用更高的学习率、调高 LIF 阈值：脉冲模型从 40.7% 升到 75.2%。</li>
-    <li><b>还没做到的。</b>5 道题全对；标称电路的脉冲级一致性；每个配置只跑了一个种子；12000 步以后是否还会继续涨也不知道。</li>
-    <li><b>下一步。</b>给采用的配置补跑两个种子；试更长的训练；按计划依次单独对照前馈、注意力和记忆阵列，找出标称电路的误差来源。</li>
+    <li><b>每个 token 要跑 T 个小步。</b>一个 token 周期里神经元最多发 T 个脉冲。T = 2 时，整个模型每个 token 发出的脉冲约是原来的 1.7 倍，T = 4 和 T = 8 时约 2.9 倍和 5.3 倍。</li>
+    <li><b>前馈的门代价涨得最快。</b>门 p = g × u 原来只是锁存加一个与门，现在变成两个脉冲数相乘，后面的 W2 每个通道最多收到 T² 个脉冲，仍然只做加法；串行实现时，门和 W2 要最多 T² 个小步。实测 W2 每个 token 收到的脉冲从 78 个变成 T = 2 的 215 个、T = 4 的 494 个、T = 8 的 1565 个，约 2.8、6.3、20 倍。</li>
+    <li><b>电路模型还没跟上。</b>电路仿真目前只支持每个 token 1 个脉冲，T = 2 的模型还没在理想电路和标称电路上验收。</li>
+    <li><b>束搜索要 K 份状态。</b>束宽 K 就要 K 倍的计算，记忆 S 和所有膜电位也要存 K 份。束宽 4 已经拿到大部分收益。</li>
   </ul>
-  <footer>代码和数据：仓库 Chaoyi-He1/dm_SNN，分支 <code>worktree-conversion-sweep</code>；完整扫描记录在 <code>step2-toy-demo/results/conversion-sweep/README.md</code>。26 个扫描运行的墙钟时间合计约 27 小时，不含诊断和最终的 12000 步 C；每张卡同时跑 4 到 7 个运行，用两张 RTX A4500。</footer>
+  <details class="data">
+    <summary>全部运行的数字</summary>
+    <div class="tbl"><table class="t" id="impAll"><thead><tr><th>做法</th><th>A1</th><th>C</th><th>C 的 5 道题</th><th>最后 10 次全对</th><th>整句，贪心</th><th>整句，束搜索</th><th>每 token 脉冲</th><th>参数，万</th></tr></thead><tbody></tbody></table></div>
+    <div class="tbl" style="margin-top:12px"><table class="t" id="impSeeds"><thead><tr><th>T</th><th>种子</th><th>A1</th><th>C</th><th>C 的 5 道题</th><th>最后 10 次全对</th><th>整句，贪心</th><th>整句，束搜索</th></tr></thead><tbody></tbody></table></div>
+  </details>
+</section>
+
+<section id="s8">
+  <h2><span class="no">08</span>结论</h2>
+  <ul class="concl">
+    <li><b>转换流程的实现没有错误。</b>代码逐项核对无误；理想电路和软件模型逐脉冲一致；按第 5 节改进后的配方打开跨 token 的膜电位后，C 追上了 A1。第 7 节的配置多数也追得上，但加宽到 256 时 C 比 A1 低 3.0 个百分点，A1 训 24000 步时低 1.8 个百分点。</li>
+    <li><b>每个 token 只能发一次脉冲是主要瓶颈。</b>改成每个 token 最多 2 个脉冲，C 从 75.2% 升到 82.5% 到 83.0%，3 个种子都 5 道题全对，整句背对率从 40% 升到 83% 到 89%，脉冲多了约七成。T = 4 时 C 是 83.2% 到 83.6%。训练更久和加宽模型都不如它划算。</li>
+    <li><b>刚转换时损失很大，训练能补回大部分。</b>21 个点一起量化，误差层层累积，每个 token 一个脉冲时刚转换只剩一成准确率；第 6 节的提升来自训练更久、C 用更高的学习率、调高 LIF 阈值，脉冲模型从 40.7% 升到 75.2%。第 7 节放宽脉冲上限改的是模型本身：T = 2 到 T = 8 时刚转换就有 24% 到 35%。</li>
+    <li><b>还没做到的。</b>电路模型支持每个 token 多个脉冲；标称电路的脉冲级一致性。只有 T = 2 和 T = 4 跑了 3 个种子，其余配置都只有一个种子；A1 24k 加 C 24k、加宽的 C、只在 q、k、v 上用 T = 4 的 C 跑满步数时还在上升，再训下去能到多少还不知道。</li>
+    <li><b>下一步。</b>给电路模型加上多脉冲神经元和门的脉冲计数，对 T = 2 的模型跑理想电路和标称电路验收；再按计划依次单独对照前馈、注意力和记忆阵列，找出标称电路的误差来源。</li>
+  </ul>
+  <footer>代码和数据：仓库 Chaoyi-He1/dm_SNN，分支 <code>worktree-conversion-sweep</code>；转换扫描记录在 <code>step2-toy-demo/results/conversion-sweep/README.md</code>，第 7 节的改进实验记录在 <code>step2-toy-demo/results/improve/README.md</code>。26 个扫描运行的墙钟时间合计约 27 小时，不含诊断和最终的 12000 步 C；每张卡同时跑 4 到 7 个运行，用两张 RTX A4500。</footer>
 </section>
 </main>
 
@@ -991,13 +1076,13 @@ F.ternary=function(h){
 };
 F.tsteps=function(h){
   const s=mk(h,820,248,660);
-  tx(s,20,26,'嵌套模式 T = 4','bt');tx(s,142,26,'本项目不用','sm');
+  tx(s,20,26,'嵌套模式 T = 4','bt');tx(s,142,26,'第 1 到 6 节不用','sm');
   tx(s,20,62,'每个 token 内','bs');tx(s,20,80,'跑 4 小步','bs');
   const pat=[[1,1,0,1],[0,1,0,0],[1,1,1,1]],avg=['0.75','0.25','1.0'];
   for(let i=0;i<3;i++){const x=150+i*210;el('rect',{x:x,y:44,width:190,height:40,rx:6,class:'box'},s);
     for(let j=0;j<4;j++){if(j)line(s,x+j*47.5,44,x+j*47.5,84,'grid');if(pat[i][j])line(s,x+j*47.5+23.75,52,x+j*47.5+23.75,76,'spk');}
     tx(s,x+95,102,'token '+(i+1)+'：取平均 = '+avg[i],'sm','middle');}
-  tx(s,20,142,'折叠模式 T = 1','bt');tx(s,142,142,'本项目用','sm');
+  tx(s,20,142,'折叠模式 T = 1','bt');tx(s,142,142,'第 1 到 6 节用','sm');
   tx(s,20,178,'每个 token','bs');tx(s,20,196,'只算 1 步','bs');
   const sp=[1,0,1];
   for(let i=0;i<3;i++){const x=150+i*210;el('rect',{x:x,y:160,width:190,height:40,rx:6,class:'box'},s);if(sp[i])line(s,x+95,168,x+95,192,'spk');tx(s,x+95,240,'token '+(i+1)+'：发或不发，只有一次机会','sm','middle');}
@@ -1102,6 +1187,142 @@ function common(a,b){const wa=a.split(' '),wb=b.split(' ');let i=0;while(i<wa.le
 const tb=document.querySelector('#demo tbody');
 DEMO.forEach(function(d){const ok=d[1]===d[2];const c=common(d[1],d[2]);const tr=document.createElement('tr');
   tr.innerHTML='<td class="tok">'+esc(d[0])+'</td><td class="tok">'+esc(d[1])+'</td><td class="tok">'+(c[0]?'<span class="m-ok">'+esc(c[0])+'</span>':'')+(c[1]?' <span class="m-no">'+esc(c[1])+'</span>':'')+'</td><td>'+(ok?'<span class="pill ok">✓ 全对</span>':'<span class="pill no">✗</span>')+'</td>';tb.appendChild(tr);});
+
+
+/* ---------- section 07 ---------- */
+const IMP={"all":[["原来的 C",74.0,75.2,"1/5",0,39.7,57.8,1742,116],["在原来的 C 上续训",74.0,75.7,"5/5",1,41.3,57.2,1767,116],["A1 12k，C 训 24k",74.0,77.8,"5/5",1,51.3,66.6,1785,116],["A1 24k，C 24k",78.2,76.4,"3/5",0,44.1,61.6,1778,116],["T = 2",83.2,82.5,"5/5",8,83.4,92.8,2996,116],["T = 4",83.3,83.2,"5/5",6,91.2,96.9,5038,116],["T = 8",83.6,83.6,"5/5",7,96.5,98.6,9274,116],["T = 4，只在 q、k、v",77.6,78.3,"3/5",0,55.4,74.2,2654,116],["加宽到 256",83.1,80.1,"3/5",2,61.9,76.7,3022,297],["加宽到 256 + T = 4",83.5,83.6,"5/5",8,95.4,97.7,7868,297]],"seeds":[["T = 2",0,83.2,82.5,"5/5",8,83.4,92.8],["T = 2",1,81.6,82.5,"5/5",5,84.3,93.0],["T = 2",2,82.8,83.0,"5/5",5,88.7,95.3],["T = 4",0,83.3,83.2,"5/5",6,91.2,96.9],["T = 4",1,83.3,83.5,"5/5",4,94.6,98.3],["T = 4",2,83.5,83.6,"5/5",9,94.2,97.8]],"dumb":[{"g":"long","label":"原来的 C：A1 12k，C 12k","a1":[74.0],"c":[75.2],"stab":[0],"cstep":[12000],"a1step":[12000]},{"g":"long","label":"在原来的 C 上续训","a1":[74.0],"c":[75.7],"stab":[1],"cstep":[6500],"a1step":[12000]},{"g":"long","label":"A1 12k，C 训 24k","a1":[74.0],"c":[77.8],"stab":[1],"cstep":[20400],"a1step":[12000]},{"g":"long","label":"A1 24k，C 24k","a1":[78.2],"c":[76.4],"stab":[0],"cstep":[24000],"a1step":[24000]},{"g":"wide","label":"加宽到 256","a1":[83.1],"c":[80.1],"stab":[2],"cstep":[12000],"a1step":[10100]},{"g":"multi","label":"T = 4，只在 q、k、v","a1":[77.6],"c":[78.3],"stab":[0],"cstep":[12000],"a1step":[12000]},{"g":"multi","label":"T = 2","a1":[83.2,81.6,82.8],"c":[82.5,82.5,83.0],"stab":[8,5,5],"cstep":[7100,7300,8600],"a1step":[9700,6800,8600]},{"g":"multi","label":"T = 4","a1":[83.3,83.3,83.5],"c":[83.2,83.5,83.6],"stab":[6,4,9],"cstep":[3100,3900,3700],"a1step":[3800,3800,4200]},{"g":"multi","label":"T = 8","a1":[83.6],"c":[83.6],"stab":[7],"cstep":[2100],"a1step":[2100]},{"g":"both","label":"加宽到 256 + T = 4","a1":[83.5],"c":[83.6],"stab":[8],"cstep":[1600],"a1step":[1400]}],"scat":[{"g":"long","label":"原来的 C","x":1742,"w2":78,"greedy":39.7,"beam":57.8,"params":1155621},{"g":"long","label":"训练更久","x":1785,"w2":83,"greedy":51.3,"beam":66.6,"params":1155621},{"g":"multi","label":"T = 4，只在 q、k、v","x":2654,"w2":72,"greedy":55.4,"beam":74.2,"params":1155621},{"g":"wide","label":"加宽到 256","x":3022,"w2":80,"greedy":61.9,"beam":76.7,"params":2966565},{"g":"multi","label":"T = 2","x":2996,"w2":215,"greedy":83.4,"beam":92.8,"params":1155621},{"g":"multi","label":"T = 4","x":5038,"w2":494,"greedy":91.2,"beam":96.9,"params":1155621},{"g":"multi","label":"T = 8","x":9274,"w2":1565,"greedy":96.5,"beam":98.6,"params":1155621},{"g":"both","label":"加宽 + T = 4","x":7868,"w2":368,"greedy":95.4,"beam":97.7,"params":2966565}],"a0Recall":99.97,"curves":{"T1":[[400,39.6],[800,45.2],[1200,49.1],[1600,52.0],[2000,54.4],[2400,56.1],[2800,57.9],[3200,59.0],[3600,60.5],[4000,61.6],[4400,62.6],[4800,63.7],[5200,64.4],[5600,65.6],[6000,66.4],[6400,67.2],[6800,68.0],[7200,68.6],[7600,69.1],[8000,69.8],[8400,70.6],[8800,70.9],[9200,71.3],[9600,71.6],[10000,72.1],[10400,72.2],[10800,72.6],[11200,73.3],[11600,73.5],[12000,74.0]],"T2":[[200,44.2],[400,51.3],[600,56.3],[800,60.9],[1000,64.0],[1200,66.4],[1400,68.2],[1600,69.9],[1800,71.3],[2000,73.1],[2200,73.7],[2400,74.2],[2600,75.4],[2800,76.0],[3000,76.2],[3200,77.3],[3400,78.2],[3600,78.0],[3800,78.2],[4000,78.5],[4200,78.8],[4400,79.7],[4600,79.7],[4800,80.0],[5000,80.4],[5200,80.5],[5400,80.6],[5600,80.5],[5800,81.1],[6000,81.1],[6200,81.4],[6400,81.5],[6600,81.8],[6800,81.8],[7000,82.0],[7200,82.1],[7400,82.2],[7600,82.4],[7800,82.5],[8000,82.5],[8200,82.6],[8400,82.7],[8600,82.7],[8800,82.9],[9000,83.0],[9200,83.1],[9400,83.0],[9600,83.2],[9700,83.2]],"T4":[[200,54.0],[400,64.3],[600,71.1],[800,75.5],[1000,77.8],[1200,79.7],[1400,80.0],[1600,81.0],[1800,81.6],[2000,82.2],[2200,82.5],[2400,82.6],[2600,82.8],[2800,82.8],[3000,83.2],[3200,83.1],[3400,83.4],[3600,83.3],[3800,83.3]],"T8":[[200,61.2],[400,73.3],[600,78.7],[800,81.4],[1000,82.6],[1200,83.2],[1400,83.1],[1600,83.4],[1800,83.6],[2000,83.8],[2100,83.6]]},"beamtab":[["浮点 A0",100.0,100.0,100.0,100.0],["原来的 C",39.7,55.6,57.8,47.6],["T = 2 的 C",83.4,92.5,92.8,90.2],["T = 4 的 C",91.2,96.7,96.9,95.5],["T = 8 的 C",96.5,98.6,98.6,98.1]],"iscan":{"1":[[0.5,12.3],[0.75,10.4]],"2":[[0.5,15.8],[0.75,24.2],[0.9,21.4],[0.95,15.8],[0.98,10.7]],"4":[[0.5,14.4],[0.75,27.3],[0.9,31.2],[0.95,27.3],[0.98,21.6]],"8":[[0.9,35.2],[0.95,33.1],[0.98,27.7]]},"bscale":{"2":1.5,"4":1.0,"8":1.0},"t2demo":[" dirty shirt into the dryer and watched it spin."," longer and ran to meet them."," park, but she could not find him anywhere."," use a wet cloth to wipe the gum away."," gum and talked about how amazing it was."],"fork":{"C":{"i":7,"true":" it","p_true":0.077,"top":[[" as",0.727],[" it",0.077],[" watched",0.076]]},"T2":{"i":7,"true":" it","p_true":0.999,"top":[[" it",0.999],[" the",0.0],[" lake",0.0]]},"T4":{"i":7,"true":" it","p_true":0.953,"top":[[" it",0.953],[" the",0.019],["<eos>",0.015]]},"A0":{"i":7,"true":" it","p_true":0.999,"top":[[" it",0.999],[".\"",0.001],[" the",0.0]]}},"branches":{"context":"He put his wet and dirty shirt into the dryer and watched","greedy":{"tokens":[[" as",0.727],[" their",0.474],[" snack",0.229],[".",1.0],["<eos>",1.0]],"sum":-2.541,"mean":-0.508},"true":{"tokens":[[" it",0.077],[" spin",0.297],[".",0.607],["<eos>",1.0]],"sum":-4.283,"mean":-1.071}}};
+const ICOL={long:'--de',wide:'--spike',multi:'--accent',both:'--ac'};
+function avg(a){return a.reduce(function(x,y){return x+y;},0)/a.length;}
+F.fork=function(h){
+  const s=mk(h,900,270,720);const fk=IMP.fork;
+  tx(s,14,24,'第 1 道题，前面都写对了','bs');
+  tx(s,14,52,'… dirty shirt into the dryer and watched','tokt');
+  el('rect',{x:338,y:34,width:100,height:26,rx:6,class:'box box-spk'},s);tx(s,388,52,'下一个词？','bs','middle');
+  function panel(x0,title,sub,cands,ok,cont){
+    el('rect',{x:x0,y:78,width:430,height:184,rx:10,class:'pane'},s);
+    tx(s,x0+16,104,title,'bt');tx(s,x0+16,123,sub,'sm');
+    cands.forEach(function(c,i){const y=150+i*28;
+      tx(s,x0+16,y+4,c[0],c[0].charCodeAt(0)>255?'bs':'tokt');
+      const bw=Math.max(2,c[1]*230);
+      el('rect',{x:x0+128,y:y-8,width:bw,height:14,rx:3,class:i===0?(ok?'fgood':'fbad'):'fde'},s);
+      tx(s,x0+128+bw+8,y+4,c[1].toFixed(3),'vlbl');
+    });
+    tx(s,x0+16,248,'接着写出','bs');tx(s,x0+86,248,cont,(ok?'goodt':'badt')+' tokt');
+  }
+  const cC=fk.C.top.map(function(t){const w=t[0].trim();return [w===fk.C.true.trim()?w+'（正确）':w,t[1]];});
+  panel(0,'原来的 C','每 token 最多 1 个脉冲',cC,false,'as their snack.');
+  const p2=fk.T2.top[0];
+  panel(470,'T = 2 的 C','每 token 最多 2 个脉冲',[[p2[0].trim()+'（正确）',p2[1]],['其他词合计',Math.max(0,1-p2[1])]],true,'it spin.');
+};
+F.levels=function(h){
+  const s=mk(h,900,276,720);
+  [1,2,4].forEach(function(T,k){
+    const x0=k*300,px=x0+44,pw=210,py=50,ph=104,yb=py+ph;
+    const X=function(u){return px+u/1.25*pw;},Y=function(v){return yb-v*ph;};
+    tx(s,x0+14,24,'T = '+T,'bt');tx(s,x0+64,24,T===1?'原来：只有发或不发':'每 token 最多 '+T+' 个脉冲','sm');
+    line(s,px,yb,px+pw,yb,'axis');line(s,px,py-6,px,yb,'axis');
+    tx(s,px+pw+6,yb+4,'U','vl');tx(s,px-6,py-12,'s','vl','end');
+    [[0,'0'],[1,'1']].concat(T>1?[[0.5,'0.5']]:[]).forEach(function(t){tx(s,px-6,Y(t[0])+4,t[1],'tick','end');if(t[0])line(s,px,Y(t[0]),px+pw,Y(t[0]),'grid');});
+    for(let j=1;j<=T;j++)line(s,X(j/T),yb,X(j/T),yb+4,'axis');
+    tx(s,X(0),yb+16,'0','vl','middle');tx(s,X(1),yb+16,'θ','vl','middle');
+    if(T>1)tx(s,X(1/T),yb+16,'θ/'+T,'vl','middle');
+    let d='M'+X(0)+' '+Y(0);for(let j=1;j<=T;j++)d+=' H'+X(j/T)+' V'+Y(j/T);d+=' H'+X(1.25);
+    el('path',{d:d,class:'ulin'},s);
+    const u=0.8,c=Math.min(Math.floor(u*T+1e-9),T),v=c/T,fr=['0','1/2','3/4'][k];
+    el('line',{x1:X(u),y1:yb,x2:X(u),y2:Y(v),class:'thr'},s);
+    if(v>0)el('line',{x1:px,y1:Y(v),x2:X(u),y2:Y(v),class:'thr'},s);
+    el('circle',{cx:X(u),cy:Y(v),r:5,class:'sp3'},s);
+    tx(s,X(u)-8,Y(v)-8,'s = '+fr,'vlbl','end');
+    const bx=px,bw=pw,by=196,bh=34;
+    tx(s,bx,by-8,T===1?'一个 token 周期只有 1 步':'一个 token 周期分成 '+T+' 小步','sm');
+    el('rect',{x:bx,y:by,width:bw,height:bh,rx:6,class:'box'},s);
+    for(let j=1;j<T;j++)line(s,bx+j*bw/T,by,bx+j*bw/T,by+bh,'grid');
+    for(let j=0;j<c;j++)line(s,bx+(j+0.5)*bw/T,by+7,bx+(j+0.5)*bw/T,by+bh-7,'spk');
+    tx(s,bx,by+bh+22,'U = 0.8θ：发 '+c+' 个脉冲','bs');
+  });
+};
+F.beam=function(h){
+  const s=mk(h,900,250,720);const br=IMP.branches;
+  el('rect',{x:10,y:104,width:236,height:34,rx:6,class:'box'},s);tx(s,128,126,'… dryer and watched','tokt','middle');
+  tx(s,10,162,'每个词下面是模型给它的概率','sm');
+  function branch(y,toks,ok,mean){
+    el('path',{d:'M246 121 C 268 121, 268 '+(y+17)+', 288 '+(y+17),class:'wire'},s);
+    let x=290;
+    toks.forEach(function(t,i){const lab=t[0]==='<eos>'?'句尾':t[0].trim();const w=Math.max(44,18+lab.length*8);
+      el('rect',{x:x,y:y,width:w,height:34,rx:6,class:ok?'box':'box box-spk'},s);
+      tx(s,x+w/2,y+22,lab,lab==='句尾'?'bs':'tokt','middle');tx(s,x+w/2,y+52,t[1].toFixed(2),'vl','middle');
+      if(i<toks.length-1)arr(s,[[x+w+2,y+17],[x+w+16,y+17]]);
+      x+=w+18;});
+    tx(s,680,y+14,'平均每词概率 '+Math.exp(mean).toFixed(2),'bt');
+    tx(s,680,y+34,ok?'正确答案':'束搜索选了这条',ok?'goodt':'badt');
+  }
+  branch(30,br.greedy.tokens,false,br.greedy.mean);
+  branch(170,br.true.tokens,true,br.true.mean);
+};
+C.impAcc=function(h){
+  const R=IMP.dumb,W=760,rowH=34,m={l:182,r:112,t:38,b:42};
+  const H=m.t+m.b+rowH*R.length;const s=mk(h,W,H,600);
+  const lo=72,hi=86,pw=W-m.l-m.r;const X=function(v){return m.l+(v-lo)/(hi-lo)*pw;};
+  [72,74,76,78,80,82,84,86].forEach(function(t){line(s,X(t),m.t-6,X(t),H-m.b,'grid');tx(s,X(t),H-m.b+18,t+'%','tick','middle');});
+  tx(s,m.l+pw,H-6,'token 准确率','axt','end');
+  const ax=X(84.2);line(s,ax,m.t-12,ax,H-m.b,'ref');tx(s,ax,m.t-18,'浮点 A0 84.2%','reflbl','middle');
+  tx(s,W-m.r+14,m.t-18,'最后 10 次全对','reflbl','start');
+  R.forEach(function(r,i){
+    const yc=m.t+rowH*i+rowH/2,c=ICOL[r.g];
+    if(i>0&&R[i-1].g!==r.g)line(s,8,m.t+rowH*i,W-8,m.t+rowH*i,'grid');
+    tx(s,m.l-12,yc+4,r.label,'bs','end');
+    el('line',{x1:X(avg(r.a1)),y1:yc,x2:X(avg(r.c)),y2:yc,style:'stroke:var('+c+');stroke-width:3;stroke-linecap:round;opacity:.45'},s);
+    r.a1.forEach(function(v){el('circle',{cx:X(v),cy:yc,r:5.5,style:'fill:var(--panel);stroke:var('+c+');stroke-width:2.2'},s);});
+    r.c.forEach(function(v){el('circle',{cx:X(v),cy:yc,r:5.5,class:'dot',style:'fill:var('+c+')'},s);});
+    tx(s,W-m.r+14,yc+4,r.stab.join(' / ')+' 次','vlbl','start');
+    const hb=el('rect',{x:0,y:yc-rowH/2,width:W,height:rowH,fill:'transparent',class:'barhit'},s);
+    hb.addEventListener('pointermove',function(e){showTip(e,'<div><b style="margin:0;padding:0">'+r.label+'</b></div>'+
+      '<div class="tr"><i style="background:var('+c+');opacity:.5"></i>A1<b>'+r.a1.map(function(v){return v.toFixed(1)+'%';}).join(' / ')+'</b></div>'+
+      '<div class="tr"><i style="background:var('+c+')"></i>C<b>'+r.c.map(function(v){return v.toFixed(1)+'%';}).join(' / ')+'</b></div>'+
+      '<div class="sub">C 停在第 '+r.cstep.join(' / ')+' 步；最后 10 次全对 '+r.stab.join(' / ')+' 次</div>');});
+    hb.addEventListener('pointerleave',hideTip);
+  });
+  dataTable(h,['做法','A1','C','最后 10 次全对'],R.map(function(r){return [r.label,r.a1.map(function(v){return v.toFixed(1)+'%';}).join(' / '),r.c.map(function(v){return v.toFixed(1)+'%';}).join(' / '),r.stab.join(' / ')];}));
+};
+C.impA1=function(h){const cv=IMP.curves;
+  const last=function(a){return a[a.length-1];};
+  lineChart(h,{x:[0,12000],y:[30,90],xTicks:[0,2000,4000,6000,8000,10000,12000],yTicks:[30,40,50,60,70,80,90],xFmt:K,yFmt:function(v){return v+'%';},unit:'%',mr:64,yTitle:'A1 的 token 准确率',xTitle:'训练步数',tipX:step,
+    refs:[{y:84.2,label:'A0 84.2%'}],
+    series:[{name:'T = 1',c:'--de',data:cv.T1,label:'T = 1'},{name:'T = 2',c:'--t2',data:cv.T2,label:'T = 2',ldx:0,ldy:-12,lanchor:'middle'},{name:'T = 4',c:'--t4',data:cv.T4,label:'T = 4',ldx:0,ldy:-12,lanchor:'middle'},{name:'T = 8',c:'--t8',data:cv.T8,label:'T = 8',ldx:0,ldy:-12,lanchor:'middle'}],
+    table:{head:['每 token 最多脉冲','停在第几步','最终准确率'],rows:[['T = 1',last(cv.T1)[0],last(cv.T1)[1].toFixed(1)+'%'],['T = 2',last(cv.T2)[0],last(cv.T2)[1].toFixed(1)+'%'],['T = 4',last(cv.T4)[0],last(cv.T4)[1].toFixed(1)+'%'],['T = 8',last(cv.T8)[0],last(cv.T8)[1].toFixed(1)+'%']]}});};
+C.impScatter=function(h){
+  const P=IMP.scat,W=760,H=380,m={l:52,r:28,t:34,b:50};const s=mk(h,W,H,600);
+  const pw=W-m.l-m.r,ph=H-m.t-m.b;const X=function(v){return m.l+v/10000*pw;},Y=function(v){return m.t+ph-(v-30)/70*ph;};
+  [30,40,50,60,70,80,90,100].forEach(function(t){line(s,m.l,Y(t),m.l+pw,Y(t),'grid');tx(s,m.l-8,Y(t)+4,t+'%','tick','end');});
+  line(s,m.l,Y(30),m.l+pw,Y(30),'axis');
+  [0,2000,4000,6000,8000,10000].forEach(function(t){tx(s,X(t),Y(30)+18,K(t),'tick','middle');});
+  tx(s,4,14,'整句背对率','axt','start');tx(s,m.l+pw,H-8,'整个模型每个 token 发出的脉冲数','axt','end');
+  line(s,m.l,Y(IMP.a0Recall),m.l+pw,Y(IMP.a0Recall),'ref');tx(s,m.l+8,Y(IMP.a0Recall)-7,'浮点 A0 '+IMP.a0Recall.toFixed(2)+'%','reflbl','start');
+  const OFF={'原来的 C':[10,4,'start'],'训练更久':[-10,4,'end'],'T = 4，只在 q、k、v':[10,18,'start'],'加宽到 256':[10,4,'start'],'T = 2':[10,4,'start'],'T = 4':[10,4,'start'],'T = 8':[-10,18,'end'],'加宽 + T = 4':[-10,4,'end']};
+  P.forEach(function(p){const c=ICOL[p.g],x=X(p.x);
+    el('line',{x1:x,y1:Y(p.greedy),x2:x,y2:Y(p.beam),style:'stroke:var('+c+');stroke-width:2;opacity:.55'},s);
+    el('circle',{cx:x,cy:Y(p.beam),r:5,style:'fill:var(--panel);stroke:var('+c+');stroke-width:2.2'},s);
+    el('circle',{cx:x,cy:Y(p.greedy),r:6,class:'dot',style:'fill:var('+c+')'},s);
+    const o=OFF[p.label]||[10,4,'start'];tx(s,x+o[0],Y(p.greedy)+o[1],p.label,'bs',o[2]);
+    const hb=el('circle',{cx:x,cy:(Y(p.greedy)+Y(p.beam))/2,r:Math.max(14,(Y(p.greedy)-Y(p.beam))/2+8),fill:'transparent',class:'barhit'},s);
+    hb.addEventListener('pointermove',function(e){showTip(e,'<div><b style="margin:0;padding:0">'+p.label+'</b></div>'+
+      '<div class="tr"><i style="background:var('+c+')"></i>贪心解码<b>'+p.greedy.toFixed(1)+'%</b></div>'+
+      '<div class="tr"><i style="background:var('+c+');opacity:.5"></i>束搜索<b>'+p.beam.toFixed(1)+'%</b></div>'+
+      '<div class="sub">每 token '+p.x+' 个脉冲；W2 收到 '+p.w2+' 个；参数 '+Math.round(p.params/1e4)+' 万</div>');});
+    hb.addEventListener('pointerleave',hideTip);
+  });
+  dataTable(h,['做法','每 token 脉冲','整句，贪心','整句，束搜索'],P.map(function(p){return [p.label,p.x,p.greedy.toFixed(1)+'%',p.beam.toFixed(1)+'%'];}));
+};
+(function(){
+  const t2=document.querySelector('#demo2 tbody');
+  DEMO.forEach(function(d,i){const tr=document.createElement('tr');
+    function cell(out){const c=common(d[1],out);return (c[0]?'<span class="m-ok">'+esc(c[0])+'</span>':'')+(c[1]?' <span class="m-no">'+esc(c[1])+'</span>':'');}
+    tr.innerHTML='<td class="tok">'+esc(d[0])+'</td><td class="tok">'+cell(d[2])+'</td><td class="tok">'+cell(IMP.t2demo[i])+'</td>';t2.appendChild(tr);});
+  const ta=document.querySelector('#impAll tbody');
+  IMP.all.forEach(function(r){const tr=document.createElement('tr');tr.innerHTML='<td>'+r[0]+'</td>'+[r[1].toFixed(1)+'%',r[2].toFixed(1)+'%',r[3],r[4],r[5].toFixed(1)+'%',r[6].toFixed(1)+'%',r[7],r[8]].map(function(x){return '<td class="num">'+x+'</td>';}).join('');ta.appendChild(tr);});
+  const ts=document.querySelector('#impSeeds tbody');
+  IMP.seeds.forEach(function(r){const tr=document.createElement('tr');tr.innerHTML=[r[0],r[1],r[2].toFixed(1)+'%',r[3].toFixed(1)+'%',r[4],r[5],r[6].toFixed(1)+'%',r[7].toFixed(1)+'%'].map(function(x){return '<td class="num">'+x+'</td>';}).join('');ts.appendChild(tr);});
+})();
 
 document.querySelectorAll('[data-fig]').forEach(function(h){try{F[h.dataset.fig](h);}catch(e){console.error('fig',h.dataset.fig,e);}});
 document.querySelectorAll('[data-chart]').forEach(function(h){try{C[h.dataset.chart](h);}catch(e){console.error('chart',h.dataset.chart,e);}});
