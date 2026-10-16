@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/T2_a1_s2/model.pt",
+ "levels": 2,
+ "level_points": "all",
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.1645,
+   "ppl": 407.158
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.2877,
+   "ppl": 51.182
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.1971,
+   "ppl": 127.582
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.181,
+   "ppl": 175.962
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1756,
+   "ppl": 204.017
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.1722,
+   "ppl": 216.231
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1721,
+   "ppl": 216.484
+  }
+ ]
+}

@@ -1,437 +1,609 @@
-[
- {
-  "name": "基线 T=1(已有)",
-  "direction": "训练更久",
-  "width": 128,
-  "T": 1,
-  "points": "all",
-  "a1": {
-   "acc": 0.7404,
-   "ppl": 2.631,
-   "exact": 1,
-   "steps_run": 12000,
-   "stopped": "max_steps",
-   "seconds": 7283.1,
-   "exact5_last10": 0,
-   "lif_scale": null
+{
+ "main": [
+  {
+   "name": "基线 T=1(已有)",
+   "direction": "训练更久",
+   "width": 128,
+   "T": 1,
+   "points": "all",
+   "a1": {
+    "acc": 0.7404,
+    "ppl": 2.631,
+    "exact": 1,
+    "steps_run": 12000,
+    "stopped": "max_steps",
+    "seconds": 7283.1,
+    "exact5_last10": 0,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.7519,
+    "ppl": 2.577,
+    "exact": 1,
+    "steps_run": 12000,
+    "stopped": "max_steps",
+    "seconds": 5576.7,
+    "exact5_last10": 0,
+    "lif_scale": 2.25
+   },
+   "a1_greedy": 0.3476,
+   "a1_beam": 0.4898,
+   "a1_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_greedy": 0.3967,
+   "c_beam": 0.5783,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 1742.1,
+   "c_w2": 78.1,
+   "c_params": 1155621,
+   "c_late": 0.9312,
+   "c_mean_p": 0.6505,
+   "a1_spikes": 2019.7
   },
-  "c": {
-   "acc": 0.7519,
-   "ppl": 2.577,
-   "exact": 1,
-   "steps_run": 12000,
-   "stopped": "max_steps",
-   "seconds": 5576.7,
-   "exact5_last10": 0,
-   "lif_scale": 2.25
+  {
+   "name": "C 续训 12k",
+   "direction": "训练更久",
+   "width": 128,
+   "T": 1,
+   "points": "all",
+   "a1": {
+    "acc": 0.7404,
+    "ppl": 2.631,
+    "exact": 1,
+    "steps_run": 12000,
+    "stopped": "max_steps",
+    "seconds": 7283.1,
+    "exact5_last10": 0,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.7569,
+    "ppl": 2.512,
+    "exact": 5,
+    "steps_run": 6500,
+    "stopped": "converged",
+    "seconds": 4812.5,
+    "exact5_last10": 1,
+    "lif_scale": 1.0
+   },
+   "a1_greedy": 0.3476,
+   "a1_beam": 0.4898,
+   "a1_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_greedy": 0.4132,
+   "c_beam": 0.5716,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 1766.8,
+   "c_w2": 79.8,
+   "c_params": 1155621,
+   "c_late": 0.9282,
+   "c_mean_p": 0.6694,
+   "a1_spikes": 2019.7
   },
-  "a1_greedy": 0.3476,
-  "a1_beam": 0.4898,
-  "a1_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_greedy": 0.3967,
-  "c_beam": 0.5783,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 1742.1,
-  "c_w2": 78.1,
-  "c_params": 1155621,
-  "c_late": 0.9312,
-  "c_mean_p": 0.6505,
-  "a1_spikes": 2019.7
- },
- {
-  "name": "C 续训 12k",
-  "direction": "训练更久",
-  "width": 128,
-  "T": 1,
-  "points": "all",
-  "a1": {
-   "acc": 0.7404,
-   "ppl": 2.631,
-   "exact": 1,
-   "steps_run": 12000,
-   "stopped": "max_steps",
-   "seconds": 7283.1,
-   "exact5_last10": 0,
-   "lif_scale": null
+  {
+   "name": "C 训 24k",
+   "direction": "训练更久",
+   "width": 128,
+   "T": 1,
+   "points": "all",
+   "a1": {
+    "acc": 0.7404,
+    "ppl": 2.631,
+    "exact": 1,
+    "steps_run": 12000,
+    "stopped": "max_steps",
+    "seconds": 7283.1,
+    "exact5_last10": 0,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.7776,
+    "ppl": 2.329,
+    "exact": 5,
+    "steps_run": 20400,
+    "stopped": "converged",
+    "seconds": 13301.1,
+    "exact5_last10": 1,
+    "lif_scale": 2.25
+   },
+   "a1_greedy": 0.3476,
+   "a1_beam": 0.4898,
+   "a1_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_greedy": 0.5133,
+   "c_beam": 0.6655,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 1784.8,
+   "c_w2": 82.8,
+   "c_params": 1155621,
+   "c_late": 0.9511,
+   "c_mean_p": 0.6983,
+   "a1_spikes": 2019.7
   },
-  "c": {
-   "acc": 0.7569,
-   "ppl": 2.512,
-   "exact": 5,
-   "steps_run": 6500,
-   "stopped": "converged",
-   "seconds": 4812.5,
-   "exact5_last10": 1,
-   "lif_scale": 1.0
+  {
+   "name": "A1 24k + C 24k",
+   "direction": "训练更久",
+   "width": 128,
+   "T": 1,
+   "points": "all",
+   "a1": {
+    "acc": 0.782,
+    "ppl": 2.262,
+    "exact": 2,
+    "steps_run": 24000,
+    "stopped": "max_steps",
+    "seconds": 15403.7,
+    "exact5_last10": 0,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.7636,
+    "ppl": 2.435,
+    "exact": 3,
+    "steps_run": 24000,
+    "stopped": "max_steps",
+    "seconds": 13889.8,
+    "exact5_last10": 0,
+    "lif_scale": 2.25
+   },
+   "a1_greedy": 0.5081,
+   "a1_beam": 0.6659,
+   "a1_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_greedy": 0.441,
+   "c_beam": 0.6155,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 1778.3,
+   "c_w2": 81.9,
+   "c_params": 1155621,
+   "c_late": 0.939,
+   "c_mean_p": 0.6753,
+   "a1_spikes": 2065.0
   },
-  "a1_greedy": 0.3476,
-  "a1_beam": 0.4898,
-  "a1_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_greedy": 0.4132,
-  "c_beam": 0.5716,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 1766.8,
-  "c_w2": 79.8,
-  "c_params": 1155621,
-  "c_late": 0.9282,
-  "c_mean_p": 0.6694,
-  "a1_spikes": 2019.7
- },
- {
-  "name": "C 训 24k",
-  "direction": "训练更久",
-  "width": 128,
-  "T": 1,
-  "points": "all",
-  "a1": {
-   "acc": 0.7404,
-   "ppl": 2.631,
-   "exact": 1,
-   "steps_run": 12000,
-   "stopped": "max_steps",
-   "seconds": 7283.1,
-   "exact5_last10": 0,
-   "lif_scale": null
+  {
+   "name": "T=2",
+   "direction": "多脉冲",
+   "width": 128,
+   "T": 2,
+   "points": "all",
+   "a1": {
+    "acc": 0.8318,
+    "ppl": 1.903,
+    "exact": 5,
+    "steps_run": 9700,
+    "stopped": "converged",
+    "seconds": 8370.6,
+    "exact5_last10": 5,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8246,
+    "ppl": 1.964,
+    "exact": 5,
+    "steps_run": 7100,
+    "stopped": "converged",
+    "seconds": 6335.2,
+    "exact5_last10": 8,
+    "lif_scale": 1.5
+   },
+   "a1_greedy": 0.8834,
+   "a1_beam": 0.9454,
+   "a1_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_greedy": 0.8337,
+   "c_beam": 0.9283,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 2996.1,
+   "c_w2": 214.6,
+   "c_params": 1155621,
+   "c_late": 0.9844,
+   "c_mean_p": 0.7759,
+   "a1_spikes": 3348.6
   },
-  "c": {
-   "acc": 0.7776,
-   "ppl": 2.329,
-   "exact": 5,
-   "steps_run": 20400,
-   "stopped": "converged",
-   "seconds": 13301.1,
-   "exact5_last10": 1,
-   "lif_scale": 2.25
+  {
+   "name": "T=4",
+   "direction": "多脉冲",
+   "width": 128,
+   "T": 4,
+   "points": "all",
+   "a1": {
+    "acc": 0.8329,
+    "ppl": 1.924,
+    "exact": 5,
+    "steps_run": 3800,
+    "stopped": "converged",
+    "seconds": 3159.2,
+    "exact5_last10": 9,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8316,
+    "ppl": 1.929,
+    "exact": 5,
+    "steps_run": 3100,
+    "stopped": "converged",
+    "seconds": 3322.1,
+    "exact5_last10": 6,
+    "lif_scale": 1.0
+   },
+   "a1_greedy": 0.9121,
+   "a1_beam": 0.9637,
+   "a1_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_greedy": 0.9118,
+   "c_beam": 0.9686,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 5037.6,
+   "c_w2": 494.4,
+   "c_params": 1155621,
+   "c_late": 0.9919,
+   "c_mean_p": 0.7851,
+   "a1_spikes": 5756.6
   },
-  "a1_greedy": 0.3476,
-  "a1_beam": 0.4898,
-  "a1_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_greedy": 0.5133,
-  "c_beam": 0.6655,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 1784.8,
-  "c_w2": 82.8,
-  "c_params": 1155621,
-  "c_late": 0.9511,
-  "c_mean_p": 0.6983,
-  "a1_spikes": 2019.7
- },
- {
-  "name": "A1 24k + C 24k",
-  "direction": "训练更久",
-  "width": 128,
-  "T": 1,
-  "points": "all",
-  "a1": {
-   "acc": 0.782,
-   "ppl": 2.262,
-   "exact": 2,
-   "steps_run": 24000,
-   "stopped": "max_steps",
-   "seconds": 15403.7,
-   "exact5_last10": 0,
-   "lif_scale": null
+  {
+   "name": "T=8",
+   "direction": "多脉冲",
+   "width": 128,
+   "T": 8,
+   "points": "all",
+   "a1": {
+    "acc": 0.8356,
+    "ppl": 1.914,
+    "exact": 5,
+    "steps_run": 2100,
+    "stopped": "converged",
+    "seconds": 1896.9,
+    "exact5_last10": 9,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8359,
+    "ppl": 1.897,
+    "exact": 5,
+    "steps_run": 2100,
+    "stopped": "converged",
+    "seconds": 2448.1,
+    "exact5_last10": 7,
+    "lif_scale": 1.0
+   },
+   "a1_greedy": 0.9554,
+   "a1_beam": 0.9823,
+   "a1_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_greedy": 0.9652,
+   "c_beam": 0.9863,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 9273.9,
+   "c_w2": 1564.8,
+   "c_params": 1155621,
+   "c_late": 0.9956,
+   "c_mean_p": 0.7943,
+   "a1_spikes": 11039.9
   },
-  "c": null,
-  "a1_greedy": 0.5081,
-  "a1_beam": 0.6659,
-  "a1_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_greedy": null,
-  "c_beam": null,
-  "c_beam_cfg": null,
-  "c_spikes": null,
-  "c_w2": null,
-  "c_params": null,
-  "c_late": null,
-  "c_mean_p": null,
-  "a1_spikes": 2065.0
- },
- {
-  "name": "T=2",
-  "direction": "多脉冲",
-  "width": 128,
-  "T": 2,
-  "points": "all",
-  "a1": {
-   "acc": 0.8318,
-   "ppl": 1.903,
-   "exact": 5,
-   "steps_run": 9700,
-   "stopped": "converged",
-   "seconds": 8370.6,
-   "exact5_last10": 5,
-   "lif_scale": null
+  {
+   "name": "T=4 只在 q/k/v",
+   "direction": "多脉冲",
+   "width": 128,
+   "T": 4,
+   "points": "mem",
+   "a1": {
+    "acc": 0.7764,
+    "ppl": 2.355,
+    "exact": 2,
+    "steps_run": 12000,
+    "stopped": "max_steps",
+    "seconds": 9200.7,
+    "exact5_last10": 0,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.7829,
+    "ppl": 2.301,
+    "exact": 3,
+    "steps_run": 12000,
+    "stopped": "max_steps",
+    "seconds": 7693.4,
+    "exact5_last10": 0,
+    "lif_scale": 2.0
+   },
+   "a1_greedy": null,
+   "a1_beam": null,
+   "a1_beam_cfg": null,
+   "c_greedy": 0.5539,
+   "c_beam": 0.7418,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 2654.2,
+   "c_w2": 72.2,
+   "c_params": 1155621,
+   "c_late": 0.9584,
+   "c_mean_p": 0.6985,
+   "a1_spikes": 3125.4
   },
-  "c": {
-   "acc": 0.8246,
-   "ppl": 1.964,
-   "exact": 5,
-   "steps_run": 7100,
-   "stopped": "converged",
-   "seconds": 6335.2,
-   "exact5_last10": 8,
-   "lif_scale": 1.5
+  {
+   "name": "加宽 d=256",
+   "direction": "加宽",
+   "width": 256,
+   "T": 1,
+   "points": "all",
+   "a1": {
+    "acc": 0.8312,
+    "ppl": 1.894,
+    "exact": 5,
+    "steps_run": 10100,
+    "stopped": "converged",
+    "seconds": 7865.5,
+    "exact5_last10": 6,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8014,
+    "ppl": 2.129,
+    "exact": 3,
+    "steps_run": 12000,
+    "stopped": "max_steps",
+    "seconds": 7312.7,
+    "exact5_last10": 2,
+    "lif_scale": 2.25
+   },
+   "a1_greedy": 0.8871,
+   "a1_beam": 0.9432,
+   "a1_beam_cfg": [
+    4,
+    1.0
+   ],
+   "c_greedy": 0.6189,
+   "c_beam": 0.7666,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 3022.4,
+   "c_w2": 80.0,
+   "c_params": 2966565,
+   "c_late": 0.9641,
+   "c_mean_p": 0.7303,
+   "a1_spikes": 3712.1
   },
-  "a1_greedy": 0.8834,
-  "a1_beam": 0.9454,
-  "a1_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_greedy": 0.8337,
-  "c_beam": 0.9283,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 2996.1,
-  "c_w2": 214.6,
-  "c_params": 1155621,
-  "c_late": 0.9844,
-  "c_mean_p": 0.7759,
-  "a1_spikes": 3348.6
- },
- {
-  "name": "T=4",
-  "direction": "多脉冲",
-  "width": 128,
-  "T": 4,
-  "points": "all",
-  "a1": {
-   "acc": 0.8329,
-   "ppl": 1.924,
-   "exact": 5,
-   "steps_run": 3800,
-   "stopped": "converged",
-   "seconds": 3159.2,
-   "exact5_last10": 9,
-   "lif_scale": null
+  {
+   "name": "加宽 d=256 + T=4",
+   "direction": "加宽+多脉冲",
+   "width": 256,
+   "T": 4,
+   "points": "all",
+   "a1": {
+    "acc": 0.8352,
+    "ppl": 1.907,
+    "exact": 5,
+    "steps_run": 1400,
+    "stopped": "converged",
+    "seconds": 1079.2,
+    "exact5_last10": 6,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8363,
+    "ppl": 1.91,
+    "exact": 5,
+    "steps_run": 1600,
+    "stopped": "converged",
+    "seconds": 1471.8,
+    "exact5_last10": 8,
+    "lif_scale": 1.0
+   },
+   "a1_greedy": 0.9634,
+   "a1_beam": 0.9847,
+   "a1_beam_cfg": [
+    4,
+    1.0
+   ],
+   "c_greedy": 0.9536,
+   "c_beam": 0.9771,
+   "c_beam_cfg": [
+    16,
+    1.0
+   ],
+   "c_spikes": 7868.1,
+   "c_w2": 368.1,
+   "c_params": 2966565,
+   "c_late": 0.9923,
+   "c_mean_p": 0.7988,
+   "a1_spikes": 9360.1
+  }
+ ],
+ "seeds": [
+  {
+   "T": 2,
+   "seed": 0,
+   "a1": {
+    "acc": 0.8318,
+    "ppl": 1.903,
+    "exact": 5,
+    "steps_run": 9700,
+    "stopped": "converged",
+    "seconds": 8370.6,
+    "exact5_last10": 5,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8246,
+    "ppl": 1.964,
+    "exact": 5,
+    "steps_run": 7100,
+    "stopped": "converged",
+    "seconds": 6335.2,
+    "exact5_last10": 8,
+    "lif_scale": 1.5
+   },
+   "c_greedy": 0.8337,
+   "c_beam": 0.9283
   },
-  "c": {
-   "acc": 0.8316,
-   "ppl": 1.929,
-   "exact": 5,
-   "steps_run": 3100,
-   "stopped": "converged",
-   "seconds": 3322.1,
-   "exact5_last10": 6,
-   "lif_scale": 1.0
+  {
+   "T": 2,
+   "seed": 1,
+   "a1": {
+    "acc": 0.8158,
+    "ppl": 2.021,
+    "exact": 5,
+    "steps_run": 6800,
+    "stopped": "converged",
+    "seconds": 5459.6,
+    "exact5_last10": 6,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8251,
+    "ppl": 1.955,
+    "exact": 5,
+    "steps_run": 7300,
+    "stopped": "converged",
+    "seconds": 5659.8,
+    "exact5_last10": 5,
+    "lif_scale": 1.5
+   },
+   "c_greedy": 0.8435,
+   "c_beam": 0.9304
   },
-  "a1_greedy": 0.9121,
-  "a1_beam": 0.9637,
-  "a1_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_greedy": 0.9118,
-  "c_beam": 0.9686,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 5037.6,
-  "c_w2": 494.4,
-  "c_params": 1155621,
-  "c_late": 0.9919,
-  "c_mean_p": 0.7851,
-  "a1_spikes": 5756.6
- },
- {
-  "name": "T=8",
-  "direction": "多脉冲",
-  "width": 128,
-  "T": 8,
-  "points": "all",
-  "a1": {
-   "acc": 0.8356,
-   "ppl": 1.914,
-   "exact": 5,
-   "steps_run": 2100,
-   "stopped": "converged",
-   "seconds": 1896.9,
-   "exact5_last10": 9,
-   "lif_scale": null
+  {
+   "T": 2,
+   "seed": 2,
+   "a1": {
+    "acc": 0.8278,
+    "ppl": 1.934,
+    "exact": 5,
+    "steps_run": 8600,
+    "stopped": "converged",
+    "seconds": 6950.4,
+    "exact5_last10": 5,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8304,
+    "ppl": 1.919,
+    "exact": 5,
+    "steps_run": 8600,
+    "stopped": "converged",
+    "seconds": 6514.1,
+    "exact5_last10": 5,
+    "lif_scale": 1.5
+   },
+   "c_greedy": 0.8871,
+   "c_beam": 0.9527
   },
-  "c": {
-   "acc": 0.8359,
-   "ppl": 1.897,
-   "exact": 5,
-   "steps_run": 2100,
-   "stopped": "converged",
-   "seconds": 2448.1,
-   "exact5_last10": 7,
-   "lif_scale": 1.0
+  {
+   "T": 4,
+   "seed": 0,
+   "a1": {
+    "acc": 0.8329,
+    "ppl": 1.924,
+    "exact": 5,
+    "steps_run": 3800,
+    "stopped": "converged",
+    "seconds": 3159.2,
+    "exact5_last10": 9,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8316,
+    "ppl": 1.929,
+    "exact": 5,
+    "steps_run": 3100,
+    "stopped": "converged",
+    "seconds": 3322.1,
+    "exact5_last10": 6,
+    "lif_scale": 1.0
+   },
+   "c_greedy": 0.9118,
+   "c_beam": 0.9686
   },
-  "a1_greedy": 0.9554,
-  "a1_beam": 0.9823,
-  "a1_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_greedy": 0.9652,
-  "c_beam": 0.9863,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 9273.9,
-  "c_w2": 1564.8,
-  "c_params": 1155621,
-  "c_late": 0.9956,
-  "c_mean_p": 0.7943,
-  "a1_spikes": 11039.9
- },
- {
-  "name": "T=4 只在 q/k/v",
-  "direction": "多脉冲",
-  "width": 128,
-  "T": 4,
-  "points": "mem",
-  "a1": {
-   "acc": 0.7764,
-   "ppl": 2.355,
-   "exact": 2,
-   "steps_run": 12000,
-   "stopped": "max_steps",
-   "seconds": 9200.7,
-   "exact5_last10": 0,
-   "lif_scale": null
+  {
+   "T": 4,
+   "seed": 1,
+   "a1": {
+    "acc": 0.833,
+    "ppl": 1.915,
+    "exact": 5,
+    "steps_run": 3800,
+    "stopped": "converged",
+    "seconds": 3089.3,
+    "exact5_last10": 9,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8347,
+    "ppl": 1.882,
+    "exact": 5,
+    "steps_run": 3900,
+    "stopped": "converged",
+    "seconds": 3184.9,
+    "exact5_last10": 4,
+    "lif_scale": 1.0
+   },
+   "c_greedy": 0.9457,
+   "c_beam": 0.9826
   },
-  "c": {
-   "acc": 0.7829,
-   "ppl": 2.301,
-   "exact": 3,
-   "steps_run": 12000,
-   "stopped": "max_steps",
-   "seconds": 7693.4,
-   "exact5_last10": 0,
-   "lif_scale": 2.0
-  },
-  "a1_greedy": null,
-  "a1_beam": null,
-  "a1_beam_cfg": null,
-  "c_greedy": 0.5539,
-  "c_beam": 0.7418,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 2654.2,
-  "c_w2": 72.2,
-  "c_params": 1155621,
-  "c_late": 0.9584,
-  "c_mean_p": 0.6985,
-  "a1_spikes": 3125.4
- },
- {
-  "name": "加宽 d=256",
-  "direction": "加宽",
-  "width": 256,
-  "T": 1,
-  "points": "all",
-  "a1": {
-   "acc": 0.8312,
-   "ppl": 1.894,
-   "exact": 5,
-   "steps_run": 10100,
-   "stopped": "converged",
-   "seconds": 7865.5,
-   "exact5_last10": 6,
-   "lif_scale": null
-  },
-  "c": {
-   "acc": 0.8014,
-   "ppl": 2.129,
-   "exact": 3,
-   "steps_run": 12000,
-   "stopped": "max_steps",
-   "seconds": 7312.7,
-   "exact5_last10": 2,
-   "lif_scale": 2.25
-  },
-  "a1_greedy": 0.8871,
-  "a1_beam": 0.9432,
-  "a1_beam_cfg": [
-   4,
-   1.0
-  ],
-  "c_greedy": 0.6189,
-  "c_beam": 0.7666,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 3022.4,
-  "c_w2": 80.0,
-  "c_params": 2966565,
-  "c_late": 0.9641,
-  "c_mean_p": 0.7303,
-  "a1_spikes": 3712.1
- },
- {
-  "name": "加宽 d=256 + T=4",
-  "direction": "加宽+多脉冲",
-  "width": 256,
-  "T": 4,
-  "points": "all",
-  "a1": {
-   "acc": 0.8352,
-   "ppl": 1.907,
-   "exact": 5,
-   "steps_run": 1400,
-   "stopped": "converged",
-   "seconds": 1079.2,
-   "exact5_last10": 6,
-   "lif_scale": null
-  },
-  "c": {
-   "acc": 0.8363,
-   "ppl": 1.91,
-   "exact": 5,
-   "steps_run": 1600,
-   "stopped": "converged",
-   "seconds": 1471.8,
-   "exact5_last10": 8,
-   "lif_scale": 1.0
-  },
-  "a1_greedy": 0.9634,
-  "a1_beam": 0.9847,
-  "a1_beam_cfg": [
-   4,
-   1.0
-  ],
-  "c_greedy": 0.9536,
-  "c_beam": 0.9771,
-  "c_beam_cfg": [
-   16,
-   1.0
-  ],
-  "c_spikes": 7868.1,
-  "c_w2": 368.1,
-  "c_params": 2966565,
-  "c_late": 0.9923,
-  "c_mean_p": 0.7988,
-  "a1_spikes": 9360.1
- }
-]
+  {
+   "T": 4,
+   "seed": 2,
+   "a1": {
+    "acc": 0.8353,
+    "ppl": 1.884,
+    "exact": 5,
+    "steps_run": 4200,
+    "stopped": "converged",
+    "seconds": 3407.5,
+    "exact5_last10": 7,
+    "lif_scale": null
+   },
+   "c": {
+    "acc": 0.8364,
+    "ppl": 1.889,
+    "exact": 5,
+    "steps_run": 3700,
+    "stopped": "converged",
+    "seconds": 3017.2,
+    "exact5_last10": 9,
+    "lif_scale": 1.0
+   },
+   "c_greedy": 0.9417,
+   "c_beam": 0.9783
+  }
+ ]
+}

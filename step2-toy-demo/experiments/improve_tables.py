@@ -81,18 +81,42 @@ def main():
                          c_spikes=pc and pc.get("total_spikes_per_token"), c_w2=pc and pc.get("w2_events_per_token"),
                          c_params=pc and pc.get("n_params"), c_late=pc and pc["by_position"]["16-25"],
                          c_mean_p=pc and pc.get("mean_p_true"), a1_spikes=pa and pa.get("total_spikes_per_token")))
-    Path("results/improve/tables.json").write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+    seeds = []
+    for T in (2, 4):
+        for s in (0, 1, 2):
+            suf = "" if s == 0 else f"_s{s}"
+            a1d, cd = R / f"T{T}_a1{suf}", R / f"T{T}_c{suf}"
+            ra, rc = stage_row(a1d), stage_row(cd)
+            gc, bc = best_beam(beam.get(f"T{T}_c{suf}"))
+            seeds.append(dict(T=T, seed=s, a1=ra, c=rc, c_greedy=gc and gc["unique_exact"], c_beam=bc and bc["unique_exact"]))
+    Path("results/improve/tables.json").write_text(json.dumps(dict(main=rows, seeds=seeds), ensure_ascii=False, indent=1),
+                                                    encoding="utf-8")
+
+    lines = []
+
+    def out(*a):
+        text = " ".join(str(x) for x in a)
+        print(text)
+        lines.append(text)
 
     def f(x, k=3):
         return "—" if x is None else (f"{x:.{k}f}" if isinstance(x, float) else str(x))
 
-    print("| 运行 | 方向 | 宽度 | T | A1 acc | A1 步数 | C acc | C 步数 | C demo | 最后 10 个评估点 5/5 次数 | C 贪心整句 | C 束搜索整句 | 每 token 脉冲 | W2 事件 | 参数 |")
-    print("|" + "---|" * 15)
+    out("| 运行 | 方向 | 宽度 | T | A1 acc | A1 步数 | C acc | C 步数 | C demo | 最后 10 个评估点 5/5 次数 | C 贪心整句 | C 束搜索整句 | 每 token 脉冲 | W2 事件 | 参数 |")
+    out("|" + "---|" * 15)
     for r in rows:
         a, c = r["a1"] or {}, r["c"] or {}
-        print(f"| {r['name']} | {r['direction']} | {r['width']} | {r['T']}{'(q/k/v)' if r['points'] == 'mem' else ''} | {f(a.get('acc'))} | {f(a.get('steps_run'))} | "
+        out(f"| {r['name']} | {r['direction']} | {r['width']} | {r['T']}{'(q/k/v)' if r['points'] == 'mem' else ''} | {f(a.get('acc'))} | {f(a.get('steps_run'))} | "
               f"{f(c.get('acc'))} | {f(c.get('steps_run'))} | {f(c.get('exact'))}/5 | {f(c.get('exact5_last10'))} | {f(r['c_greedy'])} | {f(r['c_beam'])} | "
               f"{f(r['c_spikes'], 0)} | {f(r['c_w2'], 0)} | {f(r['c_params'])} |")
+    out()
+    out("| T | 种子 | A1 acc | A1 步数 | C acc | C 步数 | C demo | 最后 10 个评估点 5/5 次数 | C 贪心整句 | C 束搜索整句 |")
+    out("|" + "---|" * 10)
+    for r in seeds:
+        a, c = r["a1"] or {}, r["c"] or {}
+        out(f"| {r['T']} | {r['seed']} | {f(a.get('acc'))} | {f(a.get('steps_run'))} | {f(c.get('acc'))} | {f(c.get('steps_run'))} | "
+              f"{f(c.get('exact'))}/5 | {f(c.get('exact5_last10'))} | {f(r['c_greedy'])} | {f(r['c_beam'])} |")
+    Path("results/improve/tables.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
