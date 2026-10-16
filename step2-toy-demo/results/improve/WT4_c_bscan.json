@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/WT4_a1/model.pt",
+ "levels": 4,
+ "level_points": "all",
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.3459,
+   "ppl": 27.101
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.2603,
+   "ppl": 44.844
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.1948,
+   "ppl": 97.371
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.1915,
+   "ppl": 103.744
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1911,
+   "ppl": 105.219
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.1909,
+   "ppl": 105.526
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1909,
+   "ppl": 105.54
+  }
+ ]
+}

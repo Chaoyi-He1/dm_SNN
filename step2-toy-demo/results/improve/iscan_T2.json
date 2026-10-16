@@ -1,0 +1,38 @@
+{
+ "levels": 2,
+ "level_points": "all",
+ "sizes": {},
+ "a0": "results/ckpt/a0.pt",
+ "rows": [
+  {
+   "fq": 0.5,
+   "token_acc": 0.158,
+   "ppl": 250.55,
+   "spikes": 1.151
+  },
+  {
+   "fq": 0.75,
+   "token_acc": 0.2417,
+   "ppl": 234.977,
+   "spikes": 0.7525
+  },
+  {
+   "fq": 0.9,
+   "token_acc": 0.2143,
+   "ppl": 481.033,
+   "spikes": 0.4438
+  },
+  {
+   "fq": 0.95,
+   "token_acc": 0.1583,
+   "ppl": 829.465,
+   "spikes": 0.3076
+  },
+  {
+   "fq": 0.98,
+   "token_acc": 0.1065,
+   "ppl": 1309.537,
+   "spikes": 0.197
+  }
+ ]
+}

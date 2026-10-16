@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/T4mem_a1/model.pt",
+ "levels": 4,
+ "level_points": "mem",
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.1445,
+   "ppl": 403.919
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.2156,
+   "ppl": 122.549
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.2382,
+   "ppl": 82.974
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.2048,
+   "ppl": 118.03
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1889,
+   "ppl": 144.24
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.177,
+   "ppl": 177.852
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1677,
+   "ppl": 209.297
+  }
+ ]
+}

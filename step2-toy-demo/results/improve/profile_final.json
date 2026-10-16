@@ -1,0 +1,2724 @@
+{
+ "A0": {
+  "path": "results/ckpt/a0.pt",
+  "info": {
+   "kind": "float",
+   "sizes": {}
+  },
+  "n_params": 1155600,
+  "top1": 0.842,
+  "top2": 0.8835,
+  "top5": 0.9265,
+  "mean_p_true": 0.8197,
+  "by_position": {
+   "1-3": 0.3726,
+   "4-6": 0.8726,
+   "7-10": 0.98,
+   "11-15": 0.9954,
+   "16-25": 1.0,
+   "26-41": 1.0
+  }
+ },
+ "W_A0": {
+  "path": "results/improve/W_a0_d256/model.pt",
+  "info": {
+   "kind": "float",
+   "sizes": {
+    "d": 256,
+    "dk": 64,
+    "dv": 64,
+    "d_ff": 512,
+    "n_heads": 4
+   }
+  },
+  "n_params": 2966544,
+  "top1": 0.8404,
+  "top2": 0.8833,
+  "top5": 0.9259,
+  "mean_p_true": 0.8147,
+  "by_position": {
+   "1-3": 0.3731,
+   "4-6": 0.8686,
+   "7-10": 0.9783,
+   "11-15": 0.9943,
+   "16-25": 0.9985,
+   "26-41": 0.9972
+  }
+ },
+ "A1_L1": {
+  "path": "results/conversion-sweep/L1_fq50_12k/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.7404,
+  "top2": 0.8378,
+  "top5": 0.912,
+  "mean_p_true": 0.6384,
+  "by_position": {
+   "1-3": 0.3531,
+   "4-6": 0.7456,
+   "7-10": 0.8418,
+   "11-15": 0.8804,
+   "16-25": 0.9017,
+   "26-41": 0.8894
+  },
+  "mean_spikes_per_neuron_token": 0.6514,
+  "weighted_spikes_per_neuron_token": 0.6312,
+  "total_spikes_per_token": 2019.7,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 129.8,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6384,
+    "nonzero": 0.6384
+   },
+   "blocks.0.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.445,
+    "nonzero": 0.445
+   },
+   "blocks.0.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7971,
+    "nonzero": 0.7971
+   },
+   "blocks.0.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.9093,
+    "nonzero": 0.9093
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.649,
+    "nonzero": 0.649
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7061,
+    "nonzero": 0.7061
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6903,
+    "nonzero": 0.6903
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4043,
+    "nonzero": 0.4043
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7098,
+    "nonzero": 0.7098
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6867,
+    "nonzero": 0.6867
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6752,
+    "nonzero": 0.6752
+   },
+   "blocks.1.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5039,
+    "nonzero": 0.5039
+   },
+   "blocks.1.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.8055,
+    "nonzero": 0.8055
+   },
+   "blocks.1.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7809,
+    "nonzero": 0.7809
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5975,
+    "nonzero": 0.5975
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6638,
+    "nonzero": 0.6638
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6993,
+    "nonzero": 0.6993
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.2876,
+    "nonzero": 0.2876
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6979,
+    "nonzero": 0.6979
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5907,
+    "nonzero": 0.5907
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7409,
+    "nonzero": 0.7409
+   }
+  }
+ },
+ "C_CL2": {
+  "path": "results/conversion-sweep/CL2_l1_lif225_lr3e3_12k/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.7519,
+  "top2": 0.8438,
+  "top5": 0.9117,
+  "mean_p_true": 0.6505,
+  "by_position": {
+   "1-3": 0.3474,
+   "4-6": 0.7341,
+   "7-10": 0.8603,
+   "11-15": 0.9086,
+   "16-25": 0.9312,
+   "26-41": 0.9291
+  },
+  "mean_spikes_per_neuron_token": 0.5687,
+  "weighted_spikes_per_neuron_token": 0.5444,
+  "total_spikes_per_token": 1742.1,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 78.1,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6433,
+    "nonzero": 0.6433
+   },
+   "blocks.0.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.2895,
+    "nonzero": 0.2895
+   },
+   "blocks.0.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7,
+    "nonzero": 0.7
+   },
+   "blocks.0.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7508,
+    "nonzero": 0.7508
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.3645,
+    "nonzero": 0.3645
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.4896,
+    "nonzero": 0.4896
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5537,
+    "nonzero": 0.5537
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.3222,
+    "nonzero": 0.3222
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5499,
+    "nonzero": 0.5499
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6302,
+    "nonzero": 0.6302
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6122,
+    "nonzero": 0.6122
+   },
+   "blocks.1.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5339,
+    "nonzero": 0.5339
+   },
+   "blocks.1.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6932,
+    "nonzero": 0.6932
+   },
+   "blocks.1.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6945,
+    "nonzero": 0.6945
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.4803,
+    "nonzero": 0.4803
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6848,
+    "nonzero": 0.6848
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6594,
+    "nonzero": 0.6594
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.1849,
+    "nonzero": 0.1849
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6108,
+    "nonzero": 0.6108
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7652,
+    "nonzero": 0.7652
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7291,
+    "nonzero": 0.7291
+   }
+  }
+ },
+ "LT_cont12k": {
+  "path": "results/improve/LT_cont12k_fromCL2/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.7569,
+  "top2": 0.8443,
+  "top5": 0.9136,
+  "mean_p_true": 0.6694,
+  "by_position": {
+   "1-3": 0.3528,
+   "4-6": 0.7459,
+   "7-10": 0.8714,
+   "11-15": 0.9057,
+   "16-25": 0.9282,
+   "26-41": 0.9213
+  },
+  "mean_spikes_per_neuron_token": 0.5768,
+  "weighted_spikes_per_neuron_token": 0.5521,
+  "total_spikes_per_token": 1766.8,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 79.8,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6551,
+    "nonzero": 0.6551
+   },
+   "blocks.0.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.2889,
+    "nonzero": 0.2889
+   },
+   "blocks.0.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7123,
+    "nonzero": 0.7123
+   },
+   "blocks.0.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7637,
+    "nonzero": 0.7637
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.3801,
+    "nonzero": 0.3801
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5101,
+    "nonzero": 0.5101
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5549,
+    "nonzero": 0.5549
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.3198,
+    "nonzero": 0.3198
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5643,
+    "nonzero": 0.5643
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6436,
+    "nonzero": 0.6436
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6099,
+    "nonzero": 0.6099
+   },
+   "blocks.1.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5351,
+    "nonzero": 0.5351
+   },
+   "blocks.1.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7122,
+    "nonzero": 0.7122
+   },
+   "blocks.1.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7001,
+    "nonzero": 0.7001
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.4863,
+    "nonzero": 0.4863
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6949,
+    "nonzero": 0.6949
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.665,
+    "nonzero": 0.665
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.1847,
+    "nonzero": 0.1847
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6225,
+    "nonzero": 0.6225
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.774,
+    "nonzero": 0.774
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7344,
+    "nonzero": 0.7344
+   }
+  }
+ },
+ "LT_c24k_fromL1": {
+  "path": "results/improve/LT_c24k_fromL1/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.7776,
+  "top2": 0.8561,
+  "top5": 0.9179,
+  "mean_p_true": 0.6983,
+  "by_position": {
+   "1-3": 0.354,
+   "4-6": 0.7717,
+   "7-10": 0.8946,
+   "11-15": 0.9348,
+   "16-25": 0.9511,
+   "26-41": 0.9546
+  },
+  "mean_spikes_per_neuron_token": 0.5821,
+  "weighted_spikes_per_neuron_token": 0.5578,
+  "total_spikes_per_token": 1784.8,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 82.8,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6532,
+    "nonzero": 0.6532
+   },
+   "blocks.0.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.29,
+    "nonzero": 0.29
+   },
+   "blocks.0.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7125,
+    "nonzero": 0.7125
+   },
+   "blocks.0.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7581,
+    "nonzero": 0.7581
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.3899,
+    "nonzero": 0.3899
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5214,
+    "nonzero": 0.5214
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5586,
+    "nonzero": 0.5586
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.3128,
+    "nonzero": 0.3128
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5734,
+    "nonzero": 0.5734
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6572,
+    "nonzero": 0.6572
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6223,
+    "nonzero": 0.6223
+   },
+   "blocks.1.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.525,
+    "nonzero": 0.525
+   },
+   "blocks.1.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7008,
+    "nonzero": 0.7008
+   },
+   "blocks.1.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7155,
+    "nonzero": 0.7155
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.4855,
+    "nonzero": 0.4855
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7071,
+    "nonzero": 0.7071
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6745,
+    "nonzero": 0.6745
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.1944,
+    "nonzero": 0.1944
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6388,
+    "nonzero": 0.6388
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7889,
+    "nonzero": 0.7889
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7445,
+    "nonzero": 0.7445
+   }
+  }
+ },
+ "LT_a1_24k": {
+  "path": "results/improve/LT_a1_24k/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.782,
+  "top2": 0.8607,
+  "top5": 0.9206,
+  "mean_p_true": 0.7057,
+  "by_position": {
+   "1-3": 0.3635,
+   "4-6": 0.7877,
+   "7-10": 0.8992,
+   "11-15": 0.9315,
+   "16-25": 0.9447,
+   "26-41": 0.9412
+  },
+  "mean_spikes_per_neuron_token": 0.6654,
+  "weighted_spikes_per_neuron_token": 0.6453,
+  "total_spikes_per_token": 2065.0,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 137.7,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6608,
+    "nonzero": 0.6608
+   },
+   "blocks.0.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.4481,
+    "nonzero": 0.4481
+   },
+   "blocks.0.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.8392,
+    "nonzero": 0.8392
+   },
+   "blocks.0.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.9242,
+    "nonzero": 0.9242
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6551,
+    "nonzero": 0.6551
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7099,
+    "nonzero": 0.7099
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6443,
+    "nonzero": 0.6443
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4377,
+    "nonzero": 0.4377
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7292,
+    "nonzero": 0.7292
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7042,
+    "nonzero": 0.7042
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6822,
+    "nonzero": 0.6822
+   },
+   "blocks.1.q": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5145,
+    "nonzero": 0.5145
+   },
+   "blocks.1.k": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.8255,
+    "nonzero": 0.8255
+   },
+   "blocks.1.v": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7981,
+    "nonzero": 0.7981
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6207,
+    "nonzero": 0.6207
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7228,
+    "nonzero": 0.7228
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7139,
+    "nonzero": 0.7139
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.279,
+    "nonzero": 0.279
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.713,
+    "nonzero": 0.713
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6126,
+    "nonzero": 0.6126
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7391,
+    "nonzero": 0.7391
+   }
+  }
+ },
+ "T2_a1": {
+  "path": "results/improve/T2_a1/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 2,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.8318,
+  "top2": 0.8814,
+  "top5": 0.9259,
+  "mean_p_true": 0.7843,
+  "by_position": {
+   "1-3": 0.3691,
+   "4-6": 0.8604,
+   "7-10": 0.9659,
+   "11-15": 0.9845,
+   "16-25": 0.9901,
+   "26-41": 0.9936
+  },
+  "mean_spikes_per_neuron_token": 1.0867,
+  "weighted_spikes_per_neuron_token": 1.0464,
+  "total_spikes_per_token": 3348.6,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 295.7,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1289,
+    "nonzero": 0.7226
+   },
+   "blocks.0.q": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.6655,
+    "nonzero": 0.3642
+   },
+   "blocks.0.k": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.3729,
+    "nonzero": 0.7625
+   },
+   "blocks.0.v": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.4524,
+    "nonzero": 0.8032
+   },
+   "blocks.0.pre": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.0795,
+    "nonzero": 0.6405
+   },
+   "blocks.0.out": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1812,
+    "nonzero": 0.6853
+   },
+   "blocks.0.q_in2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.2069,
+    "nonzero": 0.7249
+   },
+   "blocks.0.g": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 0.4535,
+    "nonzero": 0.2844
+   },
+   "blocks.0.u": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 1.2404,
+    "nonzero": 0.7349
+   },
+   "blocks.0.y2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.0287,
+    "nonzero": 0.6406
+   },
+   "blocks.1.q_in1": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.0833,
+    "nonzero": 0.6721
+   },
+   "blocks.1.q": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.74,
+    "nonzero": 0.4168
+   },
+   "blocks.1.k": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.3934,
+    "nonzero": 0.7882
+   },
+   "blocks.1.v": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.3439,
+    "nonzero": 0.7708
+   },
+   "blocks.1.pre": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.0283,
+    "nonzero": 0.6279
+   },
+   "blocks.1.out": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1215,
+    "nonzero": 0.6713
+   },
+   "blocks.1.q_in2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1614,
+    "nonzero": 0.7015
+   },
+   "blocks.1.g": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 0.4145,
+    "nonzero": 0.2675
+   },
+   "blocks.1.u": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 1.2316,
+    "nonzero": 0.7294
+   },
+   "blocks.1.y2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.9959,
+    "nonzero": 0.6389
+   },
+   "q_out": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.497,
+    "nonzero": 0.8185
+   }
+  }
+ },
+ "T2_c": {
+  "path": "results/improve/T2_c/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 2,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.8246,
+  "top2": 0.8773,
+  "top5": 0.9241,
+  "mean_p_true": 0.7759,
+  "by_position": {
+   "1-3": 0.3611,
+   "4-6": 0.8526,
+   "7-10": 0.9599,
+   "11-15": 0.9766,
+   "16-25": 0.9844,
+   "26-41": 0.9816
+  },
+  "mean_spikes_per_neuron_token": 0.9758,
+  "weighted_spikes_per_neuron_token": 0.9363,
+  "total_spikes_per_token": 2996.1,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 214.6,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1658,
+    "nonzero": 0.7416
+   },
+   "blocks.0.q": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.424,
+    "nonzero": 0.2865
+   },
+   "blocks.0.k": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.2889,
+    "nonzero": 0.7654
+   },
+   "blocks.0.v": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.3282,
+    "nonzero": 0.7788
+   },
+   "blocks.0.pre": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.5919,
+    "nonzero": 0.4159
+   },
+   "blocks.0.out": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.7897,
+    "nonzero": 0.5098
+   },
+   "blocks.0.q_in2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1626,
+    "nonzero": 0.7102
+   },
+   "blocks.0.g": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 0.345,
+    "nonzero": 0.216
+   },
+   "blocks.0.u": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 1.1047,
+    "nonzero": 0.6819
+   },
+   "blocks.0.y2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.9525,
+    "nonzero": 0.6032
+   },
+   "blocks.1.q_in1": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1885,
+    "nonzero": 0.7006
+   },
+   "blocks.1.q": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.5593,
+    "nonzero": 0.3381
+   },
+   "blocks.1.k": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.3139,
+    "nonzero": 0.7596
+   },
+   "blocks.1.v": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.2543,
+    "nonzero": 0.7393
+   },
+   "blocks.1.pre": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 0.8582,
+    "nonzero": 0.559
+   },
+   "blocks.1.out": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.0985,
+    "nonzero": 0.661
+   },
+   "blocks.1.q_in2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.0713,
+    "nonzero": 0.6677
+   },
+   "blocks.1.g": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 0.3371,
+    "nonzero": 0.218
+   },
+   "blocks.1.u": {
+    "levels": 2,
+    "neurons": 256,
+    "spikes_per_token": 1.1277,
+    "nonzero": 0.6865
+   },
+   "blocks.1.y2": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.1196,
+    "nonzero": 0.6773
+   },
+   "q_out": {
+    "levels": 2,
+    "neurons": 128,
+    "spikes_per_token": 1.4107,
+    "nonzero": 0.7888
+   }
+  }
+ },
+ "T4_a1": {
+  "path": "results/improve/T4_a1/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 4,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.8329,
+  "top2": 0.8802,
+  "top5": 0.924,
+  "mean_p_true": 0.7846,
+  "by_position": {
+   "1-3": 0.3674,
+   "4-6": 0.8606,
+   "7-10": 0.969,
+   "11-15": 0.9859,
+   "16-25": 0.9933,
+   "26-41": 0.9915
+  },
+  "mean_spikes_per_neuron_token": 1.8747,
+  "weighted_spikes_per_neuron_token": 1.7989,
+  "total_spikes_per_token": 5756.6,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 777.9,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.7458,
+    "nonzero": 0.7459
+   },
+   "blocks.0.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.1579,
+    "nonzero": 0.3944
+   },
+   "blocks.0.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.3316,
+    "nonzero": 0.8069
+   },
+   "blocks.0.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.2812,
+    "nonzero": 0.8086
+   },
+   "blocks.0.pre": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.6864,
+    "nonzero": 0.6471
+   },
+   "blocks.0.out": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.0259,
+    "nonzero": 0.7151
+   },
+   "blocks.0.q_in2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.9678,
+    "nonzero": 0.7698
+   },
+   "blocks.0.g": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.65,
+    "nonzero": 0.2731
+   },
+   "blocks.0.u": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.1182,
+    "nonzero": 0.7869
+   },
+   "blocks.0.y2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.8313,
+    "nonzero": 0.7125
+   },
+   "blocks.1.q_in1": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.815,
+    "nonzero": 0.7411
+   },
+   "blocks.1.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.2108,
+    "nonzero": 0.426
+   },
+   "blocks.1.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.519,
+    "nonzero": 0.8354
+   },
+   "blocks.1.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.2256,
+    "nonzero": 0.8039
+   },
+   "blocks.1.pre": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.7448,
+    "nonzero": 0.6715
+   },
+   "blocks.1.out": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.0814,
+    "nonzero": 0.7352
+   },
+   "blocks.1.q_in2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.0298,
+    "nonzero": 0.775
+   },
+   "blocks.1.g": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.6319,
+    "nonzero": 0.2725
+   },
+   "blocks.1.u": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.2051,
+    "nonzero": 0.8003
+   },
+   "blocks.1.y2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.0839,
+    "nonzero": 0.776
+   },
+   "q_out": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 3.0248,
+    "nonzero": 0.89
+   }
+  }
+ },
+ "T4_c": {
+  "path": "results/improve/T4_c/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 4,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.8316,
+  "top2": 0.8793,
+  "top5": 0.9241,
+  "mean_p_true": 0.7851,
+  "by_position": {
+   "1-3": 0.3628,
+   "4-6": 0.8599,
+   "7-10": 0.9693,
+   "11-15": 0.9851,
+   "16-25": 0.9919,
+   "26-41": 0.9922
+  },
+  "mean_spikes_per_neuron_token": 1.6463,
+  "weighted_spikes_per_neuron_token": 1.5743,
+  "total_spikes_per_token": 5037.6,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 494.4,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.7405,
+    "nonzero": 0.7351
+   },
+   "blocks.0.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 0.7735,
+    "nonzero": 0.3219
+   },
+   "blocks.0.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.2626,
+    "nonzero": 0.8109
+   },
+   "blocks.0.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.2482,
+    "nonzero": 0.8036
+   },
+   "blocks.0.pre": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 0.9416,
+    "nonzero": 0.491
+   },
+   "blocks.0.out": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.4456,
+    "nonzero": 0.6075
+   },
+   "blocks.0.q_in2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.8061,
+    "nonzero": 0.7362
+   },
+   "blocks.0.g": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.4409,
+    "nonzero": 0.1875
+   },
+   "blocks.0.u": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.9192,
+    "nonzero": 0.7543
+   },
+   "blocks.0.y2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.5008,
+    "nonzero": 0.6456
+   },
+   "blocks.1.q_in1": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.7657,
+    "nonzero": 0.7317
+   },
+   "blocks.1.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 0.9088,
+    "nonzero": 0.3504
+   },
+   "blocks.1.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.4271,
+    "nonzero": 0.8285
+   },
+   "blocks.1.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.1814,
+    "nonzero": 0.7961
+   },
+   "blocks.1.pre": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.4988,
+    "nonzero": 0.6405
+   },
+   "blocks.1.out": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.852,
+    "nonzero": 0.7061
+   },
+   "blocks.1.q_in2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.7574,
+    "nonzero": 0.7294
+   },
+   "blocks.1.g": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.4412,
+    "nonzero": 0.1966
+   },
+   "blocks.1.u": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.9825,
+    "nonzero": 0.7605
+   },
+   "blocks.1.y2": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.8767,
+    "nonzero": 0.7348
+   },
+   "q_out": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.802,
+    "nonzero": 0.8635
+   }
+  }
+ },
+ "T8_a1": {
+  "path": "results/improve/T8_a1/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 8,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.8356,
+  "top2": 0.8803,
+  "top5": 0.9244,
+  "mean_p_true": 0.7888,
+  "by_position": {
+   "1-3": 0.3614,
+   "4-6": 0.8654,
+   "7-10": 0.9737,
+   "11-15": 0.9926,
+   "16-25": 0.9969,
+   "26-41": 0.9915
+  },
+  "mean_spikes_per_neuron_token": 3.5924,
+  "weighted_spikes_per_neuron_token": 3.45,
+  "total_spikes_per_token": 11039.9,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 2884.8,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.1945,
+    "nonzero": 0.845
+   },
+   "blocks.0.q": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 2.2782,
+    "nonzero": 0.4426
+   },
+   "blocks.0.k": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 4.264,
+    "nonzero": 0.881
+   },
+   "blocks.0.v": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.8605,
+    "nonzero": 0.863
+   },
+   "blocks.0.pre": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 2.8714,
+    "nonzero": 0.7239
+   },
+   "blocks.0.out": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.8118,
+    "nonzero": 0.7932
+   },
+   "blocks.0.q_in2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.6086,
+    "nonzero": 0.8564
+   },
+   "blocks.0.g": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 1.2401,
+    "nonzero": 0.2962
+   },
+   "blocks.0.u": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 4.0096,
+    "nonzero": 0.8688
+   },
+   "blocks.0.y2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.8651,
+    "nonzero": 0.805
+   },
+   "blocks.1.q_in1": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.2766,
+    "nonzero": 0.8345
+   },
+   "blocks.1.q": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 2.4135,
+    "nonzero": 0.4707
+   },
+   "blocks.1.k": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 4.8607,
+    "nonzero": 0.9047
+   },
+   "blocks.1.v": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.8262,
+    "nonzero": 0.8634
+   },
+   "blocks.1.pre": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.247,
+    "nonzero": 0.7578
+   },
+   "blocks.1.out": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 4.4928,
+    "nonzero": 0.8391
+   },
+   "blocks.1.q_in2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.7086,
+    "nonzero": 0.8544
+   },
+   "blocks.1.g": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 1.2176,
+    "nonzero": 0.2818
+   },
+   "blocks.1.u": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 4.3425,
+    "nonzero": 0.8826
+   },
+   "blocks.1.y2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 4.7272,
+    "nonzero": 0.8923
+   },
+   "q_out": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 6.3229,
+    "nonzero": 0.9443
+   }
+  }
+ },
+ "T8_c": {
+  "path": "results/improve/T8_c/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 8,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.8359,
+  "top2": 0.88,
+  "top5": 0.924,
+  "mean_p_true": 0.7943,
+  "by_position": {
+   "1-3": 0.3601,
+   "4-6": 0.8678,
+   "7-10": 0.9751,
+   "11-15": 0.9913,
+   "16-25": 0.9956,
+   "26-41": 0.9957
+  },
+  "mean_spikes_per_neuron_token": 3.0352,
+  "weighted_spikes_per_neuron_token": 2.8981,
+  "total_spikes_per_token": 9273.9,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 1564.8,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.1086,
+    "nonzero": 0.8282
+   },
+   "blocks.0.q": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 1.4457,
+    "nonzero": 0.3536
+   },
+   "blocks.0.k": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 4.1064,
+    "nonzero": 0.872
+   },
+   "blocks.0.v": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.8687,
+    "nonzero": 0.8663
+   },
+   "blocks.0.pre": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 1.382,
+    "nonzero": 0.5587
+   },
+   "blocks.0.out": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 2.7082,
+    "nonzero": 0.7046
+   },
+   "blocks.0.q_in2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.1802,
+    "nonzero": 0.828
+   },
+   "blocks.0.g": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 0.7291,
+    "nonzero": 0.1851
+   },
+   "blocks.0.u": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 3.4965,
+    "nonzero": 0.841
+   },
+   "blocks.0.y2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.0352,
+    "nonzero": 0.7511
+   },
+   "blocks.1.q_in1": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.0251,
+    "nonzero": 0.8141
+   },
+   "blocks.1.q": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 1.7792,
+    "nonzero": 0.3861
+   },
+   "blocks.1.k": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 4.5924,
+    "nonzero": 0.8941
+   },
+   "blocks.1.v": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.6924,
+    "nonzero": 0.8533
+   },
+   "blocks.1.pre": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 2.4605,
+    "nonzero": 0.7055
+   },
+   "blocks.1.out": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.7585,
+    "nonzero": 0.8007
+   },
+   "blocks.1.q_in2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.0021,
+    "nonzero": 0.8106
+   },
+   "blocks.1.g": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 0.7655,
+    "nonzero": 0.1937
+   },
+   "blocks.1.u": {
+    "levels": 8,
+    "neurons": 256,
+    "spikes_per_token": 3.723,
+    "nonzero": 0.8467
+   },
+   "blocks.1.y2": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 3.8619,
+    "nonzero": 0.8444
+   },
+   "q_out": {
+    "levels": 8,
+    "neurons": 128,
+    "spikes_per_token": 6.0171,
+    "nonzero": 0.9277
+   }
+  }
+ },
+ "T4mem_a1": {
+  "path": "results/improve/T4mem_a1/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 4,
+   "level_points": "mem",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.7764,
+  "top2": 0.8569,
+  "top5": 0.9174,
+  "mean_p_true": 0.6863,
+  "by_position": {
+   "1-3": 0.3587,
+   "4-6": 0.7846,
+   "7-10": 0.8864,
+   "11-15": 0.9274,
+   "16-25": 0.9432,
+   "26-41": 0.9468
+  },
+  "mean_spikes_per_neuron_token": 1.0619,
+  "weighted_spikes_per_neuron_token": 0.9767,
+  "total_spikes_per_token": 3125.4,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 133.3,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6562,
+    "nonzero": 0.6562
+   },
+   "blocks.0.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.1791,
+    "nonzero": 0.3715
+   },
+   "blocks.0.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.7279,
+    "nonzero": 0.8482
+   },
+   "blocks.0.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.773,
+    "nonzero": 0.8607
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6416,
+    "nonzero": 0.6416
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7249,
+    "nonzero": 0.7249
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7115,
+    "nonzero": 0.7115
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4173,
+    "nonzero": 0.4173
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7228,
+    "nonzero": 0.7228
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6914,
+    "nonzero": 0.6914
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6847,
+    "nonzero": 0.6847
+   },
+   "blocks.1.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 1.2478,
+    "nonzero": 0.4241
+   },
+   "blocks.1.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.6643,
+    "nonzero": 0.8544
+   },
+   "blocks.1.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.2306,
+    "nonzero": 0.8001
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5791,
+    "nonzero": 0.5791
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6535,
+    "nonzero": 0.6535
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6995,
+    "nonzero": 0.6995
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.2901,
+    "nonzero": 0.2901
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6871,
+    "nonzero": 0.6871
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5726,
+    "nonzero": 0.5726
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7451,
+    "nonzero": 0.7451
+   }
+  }
+ },
+ "T4mem_c": {
+  "path": "results/improve/T4mem_c/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 4,
+   "level_points": "mem",
+   "sizes": {}
+  },
+  "n_params": 1155621,
+  "top1": 0.7829,
+  "top2": 0.86,
+  "top5": 0.9183,
+  "mean_p_true": 0.6985,
+  "by_position": {
+   "1-3": 0.3544,
+   "4-6": 0.7701,
+   "7-10": 0.9047,
+   "11-15": 0.9443,
+   "16-25": 0.9584,
+   "26-41": 0.9639
+  },
+  "mean_spikes_per_neuron_token": 0.9108,
+  "weighted_spikes_per_neuron_token": 0.8294,
+  "total_spikes_per_token": 2654.2,
+  "n_spiking_neurons": 3200,
+  "w2_events_per_token": 72.2,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6883,
+    "nonzero": 0.6883
+   },
+   "blocks.0.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 0.7166,
+    "nonzero": 0.3136
+   },
+   "blocks.0.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.4099,
+    "nonzero": 0.835
+   },
+   "blocks.0.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.4489,
+    "nonzero": 0.8396
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.3475,
+    "nonzero": 0.3475
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5437,
+    "nonzero": 0.5437
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.5871,
+    "nonzero": 0.5871
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.3309,
+    "nonzero": 0.3309
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5477,
+    "nonzero": 0.5477
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6281,
+    "nonzero": 0.6281
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6226,
+    "nonzero": 0.6226
+   },
+   "blocks.1.q": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 0.7785,
+    "nonzero": 0.3344
+   },
+   "blocks.1.k": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.5144,
+    "nonzero": 0.8375
+   },
+   "blocks.1.v": {
+    "levels": 4,
+    "neurons": 128,
+    "spikes_per_token": 2.0892,
+    "nonzero": 0.787
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.4236,
+    "nonzero": 0.4236
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6429,
+    "nonzero": 0.6429
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.6535,
+    "nonzero": 0.6535
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.154,
+    "nonzero": 0.154
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5757,
+    "nonzero": 0.5757
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7099,
+    "nonzero": 0.7099
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 128,
+    "spikes_per_token": 0.7144,
+    "nonzero": 0.7144
+   }
+  }
+ },
+ "W_a1": {
+  "path": "results/improve/W_a1/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {
+    "d": 256,
+    "dk": 64,
+    "dv": 64,
+    "d_ff": 512,
+    "n_heads": 4
+   }
+  },
+  "n_params": 2966565,
+  "top1": 0.8312,
+  "top2": 0.8809,
+  "top5": 0.926,
+  "mean_p_true": 0.7913,
+  "by_position": {
+   "1-3": 0.3666,
+   "4-6": 0.8576,
+   "7-10": 0.9678,
+   "11-15": 0.9853,
+   "16-25": 0.9895,
+   "26-41": 0.9901
+  },
+  "mean_spikes_per_neuron_token": 0.6107,
+  "weighted_spikes_per_neuron_token": 0.58,
+  "total_spikes_per_token": 3712.1,
+  "n_spiking_neurons": 6400,
+  "w2_events_per_token": 154.7,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5923,
+    "nonzero": 0.5923
+   },
+   "blocks.0.q": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4185,
+    "nonzero": 0.4185
+   },
+   "blocks.0.k": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7553,
+    "nonzero": 0.7553
+   },
+   "blocks.0.v": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.9185,
+    "nonzero": 0.9185
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6546,
+    "nonzero": 0.6546
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7352,
+    "nonzero": 0.7352
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6759,
+    "nonzero": 0.6759
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.2727,
+    "nonzero": 0.2727
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.6704,
+    "nonzero": 0.6704
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6099,
+    "nonzero": 0.6099
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7225,
+    "nonzero": 0.7225
+   },
+   "blocks.1.q": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.446,
+    "nonzero": 0.446
+   },
+   "blocks.1.k": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7605,
+    "nonzero": 0.7605
+   },
+   "blocks.1.v": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.79,
+    "nonzero": 0.79
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5891,
+    "nonzero": 0.5891
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6623,
+    "nonzero": 0.6623
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5233,
+    "nonzero": 0.5233
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.1787,
+    "nonzero": 0.1787
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.5536,
+    "nonzero": 0.5536
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5098,
+    "nonzero": 0.5098
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.786,
+    "nonzero": 0.786
+   }
+  }
+ },
+ "W_c": {
+  "path": "results/improve/W_c/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {
+    "d": 256,
+    "dk": 64,
+    "dv": 64,
+    "d_ff": 512,
+    "n_heads": 4
+   }
+  },
+  "n_params": 2966565,
+  "top1": 0.8014,
+  "top2": 0.8696,
+  "top5": 0.9226,
+  "mean_p_true": 0.7303,
+  "by_position": {
+   "1-3": 0.3626,
+   "4-6": 0.8162,
+   "7-10": 0.9266,
+   "11-15": 0.9523,
+   "16-25": 0.9641,
+   "26-41": 0.9582
+  },
+  "mean_spikes_per_neuron_token": 0.502,
+  "weighted_spikes_per_neuron_token": 0.4723,
+  "total_spikes_per_token": 3022.4,
+  "n_spiking_neurons": 6400,
+  "w2_events_per_token": 80.0,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5422,
+    "nonzero": 0.5422
+   },
+   "blocks.0.q": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.1978,
+    "nonzero": 0.1978
+   },
+   "blocks.0.k": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6259,
+    "nonzero": 0.6259
+   },
+   "blocks.0.v": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6713,
+    "nonzero": 0.6713
+   },
+   "blocks.0.pre": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.2612,
+    "nonzero": 0.2612
+   },
+   "blocks.0.out": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.293,
+    "nonzero": 0.293
+   },
+   "blocks.0.q_in2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.5828,
+    "nonzero": 0.5828
+   },
+   "blocks.0.g": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.1765,
+    "nonzero": 0.1765
+   },
+   "blocks.0.u": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.4647,
+    "nonzero": 0.4647
+   },
+   "blocks.0.y2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4117,
+    "nonzero": 0.4117
+   },
+   "blocks.1.q_in1": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.639,
+    "nonzero": 0.639
+   },
+   "blocks.1.q": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4436,
+    "nonzero": 0.4436
+   },
+   "blocks.1.k": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7391,
+    "nonzero": 0.7391
+   },
+   "blocks.1.v": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6978,
+    "nonzero": 0.6978
+   },
+   "blocks.1.pre": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4896,
+    "nonzero": 0.4896
+   },
+   "blocks.1.out": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.6984,
+    "nonzero": 0.6984
+   },
+   "blocks.1.q_in2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.4235,
+    "nonzero": 0.4235
+   },
+   "blocks.1.g": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.1122,
+    "nonzero": 0.1122
+   },
+   "blocks.1.u": {
+    "levels": 1,
+    "neurons": 512,
+    "spikes_per_token": 0.5111,
+    "nonzero": 0.5111
+   },
+   "blocks.1.y2": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7782,
+    "nonzero": 0.7782
+   },
+   "q_out": {
+    "levels": 1,
+    "neurons": 256,
+    "spikes_per_token": 0.7822,
+    "nonzero": 0.7822
+   }
+  }
+ },
+ "WT4_a1": {
+  "path": "results/improve/WT4_a1/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.0,
+   "levels": 4,
+   "level_points": "all",
+   "sizes": {
+    "d": 256,
+    "dk": 64,
+    "dv": 64,
+    "d_ff": 512,
+    "n_heads": 4
+   }
+  },
+  "n_params": 2966565,
+  "top1": 0.8352,
+  "top2": 0.8805,
+  "top5": 0.9233,
+  "mean_p_true": 0.8,
+  "by_position": {
+   "1-3": 0.3614,
+   "4-6": 0.8601,
+   "7-10": 0.9761,
+   "11-15": 0.9922,
+   "16-25": 0.9969,
+   "26-41": 0.9979
+  },
+  "mean_spikes_per_neuron_token": 1.5644,
+  "weighted_spikes_per_neuron_token": 1.4625,
+  "total_spikes_per_token": 9360.1,
+  "n_spiking_neurons": 6400,
+  "w2_events_per_token": 771.6,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.5768,
+    "nonzero": 0.711
+   },
+   "blocks.0.q": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.1466,
+    "nonzero": 0.3826
+   },
+   "blocks.0.k": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.0918,
+    "nonzero": 0.7493
+   },
+   "blocks.0.v": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.0248,
+    "nonzero": 0.7505
+   },
+   "blocks.0.pre": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.5834,
+    "nonzero": 0.6154
+   },
+   "blocks.0.out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.046,
+    "nonzero": 0.7123
+   },
+   "blocks.0.q_in2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.7095,
+    "nonzero": 0.728
+   },
+   "blocks.0.g": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 0.4805,
+    "nonzero": 0.1324
+   },
+   "blocks.0.u": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 1.6462,
+    "nonzero": 0.7108
+   },
+   "blocks.0.y2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.1025,
+    "nonzero": 0.512
+   },
+   "blocks.1.q_in1": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.7212,
+    "nonzero": 0.7254
+   },
+   "blocks.1.q": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.1346,
+    "nonzero": 0.416
+   },
+   "blocks.1.k": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.1833,
+    "nonzero": 0.7886
+   },
+   "blocks.1.v": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.9582,
+    "nonzero": 0.7578
+   },
+   "blocks.1.pre": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.5215,
+    "nonzero": 0.6159
+   },
+   "blocks.1.out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.0003,
+    "nonzero": 0.7189
+   },
+   "blocks.1.q_in2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.6892,
+    "nonzero": 0.7153
+   },
+   "blocks.1.g": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 0.4205,
+    "nonzero": 0.1052
+   },
+   "blocks.1.u": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 1.1633,
+    "nonzero": 0.6075
+   },
+   "blocks.1.y2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.2326,
+    "nonzero": 0.5832
+   },
+   "q_out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.4197,
+    "nonzero": 0.8179
+   }
+  }
+ },
+ "WT4_c": {
+  "path": "results/improve/WT4_c/model.pt",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 4,
+   "level_points": "all",
+   "sizes": {
+    "d": 256,
+    "dk": 64,
+    "dv": 64,
+    "d_ff": 512,
+    "n_heads": 4
+   }
+  },
+  "n_params": 2966565,
+  "top1": 0.8363,
+  "top2": 0.8809,
+  "top5": 0.9251,
+  "mean_p_true": 0.7988,
+  "by_position": {
+   "1-3": 0.3644,
+   "4-6": 0.8678,
+   "7-10": 0.9762,
+   "11-15": 0.9905,
+   "16-25": 0.9923,
+   "26-41": 0.9901
+  },
+  "mean_spikes_per_neuron_token": 1.3288,
+  "weighted_spikes_per_neuron_token": 1.2294,
+  "total_spikes_per_token": 7868.1,
+  "n_spiking_neurons": 6400,
+  "w2_events_per_token": 368.1,
+  "spike_points": {
+   "blocks.0.q_in1": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.4691,
+    "nonzero": 0.686
+   },
+   "blocks.0.q": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.7482,
+    "nonzero": 0.3205
+   },
+   "blocks.0.k": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.0623,
+    "nonzero": 0.7725
+   },
+   "blocks.0.v": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.0403,
+    "nonzero": 0.7754
+   },
+   "blocks.0.pre": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.8061,
+    "nonzero": 0.4349
+   },
+   "blocks.0.out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.5015,
+    "nonzero": 0.605
+   },
+   "blocks.0.q_in2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.3071,
+    "nonzero": 0.6482
+   },
+   "blocks.0.g": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 0.2504,
+    "nonzero": 0.0758
+   },
+   "blocks.0.u": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 1.3116,
+    "nonzero": 0.6403
+   },
+   "blocks.0.y2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.7451,
+    "nonzero": 0.4381
+   },
+   "blocks.1.q_in1": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.6188,
+    "nonzero": 0.7047
+   },
+   "blocks.1.q": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.7693,
+    "nonzero": 0.3154
+   },
+   "blocks.1.k": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.2446,
+    "nonzero": 0.7974
+   },
+   "blocks.1.v": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.9813,
+    "nonzero": 0.7586
+   },
+   "blocks.1.pre": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.3071,
+    "nonzero": 0.5788
+   },
+   "blocks.1.out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.8765,
+    "nonzero": 0.6868
+   },
+   "blocks.1.q_in2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.3299,
+    "nonzero": 0.6437
+   },
+   "blocks.1.g": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 0.2633,
+    "nonzero": 0.0661
+   },
+   "blocks.1.u": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 1.0037,
+    "nonzero": 0.559
+   },
+   "blocks.1.y2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.8807,
+    "nonzero": 0.4984
+   },
+   "q_out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.3889,
+    "nonzero": 0.8135
+   }
+  }
+ }
+}

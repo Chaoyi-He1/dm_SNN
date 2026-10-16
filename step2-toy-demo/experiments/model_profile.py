@@ -69,7 +69,8 @@ def main():
         r = dict(path=path, info=info, n_params=sum(p.numel() for p in m.parameters()), **profile(m, tokens, dev))
         if info["kind"] == "spiking":
             sc = spike_counts(m, tokens[:512], dev)
-            for k in ("mean_spikes_per_neuron_token", "weighted_spikes_per_neuron_token", "total_spikes_per_token", "n_spiking_neurons"):
+            for k in ("mean_spikes_per_neuron_token", "weighted_spikes_per_neuron_token", "total_spikes_per_token", "n_spiking_neurons",
+                      "w2_events_per_token"):
                 r[k] = sc[k]
             r["spike_points"] = sc["points"]
         out[name] = r

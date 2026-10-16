@@ -1,0 +1,436 @@
+{
+ "args": {
+  "stage": "c",
+  "name": "WT4_c",
+  "out": "results/improve",
+  "a0": "results/improve/W_a0_d256/model.pt",
+  "fq": 0.75,
+  "lr": 0.003,
+  "steps": 12000,
+  "schedule": "cosine",
+  "warmup": 0,
+  "kd": 0.0,
+  "kd_T": 2.0,
+  "seed": 0,
+  "eval_every": 100,
+  "no_stop": false,
+  "levels": 4,
+  "level_points": "all",
+  "d": 256,
+  "dk": 64,
+  "dv": 64,
+  "d_ff": 512,
+  "heads": 4,
+  "init": "results/improve/WT4_a1/model.pt",
+  "leak_anneal": 0,
+  "recalib": null,
+  "thr_scale": 1.0,
+  "lif_scale": 1.0
+ },
+ "torch": "2.14.0+cu126",
+ "device": "cuda:0",
+ "b": {
+  "token_acc": 0.3459346791951724,
+  "ppl": 27.10074137373938,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " ran so happy about back!\" The fairy tale his dad his mother stove job past the big pond other called Lucy came who lived in who lived in the forest..",
+    "exact": false
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " longer worried and enjoyed every across replied firmly stay here\".",
+    "exact": false
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " park, all around Ella things nature sang lovely can make closer closer but new things can happen closer have such reliable favorite good special better new adventures better model happy to help you pretend play with..",
+    "exact": false
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " the gum some the be improved but he still be careful because't be tasted.",
+    "exact": false
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " gum from Lily wasn, Jack, he, he they he until he bit afraid bring us luck eat caught really soft dinosaur given it stopped at it and it up yummy bugs again.\" Her Dad looked up",
+    "exact": false
+   }
+  ],
+  "n_exact": 0,
+  "n_demo": 5
+ },
+ "spikes": {
+  "points": {
+   "blocks.0.q_in1": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.4709,
+    "nonzero": 0.6867
+   },
+   "blocks.0.q": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.7485,
+    "nonzero": 0.3204
+   },
+   "blocks.0.k": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.0584,
+    "nonzero": 0.7719
+   },
+   "blocks.0.v": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.0428,
+    "nonzero": 0.7757
+   },
+   "blocks.0.pre": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.8135,
+    "nonzero": 0.4391
+   },
+   "blocks.0.out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.5162,
+    "nonzero": 0.6093
+   },
+   "blocks.0.q_in2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.3109,
+    "nonzero": 0.649
+   },
+   "blocks.0.g": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 0.2462,
+    "nonzero": 0.0745
+   },
+   "blocks.0.u": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 1.3147,
+    "nonzero": 0.6413
+   },
+   "blocks.0.y2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.7335,
+    "nonzero": 0.4358
+   },
+   "blocks.1.q_in1": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.6207,
+    "nonzero": 0.705
+   },
+   "blocks.1.q": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.7712,
+    "nonzero": 0.3151
+   },
+   "blocks.1.k": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.2461,
+    "nonzero": 0.7976
+   },
+   "blocks.1.v": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.9849,
+    "nonzero": 0.7595
+   },
+   "blocks.1.pre": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.3241,
+    "nonzero": 0.5839
+   },
+   "blocks.1.out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.8961,
+    "nonzero": 0.6924
+   },
+   "blocks.1.q_in2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 1.3349,
+    "nonzero": 0.6452
+   },
+   "blocks.1.g": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 0.2671,
+    "nonzero": 0.067
+   },
+   "blocks.1.u": {
+    "levels": 4,
+    "neurons": 512,
+    "spikes_per_token": 1.0101,
+    "nonzero": 0.5615
+   },
+   "blocks.1.y2": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 0.8856,
+    "nonzero": 0.5003
+   },
+   "q_out": {
+    "levels": 4,
+    "neurons": 256,
+    "spikes_per_token": 2.3947,
+    "nonzero": 0.8142
+   }
+  },
+  "mean_spikes_per_neuron_token": 1.3329,
+  "weighted_spikes_per_neuron_token": 1.2332,
+  "total_spikes_per_token": 7892.3,
+  "n_spiking_neurons": 6400,
+  "w2_events": {
+   "blocks.0": {
+    "events_per_channel_token": 0.3811,
+    "channels": 512
+   },
+   "blocks.1": {
+    "events_per_channel_token": 0.3335,
+    "channels": 512
+   }
+  },
+  "w2_events_per_token": 365.9
+ },
+ "history": [
+  {
+   "step": 100,
+   "loss": 1.6907,
+   "ce": 1.6907,
+   "token_acc": 0.672286564354272,
+   "ppl": 3.7042005001700655,
+   "n_exact": 1,
+   "seconds": 86.4,
+   "lr": 0.0029994962157402064,
+   "leak": null
+  },
+  {
+   "step": 200,
+   "loss": 0.9575,
+   "ce": 0.9575,
+   "token_acc": 0.7665361147064261,
+   "ppl": 2.5506912109901805,
+   "n_exact": 3,
+   "seconds": 170.7,
+   "lr": 0.002997964803079841,
+   "leak": null
+  },
+  {
+   "step": 300,
+   "loss": 0.9897,
+   "ce": 0.9897,
+   "token_acc": 0.8046763375972836,
+   "ppl": 2.226638503596085,
+   "n_exact": 2,
+   "seconds": 256.2,
+   "lr": 0.002995406760168456,
+   "leak": null
+  },
+  {
+   "step": 400,
+   "loss": 0.8094,
+   "ce": 0.8094,
+   "token_acc": 0.8154678858987073,
+   "ppl": 2.1392590580693684,
+   "n_exact": 4,
+   "seconds": 341.3,
+   "lr": 0.002991823840160886,
+   "leak": null
+  },
+  {
+   "step": 500,
+   "loss": 0.8937,
+   "ce": 0.8937,
+   "token_acc": 0.8254189709367804,
+   "ppl": 2.0316197117353862,
+   "n_exact": 3,
+   "seconds": 427.3,
+   "lr": 0.0029872184986115334,
+   "leak": null
+  },
+  {
+   "step": 600,
+   "loss": 0.8057,
+   "ce": 0.8057,
+   "token_acc": 0.8289825351733876,
+   "ppl": 2.008325840029046,
+   "n_exact": 4,
+   "seconds": 513.8,
+   "lr": 0.002981593891791454,
+   "leak": null
+  },
+  {
+   "step": 700,
+   "loss": 0.6451,
+   "ce": 0.6451,
+   "token_acc": 0.832798238389,
+   "ppl": 1.968556701939905,
+   "n_exact": 4,
+   "seconds": 600.1,
+   "lr": 0.0029749538745252064,
+   "leak": null
+  },
+  {
+   "step": 800,
+   "loss": 0.7637,
+   "ce": 0.7637,
+   "token_acc": 0.8349162058126439,
+   "ppl": 1.9467868929387793,
+   "n_exact": 4,
+   "seconds": 686.4,
+   "lr": 0.00296730299754895,
+   "leak": null
+  },
+  {
+   "step": 900,
+   "loss": 0.6905,
+   "ce": 0.6905,
+   "token_acc": 0.8340589332840261,
+   "ppl": 1.950495109392522,
+   "n_exact": 5,
+   "seconds": 770.5,
+   "lr": 0.0029586465043915937,
+   "leak": null
+  },
+  {
+   "step": 1000,
+   "loss": 0.6679,
+   "ce": 0.6679,
+   "token_acc": 0.8359247617286648,
+   "ppl": 1.9133112035898134,
+   "n_exact": 5,
+   "seconds": 855.6,
+   "lr": 0.002948990327781145,
+   "leak": null
+  },
+  {
+   "step": 1100,
+   "loss": 0.7143,
+   "ce": 0.7143,
+   "token_acc": 0.8345464019767695,
+   "ppl": 1.9175655793435664,
+   "n_exact": 5,
+   "seconds": 945.3,
+   "lr": 0.002938341085578718,
+   "leak": null
+  },
+  {
+   "step": 1200,
+   "loss": 0.6088,
+   "ce": 0.6088,
+   "token_acc": 0.8362945655645392,
+   "ppl": 1.8939653148092797,
+   "n_exact": 5,
+   "seconds": 1031.4,
+   "lr": 0.0029267060762429757,
+   "leak": null
+  },
+  {
+   "step": 1300,
+   "loss": 0.7556,
+   "ce": 0.7556,
+   "token_acc": 0.8369501269099527,
+   "ppl": 1.8992381297828975,
+   "n_exact": 5,
+   "seconds": 1116.7,
+   "lr": 0.002914093273828134,
+   "leak": null
+  },
+  {
+   "step": 1400,
+   "loss": 0.6771,
+   "ce": 0.6771,
+   "token_acc": 0.8362609470340051,
+   "ppl": 1.909806611261473,
+   "n_exact": 5,
+   "seconds": 1200.7,
+   "lr": 0.0029005113225189466,
+   "leak": null
+  },
+  {
+   "step": 1500,
+   "loss": 0.7848,
+   "ce": 0.7848,
+   "token_acc": 0.8385638163755862,
+   "ppl": 1.884645873376915,
+   "n_exact": 5,
+   "seconds": 1312.7,
+   "lr": 0.0028859695307064063,
+   "leak": null
+  },
+  {
+   "step": 1600,
+   "loss": 0.6511,
+   "ce": 0.6511,
+   "token_acc": 0.8362945655645392,
+   "ppl": 1.9101880579142005,
+   "n_exact": 5,
+   "seconds": 1447.1,
+   "lr": 0.002870477864608242,
+   "leak": null
+  }
+ ],
+ "final": {
+  "token_acc": 0.8362945655645392,
+  "ppl": 1.9101880579142005,
+  "n_tokens": 59491,
+  "completions": [
+   {
+    "prefix": "He put his wet and",
+    "target": " dirty shirt into the dryer and watched it spin.",
+    "output": " dirty shirt into the dryer and watched it spin.",
+    "exact": true
+   },
+   {
+    "prefix": "He couldn't wait any",
+    "target": " longer and ran to meet them.",
+    "output": " longer and ran to meet them.",
+    "exact": true
+   },
+   {
+    "prefix": "She ran around the whole",
+    "target": " park, but she could not find him anywhere.",
+    "output": " park, but she could not find him anywhere.",
+    "exact": true
+   },
+   {
+    "prefix": "They showed her how to",
+    "target": " use a wet cloth to wipe the gum away.",
+    "output": " use a wet cloth to wipe the gum away.",
+    "exact": true
+   },
+   {
+    "prefix": "They all looked at the",
+    "target": " gum and talked about how amazing it was.",
+    "output": " gum and talked about how amazing it was.",
+    "exact": true
+   }
+  ],
+  "n_exact": 5,
+  "n_demo": 5
+ },
+ "stopped": "converged",
+ "seed": 0,
+ "seconds": 1471.8
+}

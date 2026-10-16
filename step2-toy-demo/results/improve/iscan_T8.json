@@ -1,0 +1,26 @@
+{
+ "levels": 8,
+ "level_points": "all",
+ "sizes": {},
+ "a0": "results/ckpt/a0.pt",
+ "rows": [
+  {
+   "fq": 0.9,
+   "token_acc": 0.3517,
+   "ppl": 159.346,
+   "spikes": 2.7847
+  },
+  {
+   "fq": 0.95,
+   "token_acc": 0.3306,
+   "ppl": 233.019,
+   "spikes": 2.2401
+  },
+  {
+   "fq": 0.98,
+   "token_acc": 0.2766,
+   "ppl": 382.801,
+   "spikes": 1.7618
+  }
+ ]
+}

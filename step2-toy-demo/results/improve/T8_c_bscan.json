@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/T8_a1/model.pt",
+ "levels": 8,
+ "level_points": "all",
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.2821,
+   "ppl": 47.623
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.2091,
+   "ppl": 86.456
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.1675,
+   "ppl": 183.063
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.1637,
+   "ppl": 201.529
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1619,
+   "ppl": 210.124
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.161,
+   "ppl": 214.872
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1609,
+   "ppl": 215.294
+  }
+ ]
+}

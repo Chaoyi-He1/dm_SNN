@@ -1,0 +1,32 @@
+{
+ "levels": 1,
+ "level_points": "all",
+ "sizes": {
+  "d": 256,
+  "dk": 64,
+  "dv": 64,
+  "d_ff": 512,
+  "n_heads": 4
+ },
+ "a0": "results/improve/W_a0_d256/model.pt",
+ "rows": [
+  {
+   "fq": 0.4,
+   "token_acc": 0.1769,
+   "ppl": 132.679,
+   "spikes": 0.5432
+  },
+  {
+   "fq": 0.5,
+   "token_acc": 0.1972,
+   "ppl": 129.806,
+   "spikes": 0.4625
+  },
+  {
+   "fq": 0.6,
+   "token_acc": 0.2023,
+   "ppl": 150.359,
+   "spikes": 0.3737
+  }
+ ]
+}
