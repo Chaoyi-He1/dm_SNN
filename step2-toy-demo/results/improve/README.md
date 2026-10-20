@@ -103,7 +103,7 @@ T 越大,阈值越像"增益"而不是"开关",所以泄漏开启后不能再放
 ## 文件
 
 - 代码:`experiments/multilevel.py`(多级脉冲点)、`experiments/convert_lab.py`(新增 a0/iscan/bscan 子命令与 --levels、尺寸参数)、`experiments/chain_c.py`(A1 → B 扫描 → C 串联)、`experiments/beam_eval.py`、`experiments/model_profile.py`、`experiments/improve_tables.py`(生成下面的表与 `tables.json`)。
-- 每个运行:`<run>/result.json`、`<run>/history.jsonl`;检查点 `model.pt` 不进版本库。
+- 每个运行:`<run>/result.json`、`<run>/history.jsonl`;检查点 `model.pt` 只有 `../CHECKPOINTS.md` 列出的 21 个进了版本库(含加载方法),其余不进。
 - 束搜索:`beam/*.json`;画像:`profile_*.json`(`profile_final.json` 为准);扫描:`iscan_*.json`、`*_bscan.json`。
 
 ## 全部运行(`experiments/improve_tables.py` 生成)
