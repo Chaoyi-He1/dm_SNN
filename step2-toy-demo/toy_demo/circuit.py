@@ -1,5 +1,9 @@
 """多块电路模型(计划第 6 节):每块一个 snn_spec.circuit.BehavioralBlock,嵌入查表充当 DAC,
 输出头 = 比较器(三值)+ crossbar + 对 bitline 电流取 argmax。两种模式:teacher forcing 对照(软件门值)与自由运行。
+
+每 token 多个脉冲(experiments/multilevel.py 的 levels=T):电路侧不需要额外设置,BehavioralBlock 从软件模块读出
+每个脉冲点的 T,神经元变为 T 个子时隙的发放(输出 c/T),比较器变为 2T 个,门 p = g·u 变为脉冲计数之积
+(W_2 每通道最多 T² 个事件),输出头前的量化器同样变为 2T 个比较器。teacher forcing 的 precision/recall 按脉冲计数统计。
 """
 import torch
 
@@ -36,8 +40,17 @@ class CircuitLM:
             self.sims.append(sim)
         xb, _, frac = primitive_kwargs(cfg, ideal, sigma_g, seed + len(self.sims))
         thr = spiking_lm.q_out.thr.item()
-        self.head_cmp = ComparatorModel(thr, offset=frac * thr)
+        self.head_cmp = ComparatorModel(thr, offset=frac * thr, levels=int(getattr(spiking_lm.q_out, "levels", 1)))
         self.head_xb = CrossbarModel(spiking_lm.head.weight, **xb)
+
+    def levels(self):
+        """每个脉冲点每 token 最多几个脉冲(从软件模型读出;全 1 即原来的折叠 T=1)。"""
+        out = {}
+        for i, sim in enumerate(self.sims):
+            for name, T in sim.levels.items():
+                out[f"blocks.{i}.{name}"] = T
+        out["q_out"] = self.head_cmp.levels
+        return out
 
     def init_state(self, B, device=None):
         return [sim.init_state(B, self.device) for sim in self.sims]
@@ -82,6 +95,7 @@ def teacher_forced_compare(spiking_lm, circuit_lm, tokens, cfg):
     一句一句跑(B=1),避开 pad。tokens [N, L] 含 BOS/EOS/PAD。"""
     bound = state_bound(cfg.dv, cfg.alpha_max)
     n_blocks = len(spiking_lm.blocks)
+    lv = [(int(getattr(b.attn.sn_out, "levels", 1)), int(getattr(b.ffn.sn_2, "levels", 1))) for b in spiking_lm.blocks]
     acc = [dict(ya_sw=[], ya_hw=[], yf_sw=[], yf_hw=[], se=[]) for _ in range(n_blocks)]
     agree = n_pos = 0
     if hasattr(spiking_lm, "eval"):
@@ -101,13 +115,14 @@ def teacher_forced_compare(spiking_lm, circuit_lm, tokens, cfg):
         agree += (sw_logits.argmax(-1) == hw_logits.argmax(-1)).sum().item()
         n_pos += inputs.shape[1]
     blocks = []
-    for a in acc:
+    for a, (Ta, Tf) in zip(acc, lv):
         ya_sw, ya_hw, yf_sw, yf_hw = (torch.cat(a[k]) for k in ("ya_sw", "ya_hw", "yf_sw", "yf_hw"))
         blocks.append(dict(
-            attn=dict(**spike_prf_by_sign(ya_hw, ya_sw), sign_error=sign_error_rate(ya_hw, ya_sw)),
-            ffn=dict(**spike_prf_by_sign(yf_hw, yf_sw), sign_error=sign_error_rate(yf_hw, yf_sw)),
+            attn=dict(**spike_prf_by_sign(ya_hw, ya_sw, levels=Ta), sign_error=sign_error_rate(ya_hw, ya_sw), levels=Ta),
+            ffn=dict(**spike_prf_by_sign(yf_hw, yf_sw, levels=Tf), sign_error=sign_error_rate(yf_hw, yf_sw), levels=Tf),
             state_err_max=max(a["se"]), state_err_mean=sum(a["se"]) / len(a["se"])))
-    out = dict(argmax_agreement=agree / n_pos, n_positions=n_pos, blocks=blocks)
+    out = dict(argmax_agreement=agree / n_pos, n_positions=n_pos, blocks=blocks,
+               levels=circuit_lm.levels() if hasattr(circuit_lm, "levels") else None)
     out["pass"] = passes(out)
     return out
 

@@ -59,3 +59,53 @@ def test_sigma_g_changes_head_weights(cfg, sl):
     a = CircuitLM(m, cfg, ideal=False, sigma_g=0.0).head_xb.W_eff
     b = CircuitLM(m, cfg, ideal=False, sigma_g=0.1).head_xb.W_eff
     assert not torch.equal(a, b)
+
+
+def _ml_model(cfg, sl, T, points="all", seed=0):
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments"))
+    from multilevel import apply_levels
+    m = _model(cfg, sl, seed)
+    apply_levels(m, T, points)
+    return m.eval()
+
+
+def test_ideal_circuit_matches_multilevel_model():
+    import torch
+    from toy_demo.config import tiny_config
+    from toy_demo.data import synthetic_slice, all_sequences
+    cfg, sl = tiny_config(), synthetic_slice()
+    for T, points in ((2, "all"), (4, "mem")):
+        m = _ml_model(cfg, sl, T, points)
+        hw = CircuitLM(m, cfg, ideal=True)
+        lv = hw.levels()
+        assert lv["q_out"] == (T if points == "all" else 1) and lv["blocks.0.k"] == T and lv["blocks.1.g"] == (T if points == "all" else 1)
+        tok = all_sequences(sl)[:8]
+        sw_logits, hw_logits = m(tok[:, :-1]), hw(tok[:, :-1])
+        assert torch.allclose(sw_logits, hw_logits, atol=1e-5)
+        assert torch.equal(sw_logits.argmax(-1), hw_logits.argmax(-1))
+        cmp = teacher_forced_compare(m, hw, tok, cfg)
+        for b in cmp["blocks"]:
+            for part in (b["attn"], b["ffn"]):
+                assert part["pos_precision"] == part["pos_recall"] == part["neg_precision"] == part["neg_recall"] == 1.0
+                assert part["sign_error"] == 0.0
+            assert b["state_err_max"] < 1e-6
+        assert cmp["pass"] and cmp["levels"] == lv
+        # 多级确实出现:至少有一个 y 的计数超过 1
+        _, recs = m(tok[:, :-1], record=True)
+        ya = torch.stack([r[0]["y_attn"] for r in recs]); 
+        assert (ya.abs() * T).round().max() > 1 or points != "all"
+
+
+def test_nominal_circuit_runs_with_multilevel_model():
+    from toy_demo.config import tiny_config
+    from toy_demo.data import synthetic_slice, all_sequences, select_demo
+    cfg, sl = tiny_config(), synthetic_slice()
+    demo = select_demo(sl, cfg)
+    m = _ml_model(cfg, sl, 2)
+    hw = CircuitLM(m, cfg, ideal=False)
+    ev = evaluate(hw, sl, demo, cfg)
+    assert 0.0 <= ev["token_acc"] <= 1.0
+    cmp = teacher_forced_compare(m, hw, all_sequences(sl)[:4], cfg)
+    assert cmp["blocks"][0]["attn"]["levels"] == 2 and isinstance(cmp["pass"], bool)

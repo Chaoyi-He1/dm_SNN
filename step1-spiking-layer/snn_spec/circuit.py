@@ -16,24 +16,37 @@ def alpha_from_tgap(t_gap, tau_leak):
 
 # ----------------------------------------------------------------------------- 神经元模型
 
-def _fire(U, theta, ternary):
+def _level_count(U, theta, levels):
+    """(1/T) Σ_{j=1..T} 1[U >= j·theta/T]:T 个子时隙里每次 U >= theta/T 就发一个脉冲并减 theta/T,
+    子时隙间不泄漏,总数等于这个计数。比较的算式与 snn_spec.neurons.level_steps 完全相同,逐位一致。"""
+    j = torch.arange(1, levels + 1, device=U.device, dtype=U.dtype) / levels
+    return (U.unsqueeze(-1) - theta * j >= 0).to(U.dtype).mean(-1)
+
+
+def _fire(U, theta, ternary, levels=1):
+    if levels == 1:
+        if ternary:
+            return (U >= theta).float() - (U <= -theta).float()
+        return (U >= theta).float()
     if ternary:
-        return (U >= theta).float() - (U <= -theta).float()
-    return (U >= theta).float()
+        return _level_count(U, theta, levels) - _level_count(-U, theta, levels)
+    return _level_count(U, theta, levels)
 
 
 class IdealLIFModel:
-    """S0.9 的 LIF(减阈值软复位、无不应期),作为行为级仿真器的理想神经元。接口与 DMNeuronModel 相同。"""
+    """S0.9 的 LIF(减阈值软复位、无不应期),作为行为级仿真器的理想神经元。接口与 DMNeuronModel 相同。
+    levels=T:每 token 最多 T 个脉冲(token 内 T 个子时隙,每次 U >= thr/T 发放并减 thr/T),输出 c/T。"""
 
-    def __init__(self, thr, leak, ternary=False):
+    def __init__(self, thr, leak, ternary=False, levels=1):
         self.thr, self.leak, self.ternary = float(thr), float(leak), bool(ternary)
+        self.levels = int(levels)
 
     def init_state(self, shape, device="cpu"):
         return dict(U=torch.zeros(shape, device=device))
 
     def step(self, I, st):
         U = self.leak * st["U"] + I
-        S = _fire(U, self.thr, self.ternary)
+        S = _fire(U, self.thr, self.ternary, self.levels)
         return S, dict(U=U - self.thr * S)
 
 
@@ -209,13 +222,20 @@ class CrossbarModel:
 
 
 class ComparatorModel:
-    """块入口 Q_in 的两个比较器:输出 sign(h)·1[|h - offset| >= thr]。hysteresis > 0 时需传入上一输出 prev。"""
+    """块入口 Q_in 的两个比较器:输出 sign(h)·1[|h - offset| >= thr]。hysteresis > 0 时需传入上一输出 prev。
+    levels=T:2T 个比较器,阈值 ±j·thr/T(j = 1..T),输出 (1/T)(Σ_j 1[z >= j·thr/T] − Σ_j 1[−z >= j·thr/T]);
+    失调 offset 对全部比较器相同;T > 1 不支持迟滞。"""
 
-    def __init__(self, thr, offset=0.0, hysteresis=0.0):
+    def __init__(self, thr, offset=0.0, hysteresis=0.0, levels=1):
         self.thr, self.offset, self.hys = float(thr), float(offset), float(hysteresis)
+        self.levels = int(levels)
+        if self.levels > 1 and self.hys != 0.0:
+            raise ValueError("ComparatorModel: levels > 1 不支持迟滞")
 
     def __call__(self, h, prev=None):
         z = h - self.offset
+        if self.levels > 1:
+            return _level_count(z, self.thr, self.levels) - _level_count(-z, self.thr, self.levels)
         if self.hys == 0.0 or prev is None:
             return torch.sign(z) * (z.abs() >= self.thr).float()
         turn_on = torch.sign(z) * (z.abs() >= self.thr + self.hys).float()
@@ -224,38 +244,48 @@ class ComparatorModel:
 
 
 def latch_and(g, u):
-    """锁存 + AND:幅度 AND,符号取 u(g >= 0)。"""
+    """锁存 + AND:幅度 AND,符号取 u(g >= 0)。每 token 多个脉冲时 g = c_g/T_g、u = ±c_u/T_u,
+    乘积就是两个脉冲计数之积 c_g·c_u/(T_g·T_u):W_2 的该字线收到 c_g·c_u 个事件(最多 T_g·T_u 个),仍只做加法。"""
     return g * u
+
+
+def _levels_of(mod):
+    return int(getattr(mod, "levels", 1))
 
 
 # ----------------------------------------------------------------------------- 行为级仿真器
 
 class BehavioralBlock:
     """把 S0.9 的 SpikingBlock 逐原语替换成电路模型,按 S0.7 的相位表逐 token 执行。
-    neuron_factory(thr, leak, ternary) 返回神经元模型;默认 IdealLIFModel。"""
+    neuron_factory(thr, leak, ternary) 返回神经元模型;默认 IdealLIFModel。脉冲点的 levels(每 token 最多几个脉冲)
+    从软件模块读出:levels > 1 的点以 neuron_factory(thr, leak, ternary, levels=T) 调用,比较器相应变为 2T 个。"""
 
     def __init__(self, block, neuron_factory=None, crossbar_kw=None, gain_cell_kw=None, comparator_kw=None):
         self.block = block
-        nf = neuron_factory or (lambda thr, leak, ternary: IdealLIFModel(thr, leak, ternary))
+        nf = neuron_factory or (lambda thr, leak, ternary, levels=1: IdealLIFModel(thr, leak, ternary, levels))
         ck, gk = crossbar_kw or {}, comparator_kw or {}
         attn, ffn = block.attn, block.ffn
         self.gain_cell_kw = gain_cell_kw or {}
+
+        def make(mod, ternary):
+            T = _levels_of(mod)
+            return nf(mod.thr.item(), mod.leak, ternary) if T == 1 else nf(mod.thr.item(), mod.leak, ternary, levels=T)
+
         with torch.no_grad():
             self.xb = {n: CrossbarModel(m.weight, **ck) for n, m in
                        [("Wq", attn.Wq), ("Wk", attn.Wk), ("Wv", attn.Wv), ("Wo", attn.Wo),
                         ("W1", ffn.W1), ("W3", ffn.W3), ("W2", ffn.W2)]}
             self.neu = {
-                "q": nf(attn.sn_q.thr.item(), attn.sn_q.leak, False),
-                "k": nf(attn.sn_k.thr.item(), attn.sn_k.leak, True),
-                "v": nf(attn.sn_v.thr.item(), attn.sn_v.leak, True),
-                "pre": nf(attn.sn_pre.thr.item(), attn.sn_pre.leak, True),
-                "out": nf(attn.sn_out.thr.item(), attn.sn_out.leak, True),
-                "g": nf(ffn.sn_1.thr.item(), ffn.sn_1.leak, False),
-                "u": nf(ffn.sn_3.thr.item(), ffn.sn_3.leak, True),
-                "y2": nf(ffn.sn_2.thr.item(), ffn.sn_2.leak, True),
+                "q": make(attn.sn_q, False), "k": make(attn.sn_k, True), "v": make(attn.sn_v, True),
+                "pre": make(attn.sn_pre, True), "out": make(attn.sn_out, True),
+                "g": make(ffn.sn_1, False), "u": make(ffn.sn_3, True), "y2": make(ffn.sn_2, True),
             }
-            self.cmp1 = ComparatorModel(block.q_in1.thr.item(), **gk)
-            self.cmp2 = ComparatorModel(block.q_in2.thr.item(), **gk)
+            self.levels = {n: _levels_of(m) for n, m in
+                           [("q_in1", block.q_in1), ("q", attn.sn_q), ("k", attn.sn_k), ("v", attn.sn_v),
+                            ("pre", attn.sn_pre), ("out", attn.sn_out), ("q_in2", block.q_in2),
+                            ("g", ffn.sn_1), ("u", ffn.sn_3), ("y2", ffn.sn_2)]}
+            self.cmp1 = ComparatorModel(block.q_in1.thr.item(), levels=self.levels["q_in1"], **gk)
+            self.cmp2 = ComparatorModel(block.q_in2.thr.item(), levels=self.levels["q_in2"], **gk)
 
     def init_state(self, B, device="cpu"):
         a, f = self.block.attn, self.block.ffn

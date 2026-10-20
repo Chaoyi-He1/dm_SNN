@@ -215,3 +215,88 @@ def test_behavioral_block_accepts_external_gates_and_dm_neurons():
     hw, _, hrecs = run_behavioral_sequence(sim, h_seq, ext_gates_seq=(alpha, beta), record=True)
     assert hw.shape == h_seq.shape
     assert torch.equal(torch.stack([r["alpha"] for r in hrecs], dim=1), alpha)
+
+
+# ----------------------------------------------------------------------------- 每 token 多个脉冲(levels=T)
+
+def test_ideal_lif_levels_equals_sequential_subslots():
+    torch.manual_seed(0)
+    for T in (2, 4):
+        n = IdealLIFModel(thr=1.0, leak=0.9, ternary=True, levels=T)
+        st = n.init_state((64,))
+        for _ in range(5):
+            I = torch.randn(64) * 1.5
+            U0 = 0.9 * st["U"] + I
+            S, st = n.step(I, st)
+            # 顺序子时隙:每次 U >= thr/T 发放并减 thr/T(负侧对称)
+            u, c = U0.clone(), torch.zeros_like(U0)
+            for _ in range(T):
+                f = (u >= 1.0 / T).float() - (u <= -1.0 / T).float()
+                c += f; u -= f / T
+            assert torch.allclose(S, c / T) and torch.allclose(st["U"], u)
+
+
+def test_comparator_levels_is_a_bank_of_2T_comparators():
+    c = ComparatorModel(thr=1.0, levels=2)
+    assert torch.equal(c(torch.tensor([-1.5, -0.5, 0.49, 0.5, 1.5])), torch.tensor([-1.0, -0.5, 0.0, 0.5, 1.0]))
+    c2 = ComparatorModel(thr=1.0, offset=0.1, levels=4)
+    assert torch.equal(c2(torch.tensor([0.35, 0.6, 1.1, -0.15])), torch.tensor([0.25, 0.5, 1.0, -0.25]))
+    with pytest.raises(ValueError):
+        ComparatorModel(thr=1.0, hysteresis=0.1, levels=2)
+
+
+def _set_levels(blk, T, points=None):
+    mods = dict(q_in1=blk.q_in1, q=blk.attn.sn_q, k=blk.attn.sn_k, v=blk.attn.sn_v, pre=blk.attn.sn_pre,
+                out=blk.attn.sn_out, q_in2=blk.q_in2, g=blk.ffn.sn_1, u=blk.ffn.sn_3, y2=blk.ffn.sn_2)
+    for name, m in mods.items():
+        if points is None or name in points:
+            m.levels = T
+
+
+@pytest.mark.parametrize("T", [2, 4])
+def test_behavioral_block_reproduces_software_block_with_levels(T):
+    blk = _block(8)
+    _set_levels(blk, T)
+    h_seq = torch.randn(2, 12, 16) * 2
+    sw, sw_st, srecs = run_sequence(blk, h_seq, record=True)
+    sim = BehavioralBlock(blk)
+    assert sim.levels["q_in1"] == T and sim.levels["y2"] == T and sim.neu["k"].levels == T
+    hw, hw_st, recs = run_behavioral_sequence(sim, h_seq, record=True)
+    assert torch.equal(hw, sw)
+    assert torch.allclose(hw_st["attn"]["S"], sw_st["attn"]["S"], atol=1e-6)
+    for key in ("x_attn", "q", "k", "v", "o_spk", "y_attn", "g", "u", "p", "y_ffn"):
+        assert all(torch.equal(a[key], b[key]) for a, b in zip(recs, srecs)), key
+    g = torch.cat([r["g"] for r in recs]); u = torch.cat([r["u"] for r in recs]); p = torch.cat([r["p"] for r in recs])
+    assert (g * T).round().max() > 1 or (u.abs() * T).round().max() > 1       # 真的用到了多级
+    assert torch.allclose(p, g * u)                                              # W2 事件数 = c_g·c_u
+    assert any(r["y_attn"].abs().sum() > 0 for r in recs) and any(r["y_ffn"].abs().sum() > 0 for r in recs)
+
+
+def test_behavioral_block_levels_only_on_some_points():
+    blk = _block(9)
+    _set_levels(blk, 4, points=("q", "k", "v"))
+    h_seq = torch.randn(1, 8, 16) * 2
+    sw, _ = run_sequence(blk, h_seq)
+    sim = BehavioralBlock(blk)
+    assert sim.levels["k"] == 4 and sim.levels["g"] == 1 and sim.cmp1.levels == 1
+    hw, _ = run_behavioral_sequence(sim, h_seq)
+    assert torch.equal(hw, sw)
+
+
+def test_old_three_argument_neuron_factory_still_works_for_levels_one():
+    blk = _block(10)
+    sim = BehavioralBlock(blk, neuron_factory=lambda thr, leak, ternary: IdealLIFModel(thr, leak, ternary))
+    h_seq = torch.randn(1, 4, 16) * 2
+    assert torch.equal(run_behavioral_sequence(sim, h_seq)[0], run_sequence(blk, h_seq)[0])
+
+
+def test_spike_prf_by_sign_counts_for_levels():
+    ref = torch.tensor([1.0, 0.5, -0.5, 0.0, -1.0])
+    ckt = torch.tensor([0.5, 0.5, -1.0, 0.5, 0.0])
+    r = spike_prf_by_sign(ckt, ref, levels=2)
+    # 正:ref 计数 2+1=3,ckt 1+1+1=3,tp = min(1,2)+min(1,1)+min(1,0) = 2
+    assert r["pos_tp"] == 2 and r["pos_pred"] == 3 and r["pos_ref"] == 3
+    # 负:ref 1+2=3,ckt 2,tp = min(2,1)+min(0,2) = 1
+    assert r["neg_tp"] == 1 and r["neg_pred"] == 2 and r["neg_ref"] == 3
+    one = spike_prf_by_sign(torch.tensor([1.0, 0.0, -1.0]), torch.tensor([1.0, -1.0, -1.0]))
+    assert one == spike_prf_by_sign(torch.tensor([1.0, 0.0, -1.0]), torch.tensor([1.0, -1.0, -1.0]), levels=1)

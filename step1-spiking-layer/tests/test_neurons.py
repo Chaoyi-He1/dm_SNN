@@ -82,3 +82,58 @@ def test_quantizer_in_threshold_is_learnable_and_stays_positive():
     with torch.no_grad():
         p.fill_(-50.0)  # 参数任意取值,阈值仍为正
     assert q.thr.item() > 0
+
+
+# ----------------------------------------------------------------------------- 每 token 多个脉冲(levels=T)
+
+def _count_ref(U, thr, T):
+    """参考定义:T 个子步,每次 U >= thr/T 发一个并减 thr/T;返回 c/T。"""
+    out = torch.zeros_like(U)
+    for i in range(U.numel()):
+        u, c = U.flatten()[i].item(), 0
+        for _ in range(T):
+            if u >= thr / T - 1e-12:
+                c += 1; u -= thr / T
+        out.view(-1)[i] = c / T
+    return out
+
+
+def test_levels_binary_counts_match_subslot_process():
+    from snn_spec.neurons import level_binary_fire, level_ternary_fire
+    torch.manual_seed(0)
+    U = torch.randn(400) * 2
+    for T in (2, 4, 8):
+        s = level_binary_fire(U, torch.tensor(1.0), T)
+        assert torch.allclose(s, _count_ref(U.clamp(min=0), 1.0, T))
+        st = level_ternary_fire(U, torch.tensor(1.0), T)
+        assert torch.allclose(st, _count_ref(U.clamp(min=0), 1.0, T) - _count_ref((-U).clamp(min=0), 1.0, T))
+        assert set((s * T).round().unique().tolist()) <= set(range(T + 1))
+
+
+def test_levels_one_is_bit_identical_to_original():
+    from snn_spec.neurons import level_ternary_fire
+    torch.manual_seed(1)
+    U = torch.randn(200)
+    assert torch.equal(level_ternary_fire(U, torch.tensor(0.7), 1), ternary_fire(U, torch.tensor(0.7)))
+    n1, n2 = TernaryLIF(0.5, 0.9), TernaryLIF(0.5, 0.9, levels=1)
+    s1, u1 = n1(U, torch.zeros_like(U)); s2, u2 = n2(U, torch.zeros_like(U))
+    assert torch.equal(s1, s2) and torch.equal(u1, u2)
+
+
+def test_levels_lif_soft_reset_subtracts_c_times_thr_over_T():
+    n = TernaryLIF(1.0, 0.9, levels=4)
+    U0 = torch.tensor([0.8, -0.3, 1.9, 0.24])
+    s, U = n(U0, torch.zeros(4))
+    assert torch.equal(s, torch.tensor([0.75, -0.25, 1.0, 0.0]))
+    assert torch.allclose(U, U0 - s)                    # 减 c 个 thr/T
+    q = QuantizerIn(1.0, levels=2)
+    assert torch.equal(q(torch.tensor([0.49, 0.5, 1.0, -0.6])), torch.tensor([0.0, 0.5, 1.0, -0.5]))
+
+
+def test_levels_surrogate_gradient_integral_is_independent_of_T():
+    from snn_spec.neurons import level_binary_fire
+    U = torch.linspace(-6, 8, 20001, requires_grad=True)
+    for T in (1, 2, 4):
+        s = level_binary_fire(U, torch.tensor(1.0), T)
+        (g,) = torch.autograd.grad(s.sum(), U)
+        assert abs(g.sum().item() * (14 / 20000) - 1.0) < 0.02

@@ -17,10 +17,26 @@ def _prf(pred_mask, ref_mask):
     return precision, recall, tp, n_pred, n_ref
 
 
-def spike_prf_by_sign(ckt, ref):
-    """ckt, ref: 同形状的脉冲张量,取值 {-1,0,+1}(二值时只有 {0,1})。"""
-    pp, pr, ptp, pn, prn = _prf(ckt == 1, ref == 1)
-    np_, nr, ntp, nn_, nrn = _prf(ckt == -1, ref == -1)
+def _prf_counts(c_pred, c_ref):
+    """按脉冲计数的 precision/recall:tp = Σ min(c_pred, c_ref),pred = Σ c_pred,ref = Σ c_ref。"""
+    tp = torch.minimum(c_pred, c_ref).sum().item()
+    n_pred = c_pred.sum().item()
+    n_ref = c_ref.sum().item()
+    precision = tp / n_pred if n_pred > 0 else (1.0 if n_ref == 0 else 0.0)
+    recall = tp / n_ref if n_ref > 0 else 1.0
+    return precision, recall, int(tp), int(n_pred), int(n_ref)
+
+
+def spike_prf_by_sign(ckt, ref, levels=1):
+    """ckt, ref: 同形状的脉冲张量,取值 {-1,0,+1}(二值时只有 {0,1})。
+    levels=T > 1 时取值是 c/T(c = 0..T 个脉冲):按脉冲计数统计,正负分开,tp = Σ min(c_ckt, c_ref);T=1 时与逐事件统计相同。"""
+    if levels == 1:
+        pp, pr, ptp, pn, prn = _prf(ckt == 1, ref == 1)
+        np_, nr, ntp, nn_, nrn = _prf(ckt == -1, ref == -1)
+    else:
+        cc, cr = (ckt * levels).round(), (ref * levels).round()
+        pp, pr, ptp, pn, prn = _prf_counts(cc.clamp(min=0), cr.clamp(min=0))
+        np_, nr, ntp, nn_, nrn = _prf_counts((-cc).clamp(min=0), (-cr).clamp(min=0))
     return dict(pos_precision=pp, pos_recall=pr, neg_precision=np_, neg_recall=nr,
                 pos_tp=ptp, pos_pred=pn, pos_ref=prn, neg_tp=ntp, neg_pred=nn_, neg_ref=nrn)
 

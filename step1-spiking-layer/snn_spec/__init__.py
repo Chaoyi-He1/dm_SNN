@@ -3,7 +3,8 @@
 接口基线见项目根目录 folded-T1-spec.md（0.1.0，尚未冻结）。
 本包提供 Stage 0 软件参考实现，供后续真实层改造和电路验证使用。
 """
-from .neurons import SpikeFn, ternary_fire, BinaryLIF, TernaryLIF, QuantizerIn, PositiveScalar
+from .neurons import (SpikeFn, ternary_fire, level_steps, level_binary_fire, level_ternary_fire,
+                      BinaryLIF, TernaryLIF, QuantizerIn, PositiveScalar)
 from .gdn import (gdn_step, transition_matrix, hf_reference_recurrence,
                   SpikingGDN, QwenNativeGates, SigmoidGates, ExternalGates, CausalFIR)
 from .block import SpikingSwiGLU, SpikingBlock, run_sequence
