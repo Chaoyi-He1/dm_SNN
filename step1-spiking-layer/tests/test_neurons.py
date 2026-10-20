@@ -132,8 +132,13 @@ def test_levels_lif_soft_reset_subtracts_c_times_thr_over_T():
 
 def test_levels_surrogate_gradient_integral_is_independent_of_T():
     from snn_spec.neurons import level_binary_fire
-    U = torch.linspace(-6, 8, 20001, requires_grad=True)
+    # arctan 代理梯度是 Lorentzian(尺度 1/π),尾巴很长:区间取 [-60, 60],截掉的尾巴每侧约 1/(60·π²) ≈ 0.0017
+    U = torch.linspace(-60, 60, 240001, requires_grad=True)
+    du = 120 / 240000
+    integrals = []
     for T in (1, 2, 4):
         s = level_binary_fire(U, torch.tensor(1.0), T)
         (g,) = torch.autograd.grad(s.sum(), U)
-        assert abs(g.sum().item() * (14 / 20000) - 1.0) < 0.02
+        integrals.append(g.sum().item() * du)
+    assert all(abs(v - integrals[0]) < 1e-3 for v in integrals)      # 与 T 无关
+    assert all(abs(v - 1.0) < 0.01 for v in integrals)                # 等于台阶的总高度 1

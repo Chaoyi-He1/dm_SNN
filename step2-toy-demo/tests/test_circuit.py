@@ -54,6 +54,43 @@ def test_nominal_circuit_runs_and_reports(cfg, sl, demo):
     assert cmp["n_positions"] == sum(len(sl.ids[i]) + 1 for i in range(4))
 
 
+def test_nominal_parts_decompose_the_nominal_circuit(cfg, sl):
+    """nominal_parts=() 与理想电路逐位相同;四部分全开与原来的全标称电路逐位相同;只开一部分时只有那一部分带误差。"""
+    import pytest
+    from toy_demo.circuit import PARTS
+    m = _model(cfg, sl)
+    tok = all_sequences(sl)[:6, :-1]
+    ideal, nominal = CircuitLM(m, cfg, ideal=True), CircuitLM(m, cfg, ideal=False)
+    assert torch.equal(CircuitLM(m, cfg, ideal=False, nominal_parts=()).forward(tok), ideal.forward(tok))
+    assert torch.equal(CircuitLM(m, cfg, ideal=False, nominal_parts=PARTS).forward(tok), nominal.forward(tok))
+    ffn = CircuitLM(m, cfg, ideal=False, nominal_parts=("ffn",))
+    s_id, s_no = ideal.sims[0], nominal.sims[0]
+    for n in ("Wq", "Wk", "Wv", "Wo"):
+        assert torch.equal(ffn.sims[0].xb[n].W_eff, s_id.xb[n].W_eff)
+    for n in ("W1", "W3", "W2"):
+        assert torch.equal(ffn.sims[0].xb[n].W_eff, s_no.xb[n].W_eff)
+    assert ffn.sims[0].cmp1.offset == 0.0 and ffn.sims[0].cmp2.offset == s_no.cmp2.offset != 0.0
+    assert ffn.sims[0].gain_cell_kw == s_id.gain_cell_kw and torch.equal(ffn.head_xb.W_eff, ideal.head_xb.W_eff)
+    assert ffn.nominal_parts == ("ffn",) and nominal.nominal_parts == PARTS and ideal.nominal_parts == ()
+    gdn = CircuitLM(m, cfg, ideal=False, nominal_parts=("gdn",))
+    for i, (sg, sn, si) in enumerate(zip(gdn.sims, nominal.sims, ideal.sims)):
+        for n in ("Wq", "Wk", "Wv", "Wo"):                           # 四个都带误差,读噪声也带上
+            assert torch.equal(sg.xb[n].W_eff, sn.xb[n].W_eff) and sg.xb[n].read_noise == sn.xb[n].read_noise == cfg.read_noise
+        for n in ("W1", "W3", "W2"):
+            assert torch.equal(sg.xb[n].W_eff, si.xb[n].W_eff) and sg.xb[n].read_noise == 0.0
+        assert sg.cmp1.offset == sn.cmp1.offset != 0.0 and sg.cmp2.offset == 0.0
+    # 只差输出头时,两块的全部记录(含读噪声的抽样)与全标称相同
+    _, rec_a = CircuitLM(m, cfg, ideal=False, nominal_parts=("gdn", "ffn", "state")).forward(tok, record=True)
+    _, rec_b = CircuitLM(m, cfg, ideal=False).forward(tok, record=True)
+    for ra, rb in zip(rec_a, rec_b):
+        for i in range(cfg.n_blocks):
+            assert all(torch.equal(ra[i][k], rb[i][k]) for k in ("y_attn", "y_ffn", "S", "h_out"))
+    with pytest.raises(ValueError):
+        CircuitLM(m, cfg, ideal=True, nominal_parts=("ffn",))
+    with pytest.raises(ValueError):
+        CircuitLM(m, cfg, ideal=False, nominal_parts=("crossbar",))
+
+
 def test_sigma_g_changes_head_weights(cfg, sl):
     m = _model(cfg, sl)
     a = CircuitLM(m, cfg, ideal=False, sigma_g=0.0).head_xb.W_eff
@@ -109,3 +146,23 @@ def test_nominal_circuit_runs_with_multilevel_model():
     assert 0.0 <= ev["token_acc"] <= 1.0
     cmp = teacher_forced_compare(m, hw, all_sequences(sl)[:4], cfg)
     assert cmp["blocks"][0]["attn"]["levels"] == 2 and isinstance(cmp["pass"], bool)
+
+
+def test_circuit_levels_script_tiny(tmp_path):
+    """experiments/circuit_levels.py 在合成切片的 T = 2 小模型上跑验收与误差隔离。"""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "experiments"))
+    import circuit_levels
+    res = circuit_levels.main(["--tiny", "--out", str(tmp_path)])
+    assert (tmp_path / "circuit.json").exists() and (tmp_path / "circuit.md").exists()
+    assert res["circuit_ideal"]["compare"]["pass"] and res["circuit_ideal"]["argmax_equal_to_software"]
+    assert len(res["sigma_g_sweep"]) == 4 and res["levels"]["q_out"] == 2
+    iso = circuit_levels.main(["--tiny", "--mode", "isolate", "--out", str(tmp_path)])
+    rows = {tuple(r["parts"]): r for r in iso["isolation"]}
+    full = rows[("gdn", "ffn", "state", "head")]["summary"]
+    nominal = circuit_levels.compact(res["circuit_nominal"]["compare"])
+    assert full == nominal                                                 # 四部分全开 = 全标称,逐位相同
+    assert rows[("gdn", "ffn", "state", "head")]["token_acc"] == res["circuit_nominal"]["token_acc"]
+    assert rows[("head",)]["summary"]["worst_sign_error"] == 0.0           # 输出头的误差不影响块内脉冲
+    assert "误差隔离" in (tmp_path / "circuit.md").read_text()

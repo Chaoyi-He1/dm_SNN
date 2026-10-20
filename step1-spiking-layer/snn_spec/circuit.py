@@ -253,17 +253,26 @@ def _levels_of(mod):
     return int(getattr(mod, "levels", 1))
 
 
+MATRICES = ("Wq", "Wk", "Wv", "Wo", "W1", "W3", "W2")
+
+
 # ----------------------------------------------------------------------------- 行为级仿真器
 
 class BehavioralBlock:
     """把 S0.9 的 SpikingBlock 逐原语替换成电路模型,按 S0.7 的相位表逐 token 执行。
     neuron_factory(thr, leak, ternary) 返回神经元模型;默认 IdealLIFModel。脉冲点的 levels(每 token 最多几个脉冲)
-    从软件模块读出:levels > 1 的点以 neuron_factory(thr, leak, ternary, levels=T) 调用,比较器相应变为 2T 个。"""
+    从软件模块读出:levels > 1 的点以 neuron_factory(thr, leak, ternary, levels=T) 调用,比较器相应变为 2T 个。
+    crossbar_kw:一个字典(7 个矩阵共用),或按矩阵名给出的字典 {"Wq": {...}, ..., "W2": {...}}(未列出的矩阵为理想),
+    用于把非理想性只加在某个子块上做误差隔离。"""
 
     def __init__(self, block, neuron_factory=None, crossbar_kw=None, gain_cell_kw=None, comparator_kw=None):
         self.block = block
         nf = neuron_factory or (lambda thr, leak, ternary, levels=1: IdealLIFModel(thr, leak, ternary, levels))
         ck, gk = crossbar_kw or {}, comparator_kw or {}
+        per_matrix = any(k in MATRICES for k in ck)
+        if per_matrix and not set(ck) <= set(MATRICES):
+            raise ValueError(f"crossbar_kw 按矩阵给出时只能用 {MATRICES} 作键,收到 {sorted(ck)}")
+        ckw = (lambda n: ck.get(n) or {}) if per_matrix else (lambda n: ck)
         attn, ffn = block.attn, block.ffn
         self.gain_cell_kw = gain_cell_kw or {}
 
@@ -272,7 +281,7 @@ class BehavioralBlock:
             return nf(mod.thr.item(), mod.leak, ternary) if T == 1 else nf(mod.thr.item(), mod.leak, ternary, levels=T)
 
         with torch.no_grad():
-            self.xb = {n: CrossbarModel(m.weight, **ck) for n, m in
+            self.xb = {n: CrossbarModel(m.weight, **ckw(n)) for n, m in
                        [("Wq", attn.Wq), ("Wk", attn.Wk), ("Wv", attn.Wv), ("Wo", attn.Wo),
                         ("W1", ffn.W1), ("W3", ffn.W3), ("W2", ffn.W2)]}
             self.neu = {

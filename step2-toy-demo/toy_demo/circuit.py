@@ -25,20 +25,48 @@ def primitive_kwargs(cfg, ideal, sigma_g=None, seed=0):
             cfg.cmp_offset_frac)
 
 
+PARTS = ("gdn", "ffn", "state", "head")
+PART_MATRICES = {"gdn": ("Wq", "Wk", "Wv", "Wo"), "ffn": ("W1", "W3", "W2")}
+
+
 class CircuitLM:
-    def __init__(self, spiking_lm, cfg, ideal=True, sigma_g=None, seed=0):
+    """ideal=True:全部原语取理想值。ideal=False:取 cfg 的标称值;nominal_parts 给出时只有这些部分取标称值,其余理想,
+    用于计划第 7 节的误差隔离:
+        "gdn"   W_q/W_k/W_v/W_O 四个 crossbar 与块入口比较器 cmp1
+        "ffn"   W_1/W_3/W_2 三个 crossbar 与前馈入口比较器 cmp2
+        "state" 状态阵列(gain cell 的写入、读出误差与保持因子)
+        "head"  输出头的比较器与 crossbar
+    各部分的随机种子与全标称时相同,所以只开一部分时它的噪声实现与全标称时那一部分完全一样。"""
+
+    def __init__(self, spiking_lm, cfg, ideal=True, sigma_g=None, seed=0, nominal_parts=None):
+        if nominal_parts is not None:
+            nominal_parts = tuple(nominal_parts)
+            if ideal:
+                raise ValueError("nominal_parts 只在 ideal=False 时有意义")
+            bad = set(nominal_parts) - set(PARTS)
+            if bad:
+                raise ValueError(f"未知的部分 {sorted(bad)};可选 {PARTS}")
         self.cfg = cfg
+        self.nominal_parts = PARTS if (nominal_parts is None and not ideal) else (nominal_parts or ())
+        on = set(self.nominal_parts)
         self.device = spiking_lm.device
         self.emb = spiking_lm.emb.weight.detach()
         self.sims = []
         for i, blk in enumerate(spiking_lm.blocks):
-            xb, gc, frac = primitive_kwargs(cfg, ideal, sigma_g, seed + i)
+            xb_n, gc_n, frac_n = primitive_kwargs(cfg, ideal, sigma_g, seed + i)
+            xb_i, gc_i, _ = primitive_kwargs(cfg, True, sigma_g, seed + i)
+            if on >= {"gdn", "ffn"}:
+                xb = xb_n
+            else:
+                xb = {n: (xb_n if p in on else xb_i) for p, names in PART_MATRICES.items() for n in names}
+            gc = gc_n if "state" in on else gc_i
             sim = BehavioralBlock(blk, crossbar_kw=xb, gain_cell_kw=gc)
-            for name in ("cmp1", "cmp2"):                       # 失调按各自阈值的比例设定
-                thr = getattr(sim, name).thr
-                setattr(sim, name, ComparatorModel(thr, offset=frac * thr))
+            for name, part in (("cmp1", "gdn"), ("cmp2", "ffn")):   # 失调按各自阈值的比例设定,级数沿用 BehavioralBlock 读出的值
+                old = getattr(sim, name)
+                frac = frac_n if part in on else 0.0
+                setattr(sim, name, ComparatorModel(old.thr, offset=frac * old.thr, levels=old.levels))
             self.sims.append(sim)
-        xb, _, frac = primitive_kwargs(cfg, ideal, sigma_g, seed + len(self.sims))
+        xb, _, frac = primitive_kwargs(cfg, ideal or "head" not in on, sigma_g, seed + len(self.sims))
         thr = spiking_lm.q_out.thr.item()
         self.head_cmp = ComparatorModel(thr, offset=frac * thr, levels=int(getattr(spiking_lm.q_out, "levels", 1)))
         self.head_xb = CrossbarModel(spiking_lm.head.weight, **xb)

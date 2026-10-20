@@ -137,3 +137,11 @@ for r in T2_c T2_c_s1 T2_c_s2 T4_c T4_c_s1 T4_c_s2; do .venv/bin/python experime
 | `step1-spiking-layer/snn_spec/metrics.py` | `spike_prf_by_sign(levels)`、`sign_error_rate`、`state_error` |
 | `step2-toy-demo/results/improve/README.md` | T = 2/4/8 实验记录与全部运行的表 |
 | `step2-toy-demo/results/conversion-sweep/README.md` | T = 1 扫描与标称电路基线数字 |
+
+## 6. 完成情况(2026-10-19,GPU 服务器上的 session)
+
+- 第 4.1 到 4.5 节都已完成,结果与结论在 `step2-toy-demo/results/improve/README.md` 的"电路模型的 T > 1 支持与验收"一节,全部数字表在 `step2-toy-demo/results/improve/circuit_tables.md`,每个运行目录里有 `circuit*.json` 与 `circuit.md`。
+- 第 3.5 节两处测试已修;`BehavioralBlock` 的 `crossbar_kw` 可按矩阵名给出,`CircuitLM` 加了 `nominal_parts`;`experiments/circuit_levels.py` 有 accept、isolate、knobs、diagnose、leaveout、seeds 六种模式。测试:step1 123 项通过、1 项预期失败(含 16 项 SPICE,服务器上用源码编译的 ngspice 47),step2 28 项通过。
+- 要点:理想电路对 T = 2、T = 4 与软件逐位相同;标称电路的逐脉冲判据所有模型都不过(单步对照就已不过:最差 P/R 0.80 到 0.84、输出头 argmax 一致率 0.76 到 0.96;误差跨 token 累积后更差;σ_G = 0.0001 累积后也过不了);自由运行(5 个噪声种子平均)比软件低 T = 1 11.7、T = 2 4.8 到 6.5、T = 4 1.2 到 1.4 个百分点;T = 1、T = 2 最大的单项来源是比较器失调(去掉后回升 9.7、4.6 个百分点),T = 4 各项都不到 1 个百分点,电导量化(+0.8)略大于失调(+0.6)。
+- T = 1 的 C 用 circuit_levels.py 重测:每次测量新建电路,读噪声的抽样与第 4.3 节的基线不同,teacher forcing 的 argmax 一致率 0.615(基线 0.625),符号错误率 2.0 / 7.1 / 4.0 / 10.9%(基线 2.0 / 7.2 / 4.2 / 10.9%),自由运行 acc 0.634 相同。
+- 报告页源文件 `results/conversion-sweep/gdn-snn-report.html` 已按结果更新(第 6 节验收表最右列、第 7 节"代价"、第 8 节结论),线上 artifact 尚未重新发布。

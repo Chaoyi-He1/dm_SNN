@@ -1,0 +1,443 @@
+{
+ "leaveout": [
+  {
+   "label": "全标称",
+   "change": {},
+   "summary": {
+    "argmax_agreement": 0.8234339500162285,
+    "state_err_max": 0.00996857788413763,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.6657379650855229,
+      "sign_error": 0.05061377322559061
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6392876051532443,
+      "sign_error": 0.07554072051113471
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.7341348583837212,
+      "sign_error": 0.04711348621763232
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6553490170686523,
+      "sign_error": 0.1129967348150347
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.1129967348150347,
+    "worst_pr": 0.6392876051532443
+   },
+   "token_acc": 0.7659645996873476,
+   "n_exact": 2,
+   "seconds": 75.4
+  },
+  {
+   "label": "去掉比较器失调",
+   "change": {
+    "cmp_offset_frac": 0.0
+   },
+   "summary": {
+    "argmax_agreement": 0.8510223953261928,
+    "state_err_max": 0.007552693132311106,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.7682031789487836,
+      "sign_error": 0.009405565853862064
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.7245037794333569,
+      "sign_error": 0.02770123277737491
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.7815661349600272,
+      "sign_error": 0.02484774326316082
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.7117763970706728,
+      "sign_error": 0.07496392496392497
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.07496392496392497,
+    "worst_pr": 0.7117763970706728
+   },
+   "token_acc": 0.8220403086181103,
+   "n_exact": 5,
+   "seconds": 73.7
+  },
+  {
+   "label": "去掉电导量化",
+   "change": {
+    "n_levels": 0
+   },
+   "summary": {
+    "argmax_agreement": 0.7990912041544953,
+    "state_err_max": 0.010263752192258835,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.6730536875173133,
+      "sign_error": 0.0467191097467383
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6504431997389744,
+      "sign_error": 0.06974072766598864
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.73509515313708,
+      "sign_error": 0.04298673517092221
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6637124768431086,
+      "sign_error": 0.10652510260614988
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.10652510260614988,
+    "worst_pr": 0.6504431997389744
+   },
+   "token_acc": 0.7776134205173891,
+   "n_exact": 2,
+   "seconds": 75.2
+  },
+  {
+   "label": "去掉编程误差 σ_G",
+   "change": {
+    "sigma_g": 0.0
+   },
+   "summary": {
+    "argmax_agreement": 0.7844855566374553,
+    "state_err_max": 0.010889858938753605,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.6661212665012872,
+      "sign_error": 0.050708091744060754
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6388931019467589,
+      "sign_error": 0.07624283923341148
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.7275202716493794,
+      "sign_error": 0.04759415468694309
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6582177737009658,
+      "sign_error": 0.11403427684002293
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.11403427684002293,
+    "worst_pr": 0.6388931019467589
+   },
+   "token_acc": 0.7658469348304786,
+   "n_exact": 3,
+   "seconds": 76.2
+  },
+  {
+   "label": "去掉读噪声",
+   "change": {
+    "read_noise": 0.0
+   },
+   "summary": {
+    "argmax_agreement": 0.8552418046088932,
+    "state_err_max": 0.010435830801725388,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.6650940351494881,
+      "sign_error": 0.05082774969003553
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6388671070945482,
+      "sign_error": 0.07679739479520507
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.7337210446649077,
+      "sign_error": 0.04876696226710209
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6537167934675084,
+      "sign_error": 0.11454835537910692
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.11454835537910692,
+    "worst_pr": 0.6388671070945482
+   },
+   "token_acc": 0.7671244389907718,
+   "n_exact": 3,
+   "seconds": 63.2
+  },
+  {
+   "label": "去掉 crossbar 的三项误差",
+   "change": {
+    "n_levels": 0,
+    "sigma_g": 0.0,
+    "read_noise": 0.0
+   },
+   "summary": {
+    "argmax_agreement": 0.7977929243752029,
+    "state_err_max": 0.010059608146548271,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.6744437777228713,
+      "sign_error": 0.04596467009228724
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6504009378201592,
+      "sign_error": 0.06919413264165288
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.73138125935093,
+      "sign_error": 0.04438068407419312
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6633077933056349,
+      "sign_error": 0.10736305897962876
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.10736305897962876,
+    "worst_pr": 0.6504009378201592
+   },
+   "token_acc": 0.7774789463952531,
+   "n_exact": 2,
+   "seconds": 63.7
+  },
+  {
+   "label": "去掉状态阵列误差",
+   "change": {
+    "write_err": 0.0,
+    "read_err": 0.0,
+    "eps_hold": 1.0
+   },
+   "summary": {
+    "argmax_agreement": 0.822135670236936,
+    "state_err_max": 0.010248363949358463,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.6648672094345484,
+      "sign_error": 0.05079935794542536
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6386509740896084,
+      "sign_error": 0.07603826674169949
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.7337806136811486,
+      "sign_error": 0.048856469873109945
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6557492041223763,
+      "sign_error": 0.11326179144830652
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.11326179144830652,
+    "worst_pr": 0.6386509740896084
+   },
+   "token_acc": 0.7661663108705519,
+   "n_exact": 2,
+   "seconds": 60.4
+  },
+  {
+   "label": "失调改为每个通道独立随机",
+   "change": "random_offset",
+   "summary": {
+    "argmax_agreement": 0.8039597533268419,
+    "state_err_max": 0.009803975000977516,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.6816000382498312,
+      "sign_error": 0.03815268784047692
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6565215525564829,
+      "sign_error": 0.06438354636507618
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 2,
+      "pr_min": 0.7387022741498018,
+      "sign_error": 0.040036765572340975
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 2,
+      "pr_min": 0.6727675522162706,
+      "sign_error": 0.1025276570298305
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.1025276570298305,
+    "worst_pr": 0.6565215525564829
+   },
+   "token_acc": 0.7855305844581534,
+   "n_exact": 1,
+   "seconds": 76.6
+  }
+ ],
+ "meta": {
+  "source": "results/improve/T2_c_s2",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 2,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "torch": "2.14.0+cu126",
+  "device": "cpu",
+  "n_compare": 205,
+  "levels_summary": "2",
+  "cfg": {
+   "slice_dir": "data/tinystories-slice",
+   "target_sentences": 4000,
+   "min_len": 2,
+   "max_len": 40,
+   "n_demo": 5,
+   "demo_prefix_len": 5,
+   "demo_len_min": 12,
+   "demo_len_max": 16,
+   "demo_seed": 0,
+   "d": 128,
+   "n_blocks": 2,
+   "n_heads": 4,
+   "dk": 32,
+   "dv": 32,
+   "d_ff": 256,
+   "alpha_min": 0.5,
+   "alpha_max": 0.99,
+   "leak": 0.9,
+   "fire_quantile": 0.75,
+   "calib_sentences": 256,
+   "batch_size": 64,
+   "clip": 1.0,
+   "lr_a0": 0.003,
+   "steps_a0": 6000,
+   "lr_a1": 0.003,
+   "steps_a1": 2000,
+   "lr_c": 0.001,
+   "steps_c": 1500,
+   "eval_every": 100,
+   "plateau_steps": 500,
+   "plateau_delta": 0.001,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "max_new_tokens": 40,
+   "n_levels": 16,
+   "sigma_g": 0.02,
+   "read_noise": 0.01,
+   "write_err": 0.02,
+   "read_err": 0.02,
+   "eps_hold": 0.999,
+   "cmp_offset_frac": 0.02,
+   "sigma_g_sweep": [
+    0.0,
+    0.02,
+    0.05,
+    0.1
+   ],
+   "n_compare_sentences": 200,
+   "compare_seed": 0,
+   "results_dir": "results"
+  },
+  "mode": "leaveout",
+  "seconds": 564.4
+ }
+}

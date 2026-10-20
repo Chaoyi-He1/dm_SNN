@@ -2,6 +2,8 @@
 
 Stage 2 起的玩具模型 demo 在 `../step2-toy-demo/`,它通过可编辑安装引用本目录的 `snn_spec`(`pyproject.toml`)。
 
+`snn_spec` 的脉冲点(LIF、块入口量化器、行为级电路的神经元与比较器)支持 `levels = T`,即每 token 最多 T 个脉冲,T = 1 时与原实现逐位相同;`BehavioralBlock` 的 `crossbar_kw` 可以按矩阵名分别给出。用法与 T = 2、T = 4 模型的电路验收见 `../step2-toy-demo/results/improve/README.md`。
+
 接口基线：上级目录 `folded-T1-spec.md`，版本 0.1.3，尚未冻结。
 
 在本目录执行：
@@ -56,7 +58,7 @@ python3 -m venv .venv
 
 ## Stage 0 完成状态
 
-当前软件工作、固定版本上游对照与两个可选学习探针已完成；正式冻结仍需 Stage 2 真实层结果。完整验收记录见上级目录 `stage0-validation.md`。2026-09-14 复跑三项实验，数值与记录完全一致；加入行为级电路原语、SPICE 测试台、GF180MCU 与 ADM 物理模型、GDN 子块闭环后 pytest 110 项通过。
+当前软件工作、固定版本上游对照与两个可选学习探针已完成；正式冻结仍需 Stage 2 真实层结果。完整验收记录见上级目录 `stage0-validation.md`。2026-09-14 复跑三项实验，数值与记录完全一致；加入行为级电路原语、SPICE 测试台、GF180MCU 与 ADM 物理模型、GDN 子块闭环后 pytest 110 项通过;2026-10-19 加入多级脉冲点(`levels = T`)后 123 项通过、1 项预期失败(含 16 项 SPICE,用 ngspice 47)。
 
 ```sh
 .venv/bin/python -m pytest -o addopts='' -q

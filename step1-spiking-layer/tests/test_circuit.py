@@ -300,3 +300,21 @@ def test_spike_prf_by_sign_counts_for_levels():
     assert r["neg_tp"] == 1 and r["neg_pred"] == 2 and r["neg_ref"] == 3
     one = spike_prf_by_sign(torch.tensor([1.0, 0.0, -1.0]), torch.tensor([1.0, -1.0, -1.0]))
     assert one == spike_prf_by_sign(torch.tensor([1.0, 0.0, -1.0]), torch.tensor([1.0, -1.0, -1.0]), levels=1)
+
+
+def test_behavioral_block_crossbar_kw_per_matrix():
+    """crossbar_kw 按矩阵名给出时只有列出的矩阵带非理想性,其余与理想相同;共用字典的旧写法不变。"""
+    blk = _block(7)
+    noisy = dict(n_levels=8, sigma_g=0.05, seed=3)
+    uni = BehavioralBlock(blk, crossbar_kw=noisy)
+    per = BehavioralBlock(blk, crossbar_kw={"W1": noisy, "W2": noisy})
+    ideal = BehavioralBlock(blk)
+    for n in ("Wq", "Wk", "Wv", "Wo", "W3"):
+        assert torch.equal(per.xb[n].W_eff, ideal.xb[n].W_eff)
+    for n in ("W1", "W2"):
+        assert torch.equal(per.xb[n].W_eff, uni.xb[n].W_eff) and not torch.equal(per.xb[n].W_eff, ideal.xb[n].W_eff)
+    weights = dict(Wq=blk.attn.Wq, Wk=blk.attn.Wk, Wv=blk.attn.Wv, Wo=blk.attn.Wo, W1=blk.ffn.W1, W3=blk.ffn.W3, W2=blk.ffn.W2)
+    for n, lin in weights.items():                                   # 共用字典送到全部 7 个矩阵
+        assert torch.equal(uni.xb[n].W_eff, CrossbarModel(lin.weight, **noisy).W_eff)
+    with pytest.raises(ValueError):
+        BehavioralBlock(blk, crossbar_kw={"W1": noisy, "sigma_g": 0.1})

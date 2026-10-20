@@ -1,0 +1,833 @@
+{
+ "one_step": [
+  {
+   "parts": [
+    "gdn",
+    "ffn",
+    "state",
+    "head"
+   ],
+   "head_argmax_agreement": 0.7588445309964297,
+   "n_positions": 3081,
+   "outputs": [
+    {
+     "block": 0,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.00027164649735810463,
+     "pr_min": 0.8955315480307443,
+     "count_mismatch": 0.10750872641801834
+    },
+    {
+     "block": 0,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.0031734293163085247,
+     "pr_min": 0.8355272674670909,
+     "count_mismatch": 0.2053564190864563
+    },
+    {
+     "block": 1,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 7.838372753816308e-06,
+     "pr_min": 0.9381244563556433,
+     "count_mismatch": 0.07904545962810516
+    },
+    {
+     "block": 1,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.0037008294836409425,
+     "pr_min": 0.893028310674893,
+     "count_mismatch": 0.15902912616729736
+    }
+   ],
+   "worst_sign_error": 0.0037008294836409425,
+   "worst_pr": 0.8355272674670909,
+   "worst_count_mismatch": 0.2053564190864563,
+   "mean_count_mismatch": 0.1377349328249693,
+   "attn_count_mismatch": 0.09327709302306175,
+   "ffn_count_mismatch": 0.18219277262687683
+  },
+  {
+   "parts": [
+    "gdn"
+   ],
+   "head_argmax_agreement": 0.8831548198636806,
+   "n_positions": 3081,
+   "outputs": [
+    {
+     "block": 0,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.00021287352651605865,
+     "pr_min": 0.8971575168754146,
+     "count_mismatch": 0.10625354945659637
+    },
+    {
+     "block": 0,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.0007072417131162396,
+     "pr_min": 0.8894773586268326,
+     "count_mismatch": 0.14032071828842163
+    },
+    {
+     "block": 1,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 7.833951562677488e-06,
+     "pr_min": 0.9387043436694329,
+     "count_mismatch": 0.07832532376050949
+    },
+    {
+     "block": 1,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.0006508492703451964,
+     "pr_min": 0.9315791605351622,
+     "count_mismatch": 0.1025945320725441
+    }
+   ],
+   "worst_sign_error": 0.0007072417131162396,
+   "worst_pr": 0.8894773586268326,
+   "worst_count_mismatch": 0.14032071828842163,
+   "mean_count_mismatch": 0.1068735308945179,
+   "attn_count_mismatch": 0.09228943660855293,
+   "ffn_count_mismatch": 0.12145762518048286
+  },
+  {
+   "parts": [
+    "ffn"
+   ],
+   "head_argmax_agreement": 0.9117169750081142,
+   "n_positions": 3081,
+   "outputs": [
+    {
+     "block": 0,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 1.0,
+     "count_mismatch": 0.0
+    },
+    {
+     "block": 0,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.001743527155435446,
+     "pr_min": 0.8535609238632528,
+     "count_mismatch": 0.18227390944957733
+    },
+    {
+     "block": 1,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 1.0,
+     "count_mismatch": 0.0
+    },
+    {
+     "block": 1,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.0026968911541970144,
+     "pr_min": 0.9035789985284389,
+     "count_mismatch": 0.1435207724571228
+    }
+   ],
+   "worst_sign_error": 0.0026968911541970144,
+   "worst_pr": 0.8535609238632528,
+   "worst_count_mismatch": 0.18227390944957733,
+   "mean_count_mismatch": 0.08144867047667503,
+   "attn_count_mismatch": 0.0,
+   "ffn_count_mismatch": 0.16289734095335007
+  },
+  {
+   "parts": [
+    "state"
+   ],
+   "head_argmax_agreement": 0.9766309639727361,
+   "n_positions": 3081,
+   "outputs": [
+    {
+     "block": 0,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 0.9820672526913787,
+     "count_mismatch": 0.018622200936079025
+    },
+    {
+     "block": 0,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 7.760169906877961e-05,
+     "pr_min": 0.9640352425735423,
+     "count_mismatch": 0.045472756028175354
+    },
+    {
+     "block": 1,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 0.9906042582535989,
+     "count_mismatch": 0.012275336310267448
+    },
+    {
+     "block": 1,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.00011027163579617791,
+     "pr_min": 0.9826199057762659,
+     "count_mismatch": 0.02614055946469307
+    }
+   ],
+   "worst_sign_error": 0.00011027163579617791,
+   "worst_pr": 0.9640352425735423,
+   "worst_count_mismatch": 0.045472756028175354,
+   "mean_count_mismatch": 0.025627713184803724,
+   "attn_count_mismatch": 0.015448768623173237,
+   "ffn_count_mismatch": 0.03580665774643421
+  },
+  {
+   "parts": [
+    "head"
+   ],
+   "head_argmax_agreement": 0.8471275559883155,
+   "n_positions": 3081,
+   "outputs": [
+    {
+     "block": 0,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 1.0,
+     "count_mismatch": 0.0
+    },
+    {
+     "block": 0,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 1.0,
+     "count_mismatch": 0.0
+    },
+    {
+     "block": 1,
+     "output": "attn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 1.0,
+     "count_mismatch": 0.0
+    },
+    {
+     "block": 1,
+     "output": "ffn",
+     "levels": 1,
+     "sign_error": 0.0,
+     "pr_min": 1.0,
+     "count_mismatch": 0.0
+    }
+   ],
+   "worst_sign_error": 0.0,
+   "worst_pr": 1.0,
+   "worst_count_mismatch": 0.0,
+   "mean_count_mismatch": 0.0,
+   "attn_count_mismatch": 0.0,
+   "ffn_count_mismatch": 0.0
+  }
+ ],
+ "tiny_perturbation": [
+  {
+   "knob": "n_levels",
+   "value": 4096,
+   "teacher_forced": {
+    "argmax_agreement": 0.8620577734501785,
+    "state_err_max": 0.005627688020467758,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.9776288104907765,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.9429611357957239,
+      "sign_error": 0.0011223531866068634
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.8895742499080243,
+      "sign_error": 0.0023050500802025476
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.8579741059253959,
+      "sign_error": 0.01895470331117897
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.01895470331117897,
+    "worst_pr": 0.8579741059253959
+   },
+   "one_step": {
+    "head_argmax_agreement": 0.9974034404414152,
+    "n_positions": 3081,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9990605388749013,
+      "count_mismatch": 0.0007886035600677133
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.995917123216248,
+      "count_mismatch": 0.003565198043361306
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9997694017022347,
+      "count_mismatch": 0.00023074894852470607
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9990720831413505,
+      "count_mismatch": 0.0013261724961921573
+     }
+    ],
+    "worst_sign_error": 0.0,
+    "worst_pr": 0.995917123216248,
+    "worst_count_mismatch": 0.003565198043361306,
+    "mean_count_mismatch": 0.0014776807620364707,
+    "attn_count_mismatch": 0.0005096762542962097,
+    "ffn_count_mismatch": 0.0024456852697767317
+   }
+  },
+  {
+   "knob": "n_levels",
+   "value": 1024,
+   "teacher_forced": {
+    "argmax_agreement": 0.8682246024018176,
+    "state_err_max": 0.006298443302512169,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.941013680679829,
+      "sign_error": 5.0850732759059055e-06
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.884300110902165,
+      "sign_error": 0.003445183402740164
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.8851274576643079,
+      "sign_error": 0.004736611316571107
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.851932605203116,
+      "sign_error": 0.024878770290764074
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.024878770290764074,
+    "worst_pr": 0.851932605203116
+   },
+   "one_step": {
+    "head_argmax_agreement": 0.997078870496592,
+    "n_positions": 3081,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.997333583701061,
+      "count_mismatch": 0.002459631534293294
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 7.942212462125575e-06,
+      "pr_min": 0.9916613163981218,
+      "count_mismatch": 0.009463242255151272
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9991928595497254,
+      "count_mismatch": 0.0009001744328998029
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9968476191761958,
+      "count_mismatch": 0.00450340798124671
+     }
+    ],
+    "worst_sign_error": 7.942212462125575e-06,
+    "worst_pr": 0.9916613163981218,
+    "worst_count_mismatch": 0.009463242255151272,
+    "mean_count_mismatch": 0.00433161405089777,
+    "attn_count_mismatch": 0.0016799029835965484,
+    "ffn_count_mismatch": 0.006983325118198991
+   }
+  },
+  {
+   "knob": "sigma_g",
+   "value": 0.0001,
+   "teacher_forced": {
+    "argmax_agreement": 0.9610516066212269,
+    "state_err_max": 0.0054024262353777885,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.9917208983706023,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.975497050645322,
+      "sign_error": 0.00037536022473179907
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.9659120295272351,
+      "sign_error": 0.0007824875469969655
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.9555561555804566,
+      "sign_error": 0.0051558007880522
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.0051558007880522,
+    "worst_pr": 0.9555561555804566
+   },
+   "one_step": {
+    "head_argmax_agreement": 0.997078870496592,
+    "n_positions": 3081,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9997749180408083,
+      "count_mismatch": 0.00020285621576476842
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9993194174832368,
+      "count_mismatch": 0.0007860678597353399
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9998742191103098,
+      "count_mismatch": 9.382099960930645e-05
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9994532273089333,
+      "count_mismatch": 0.0007099967333488166
+     }
+    ],
+    "worst_sign_error": 0.0,
+    "worst_pr": 0.9993194174832368,
+    "worst_count_mismatch": 0.0007860678597353399,
+    "mean_count_mismatch": 0.00044818545211455785,
+    "attn_count_mismatch": 0.00014833860768703744,
+    "ffn_count_mismatch": 0.0007480322965420783
+   }
+  },
+  {
+   "knob": "sigma_g",
+   "value": 0.001,
+   "teacher_forced": {
+    "argmax_agreement": 0.8601103537812399,
+    "state_err_max": 0.005686955060809851,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.9418016342907471,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.8807444479683161,
+      "sign_error": 0.003686122439883221
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.8829254531349179,
+      "sign_error": 0.004839464841370795
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.8499277720025381,
+      "sign_error": 0.02557632971045735
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.02557632971045735,
+    "worst_pr": 0.8499277720025381
+   },
+   "one_step": {
+    "head_argmax_agreement": 0.9931840311587147,
+    "n_positions": 3081,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9980722750090515,
+      "count_mismatch": 0.0019068483961746097
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9925740851040789,
+      "count_mismatch": 0.008063534274697304
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9993339132206471,
+      "count_mismatch": 0.0008367818663828075
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9969488733782452,
+      "count_mismatch": 0.004199123475700617
+     }
+    ],
+    "worst_sign_error": 0.0,
+    "worst_pr": 0.9925740851040789,
+    "worst_count_mismatch": 0.008063534274697304,
+    "mean_count_mismatch": 0.0037515720032388344,
+    "attn_count_mismatch": 0.0013718151312787086,
+    "ffn_count_mismatch": 0.00613132887519896
+   }
+  },
+  {
+   "knob": "read_noise",
+   "value": 0.0001,
+   "teacher_forced": {
+    "argmax_agreement": 0.9201557935735151,
+    "state_err_max": 0.005254065617918968,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.9925688625004697,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.9777552758892264,
+      "sign_error": 0.00036252608173754724
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.9400572671371126,
+      "sign_error": 0.0008687315345633841
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.918996638360492,
+      "sign_error": 0.00824722588490648
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.00824722588490648,
+    "worst_pr": 0.918996638360492
+   },
+   "one_step": {
+    "head_argmax_agreement": 0.9990262901655307,
+    "n_positions": 3081,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9998121077749803,
+      "count_mismatch": 0.00016735638200771064
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9987873433986508,
+      "count_mismatch": 0.000907781592104584
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9999371095551549,
+      "count_mismatch": 5.324975791154429e-05
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9997502396349448,
+      "count_mismatch": 0.00027132019749842584
+     }
+    ],
+    "worst_sign_error": 0.0,
+    "worst_pr": 0.9987873433986508,
+    "worst_count_mismatch": 0.000907781592104584,
+    "mean_count_mismatch": 0.0003499269823805662,
+    "attn_count_mismatch": 0.00011030306995962746,
+    "ffn_count_mismatch": 0.0005895508948015049
+   }
+  },
+  {
+   "knob": "read_noise",
+   "value": 0.001,
+   "teacher_forced": {
+    "argmax_agreement": 0.8481012658227848,
+    "state_err_max": 0.00636377464979887,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.9515161596493117,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.9000916148319591,
+      "sign_error": 0.0027217887037045115
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "pr_min": 0.8790699861297223,
+      "sign_error": 0.004583260484052252
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "pr_min": 0.8529596234126208,
+      "sign_error": 0.024294682588436242
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.024294682588436242,
+    "worst_pr": 0.8529596234126208
+   },
+   "one_step": {
+    "head_argmax_agreement": 0.9922103213242454,
+    "n_positions": 3081,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9983371538085754,
+      "count_mismatch": 0.0016558138886466622
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9946117401429374,
+      "count_mismatch": 0.006460970267653465
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 1,
+      "sign_error": 0.0,
+      "pr_min": 0.9995179005617506,
+      "count_mismatch": 0.0005451760953292251
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 1,
+      "sign_error": 3.291173402053034e-06,
+      "pr_min": 0.9981099215617448,
+      "count_mismatch": 0.0026675593107938766
+     }
+    ],
+    "worst_sign_error": 3.291173402053034e-06,
+    "worst_pr": 0.9946117401429374,
+    "worst_count_mismatch": 0.006460970267653465,
+    "mean_count_mismatch": 0.0028323798906058073,
+    "attn_count_mismatch": 0.0011004949919879436,
+    "ffn_count_mismatch": 0.004564264789223671
+   }
+  }
+ ],
+ "position_profile_nominal": {
+  "1-3": 0.2182,
+  "4-6": 0.3382,
+  "7-10": 0.3466,
+  "11-15": 0.3427,
+  "16-25": 0.3402,
+  "26-41": 0.3405
+ },
+ "meta": {
+  "source": "results/conversion-sweep/CL2_l1_lif225_lr3e3_12k",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 1,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "torch": "2.14.0+cu126",
+  "device": "cpu",
+  "n_compare": 205,
+  "levels_summary": "1",
+  "cfg": {
+   "slice_dir": "data/tinystories-slice",
+   "target_sentences": 4000,
+   "min_len": 2,
+   "max_len": 40,
+   "n_demo": 5,
+   "demo_prefix_len": 5,
+   "demo_len_min": 12,
+   "demo_len_max": 16,
+   "demo_seed": 0,
+   "d": 128,
+   "n_blocks": 2,
+   "n_heads": 4,
+   "dk": 32,
+   "dv": 32,
+   "d_ff": 256,
+   "alpha_min": 0.5,
+   "alpha_max": 0.99,
+   "leak": 0.9,
+   "fire_quantile": 0.75,
+   "calib_sentences": 256,
+   "batch_size": 64,
+   "clip": 1.0,
+   "lr_a0": 0.003,
+   "steps_a0": 6000,
+   "lr_a1": 0.003,
+   "steps_a1": 2000,
+   "lr_c": 0.001,
+   "steps_c": 1500,
+   "eval_every": 100,
+   "plateau_steps": 500,
+   "plateau_delta": 0.001,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "max_new_tokens": 40,
+   "n_levels": 16,
+   "sigma_g": 0.02,
+   "read_noise": 0.01,
+   "write_err": 0.02,
+   "read_err": 0.02,
+   "eps_hold": 0.999,
+   "cmp_offset_frac": 0.02,
+   "sigma_g_sweep": [
+    0.0,
+    0.02,
+    0.05,
+    0.1
+   ],
+   "n_compare_sentences": 200,
+   "compare_seed": 0,
+   "results_dir": "results"
+  },
+  "mode": "diagnose",
+  "seconds": 204.9
+ }
+}

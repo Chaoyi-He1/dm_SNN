@@ -1,0 +1,1458 @@
+{
+ "knobs": [
+  {
+   "knob": "n_levels",
+   "value": 256,
+   "nominal": 16,
+   "summary": {
+    "argmax_agreement": 0.9558584875040571,
+    "state_err_max": 0.0055654654279351234,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8777825596329343,
+      "sign_error": 0.0008976096654608777
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8209958228905597,
+      "sign_error": 0.007556338185141431
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8240171862962482,
+      "sign_error": 0.018401671772606463
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7750439271558358,
+      "sign_error": 0.04058269723150911
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.04058269723150911,
+    "worst_pr": 0.7750439271558358
+   }
+  },
+  {
+   "knob": "n_levels",
+   "value": 64,
+   "nominal": 16,
+   "summary": {
+    "argmax_agreement": 0.9548847776695878,
+    "state_err_max": 0.0056796595454216,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8465220511570595,
+      "sign_error": 0.0035319537937338985
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7976645123384254,
+      "sign_error": 0.0122987701229877
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.813008062757568,
+      "sign_error": 0.022046966956151624
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.758812474048821,
+      "sign_error": 0.04807960006294409
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.04807960006294409,
+    "worst_pr": 0.758812474048821
+   }
+  },
+  {
+   "knob": "n_levels",
+   "value": 32,
+   "nominal": 16,
+   "summary": {
+    "argmax_agreement": 0.8831548198636806,
+    "state_err_max": 0.0061017610132694244,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8260628777901597,
+      "sign_error": 0.006456884447595926
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7820001668195846,
+      "sign_error": 0.017296766436287872
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8017970503853387,
+      "sign_error": 0.025714285714285714
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7481489149563313,
+      "sign_error": 0.05455339134792995
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.05455339134792995,
+    "worst_pr": 0.7481489149563313
+   }
+  },
+  {
+   "knob": "n_levels",
+   "value": 16,
+   "nominal": 16,
+   "summary": {
+    "argmax_agreement": 0.9321648815319702,
+    "state_err_max": 0.006861317902803421,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.804783752783213,
+      "sign_error": 0.011382214574763705
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7580971525180048,
+      "sign_error": 0.025825524319500224
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7875556535763023,
+      "sign_error": 0.033498563576279915
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7267364876278491,
+      "sign_error": 0.06655310318345405
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.06655310318345405,
+    "worst_pr": 0.7267364876278491
+   }
+  },
+  {
+   "knob": "n_levels",
+   "value": 8,
+   "nominal": 16,
+   "summary": {
+    "argmax_agreement": 0.8250567997403441,
+    "state_err_max": 0.008652306161820889,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7506492555203367,
+      "sign_error": 0.028985009108451955
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7003406670004614,
+      "sign_error": 0.052627577325711244
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7452511330341173,
+      "sign_error": 0.05515260384009219
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.6727038592066963,
+      "sign_error": 0.1018528893038697
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.1018528893038697,
+    "worst_pr": 0.6727038592066963
+   }
+  },
+  {
+   "knob": "sigma_g",
+   "value": 0.005,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9561830574488802,
+    "state_err_max": 0.00529518723487854,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8826848262236314,
+      "sign_error": 0.0007467725563321394
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8237226228543141,
+      "sign_error": 0.007190083380051078
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8273997719170838,
+      "sign_error": 0.017561070528048256
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7765589150818571,
+      "sign_error": 0.04002507556609688
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.04002507556609688,
+    "worst_pr": 0.7765589150818571
+   }
+  },
+  {
+   "knob": "sigma_g",
+   "value": 0.01,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9539110678351185,
+    "state_err_max": 0.0060019902884960175,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8650741998684808,
+      "sign_error": 0.0017482120558519696
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8101209045750933,
+      "sign_error": 0.009904462178262336
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.817500531549169,
+      "sign_error": 0.01977981651376147
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7692339211958303,
+      "sign_error": 0.043830609283945075
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.043830609283945075,
+    "worst_pr": 0.7692339211958303
+   }
+  },
+  {
+   "knob": "sigma_g",
+   "value": 0.02,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.952288218111003,
+    "state_err_max": 0.0057826717384159565,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8476797193039497,
+      "sign_error": 0.0035819822145593517
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.799174097671637,
+      "sign_error": 0.01253210020245207
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8114450129642772,
+      "sign_error": 0.02205945642417113
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7576075293038342,
+      "sign_error": 0.049264806925931014
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.049264806925931014,
+    "worst_pr": 0.7576075293038342
+   }
+  },
+  {
+   "knob": "sigma_g",
+   "value": 0.05,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.8795845504706264,
+    "state_err_max": 0.006482480559498072,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8209015824894179,
+      "sign_error": 0.007840675213836596
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7778662953392157,
+      "sign_error": 0.01906260930395243
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7940129615158401,
+      "sign_error": 0.028436626474139498
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7408378679604012,
+      "sign_error": 0.05900769046000269
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.05900769046000269,
+    "worst_pr": 0.7408378679604012
+   }
+  },
+  {
+   "knob": "sigma_g",
+   "value": 0.1,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.854592664719247,
+    "state_err_max": 0.0073007699102163315,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7926698751388281,
+      "sign_error": 0.014732991531770264
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7440835228310123,
+      "sign_error": 0.03231400631976516
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7769761727270217,
+      "sign_error": 0.03851960596228115
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7123918436170845,
+      "sign_error": 0.07638974057085858
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.07638974057085858,
+    "worst_pr": 0.7123918436170845
+   }
+  },
+  {
+   "knob": "read_noise",
+   "value": 0.0025,
+   "nominal": 0.01,
+   "summary": {
+    "argmax_agreement": 0.9568321973385264,
+    "state_err_max": 0.005200727842748165,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9007538456314306,
+      "sign_error": 0.0003601182241779862
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8374114638424358,
+      "sign_error": 0.005314581856449049
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8349146686095289,
+      "sign_error": 0.015091406316077765
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7838157520924846,
+      "sign_error": 0.03593695327162261
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.03593695327162261,
+    "worst_pr": 0.7838157520924846
+   }
+  },
+  {
+   "knob": "read_noise",
+   "value": 0.005,
+   "nominal": 0.01,
+   "summary": {
+    "argmax_agreement": 0.943524829600779,
+    "state_err_max": 0.005218129139393568,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8830281534780321,
+      "sign_error": 0.0007771673589709232
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8245143063719255,
+      "sign_error": 0.007251115470677467
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8266984031434575,
+      "sign_error": 0.017197072113218116
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7753037653794882,
+      "sign_error": 0.03969057518918854
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.03969057518918854,
+    "worst_pr": 0.7753037653794882
+   }
+  },
+  {
+   "knob": "read_noise",
+   "value": 0.01,
+   "nominal": 0.01,
+   "summary": {
+    "argmax_agreement": 0.9295683219733852,
+    "state_err_max": 0.005638813599944115,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8665455533294849,
+      "sign_error": 0.0016443259399230529
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.812032214441603,
+      "sign_error": 0.009122611493591703
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8187099784895168,
+      "sign_error": 0.01973627791684873
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7671846108044477,
+      "sign_error": 0.04348332991609679
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.04348332991609679,
+    "worst_pr": 0.7671846108044477
+   }
+  },
+  {
+   "knob": "read_noise",
+   "value": 0.02,
+   "nominal": 0.01,
+   "summary": {
+    "argmax_agreement": 0.9126906848425835,
+    "state_err_max": 0.0057269977405667305,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8487827397520672,
+      "sign_error": 0.0031265009051612666
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7992287282035516,
+      "sign_error": 0.012374981881432092
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8117570392297093,
+      "sign_error": 0.021731545222056656
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7584786841551902,
+      "sign_error": 0.04805059487751096
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.04805059487751096,
+    "worst_pr": 0.7584786841551902
+   }
+  },
+  {
+   "knob": "read_noise",
+   "value": 0.05,
+   "nominal": 0.01,
+   "summary": {
+    "argmax_agreement": 0.8893216488153197,
+    "state_err_max": 0.006184158846735954,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8248123875174029,
+      "sign_error": 0.007327490805317611
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7791323162608059,
+      "sign_error": 0.01830254572190056
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7963352100930833,
+      "sign_error": 0.026985481785939208
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.742083524552547,
+      "sign_error": 0.056611541612825646
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.056611541612825646,
+    "worst_pr": 0.742083524552547
+   }
+  },
+  {
+   "knob": "write_err",
+   "value": 0.005,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.973385264524505,
+    "state_err_max": 0.004651052877306938,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9482495161126014,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8675137574142756,
+      "sign_error": 0.0018856821315510273
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8601492800989312,
+      "sign_error": 0.009963122991944035
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8106403833587453,
+      "sign_error": 0.027107786653125795
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.027107786653125795,
+    "worst_pr": 0.8106403833587453
+   }
+  },
+  {
+   "knob": "write_err",
+   "value": 0.01,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9681921454073353,
+    "state_err_max": 0.004854410886764526,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9314645658596217,
+      "sign_error": 1.283532280836863e-05
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.852393990922115,
+      "sign_error": 0.0029571131617627876
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8479189504872304,
+      "sign_error": 0.012024328199066327
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7995257763500077,
+      "sign_error": 0.03039609542245053
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.03039609542245053,
+    "worst_pr": 0.7995257763500077
+   }
+  },
+  {
+   "knob": "write_err",
+   "value": 0.02,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9620253164556962,
+    "state_err_max": 0.004884267225861549,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.912931590561874,
+      "sign_error": 5.658077994428969e-05
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8437009599716258,
+      "sign_error": 0.004073793100424043
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8411530036252076,
+      "sign_error": 0.013677201989411199
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7915955322583729,
+      "sign_error": 0.03312874684502276
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.03312874684502276,
+    "worst_pr": 0.7915955322583729
+   }
+  },
+  {
+   "knob": "write_err",
+   "value": 0.05,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9571567672833495,
+    "state_err_max": 0.0051074884831905365,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8903494176372713,
+      "sign_error": 0.0003738001682100757
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8280679929505637,
+      "sign_error": 0.005653001548585197
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8273749202676246,
+      "sign_error": 0.016585908268199046
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7779180052011626,
+      "sign_error": 0.03757191921857445
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.03757191921857445,
+    "worst_pr": 0.7779180052011626
+   }
+  },
+  {
+   "knob": "read_err",
+   "value": 0.005,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9694904251866278,
+    "state_err_max": 0.004476151894778013,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9543919090961559,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8709032426323567,
+      "sign_error": 0.0017978297626436658
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8614157802519211,
+      "sign_error": 0.009418873289497068
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8124262714085984,
+      "sign_error": 0.02578548974836177
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.02578548974836177,
+    "worst_pr": 0.8124262714085984
+   }
+  },
+  {
+   "knob": "read_err",
+   "value": 0.01,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9594287568971114,
+    "state_err_max": 0.004615502897650003,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9376034908656586,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8568659873873633,
+      "sign_error": 0.0025764252749921925
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8463339675106103,
+      "sign_error": 0.011503355812074524
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7996323127690728,
+      "sign_error": 0.02985840547272519
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.02985840547272519,
+    "worst_pr": 0.7996323127690728
+   }
+  },
+  {
+   "knob": "read_err",
+   "value": 0.02,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9545602077247647,
+    "state_err_max": 0.004903735592961311,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9195154640924282,
+      "sign_error": 2.596211262364456e-05
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8445018990069045,
+      "sign_error": 0.0035350858364398574
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8384704282613312,
+      "sign_error": 0.013731523378582203
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7919837271846119,
+      "sign_error": 0.03277382533045322
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.03277382533045322,
+    "worst_pr": 0.7919837271846119
+   }
+  },
+  {
+   "knob": "read_err",
+   "value": 0.05,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9561830574488802,
+    "state_err_max": 0.004948355723172426,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8948221821191603,
+      "sign_error": 0.00018161683277962348
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.830956631032846,
+      "sign_error": 0.005384271374361835
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8289809136636119,
+      "sign_error": 0.01647247565184981
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.778370677867303,
+      "sign_error": 0.03782311403648912
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.03782311403648912,
+    "worst_pr": 0.778370677867303
+   }
+  },
+  {
+   "knob": "eps_hold",
+   "value": 0.9999,
+   "nominal": 0.999,
+   "summary": {
+    "argmax_agreement": 0.9922103213242454,
+    "state_err_max": 0.004145199898630381,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9903562090393562,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.9519293853013242,
+      "sign_error": 0.0002631914757863842
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9461464756219126,
+      "sign_error": 0.002299845074744965
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.909523562623994,
+      "sign_error": 0.008040416835009482
+     }
+    ],
+    "passes": true,
+    "worst_sign_error": 0.008040416835009482,
+    "worst_pr": 0.909523562623994
+   }
+  },
+  {
+   "knob": "eps_hold",
+   "value": 0.999,
+   "nominal": 0.999,
+   "summary": {
+    "argmax_agreement": 0.9837715027588445,
+    "state_err_max": 0.0047403122298419476,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.9604978097728276,
+      "sign_error": 0.0
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8927885355519709,
+      "sign_error": 0.0014316001595331557
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8849617146533609,
+      "sign_error": 0.00720358861228177
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8397638504495357,
+      "sign_error": 0.020734164535134908
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.020734164535134908,
+    "worst_pr": 0.8397638504495357
+   }
+  },
+  {
+   "knob": "eps_hold",
+   "value": 0.99,
+   "nominal": 0.999,
+   "summary": {
+    "argmax_agreement": 0.9691658552418047,
+    "state_err_max": 0.004987054038792849,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8982104655506129,
+      "sign_error": 0.0002623317797462377
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.8431353515337341,
+      "sign_error": 0.004538200896272816
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8421561291070803,
+      "sign_error": 0.013052449733672441
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7961548547826657,
+      "sign_error": 0.0317367884699374
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.0317367884699374,
+    "worst_pr": 0.7961548547826657
+   }
+  },
+  {
+   "knob": "eps_hold",
+   "value": 0.95,
+   "nominal": 0.999,
+   "summary": {
+    "argmax_agreement": 0.9558584875040571,
+    "state_err_max": 0.007467764895409346,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7928520493055792,
+      "sign_error": 0.0036004781885094115
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7891801786120743,
+      "sign_error": 0.013012155257228094
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7748330107221061,
+      "sign_error": 0.023738071816072487
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7463395179090452,
+      "sign_error": 0.049703081413421286
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.049703081413421286,
+    "worst_pr": 0.7463395179090452
+   }
+  },
+  {
+   "knob": "cmp_offset_frac",
+   "value": 0.005,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9409282700421941,
+    "state_err_max": 0.0065320939756929874,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.8104572520395887,
+      "sign_error": 0.010065824130452322
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7737538992944453,
+      "sign_error": 0.02086103109535416
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7969161421543028,
+      "sign_error": 0.027809171829498675
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7393482070106306,
+      "sign_error": 0.05862565684026862
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.05862565684026862,
+    "worst_pr": 0.7393482070106306
+   }
+  },
+  {
+   "knob": "cmp_offset_frac",
+   "value": 0.01,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9344368711457319,
+    "state_err_max": 0.006857526022940874,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7953296703296703,
+      "sign_error": 0.014071942446043165
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7615298388850781,
+      "sign_error": 0.026110958795893993
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7893434482758621,
+      "sign_error": 0.0330701072981876
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7330312925170068,
+      "sign_error": 0.06370145314739997
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.06370145314739997,
+    "worst_pr": 0.7330312925170068
+   }
+  },
+  {
+   "knob": "cmp_offset_frac",
+   "value": 0.02,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.9412528399870173,
+    "state_err_max": 0.006915087811648846,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7774586765807211,
+      "sign_error": 0.0196189152404946
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7458979422053384,
+      "sign_error": 0.031889902234309424
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7782900537480312,
+      "sign_error": 0.03684957308927371
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7200466308149251,
+      "sign_error": 0.07189002373266355
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.07189002373266355,
+    "worst_pr": 0.7200466308149251
+   }
+  },
+  {
+   "knob": "cmp_offset_frac",
+   "value": 0.05,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.8558909444985394,
+    "state_err_max": 0.008026376366615295,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7341391027571078,
+      "sign_error": 0.037074079183335634
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.7072214709387176,
+      "sign_error": 0.05204412967275753
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7510608852355529,
+      "sign_error": 0.0484888629894059
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.6950497588441981,
+      "sign_error": 0.0890280559062144
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.0890280559062144,
+    "worst_pr": 0.6950497588441981
+   }
+  },
+  {
+   "knob": "cmp_offset_frac",
+   "value": 0.1,
+   "nominal": 0.02,
+   "summary": {
+    "argmax_agreement": 0.7870821161960403,
+    "state_err_max": 0.00954019371420145,
+    "outputs": [
+     {
+      "block": 0,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.673844674200529,
+      "sign_error": 0.06746660403100466
+     },
+     {
+      "block": 0,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.6535722743085087,
+      "sign_error": 0.08550111597352852
+     },
+     {
+      "block": 1,
+      "output": "attn",
+      "levels": 4,
+      "pr_min": 0.7022874532395825,
+      "sign_error": 0.07334148565569465
+     },
+     {
+      "block": 1,
+      "output": "ffn",
+      "levels": 4,
+      "pr_min": 0.6432948839734021,
+      "sign_error": 0.12644754804158354
+     }
+    ],
+    "passes": false,
+    "worst_sign_error": 0.12644754804158354,
+    "worst_pr": 0.6432948839734021
+   }
+  }
+ ],
+ "tolerance": {
+  "n_levels": {
+   "tolerance": null,
+   "nominal": 16,
+   "passing": []
+  },
+  "sigma_g": {
+   "tolerance": null,
+   "nominal": 0.02,
+   "passing": []
+  },
+  "read_noise": {
+   "tolerance": null,
+   "nominal": 0.01,
+   "passing": []
+  },
+  "write_err": {
+   "tolerance": null,
+   "nominal": 0.02,
+   "passing": []
+  },
+  "read_err": {
+   "tolerance": null,
+   "nominal": 0.02,
+   "passing": []
+  },
+  "eps_hold": {
+   "tolerance": 0.9999,
+   "nominal": 0.999,
+   "passing": [
+    0.9999
+   ]
+  },
+  "cmp_offset_frac": {
+   "tolerance": null,
+   "nominal": 0.02,
+   "passing": []
+  }
+ },
+ "meta": {
+  "source": "results/improve/T4_c",
+  "info": {
+   "kind": "spiking",
+   "leak": 0.9,
+   "levels": 4,
+   "level_points": "all",
+   "sizes": {}
+  },
+  "torch": "2.14.0+cu126",
+  "device": "cpu",
+  "n_compare": 205,
+  "levels_summary": "4",
+  "cfg": {
+   "slice_dir": "data/tinystories-slice",
+   "target_sentences": 4000,
+   "min_len": 2,
+   "max_len": 40,
+   "n_demo": 5,
+   "demo_prefix_len": 5,
+   "demo_len_min": 12,
+   "demo_len_max": 16,
+   "demo_seed": 0,
+   "d": 128,
+   "n_blocks": 2,
+   "n_heads": 4,
+   "dk": 32,
+   "dv": 32,
+   "d_ff": 256,
+   "alpha_min": 0.5,
+   "alpha_max": 0.99,
+   "leak": 0.9,
+   "fire_quantile": 0.75,
+   "calib_sentences": 256,
+   "batch_size": 64,
+   "clip": 1.0,
+   "lr_a0": 0.003,
+   "steps_a0": 6000,
+   "lr_a1": 0.003,
+   "steps_a1": 2000,
+   "lr_c": 0.001,
+   "steps_c": 1500,
+   "eval_every": 100,
+   "plateau_steps": 500,
+   "plateau_delta": 0.001,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "max_new_tokens": 40,
+   "n_levels": 16,
+   "sigma_g": 0.02,
+   "read_noise": 0.01,
+   "write_err": 0.02,
+   "read_err": 0.02,
+   "eps_hold": 0.999,
+   "cmp_offset_frac": 0.02,
+   "sigma_g_sweep": [
+    0.0,
+    0.02,
+    0.05,
+    0.1
+   ],
+   "n_compare_sentences": 200,
+   "compare_seed": 0,
+   "results_dir": "results"
+  },
+  "mode": "knobs",
+  "seconds": 843.7
+ }
+}

@@ -517,14 +517,14 @@ svg .fde{fill:var(--de)}
           <tr><td>A1 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td><td><span class="pill ok">✓ 通过</span></td></tr>
           <tr><td>C 5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">1/5</td><td><span class="pill ok">✓ 通过</span></td></tr>
           <tr><td>C 准确率在 A1 的 1 个百分点以内</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">75.2% ≥ 74.0%</td><td><span class="pill ok">✓ 通过</span><br><span class="num" style="font-size:12.5px">82.5% 对 83.2%</span></td></tr>
-          <tr><td>理想电路每个 token 的输出和 C 相同</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">对照的 205 句上完全相同</td><td><span class="pill na">未测</span></td></tr>
-          <tr><td>理想电路逐脉冲对照</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">误差 0</td><td><span class="pill na">未测</span></td></tr>
-          <tr><td>标称电路自己生成，5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">0/5</td><td><span class="pill na">未测</span></td></tr>
-          <tr><td>标称电路与 C 对照：喂同样的前文</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">下一个 token 相同 62.5%，要求 ≥ 99%；脉冲 P/R 0.67–0.78，要求 ≥ 0.9</td><td><span class="pill na">未测</span></td></tr>
+          <tr><td>理想电路每个 token 的输出和 C 相同</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">对照的 205 句上完全相同</td><td><span class="pill ok">✓ 通过</span><br><span class="num" style="font-size:12.5px">3 个种子都完全相同</span></td></tr>
+          <tr><td>理想电路逐脉冲对照</td><td><span class="pill ok">✓ 通过</span></td><td><span class="pill ok">✓ 通过</span></td><td class="num">误差 0</td><td><span class="pill ok">✓ 通过</span><br><span class="num" style="font-size:12.5px">误差 0</span></td></tr>
+          <tr><td>标称电路自己生成，5 句全对</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">0/5</td><td><span class="pill no">✗ 未过</span><br><span class="num" style="font-size:12.5px">1/5、2/5、2/5;换 5 个噪声种子(失调与电导量化不变)共 0/15</span></td></tr>
+          <tr><td>标称电路与 C 对照：喂同样的前文</td><td><span class="pill no">✗ 未过</span></td><td><span class="pill no">✗ 未过</span></td><td class="num">下一个 token 相同 62.5%，要求 ≥ 99%；脉冲 P/R 0.67–0.78，要求 ≥ 0.9</td><td><span class="pill no">✗ 未过</span><br><span class="num" style="font-size:12.5px">下一个 token 相同 78% 到 82%;脉冲 P/R 0.64–0.76</span></td></tr>
         </tbody>
       </table>
     </div>
-    <figcaption>8 项里改进前通过 3 项，改进后通过 4 项。新通过的是“C 追上 A1”。最右一列是第 7 节每个 token 最多 2 个脉冲的模型：4 项软件验收都通过，3 个种子都一样；电路模型还不支持多个脉冲，后 4 项没测。</figcaption>
+    <figcaption>8 项里改进前通过 3 项，改进后通过 4 项。新通过的是“C 追上 A1”。最右一列是第 7 节每个 token 最多 2 个脉冲的模型：4 项软件验收都通过，3 个种子都一样；理想电路两项通过，标称电路两项不通过。标称电路的逐脉冲对照对误差极其敏感：只看单个 token 时就不过，扫到的每一种误差即使远小于标称值，累积后也会让它失败；按自由运行的准确率看（换 5 组随机误差取平均），T = 2 比软件低 4.8 到 6.5 个百分点，T = 4 只低 1.2 到 1.4 个。“改进后”一列的 62.5% 来自转换扫描的流程，用最右一列的测法重测同一个 T = 1 模型是 61.5%，差别只是读噪声的抽样不同。</figcaption>
   </figure>
 </section>
 
@@ -587,7 +587,7 @@ svg .fde{fill:var(--de)}
   <ul class="concl">
     <li><b>每个 token 要跑 T 个小步。</b>一个 token 周期里神经元最多发 T 个脉冲。T = 2 时，整个模型每个 token 发出的脉冲约是原来的 1.7 倍，T = 4 和 T = 8 时约 2.9 倍和 5.3 倍。</li>
     <li><b>前馈的门代价涨得最快。</b>门 p = g × u 原来只是锁存加一个与门，现在变成两个脉冲数相乘，后面的 W2 每个通道最多收到 T² 个脉冲，仍然只做加法；串行实现时，门和 W2 要最多 T² 个小步。实测 W2 每个 token 收到的脉冲从 78 个变成 T = 2 的 215 个、T = 4 的 494 个、T = 8 的 1565 个，约 2.8、6.3、20 倍。</li>
-    <li><b>电路模型还没跟上。</b>电路仿真目前只支持每个 token 1 个脉冲，T = 2 的模型还没在理想电路和标称电路上验收。</li>
+    <li><b>电路模型已经跟上。</b>理想电路对 T = 2、T = 4 与软件逐位相同。加上假设的器件误差后，自由运行的准确率（换 5 组随机误差取平均）比软件低：T = 1 11.7 个百分点，T = 2 4.8 到 6.5 个，T = 4 1.2 到 1.4 个。T = 1 和 T = 2 最大的单项误差来源是比较器失调，去掉它准确率回升 9.7 和 4.6 个百分点；T = 4 每一项都不到 1 个百分点，电导量化略大于失调。</li>
     <li><b>束搜索要 K 份状态。</b>束宽 K 就要 K 倍的计算，记忆 S 和所有膜电位也要存 K 份。束宽 4 已经拿到大部分收益。</li>
   </ul>
   <details class="data">
@@ -603,8 +603,8 @@ svg .fde{fill:var(--de)}
     <li><b>转换流程的实现没有错误。</b>代码逐项核对无误；理想电路和软件模型逐脉冲一致；按第 5 节改进后的配方打开跨 token 的膜电位后，C 追上了 A1。第 7 节的配置多数也追得上，但加宽到 256 时 C 比 A1 低 3.0 个百分点，A1 训 24000 步时低 1.8 个百分点。</li>
     <li><b>每个 token 只能发一次脉冲是主要瓶颈。</b>改成每个 token 最多 2 个脉冲，C 从 75.2% 升到 82.5% 到 83.0%，3 个种子都 5 道题全对，整句背对率从 40% 升到 83% 到 89%，脉冲多了约七成。T = 4 时 C 是 83.2% 到 83.6%。训练更久和加宽模型都不如它划算。</li>
     <li><b>刚转换时损失很大，训练能补回大部分。</b>21 个点一起量化，误差层层累积，每个 token 一个脉冲时刚转换只剩一成准确率；第 6 节的提升来自训练更久、C 用更高的学习率、调高 LIF 阈值，脉冲模型从 40.7% 升到 75.2%。第 7 节放宽脉冲上限改的是模型本身：T = 2 到 T = 8 时刚转换就有 24% 到 35%。</li>
-    <li><b>还没做到的。</b>电路模型支持每个 token 多个脉冲；标称电路的脉冲级一致性。只有 T = 2 和 T = 4 跑了 3 个种子，其余配置都只有一个种子；A1 24k 加 C 24k、加宽的 C、只在 q、k、v 上用 T = 4 的 C 跑满步数时还在上升，再训下去能到多少还不知道。</li>
-    <li><b>下一步。</b>给电路模型加上多脉冲神经元和门的脉冲计数，对 T = 2 的模型跑理想电路和标称电路验收；再按计划依次单独对照前馈、注意力和记忆阵列，找出标称电路的误差来源。</li>
+    <li><b>还没做到的。</b>标称电路的脉冲级一致性：只看单个 token、误差不跨 token 累积时，脉冲 P/R 也只有 0.80 到 0.84（要求 ≥ 0.9），误差跨 token 累积后降到 0.64 到 0.71。这项判据需要换成功能性的判据，或换成单步判据并重新定阈值。只有 T = 2 和 T = 4 跑了 3 个种子，其余配置都只有一个种子；A1 24k 加 C 24k、加宽的 C、只在 q、k、v 上用 T = 4 的 C 跑满步数时还在上升，再训下去能到多少还不知道。</li>
+    <li><b>下一步。</b>T = 2 先处理比较器失调：共用的 2% 失调完全去掉后，T = 2 的标称准确率平均回升 4.6 个百分点，其次是电导量化（1.2 个）；T = 4 去掉电导量化（0.8 个）略多于去掉失调（0.6 个）。只把失调降低一部分时的效果还没测。电路验收的详细结果在 <code>step2-toy-demo/results/improve/README.md</code>。</li>
   </ul>
   <footer>代码和数据：仓库 Chaoyi-He1/dm_SNN，分支 <code>worktree-conversion-sweep</code>；转换扫描记录在 <code>step2-toy-demo/results/conversion-sweep/README.md</code>，第 7 节的改进实验记录在 <code>step2-toy-demo/results/improve/README.md</code>。26 个扫描运行的墙钟时间合计约 27 小时，不含诊断和最终的 12000 步 C；每张卡同时跑 4 到 7 个运行，用两张 RTX A4500。</footer>
 </section>
