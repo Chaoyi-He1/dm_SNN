@@ -50,9 +50,13 @@ python3 -m venv .venv
 - 正文对照：`experiments/adm_main_text.py` 把 Table 1 模型对着正文 Fig. 2e / 3b / 3c,d / 4a,b / 4c,d 跑一遍，结果 `results/adm-main-text.json`，断言在 `tests/test_adm_main_text.py`（1 项 xfail 记录模型与正文的不符），解释见 `results/adm-neuron.md` 末节。
 - 依赖：ngspice，`pypdf`（仅用于提取补充材料文本，不入库）。
 
+## GDN 子块闭环与原理图
+
+`experiments/spice/gdn_layer.py` 把单头 d=16 的 GDN 子块按相位表搭进 ngspice，16 个 token 与软件模型逐 token 比对（`tests/test_spice_gdn_layer.py`，约 70 s），结果 `results/spice-gdn-layer.md`。所有测试台的原理图由 `experiments/spice/draw_schematics.py` 生成到 `schematics/`（schemdraw + matplotlib，SVG 与 PNG）。
+
 ## Stage 0 完成状态
 
-当前软件工作、固定版本上游对照与两个可选学习探针已完成；正式冻结仍需 Stage 2 真实层结果。完整验收记录见上级目录 `stage0-validation.md`。2026-09-14 复跑三项实验，数值与记录完全一致；加入行为级电路原语、SPICE 测试台、GF180MCU 与 ADM 物理模型后 pytest 105 项通过。
+当前软件工作、固定版本上游对照与两个可选学习探针已完成；正式冻结仍需 Stage 2 真实层结果。完整验收记录见上级目录 `stage0-validation.md`。2026-09-14 复跑三项实验，数值与记录完全一致；加入行为级电路原语、SPICE 测试台、GF180MCU 与 ADM 物理模型、GDN 子块闭环后 pytest 110 项通过。
 
 ```sh
 .venv/bin/python -m pytest -o addopts='' -q

@@ -1,6 +1,6 @@
 # Stage 1 进展记录
 
-更新时间：2026-09-14（同日两次：占位器件；真实器件）。对应 project-plan.md 的 Stage 1（电路原语的表征与时序验证）与 Stage 2.3（行为级仿真器）的骨架。规范版本 0.1.3。
+更新时间：2026-10-19（2026-09-14 占位器件与真实器件；2026-10-19 GDN 子块闭环与原理图）。对应 project-plan.md 的 Stage 1（电路原语的表征与时序验证）与 Stage 2.3（行为级仿真器）的骨架。规范版本 0.1.3。
 
 **状态：Stage 1 的软件侧原语与相位级仿真器已完成并与 Stage 0 软件层逐脉冲一致；SPICE 侧先用占位元件完成单 cell 时序判别、泄漏管 α 扫描、神经元六参数拟合，随后换成真实器件：晶体管用 GlobalFoundries GF180MCU 开源 PDK（65 nm 无公开模型），扩散忆阻器用 Zhao et al. 2025 补充材料的物理模型。S1.5、S1.6、16×16 分块未做。**
 
@@ -55,16 +55,30 @@ GF 65 nm（65LPe）只有 NDA 途径。经确认后改用 GF180MCU 开源 PDK（
 6. **这个器件的膜电位不是栅电压，是离子残留 x₂。** 发放由 x 越过 1 触发，增长是加速的；线性 LIF 抽象（六参数模型）对它失效。行为级仿真器直接用物理模型 `ADMNeuronModel.step`（状态 x₁、x₂、V_gs）替换 LIF。
 7. **时间尺度与脉冲约束。** Table 1 器件的积分需要 15–200 ms，token 周期只能是 ms 级；50% 占空比下 V_gs 在两次导通间降不到 0.2 V，持续输入下器件以 2–3 kHz 松弛振荡，"每 token 至多一个脉冲"要靠短输入脉冲、导通后撤除和合适的 R_c 来保证。
 
+## GDN 子块的 SPICE 闭环（2026-10-19）
+
+单头、d = d_k = d_v = 16、16 个 token 的 GDN 注意力子块按 S0.7 的相位表在 ngspice 里逐 token 执行（`experiments/spice/gdn_layer.py`），与软件模型 `SpikingGDN` 在同权重、同输入、同门值下比对。神经元（膜电容、泄漏窗、积分窗、比较锁存、减阈值复位）、16×16 gain cell 电容阵列（逐 token 的泄漏窗、行脉冲写入、采样保持、delta 块）都是电路；crossbar 与阵列的列求和由 B 源理想完成。
+
+| 信号 | 一致率 | precision / recall（+）| precision / recall（−）|
+|---|---|---|---|
+| q / k / v | 1.000 / 1.000 / 1.000 | 1.000 / 1.000 | 1.000 / 1.000 |
+| o_spk | 0.992 | 1.000 / 0.950 | 1.000 / 1.000 |
+| y | 0.977 | 0.974 / 0.974 | 0.984 / 0.984 |
+
+状态矩阵最大误差 0.0028（参考最大 0.453，0.6%；相对命题上界 8×10⁻⁵），符号错误率 0。S2.4 在 demo 规模上能测的三项判据全部满足；分歧全部来自第 13 个 token 一个临界神经元的翻转。详见 `step1-spiking-layer/results/spice-gdn-layer.md`。全部测试台的原理图在 `step1-spiking-layer/schematics/`（`draw_schematics.py` 生成）。
+
 ## 复现
 
 ```sh
 cd step1-spiking-layer
-.venv/bin/python -m pytest -q                      # 105 项
+.venv/bin/python -m pytest -q                      # 110 项(含 70 s 的 GDN 子块 SPICE 闭环)
 .venv/bin/python -m experiments.spice.gain_cell    # 需要 ngspice
 .venv/bin/python -m experiments.spice.dm_neuron
 .venv/bin/python -m experiments.spice.gf180        # GF180MCU 泄漏路径
 .venv/bin/python -m experiments.spice.adm_spice    # ADM 1M1T1R
 .venv/bin/python experiments/adm_fit.py
+.venv/bin/python -m experiments.spice.gdn_layer    # GDN 子块闭环
+.venv/bin/python experiments/spice/draw_schematics.py  # 原理图
 ```
 
 ## 2026-09-19 ADM 模型与正文对照
