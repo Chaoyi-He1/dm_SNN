@@ -17,9 +17,8 @@
 """
 import torch
 
+from toy_demo.convert import _block_points          # 先导入 toy_demo:它把同一代码树的 step1-spiking-layer 放到 sys.path 最前面
 from snn_spec.neurons import BinaryLIF, QuantizerIn, SpikeFn, TernaryLIF
-
-from toy_demo.convert import _block_points
 
 
 def _steps(U, thr, T, w):

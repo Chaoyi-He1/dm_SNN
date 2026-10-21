@@ -21,6 +21,8 @@ python3 -m venv .venv
 
 `config.py` 配置;`data.py` 切片与批处理;`build_slice.py` 一次性构建;`model.py` A0 浮点模型与 A1/B/C 脉冲模型;`convert.py` 权重转移、阈值标定、leak 切换;`train.py` 训练与统一评估;`circuit.py` 多块电路模型与 teacher forcing 对照;`report.py` 结果页;`run.py` 流水线;`demo.py` demo 命令。
 
+`toy_demo` 导入时会把同一代码树的 `../step1-spiking-layer` 放到 `sys.path` 最前面,所以无论从主 checkout 还是 git worktree 运行,用的都是同一棵树里的 `snn_spec`,不需要设 `PYTHONPATH`(venv 里的可编辑安装只作后备)。
+
 `experiments/` 里是流水线之外的实验:`convert_lab.py` 转换实验台,`multilevel.py` 每 token 多个脉冲的脉冲点,`beam_eval.py` 束搜索,`circuit_levels.py` 任意 T 的电路验收、误差隔离、容限扫描与诊断(`circuit_tables.py` 汇总),其余见各文件开头的说明。
 
 ## 本次结果
