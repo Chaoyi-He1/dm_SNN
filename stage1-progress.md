@@ -80,7 +80,7 @@ GF 65 nm（65LPe）只有 NDA 途径。经确认后改用 GF180MCU 开源 PDK（
 | 状态矩阵误差 / 尺度 | ≤ 1×10⁻⁵ | ≤ 1×10⁻⁵ |
 | 每次仿真 | 约 6 分钟 | 约 7.5 分钟 |
 
-软件参考里离阈值最近的判决只有 1.7×10⁻⁵ 的余量，电路也判对了。闭环暴露了四个数值问题，都已修正并记在 `step1-spiking-layer/results/spice-block-layer.md`：记录网格、窗口积分（硬阶跃门控在求解步跨过阶跃时窗宽差半步，改为电流乘相位电压）、梯形法在采样开关上的振铃（改 Gear）、相位时刻舍入到 0.1 ns（泄漏因子 0.899964，三次运行因此各翻转了一个临界判决；其中一次是 k 的翻转写进状态，之后整层分歧，最差 P/R 0.939）。原理图 `schematics/06`（1T1R crossbar 测试台）与 `08a–08d`（数据通路、新增部分的电路、T = 1 / 2 的相位时间线、多脉冲神经元与 2T 比较器组）。
+软件参考里离阈值最近的判决只有 1.7×10⁻⁵ 的余量，电路也判对了。闭环暴露了四个数值问题，都已修正并记在 `step1-spiking-layer/results/spice-block-layer.md`：记录网格、窗口积分（硬阶跃门控在求解步跨过阶跃时窗宽差半步，改为电流乘相位电压）、梯形法在采样开关上的振铃（改 Gear）、相位时刻舍入到 0.1 ns（泄漏因子 0.899964，三次运行因此各翻转了一个临界判决；其中一次是 k 的翻转写进状态，之后整层分歧，最差 P/R 0.939）。7 个权重矩阵换成电阻差分 crossbar（T = 1，4 个 token，每次约 30–50 分钟）：线电阻为 0 时整层仍与软件逐元素一致，接线与单位换算无误；每段 1 Ω 的线电阻（IR drop，列和约 0.2–0.4%）在第 1 个 token 就翻转一个离阈值 5.9×10⁻³ 的 q，之后经状态与残差扩散，4 个 token 合计最差 P/R 0.56；1T1R（GF180 选通管）2 个 token 里出现同一个翻转。软件参考里没有 IR drop，这是 crossbar 版本过判据前要补的模型项。原理图 `schematics/06`（1T1R crossbar 测试台）与 `08a–08d`（数据通路、新增部分的电路、T = 1 / 2 的相位时间线、多脉冲神经元与 2T 比较器组）。
 
 ## 复现
 
@@ -93,7 +93,7 @@ cd step1-spiking-layer
 .venv/bin/python -m experiments.spice.adm_spice    # ADM 1M1T1R
 .venv/bin/python experiments/adm_fit.py
 .venv/bin/python -m experiments.spice.gdn_layer    # GDN 子块闭环
-.venv/bin/python -m experiments.spice.block_layer 2 ideal 16 0   # 完整一层:T、求和方式、token 数、种子
+.venv/bin/python -m experiments.spice.block_layer 2 ideal 16 0   # 完整一层:T、求和方式(ideal / R / 1T1R)、token 数、种子[、每段线电阻 Ω]
 .venv/bin/python experiments/spice/draw_schematics.py  # 原理图(参数 block 只画 08a–08d,crossbar 只画 06)
 ```
 

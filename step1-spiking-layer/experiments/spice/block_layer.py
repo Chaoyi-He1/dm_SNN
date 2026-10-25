@@ -29,7 +29,6 @@ import torch
 
 from .runner import run_ngspice, parse_wrdata
 from . import crossbar as xb
-from .gdn_layer import _xbar_group
 from .gf180 import HEADER as GF180_HEADER, LINKS as GF180_LINKS
 from snn_spec.block import SpikingBlock
 from snn_spec.gdn import ExternalGates
@@ -154,7 +153,18 @@ def comparators(name, src_nodes, thr, levels, phase):
     return "\n".join(lines) + "\n"
 
 
-def netlist(ref, xbar="ideal"):
+def _xbar_group(n, tag, W, w_max, rowp, rown, sel, xbar, r_line):
+    """一个权重矩阵的差分 crossbar(R / 1T1R,每段线电阻 r_line)+ 每列的电流传输器(0 V 位线钳位、电流复制进膜电容)。
+    与 gdn_layer._xbar_group 相同,多一个线电阻参数。返回该组神经元的膜电容(1 软件单位 = 1 V)。"""
+    npos, nneg, _, _ = xb.quantize_weights(W, w_max=w_max)
+    lines, ends = xb.xbar_lines(tag, npos, nneg, rowp, rown, sel, xbar, r_line=r_line)
+    n.append("\n".join(lines) + "\n")
+    for j in range(W.shape[0]):
+        n.append(f"Vs{tag}{j} {ends[j]} 0 0\nF{tag}{j} 0 u{tag}{j} Vs{tag}{j} 1\n")
+    return xb.unit_scale(w_max) * xb.T_INT
+
+
+def netlist(ref, xbar="ideal", r_line=xb.R_LINE):
     W = ref["weights"]
     d, dff, L, T = ref["d"], ref["d_ff"], ref["L"], ref["levels"]
     thr = ref["thr"]
@@ -189,7 +199,7 @@ def netlist(ref, xbar="ideal"):
         # 选通开关在边沿中点(V_SEL/2)动作:平顶取窗宽 − 1 个边沿,导通时间正好是积分窗宽
         n.append(f"Vsel{stage} sel{stage} 0 PULSE(0 {xb.V_SEL} {t0:.7f}u {EDGE_US:.4g}u {EDGE_US:.4g}u {t1 - t0 - EDGE_US:.7f}u {period:.4f}u)\n")
         for nm, key, tern in groups:
-            cap = _xbar_group(n, nm, nm, W[key], ref["w_max"][key], rp, rn, f"sel{stage}", xbar)
+            cap = _xbar_group(n, nm, W[key], ref["w_max"][key], rp, rn, f"sel{stage}", xbar, r_line)
             n.append(neurons(nm, W[key].shape[0], None, tern, thr[{"z": "y2", "p": "pre", "y": "out"}.get(nm, nm)], stage, T, cap=cap))
 
     # 注意力子块:投影神经元(q 二值,k、v 三值)
@@ -296,10 +306,10 @@ SIGNALS = [  # (名字, 电路节点前缀, 软件记录键, 宽度键, 计数�
     ("g", "sg", "g", "d_ff", 1), ("u", "su", "u", "d_ff", 1), ("p", "pa", "p", "d_ff", 2), ("y2", "sz", "y_ffn", "d", 1)]
 
 
-def simulate(ref, xbar="ideal"):
+def simulate(ref, xbar="ideal", r_line=xb.R_LINE):
     if xbar != "ideal" and not ref.get("quantized"):
         raise ValueError("crossbar 模式需要 make_reference(quantize=True) 的量化权重参考")
-    log, files = run_ngspice(netlist(ref, xbar), files=("wave.txt",), timeout=14400, links=GF180_LINKS if xbar != "ideal" else ())
+    log, files = run_ngspice(netlist(ref, xbar, r_line), files=("wave.txt",), timeout=14400, links=GF180_LINKS if xbar != "ideal" else ())
     if "wave.txt" not in files:
         raise RuntimeError("ngspice 未输出波形:\n" + log[-3000:])
     w = parse_wrdata(files["wave.txt"])
@@ -395,17 +405,20 @@ def compare(ref, out):
     return rep
 
 
-def main(levels=1, xbar="ideal", L=16, seed=0):
+def main(levels=1, xbar="ideal", L=16, seed=0, r_line=xb.R_LINE):
     ref = make_reference(L=L, levels=levels, seed=seed, quantize=(xbar != "ideal"))
     t0 = time.time()
-    out = simulate(ref, xbar)
+    out = simulate(ref, xbar, r_line)
     rep = compare(ref, out)
     rep["sim_seconds"] = round(time.time() - t0, 1)
     PH, period, t_rec = schedule(levels)
     rep["period_us"] = period
-    name = f"spice-block-layer-T{levels}" + ("" if xbar == "ideal" else f"-{xbar}") + ("" if seed == 0 else f"-seed{seed}")
+    name = (f"spice-block-layer-T{levels}" + ("" if xbar == "ideal" else f"-{xbar}")
+            + ("" if xbar == "ideal" or r_line == xb.R_LINE else f"-rline{r_line:g}")
+            + ("" if xbar == "ideal" or L == 16 else f"-L{L}") + ("" if seed == 0 else f"-seed{seed}"))
     (ROOT / "results" / f"{name}.json").write_text(
-        json.dumps(dict(d=ref["d"], d_ff=ref["d_ff"], L=ref["L"], levels=levels, xbar=xbar, seed=seed, thr=ref["thr"],
+        json.dumps(dict(d=ref["d"], d_ff=ref["d_ff"], L=ref["L"], levels=levels, xbar=xbar,
+                        r_line=r_line if xbar != "ideal" else None, seed=seed, thr=ref["thr"],
                         report=rep), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({k: rep[k] for k in ("worst", "h_mid", "h_out", "S", "spikes_total_ref", "sim_seconds", "period_us")}, indent=1))
     return ref, out, rep
@@ -415,4 +428,5 @@ if __name__ == "__main__":
     import sys
     a = sys.argv[1:]
     main(levels=int(a[0]) if len(a) > 0 else 1, xbar=a[1] if len(a) > 1 else "ideal",
-         L=int(a[2]) if len(a) > 2 else 16, seed=int(a[3]) if len(a) > 3 else 0)
+         L=int(a[2]) if len(a) > 2 else 16, seed=int(a[3]) if len(a) > 3 else 0,
+         r_line=float(a[4]) if len(a) > 4 else xb.R_LINE)

@@ -1,0 +1,301 @@
+{
+  "d": 16,
+  "d_ff": 32,
+  "L": 2,
+  "levels": 1,
+  "xbar": "1T1R",
+  "r_line": 1.0,
+  "seed": 0,
+  "thr": {
+    "q_in1": 0.7,
+    "q": 1.0,
+    "k": 1.0,
+    "v": 1.0,
+    "pre": 0.3,
+    "out": 0.5,
+    "q_in2": 0.7,
+    "g": 1.0,
+    "u": 1.0,
+    "y2": 1.0
+  },
+  "report": {
+    "x1": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 13,
+      "ckt_spikes": 13,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 3.05647353e-07,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "q": {
+      "levels": 1,
+      "agreement": 0.96875,
+      "ref_spikes": 9,
+      "ckt_spikes": 8,
+      "pos_precision": 1.0,
+      "pos_recall": 0.8888888888888888,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 1.1030999999994684e-05,
+      "per_token_mismatch": [
+        0,
+        1
+      ],
+      "mismatch_sites": [
+        [
+          1,
+          6
+        ]
+      ]
+    },
+    "k": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 9,
+      "ckt_spikes": 9,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 1.1039999999962191e-05,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "v": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 15,
+      "ckt_spikes": 15,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 1.1041000000044932e-05,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "o_spk": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 0,
+      "ckt_spikes": 0,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 0.0,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "y1": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 0,
+      "ckt_spikes": 0,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 0.0,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "x2": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 13,
+      "ckt_spikes": 13,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 3.05647353e-07,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "g": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 17,
+      "ckt_spikes": 17,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 2.2100000000024878e-06,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "u": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 30,
+      "ckt_spikes": 30,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 2.226999999965784e-06,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "p": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 10,
+      "ckt_spikes": 10,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 4.436999999968272e-06,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "y2": {
+      "levels": 1,
+      "agreement": 1.0,
+      "ref_spikes": 10,
+      "ckt_spikes": 10,
+      "pos_precision": 1.0,
+      "pos_recall": 1.0,
+      "neg_precision": 1.0,
+      "neg_recall": 1.0,
+      "sign_error_rate": 0.0,
+      "max_level_dev": 5.189999999766215e-07,
+      "per_token_mismatch": [
+        0,
+        0
+      ],
+      "mismatch_sites": []
+    },
+    "margins": {
+      "q": {
+        "min": 0.005911657214164867,
+        "token": 1,
+        "channel": 6
+      },
+      "k": {
+        "min": 0.04479464888572693,
+        "token": 0,
+        "channel": 6
+      },
+      "v": {
+        "min": 0.030609413981437683,
+        "token": 0,
+        "channel": 10
+      },
+      "pre": {
+        "min": 0.2327385202050209,
+        "token": 1,
+        "channel": 10
+      },
+      "out": {
+        "min": 0.5,
+        "token": 0,
+        "channel": 0
+      },
+      "g": {
+        "min": 0.07523841857910152,
+        "token": 1,
+        "channel": 30
+      },
+      "u": {
+        "min": 0.001456072926521279,
+        "token": 1,
+        "channel": 30
+      },
+      "y2": {
+        "min": 0.0026729702949523926,
+        "token": 0,
+        "channel": 10
+      },
+      "q_in1": {
+        "min": 0.024456930160522417,
+        "token": 0,
+        "channel": 8
+      },
+      "q_in2": {
+        "min": 0.024456930160522417,
+        "token": 0,
+        "channel": 8
+      }
+    },
+    "h_mid": {
+      "max_abs_err": 4.632568550988481e-09,
+      "max_abs_ref": 2.4468750953674316,
+      "worst_site": [
+        0,
+        3
+      ],
+      "ckt_at_worst": -2.4468751,
+      "ref_at_worst": -2.4468750953674316
+    },
+    "h_out": {
+      "max_abs_err": 2.8497619619649583e-07,
+      "max_abs_ref": 3.4468750953674316,
+      "worst_site": [
+        0,
+        4
+      ],
+      "ckt_at_worst": 1.87847705,
+      "ref_at_worst": 1.8784773349761963
+    },
+    "S": {
+      "max_abs_err": 2.3057696838246766e-06,
+      "max_abs_ref": 0.23630720376968384,
+      "err_over_bound": 7.422302393756018e-08,
+      "err_over_scale": 9.757509068881323e-06
+    },
+    "spikes_total_ref": 126,
+    "worst": {
+      "pr": 0.8888888888888888,
+      "sign_error": 0.0,
+      "agreement": 0.96875
+    },
+    "sim_seconds": 1259.5,
+    "period_us": 13.3
+  }
+}

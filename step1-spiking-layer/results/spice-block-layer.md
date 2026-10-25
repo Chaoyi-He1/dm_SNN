@@ -4,7 +4,8 @@
 单头、d = d_k = d_v = 16、d_ff = 32,每 token 最多 T 个脉冲(T = 1、2),16 个 token,按相位表在 ngspice 47 里逐 token 执行,
 与软件模型 `SpikingBlock`(同权重、同块输入 h_in、同门值,全部 10 个脉冲点设 `levels = T`)逐脉冲比对。
 代码 `experiments/spice/block_layer.py`,测试 `tests/test_spice_block_layer.py`,原理图 `schematics/06`、`08a–08d`,
-原始数值 `spice-block-layer-T{1,2}[-seed{1,2}].json`。复现:`.venv/bin/python -m experiments.spice.block_layer <T> ideal 16 <seed>`。
+原始数值 `spice-block-layer-T{1,2}[-seed{1,2}].json`(crossbar 模式见末节)。
+复现:`.venv/bin/python -m experiments.spice.block_layer <T> <ideal|R|1T1R> <token 数> <种子> [每段线电阻 Ω]`。
 
 ## 电路里有什么
 
@@ -100,10 +101,24 @@ y1 = −1 的注入只给了 −0.999915(100 ns 的窗口相当于短了 8.5 ps)
 `xbar = "R"`:7 个权重矩阵都是电阻型差分 crossbar(16 级电导、选通是导通电阻 ≈ 790 Ω 的理想开关、每段线电阻 1 Ω),
 位线由电流传输器钳在 0 V、电流灌进膜电容;软件参考用同样量化到 16 级的权重。`xbar = "1T1R"` 再把选通开关换成 GF180 nmos_3p3。
 
-首跑(T = 1,4 个 token,修正第 4 处之前的相位表,32 分钟):x1、k 全对,q 在第 1 个 token 错 1 个元素,之后经状态与残差扩散,
-第 4 个 token 时 y1 的最差 P/R 0.56、状态误差 / 尺度 0.28,不满足 S2.4。单个 crossbar 的列和误差约 0.4%(`spice-crossbar.json`,
-主要是线电阻的 IR drop),比理想求和下的 10⁻⁵ 大两个数量级,余量小于它的判决会翻转;软件参考里没有 IR drop。
-用修正后的网表复跑线电阻 1 Ω 与 0 Ω 两种(区分 IR drop 与接线错误)、以及 1T1R 的 2 个 token,结果待补。
+crossbar 模式慢得多,只跑了 T = 1 的短序列(种子 0,`main` 的第 5 个参数是每段线电阻):
+
+| 模式 | token | 每段线电阻 | 11 个点逐元素一致率 | 最差 P/R | 符号错误 | S 误差 / 尺度 | 仿真 | 结果文件 |
+|---|---|---|---|---|---|---|---|---|
+| R | 4 | 0 Ω | 1.0000 | 1.000 | 0.000 | 1×10⁻⁵ | 47 分钟 | `spice-block-layer-T1-R-rline0-L4.json` |
+| R | 4 | 1 Ω | 0.8281 | 0.556 | 0.071 | 0.28 | 31 分钟 | `spice-block-layer-T1-R-L4.json` |
+| 1T1R | 2 | 1 Ω | 0.9688 | 0.889 | 0.000 | 1×10⁻⁵ | 21 分钟 | `spice-block-layer-T1-1T1R-L2.json` |
+
+**线电阻为 0 时,电阻 crossbar 版本的整层与软件逐元素一致**:7 个 crossbar、位线电流传输器、选通时序与 1 单位 = 1 V 的膜电容换算都是对的。
+**每段 1 Ω 的线电阻足以让它分歧**:第 1 个 token 里 q₆ 的软件膜电位是 1.00591(离阈值 5.9×10⁻³),电路没有发放,也就是两个 token 的
+列和合起来少了 6×10⁻³ 以上(该列 Σ|W x| ≈ 2.8–3.9,约 0.2%,方向与 IR drop 衰减列电流一致);之后 q 的分歧经状态读出传到 o_spk、y1,
+再经累加器传到 x2 与整个前馈子块,4 个 token 合计 y1 的最差 P/R 0.56,不满足 S2.4。1T1R(GF180 nmos_3p3 选通管)在 2 个 token 里
+出现同一个 q₆ 的翻转,其余全对。软件参考里没有 IR drop;单个 crossbar 的列和误差约 0.4%(`spice-crossbar.json`),比理想求和下的
+10⁻⁵ 大两个数量级,软件判决余量小于它的神经元都会翻转。要让 crossbar 版本过判据,要么在软件 / 行为级模型里加入 IR drop 的一阶模型
+(训练时就看到它),要么在电路上补偿(行驱动按位置预加重、分块缩短线长)。
+
+另:`spice-crossbar.json` 里的 `w_eff_max_rel_err = 0.27` 是 `crossbar.main` 的分析笔误(单位向量窗的积分电压没有除以
+s·T_int / C_m = 1.275),不是 crossbar 的误差;随机输入下的列和误差 0.4% 才是。没有改那个文件。
 
 ## 没做的
 
