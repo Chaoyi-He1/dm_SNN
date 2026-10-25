@@ -1,8 +1,8 @@
 # Stage 1 进展记录
 
-更新时间：2026-10-19（2026-09-14 占位器件与真实器件；2026-10-19 GDN 子块闭环与原理图）。对应 project-plan.md 的 Stage 1（电路原语的表征与时序验证）与 Stage 2.3（行为级仿真器）的骨架。规范版本 0.1.3。
+更新时间：2026-10-25（2026-09-14 占位器件与真实器件；2026-10-19 GDN 子块闭环与原理图；2026-10-25 完整一层的 SPICE 闭环，T = 1、2）。对应 project-plan.md 的 Stage 1（电路原语的表征与时序验证）与 Stage 2.3（行为级仿真器）的骨架。规范版本 0.1.3。
 
-**状态：Stage 1 的软件侧原语与相位级仿真器已完成并与 Stage 0 软件层逐脉冲一致；SPICE 侧先用占位元件完成单 cell 时序判别、泄漏管 α 扫描、神经元六参数拟合，随后换成真实器件：晶体管用 GlobalFoundries GF180MCU 开源 PDK（65 nm 无公开模型），扩散忆阻器用 Zhao et al. 2025 补充材料的物理模型。S1.5、S1.6、16×16 分块未做。**
+**状态：Stage 1 的软件侧原语与相位级仿真器已完成并与 Stage 0 软件层逐脉冲一致；SPICE 侧先用占位元件完成单 cell 时序判别、泄漏管 α 扫描、神经元六参数拟合，随后换成真实器件：晶体管用 GlobalFoundries GF180MCU 开源 PDK（65 nm 无公开模型），扩散忆阻器用 Zhao et al. 2025 补充材料的物理模型。完整一层（GDN + SwiGLU + 两个累加器 + 两组块入口比较器，d = 16、d_ff = 32，每 token 1 或 2 个脉冲）已在 ngspice 里与软件逐元素一致（列求和理想）。S1.6、16×16 分块未做。**
 
 ## 已完成
 
@@ -28,11 +28,12 @@
 - S1.2：拟合流程成立，参数回到理论值；precision / recall 的 0.95 门三个序列过了两个。
 - S1.3：流程成立；[α_min, α_max] 的具体数值依赖真实泄漏管，占位器件的数字不能用于钳位。
 - S1.4：单 cell、理想元件下落在形式 A；16×16 分块未做。
-- S1.5、S1.6：未做。
+- S1.5：累加器 + 比较器、锁存 + AND、W_O 双神经元在完整一层里做了，与软件逐元素一致；crossbar 列 + 神经元的电阻 / 1T1R 版本见下文"完整一层"一节。
+- S1.6：未做。
 
 ## 下一步
 
-- Stage 1 剩余：S1.5 组合级 SPICE（crossbar 列 + 神经元、累加器 + 比较器、锁存 + AND、W_O 双神经元）、S1.6 门生成电路、16×16 分块的两点判别、行为级仿真器与 SPICE 在分块上的对照。
+- Stage 1 剩余：S1.6 门生成电路、16×16 分块的两点判别、行为级仿真器与 SPICE 在分块上的对照、完整一层换成真实 crossbar 与 DM 神经元。
 - 器件组需提供：HfO₂ ADM 的阈值/保持电压分布（补充材料只有图）、器件间差异，以及是否接受 Table 8 的快速动力学假设；GF 65LPe 的 NDA 模型文件。
 - GF180 上的输出级（R_l、V_dd 按 3.3 V 重设）、开关 + PDK 多晶硅电阻的泄漏路径映射、按 ms 周期重做单 cell 两点判别。
 - 模型侧改为从零训练的玩具模型(`toy-demo-plan.md`,代码在 `step2-toy-demo/`),不再下载 Qwen 权重或做 LoRA。
@@ -67,6 +68,20 @@ GF 65 nm（65LPe）只有 NDA 途径。经确认后改用 GF180MCU 开源 PDK（
 
 状态矩阵最大误差 0.0028（参考最大 0.453，0.6%；相对命题上界 8×10⁻⁵），符号错误率 0。S2.4 在 demo 规模上能测的三项判据全部满足；分歧全部来自第 13 个 token 一个临界神经元的翻转。详见 `step1-spiking-layer/results/spice-gdn-layer.md`。全部测试台的原理图在 `step1-spiking-layer/schematics/`（`draw_schematics.py` 生成）。
 
+## 完整一层的 SPICE 闭环（2026-10-25）
+
+在 GDN 子块上补齐前馈子块（W_1 / W_3 → g 二值、u 三值神经元 → 锁存 + AND → W_2 → y2 神经元）、16 个累加器电容（DAC 装入 h_in，y1、y2 的每个脉冲注入一份电荷）和两组块入口比较器（每通道 2T 个，阈值 ±jθ/T，cmp1 / cmp2 采样锁存），得到完整的一层（`experiments/spice/block_layer.py`）：单头 d = 16、d_ff = 32，每 token 最多 T 个脉冲（神经元在积分后有 T 个子时隙，每个子时隙采样比较结果、计数 f/T、减 f·θ/T），与软件 `SpikingBlock`（10 个脉冲点 `levels = T`）同权重、同 h_in、同门值比对。
+
+| | T = 1（周期 13.3 µs） | T = 2（周期 15.3 µs） |
+|---|---|---|
+| 3 个种子 × 16 个 token 的参考脉冲（计数） | 4 216 | 11 317 |
+| 11 个脉冲点逐元素一致率 | 1.0000（三个种子） | 1.0000（三个种子） |
+| h_mid / h_out 最大误差 | ≤ 8.5×10⁻⁵ | ≤ 1.1×10⁻⁴ |
+| 状态矩阵误差 / 尺度 | ≤ 1×10⁻⁵ | ≤ 1×10⁻⁵ |
+| 每次仿真 | 约 6 分钟 | 约 7.5 分钟 |
+
+软件参考里离阈值最近的判决只有 1.7×10⁻⁵ 的余量，电路也判对了。闭环暴露了四个数值问题，都已修正并记在 `step1-spiking-layer/results/spice-block-layer.md`：记录网格、窗口积分（硬阶跃门控在求解步跨过阶跃时窗宽差半步，改为电流乘相位电压）、梯形法在采样开关上的振铃（改 Gear）、相位时刻舍入到 0.1 ns（泄漏因子 0.899964，三次运行因此各翻转了一个临界判决；其中一次是 k 的翻转写进状态，之后整层分歧，最差 P/R 0.939）。原理图 `schematics/06`（1T1R crossbar 测试台）与 `08a–08d`（数据通路、新增部分的电路、T = 1 / 2 的相位时间线、多脉冲神经元与 2T 比较器组）。
+
 ## 复现
 
 ```sh
@@ -78,7 +93,8 @@ cd step1-spiking-layer
 .venv/bin/python -m experiments.spice.adm_spice    # ADM 1M1T1R
 .venv/bin/python experiments/adm_fit.py
 .venv/bin/python -m experiments.spice.gdn_layer    # GDN 子块闭环
-.venv/bin/python experiments/spice/draw_schematics.py  # 原理图
+.venv/bin/python -m experiments.spice.block_layer 2 ideal 16 0   # 完整一层:T、求和方式、token 数、种子
+.venv/bin/python experiments/spice/draw_schematics.py  # 原理图(参数 block 只画 08a–08d,crossbar 只画 06)
 ```
 
 ## 2026-09-19 ADM 模型与正文对照

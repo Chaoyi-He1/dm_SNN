@@ -20,7 +20,10 @@ sys.path.insert(0, str(ROOT))
 from experiments.spice.gain_cell import schedules, always_on_prediction  # noqa: E402
 
 _names = {f.name for f in fm.fontManager.ttflist}
-CJK_FONT = next((n for n in ("Arial Unicode MS", "PingFang SC", "Hiragino Sans GB", "Heiti SC") if n in _names), "DejaVu Sans")
+CJK_FONT = next((n for n in ("Arial Unicode MS", "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Noto Sans CJK SC",
+                                "Noto Sans CJK JP", "Microsoft YaHei")   # Linux 的 NotoSansCJK .ttc 在 matplotlib 里登记为 JP,字形覆盖全部 CJK
+                 if n in _names), "DejaVu Sans")
+VDOTS = "︙" if CJK_FONT.startswith("Noto") else "⋮"      # schemdraw 只用一种字体;Noto CJK 没有 U+22EE,用 CJK 竖排省略号
 plt.rcParams["font.family"] = [CJK_FONT, "DejaVu Sans"]
 schemdraw.config(font=CJK_FONT)
 
@@ -476,7 +479,7 @@ def gdn_layer_full_schematic():
         lbl(d, (x0 + 4.5, 23.5), "…", halign="center", fontsize=14)
         lbl(d, (x0 + 1.3, 29.6), f"W_{nm}", halign="center", fontsize=11)
     _xbar(d, 1.2, rows, row_labels, cols, col_labels, 19.5, "投影 crossbar:字线 = 块输入 x_i(三值,电压 +V/0/−V),交叉点电阻 = 权重(差分对 G⁺−G⁻),位线电流 = Σ_i G_ji x_i")
-    lbl(d, (16.0, 23.5), "⋮", halign="center", fontsize=14)
+    lbl(d, (16.0, 23.5), VDOTS, halign="center", fontsize=14)
     for xc, cl in zip(cols, col_labels):
         _lif(d, xc, 19.5, cl, "θ=1")
     lbl(d, (1.2, 16.6), "每条位线接一个神经元(简化符号:膜电容 + 比较器;泄漏窗、φ_fire 锁存、减阈值复位见 07b)。q 二值;k、v 三值。", fontsize=10)
@@ -487,7 +490,7 @@ def gdn_layer_full_schematic():
     cols2 = [8.0, 10.6, 14.4]
     _xbar(d, 6.2, rows2, ["o₁", "o₂", "o₁₆"], cols2, ["y₁", "y₂", "y₁₆"], 4.5, "W_O crossbar:字线 = SN_pre 的三值脉冲 o_i")
     lbl(d, (12.5, 8.5), "…", halign="center", fontsize=14)
-    lbl(d, (9.3, 8.5), "⋮", halign="center", fontsize=14)
+    lbl(d, (9.3, 8.5), VDOTS, halign="center", fontsize=14)
     for xc, cl in zip(cols2, ["y₁", "y₂", "y₁₆"]):
         _lif(d, xc, 4.5, cl, "θ=0.5")
     lbl(d, (6.2, 1.6), "SN_out:三值,输出脉冲 y_τ → 累加器(FFN 与累加器本图未画)", fontsize=10)
@@ -501,7 +504,7 @@ def gdn_layer_full_schematic():
     for yr, rn in zip(rows_a, row_names):
         d += elm.Line().at((X0 - 1.0, yr + 1.4)).right().tox(cols_a[-1] + 4.0)
         lbl(d, (X0 - 1.2, yr + 1.4), f"行 {rn}:k{rn}/√d(φ3,φ4)|q{rn}(φ5)", halign="right", fontsize=9.5)
-    lbl(d, (X0 + 12.5, 16.8), "⋮", halign="center", fontsize=14)
+    lbl(d, (X0 + 12.5, 16.8), VDOTS, halign="center", fontsize=14)
     lbl(d, (X0 + 16.6, 26.0), "…", halign="center", fontsize=14)
     for xc, cn in zip(cols_a, col_names):
         x_dv, x_rd = xc - 2.6, xc + 2.9
@@ -530,11 +533,373 @@ def gdn_layer_full_schematic():
     save(d, "07e_gdn_layer_schematic")
 
 
+# ----------------------------------------------------------------------------- 6. crossbar 测试台(crossbar.bench_netlist)
+def crossbar_bench():
+    """差分 1T1R crossbar 的测试台:画 2 行(每行 ± 两条字线)× 2 列,其余省略。元件名与 crossbar.xbar_lines / bench_netlist 一致。"""
+    import experiments.spice.crossbar as xb
+    d = schemdraw.Drawing(unit=1.0); d.config(fontsize=10)
+    rows = [(16.0, "rp1", "+V_read·x1"), (13.0, "rn1", "−V_read·x1"), (8.5, "rp16", "+V_read·x16"), (5.5, "rn16", "−V_read·x16")]
+    cols = [9.0, 17.0]
+    y_sel, y_end = 18.6, 3.4
+    # 行驱动:Vrp_i(PWL)与 Ern_i = −1 × rp_i
+    for k, (yr, node, val) in enumerate(rows):
+        d += elm.Line().at((3.0, yr)).right().tox(cols[-1] + 2.2)
+        src = elm.SourceV() if k % 2 == 0 else elm.SourceControlledV()
+        d += src.at((1.6, yr - 1.3)).up().length(1.3)
+        d += elm.Ground().at((1.6, yr - 1.3))
+        d += elm.Line().at((1.6, yr)).right().tox(3.0)
+        lbl(d, (0.9, yr - 0.65), ("Vrp" if k % 2 == 0 else "Ern") + node[2:] + "\n" + val, halign="right", fontsize=8.5)
+        lbl(d, (3.1, yr + 0.3), node, fontsize=8.5)
+    # 选通线、位线
+    d += elm.Line().at((3.0, y_sel)).right().tox(cols[-1] + 2.2).linestyle("--")
+    lbl(d, (3.0, y_sel + 0.45), f"sel:选通栅线,积分窗内 {xb.V_SEL} V,接全部选通管的栅(R 模式里换成理想开关,"
+        f"导通电阻 = nmos_3p3 的 R_on ≈ 790 Ω)", fontsize=9)
+    for j, xc in enumerate(cols):
+        cn = "1" if j == 0 else "16"
+        d += elm.Line().at((xc, 17.6)).down().toy(y_end)
+        lbl(d, (xc, 17.9), f"bl{cn}", halign="center", fontsize=9)
+        for k, (yr, node, val) in enumerate(rows):
+            xm = xc - 3.2
+            d += elm.Dot(radius=0.07).at((xm, yr))
+            d += elm.Memristor().at((xm, yr)).down().length(0.9)
+            d += (m := elm.NFet().right().anchor("drain").at((xm, yr - 0.9)).scale(0.6))   # 漏在上、源在下、栅在右
+            d += elm.Line().at(m.source).down().toy(yr - 2.0)
+            d += elm.Line().right().tox(xc)
+            d += elm.Dot(radius=0.07).at((xc, yr - 2.0))
+            d += elm.Line().at(m.gate).right().length(0.4).linestyle(":").linewidth(0.8)
+            if j == 0 and k == 0:
+                lbl(d, (xm - 0.5, yr - 0.45), "R_m = 1/G − R_on\nG = G_off + n·ΔG", halign="right", fontsize=8)
+                lbl(d, (xm - 0.3, yr - 1.55), "M nmos_3p3 2/0.28 µm,栅 → sel", halign="right", fontsize=8)
+        # 列底:0 V 电流计(位线虚地)+ 电流复制进积分电容
+        d += (vs := elm.SourceV().at((xc, y_end)).down().length(1.2))
+        d += elm.Ground().at(vs.end)
+        lbl(d, (xc + 0.5, y_end - 0.6), f"Vs{cn} 0 V(位线钳在 0 V,测电流)", fontsize=8.5)
+        xf = xc + 2.4
+        y0 = y_end - 3.6
+        d += (f := elm.SourceControlledI().at((xf, y0)).up().length(1.4))
+        d += elm.Ground().at((xf, y0))
+        d += elm.Line().at(f.end).right().length(1.4)
+        d += elm.Dot().label(f"u{cn}", loc="top", ofst=0.1)
+        d += elm.Capacitor().down().length(1.4)
+        d += elm.Ground()
+        d += elm.Switch().at((xf + 1.4, y0 + 1.4)).right().length(1.2)
+        d += elm.Ground().theta(0)
+        lbl(d, (xf - 0.5, y0 + 0.7), "F = 1 × I(Vs)", halign="right", fontsize=8.5)
+        lbl(d, (xf + 1.65, y0 + 0.55), "C_m 10 pF", fontsize=8.5)
+        lbl(d, (xf + 2.0, y0 + 1.85), "S_clr", halign="center", fontsize=8.5)
+    lbl(d, (13.0, 11.0), VDOTS, halign="center", fontsize=14)
+    lbl(d, (13.0, 2.4), "…", halign="center", fontsize=14)
+    lbl(d, (0.0, -1.8), f"差分 1T1R crossbar(16×16 只画行 1、16 与列 1、16):权重 w = (n+ − n−)·w_max/{xb.LEVELS - 1},n 为 {xb.LEVELS} 级电导,"
+        f"G_on {xb.G_ON * 1e6:.0f} µS / G_off {xb.G_OFF * 1e6:.0f} µS,V_read {xb.V_READ} V;", fontsize=9.5)
+    lbl(d, (0.0, -2.6), f"行线、位线每个 cell 一段 R_line = {xb.R_LINE} Ω(图中未画)。位线电流 = Σ_i (G+_ji − G−_ji)·V_read·x_i,"
+        f"积分窗 {xb.T_INT * 1e6:.0f} µs 后 C_m 上的电压与 W·x 成正比(1 单位 = V_read·ΔG_max/w_max·T_int / C_m)", fontsize=9.5)
+    lbl(d, (0.0, -3.4), "完整一层(block_layer,xbar = R / 1T1R)里 7 个权重矩阵都用这个结构,电流传输器把位线电流灌进神经元膜电容,"
+        "膜电容取 V_read·ΔG_max/w_max·T_int 使 1 单位 = 1 V", fontsize=9.5)
+    save(d, "06_crossbar_1t1r_bench")
+
+
+# ----------------------------------------------------------------------------- 8. 完整一层(block_layer.netlist)
+STAGE_COLORS = dict(io="#6b7280", A="#1f5f99", gc="#4c8fd1", B="#2f7f7a", C="#5aa39a", D="#b5651d", E="#d9902f")
+
+
+def block_layer_datapath():
+    """08a:一层的数据通路。累加器是同一组电容:load 装入 h_in,acc1 注入 y1,acc2 注入 y2;两组比较器在 cmp1 / cmp2 读它。"""
+    d = schemdraw.Drawing(unit=1.0); d.config(fontsize=10)
+    def chain(x, y, items, gap=1.2):
+        """在 y 上从 x 起向右排一串方框,相邻方框之间画箭头;返回最后一个方框。"""
+        last = None
+        for w, h, text in items:
+            if last is not None:
+                d.add(elm.Arrow().at(last.E).right().length(gap))
+                x = last.E[0] + gap
+            last = d.add(flow.Box(w=w, h=h).at((x, y)).anchor("W").label(text, fontsize=9.5))
+        return last
+
+    d += flow.Box(w=4.6, h=7.4).at((0, 0)).anchor("W").label(
+        "累加器 h_i\n(C_acc 1 nF × 16)\n\nload:DAC 装入 h_in\nacc1:+ y1\nacc2:+ y2")
+    yt, yb = 2.1, -2.1
+    d += elm.Arrow().at((4.6, yt)).right().length(1.2)
+    d += elm.Arrow().at((4.6, yb)).right().length(1.2)
+    gdn = chain(5.8, yt, [(5.4, 1.9, "Q_in1:2T 个比较器\n±jθ/T,cmp1 锁存 → x1"),
+                          (13.6, 2.6, "GDN 注意力子块(07a / 07e)\nW_q,W_k,W_v → q,k,v 神经元 → gain cell 16×16\n→ SN_pre → W_O → SN_out:y1")])
+    f2 = chain(5.8, yb, [(5.4, 1.9, "Q_in2:2T 个比较器\n±jθ/T,cmp2 锁存 → x2"),
+                         (5.6, 1.9, "W_1 | W_3 共用字线\ng 二值 / u 三值神经元"),
+                         (4.0, 1.9, "锁存 + AND\np = g·u"),
+                         (5.0, 1.9, "W_2 → y2 神经元\n(三值)")], gap=1.0)
+    # y1 / y2 回到累加器
+    xr = max(gdn.E[0], f2.E[0]) + 0.8
+    d += elm.Line().at(gdn.E).right().tox(xr)
+    d += elm.Line().up().toy(4.8)
+    d += elm.Arrow().left().tox(2.3)
+    d += elm.Arrow().down().toy(3.7)
+    lbl(d, ((2.3 + gdn.E[0]) / 2, 5.2), "acc1:y1 的每个脉冲向 C_acc 注入一份电荷(1 单位 = 1 V)→ h_mid", halign="center", fontsize=9.5)
+    d += elm.Line().at(f2.E).right().tox(xr)
+    d += elm.Line().down().toy(-4.8)
+    d += elm.Arrow().left().tox(2.3)
+    d += elm.Arrow().up().toy(-3.7)
+    lbl(d, ((2.3 + f2.E[0]) / 2, -5.2), "acc2:y2 注入 → h_out(下一层的入口;本次只有一层,下一 token 由 DAC 重新装入)", halign="center", fontsize=9.5)
+    lbl(d, (0, 7.2), "完整一层的电路数据通路(block_layer.netlist):d = 16,d_ff = 32,单头,每 token 最多 T 个脉冲(T = 1、2);"
+        "门值 α、β 外部给定", fontsize=10.5)
+    lbl(d, (0, 6.4), "顺序:load → cmp1 → 注意力子块 → acc1 → cmp2 → 前馈子块 → acc2(相位见 08c)", fontsize=10)
+    save(d, "08a_block_layer_datapath")
+
+
+def _and_down(d, x, y):
+    """朝下的二输入 AND(锁存后的 g_j、u_j 相乘):in1、in2 在上,out 在下。返回 (in1, in2, out)。"""
+    import schemdraw.logic as logic
+    g = logic.And(inputs=2).theta(-90).at((x, y)).anchor("out").scale(0.7)
+    d += g
+    return g.in1, g.in2, g.out
+
+
+def block_layer_schematic():
+    """08b:新增部分的电路级原理图(累加器、两组块入口比较器、前馈子块),注意力子块画成方框(细节见 07e)。"""
+    d = schemdraw.Drawing(unit=1.0); d.config(fontsize=10)
+    # ===== 左:累加器与比较器(通道 1、2、16)=====
+    chans = [(27.0, "1"), (23.0, "2"), (17.0, "16")]
+    x2_out = {}
+    for k, (yc, cn) in enumerate(chans):
+        first = k == 0
+        d += elm.SourceV().at((0.6, yc - 1.6)).up().length(1.6)
+        d += elm.Ground().at((0.6, yc - 1.6))
+        d += elm.Switch().at((0.6, yc)).right().length(1.6)
+        lbl(d, (1.4, yc + 0.45), "S_ld(load)" if first else "load", halign="center", fontsize=8)
+        d += elm.Dot().at((2.2, yc)).label(f"h{cn}", loc="top", ofst=0.1)
+        d += elm.Capacitor().at((2.2, yc)).down().length(1.6)
+        d += elm.Ground()
+        d += elm.SourceControlledI().at((3.6, yc - 1.6)).up().length(1.6)
+        d += elm.Ground().at((3.6, yc - 1.6))
+        d += elm.Line().at((2.2, yc)).right().tox(3.6)
+        if first:
+            lbl(d, (0.0, yc - 0.8), "V_hin\n(DAC)", halign="right", fontsize=8)
+            lbl(d, (2.2, yc - 2.6), "C_acc", halign="center", fontsize=8)
+            lbl(d, (3.6, yc - 2.6), "B_acc", halign="center", fontsize=8)
+        # 两组比较器:Q_in1(cmp1 → x1)、Q_in2(cmp2 → x2),都读同一个 h_i
+        d += elm.Line().at((3.6, yc)).right().tox(5.0)
+        d += elm.Line().at((5.0, yc + 0.9)).down().toy(yc - 0.9)
+        for side, (dy, ph, nm) in enumerate(((0.9, "cmp1", "Q_in1"), (-0.9, "cmp2", "Q_in2"))):
+            y = yc + dy
+            d += elm.Line().at((5.0, y)).right().length(0.3)
+            d += (c := Cmp().right().anchor("in").at((5.3, y)))
+            d += elm.Switch().at(c.out).right().length(1.2)
+            xo = c.out[0] + 1.2
+            d += elm.Dot().at((xo, y))
+            d += elm.Capacitor().at((xo, y)).down().length(0.6)
+            d += elm.Ground().scale(0.6)
+            lbl(d, (c.out[0] + 0.6, y + 0.45), ph, halign="center", fontsize=7.5)
+            if first:
+                lbl(d, (5.75, y + 0.65), nm, halign="center", fontsize=7.5)
+            if side == 0:
+                d += elm.Line().at((xo, y)).right().length(0.5)
+                lbl(d, (xo + 0.6, y), f"x1_{cn} → GDN", fontsize=8.5)
+            else:
+                x2_out[cn] = (xo, y)
+    lbl(d, (2.2, 20.4), VDOTS, halign="center", fontsize=14)
+    lbl(d, (0.0, 13.6), "C_acc 1 nF;B_acc:I = φacc1·y1_i·C_acc/0.1 µs + φacc2·y2_i·C_acc/0.1 µs(acc1 注入 y1,acc2 注入 y2,1 单位 = 1 V)", fontsize=9)
+    lbl(d, (0.0, 12.9), "比较器:2T 个阈值 ±jθ/T(θ = 0.7),输出 (Σ_j 1[h ≥ jθ/T] − Σ_j 1[h ≤ −jθ/T]) / T,", fontsize=9)
+    lbl(d, (0.0, 12.2), "在 cmp1 / cmp2 采样进 1 pF 锁存,保持到下一次采样(展开见 08d)。图中编号从 1 起,网表节点从 0 起(h0…h15)", fontsize=9)
+    # ===== 左上:GDN 子块方框 =====
+    d += flow.Box(w=11.0, h=2.4).at((0.0, 31.2)).anchor("W").label(
+        "GDN 注意力子块(电路见 07e,相位 A、p1、p3、p4、B、C)\n输入:x1_i(cmp1 锁存)   输出:y1_i(SN_out 锁存)→ B_acc(acc1)", fontsize=9.5)
+    # ===== 右上:W_1 | W_3 crossbar(共用字线 x2,列交错:g_j 与 u_j 相邻)=====
+    X0 = 13.5
+    rows = [x2_out["1"][1], x2_out["2"][1], x2_out["16"][1]]
+    pairs = [(16.5, "1"), (23.5, "2"), (33.5, "32")]
+    cols = []
+    for xb_, pn in pairs:
+        cols += [(xb_, f"g{pn}", "θ=1"), (xb_ + 2.6, f"u{pn}", "θ=1")]
+    y_top, y_bot = rows[0] + 1.6, rows[-1] - 1.8
+    for cn, (xo, yo) in x2_out.items():
+        d += elm.Line().at((xo, yo)).right().tox(X0)
+    for yr, cn in zip(rows, ("1", "2", "16")):
+        d += elm.Line().at((X0, yr)).right().tox(cols[-1][0] + 0.8)
+        lbl(d, (X0 - 0.15, yr + 0.35), f"x2_{cn}", halign="right", fontsize=8.5)
+        for xc, _, _ in cols:
+            d += elm.Dot(radius=0.07).at((xc - 0.9, yr))
+            d += elm.Resistor().at((xc - 0.9, yr)).to((xc, yr - 0.9))
+            d += elm.Dot(radius=0.07).at((xc, yr - 0.9))
+    for xc, nm, th in cols:
+        d += elm.Line().at((xc, y_top)).down().toy(y_bot)
+        lbl(d, (xc, y_top + 0.4), nm, halign="center", fontsize=9)
+    lbl(d, (X0, y_top + 1.4), "前馈子块:W_1(列 g_j)与 W_3(列 u_j)两个 crossbar 共用字线 x2_i,列交错画;d_ff = 32 列各画 1、2、32", fontsize=10)
+    lbl(d, (29.0, rows[1] - 2.0), "…", halign="center", fontsize=14)
+    lbl(d, (X0 + 0.6, (rows[1] + rows[2]) / 2 - 0.4), VDOTS, halign="center", fontsize=14)
+    # 神经元 + 锁存 + AND
+    y_and = y_bot - 3.6
+    p_nodes = []
+    for (xb_, pn) in pairs:
+        _lif(d, xb_, y_bot, f"g{pn}", "θ=1")
+        _lif(d, xb_ + 2.6, y_bot, f"u{pn}", "θ=1")
+        og, ou = (xb_ + 1.25, y_bot), (xb_ + 2.6 + 1.25, y_bot)
+        in1, in2, out = _and_down(d, xb_ + 4.4, y_and)
+        d += elm.Line().at(og).down().toy(y_bot - 2.0)
+        d += elm.Line().tox(in1[0]); d += elm.Line().toy(in1[1])
+        d += elm.Line().at(ou).down().toy(y_bot - 1.6)
+        d += elm.Line().tox(in2[0]); d += elm.Line().toy(in2[1])
+        p_nodes.append((out, pn))
+    lbl(d, (pairs[0][0] + 4.9, y_and + 0.9), "AND:p_j = g_j·u_j", fontsize=8.5)
+    lbl(d, (X0, y_bot - 4.9), "g 二值、u 三值(简化符号;泄漏窗、子时隙锁存、减阈值复位见 08d);锁存输出相乘得 p_j ∈ {−1, 0, +1}(T = 2 时 c_g·c_u / 4)", fontsize=9)
+    # ===== 右下:W_2 crossbar(字线 p_j)+ y2 神经元 =====
+    rows2 = [y_and - 3.0, y_and - 4.8, y_and - 7.4]
+    cols2 = [(41.0, "y2_1"), (43.6, "y2_2"), (47.4, "y2_16")]
+    for (out, pn), yr in zip(p_nodes, rows2):
+        d += elm.Line().at(out).down().toy(yr)
+        d += elm.Line().right().tox(cols2[-1][0] + 0.8)
+        lbl(d, (out[0] - 0.15, yr + 0.35), f"p{pn}", halign="right", fontsize=8.5)
+        for xc, _ in cols2:
+            d += elm.Dot(radius=0.07).at((xc - 0.9, yr))
+            d += elm.Resistor().at((xc - 0.9, yr)).to((xc, yr - 0.9))
+            d += elm.Dot(radius=0.07).at((xc, yr - 0.9))
+    y_bot2 = rows2[-1] - 1.8
+    for xc, nm in cols2:
+        d += elm.Line().at((xc, rows2[0] + 1.2)).down().toy(y_bot2)
+        lbl(d, (xc, rows2[0] + 1.6), nm, halign="center", fontsize=9)
+        _lif(d, xc, y_bot2, nm, "θ=1")
+    lbl(d, (45.5, rows2[1] - 1.3), "…", halign="center", fontsize=14)
+    lbl(d, (39.5, rows2[0] + 2.6), "W_2 crossbar(字线 p_j,32 行;列 = y2 神经元,16 列)", fontsize=10)
+    lbl(d, (39.5, y_bot2 - 3.0), "y2_i(三值)→ B_acc 的 acc2 项", fontsize=9.5)
+    lbl(d, (0.0, y_bot2 - 4.4), "求和:ideal 模式由 B 源完成;R / 1T1R 模式下 7 个权重矩阵都是 06 的差分 crossbar,位线经电流传输器灌膜电容(1 单位 = 1 V)。"
+        "所有开关由 08c 的相位时钟驱动。", fontsize=9.5)
+    save(d, "08b_block_layer_schematic")
+
+
+def block_layer_phases():
+    """08c:一个 token 的相位时间线(block_layer.schedule),T = 1 与 T = 2 各一张。"""
+    import experiments.spice.block_layer as bl
+    from matplotlib.patches import Patch
+    groups = [("clr / load", ["clr", "load"], "io"), ("cmp1(Q_in1 锁存)", ["cmp1"], "io"),
+              ("A:q/k/v 泄漏 · 积分", ["Al", "Ai"], "A"), ("A:子时隙 采样 s_k · 计数 a_k", "As", "A"),
+              ("p1 阵列泄漏(α = 0.5)", ["p1"], "gc"), ("p3 检索 / p3s 采样", ["p3", "p3s"], "gc"), ("p4 写入", ["p4"], "gc"),
+              ("B:SN_pre 泄漏 · 积分", ["Bl", "Bi"], "B"), ("B:子时隙", "Bs", "B"),
+              ("C:SN_out 泄漏 · 积分", ["Cl", "Ci"], "C"), ("C:子时隙", "Cs", "C"), ("acc1(y1 注入)", ["acc1"], "io"),
+              ("cmp2(Q_in2 锁存)", ["cmp2"], "io"), ("D:g/u 泄漏 · 积分", ["Dl", "Di"], "D"), ("D:子时隙", "Ds", "D"),
+              ("E:y2 泄漏 · 积分", ["El", "Ei"], "E"), ("E:子时隙", "Es", "E"), ("acc2(y2 注入)", ["acc2"], "io")]
+    fig, axes = plt.subplots(2, 1, figsize=(12, 10.5), sharex=True)
+    for ax, T in zip(axes, (1, 2)):
+        PH, period, t_rec = bl.schedule(T)
+        for r, (lab, keys, col) in enumerate(groups):
+            y = len(groups) - r
+            if isinstance(keys, str):                      # 子时隙:s_k 实心、a_k 斜线
+                tag = keys[0]
+                for k in range(T):
+                    s0, s1 = PH[f"{tag}s{k}"]; a0, a1 = PH[f"{tag}a{k}"]
+                    ax.broken_barh([(s0, s1 - s0)], (y - 0.35, 0.7), color=STAGE_COLORS[col])
+                    ax.broken_barh([(a0, a1 - a0)], (y - 0.35, 0.7), facecolor="white", edgecolor=STAGE_COLORS[col], hatch="////")
+            else:
+                for i, key in enumerate(keys):
+                    t0, t1 = PH[key]
+                    if key == "p1":
+                        t1 = t0 + math.log(2) * bl.CELL["RC"]
+                    light = i == 0 and len(keys) > 1 and key not in ("clr", "p3")
+                    ax.broken_barh([(t0, t1 - t0)], (y - 0.35, 0.7), color=STAGE_COLORS[col], alpha=0.45 if light else 1.0)
+            ax.text(-0.15, y, lab, ha="right", va="center", fontsize=9)
+        ax.axvline(t_rec, color="#9ca3af", lw=0.8, ls="--")
+        ax.text(t_rec, len(groups) + 0.9, "记录", ha="center", fontsize=8.5, color="#6b7280")
+        ax.set_ylim(0.3, len(groups) + 1.3); ax.set_yticks([]); ax.set_xlim(-0.05, period)
+        for sp in ("top", "right", "left"):
+            ax.spines[sp].set_visible(False)
+        ax.set_title(f"T = {T}(每 token 最多 {T} 个脉冲):周期 {period:g} µs,每个神经元级 {T} 个子时隙", fontsize=10.5, loc="left")
+    axes[-1].set_xlabel("t (µs)")
+    axes[0].legend(handles=[Patch(color=STAGE_COLORS["A"], alpha=0.45, label="泄漏窗"), Patch(color=STAGE_COLORS["A"], label="积分窗 / 子时隙采样 s_k"),
+                            Patch(facecolor="white", edgecolor=STAGE_COLORS["A"], hatch="////", label="子时隙计数 + 复位 a_k")],
+                   loc="upper right", fontsize=8.5, frameon=False)
+    fig.suptitle("完整一层一个 token 的相位序列(block_layer.schedule):注意力子块蓝 / 青,前馈子块橙,累加器与比较器灰", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(OUT / "08c_block_layer_phases.png", dpi=200); fig.savefig(OUT / "08c_block_layer_phases.svg"); plt.close(fig)
+
+
+def block_layer_multilevel_units():
+    """08d:每 token 最多 T 个脉冲的神经元(T 个子时隙)与 Q_in 的 2T 比较器组。元件名与 block_layer.neurons / comparators 一致。"""
+    d = schemdraw.Drawing(unit=1.0); d.config(fontsize=10)
+    # ---- 左:神经元(下排:积分、膜电容、泄漏、复位;上排:比较、子时隙锁存、计数)----
+    d += (bi := elm.SourceControlledI().at((0.0, 0.0)).up().length(2.2))
+    d += elm.Ground().at((0.0, 0.0))
+    lbl(d, (-0.6, 1.1), "B_int\nI = φ_i·(Σ_i W_ji x_i)·C_n / 1 µs", halign="right", fontsize=8.5)
+    d += elm.Line().at(bi.end).right().tox(3.0)
+    d += elm.Dot().at((3.0, 2.2)).label("U", loc="bottom", ofst=0.15)
+    d += elm.Capacitor().at((3.0, 2.2)).down().length(2.2)
+    d += elm.Ground()
+    lbl(d, (3.35, 0.9), "C_n 1 nF", fontsize=8.5)
+    d += elm.Line().at((3.0, 2.2)).right().tox(5.6)
+    d += elm.Resistor().down().length(1.1)
+    d += elm.Switch().down().length(1.1)
+    d += elm.Ground()
+    lbl(d, (5.95, 1.1), "泄漏窗 φ_l\n0.105 µs → ×0.9", fontsize=8.5)
+    d += elm.Line().at((5.6, 2.2)).right().tox(9.4)
+    d += elm.SourceControlledI().at((9.4, 2.2)).down().length(2.2)
+    d += elm.Ground().at((9.4, 0.0))
+    lbl(d, (10.1, 1.1), "B_reset(从 U 吸出)\nI = Σ_k φa_k·f·(θ/T)·C_n / 0.1 µs", fontsize=8.5)
+    # 比较器 + T 个子时隙采样开关 → f
+    d += elm.Line().at((3.0, 2.2)).up().toy(5.0)
+    d += elm.Line().at((3.0, 5.0)).right().length(0.5)
+    d += (c := Cmp().right().anchor("in").at((3.5, 5.0)))
+    lbl(d, (1.0, 7.3), "B_cmp:f_in = 1[U ≥ θ/T] − 1[U ≤ −θ/T](二值只有前一项)", fontsize=8.5)
+    xa, xb2 = c.out[0] + 0.4, c.out[0] + 2.0
+    d += elm.Line().at(c.out).right().tox(xa)
+    d += elm.Line().at((xa, 5.9)).down().toy(4.1)
+    d += elm.Line().at((xb2, 5.9)).down().toy(4.1)
+    for y, ph in ((5.9, "φs_1"), (4.1, "φs_T")):
+        d += elm.Switch().at((xa, y)).right().tox(xb2)
+        lbl(d, ((xa + xb2) / 2, y + (0.5 if y > 5 else -0.55)), ph, halign="center", fontsize=8)
+    lbl(d, ((xa + xb2) / 2, 5.0), VDOTS, halign="center", fontsize=11)
+    xf = xb2 + 0.8
+    d += elm.Line().at((xb2, 5.0)).right().tox(xf)
+    d += elm.Dot().at((xf, 5.0)).label("f", loc="top", ofst=0.1)
+    d += elm.Capacitor().at((xf, 5.0)).down().length(1.3)
+    d += elm.Ground()
+    lbl(d, (xf + 0.35, 4.35), "C_f 1 pF", fontsize=8.5)
+    # 计数到 s
+    xs = xf + 4.2
+    d += (bs := elm.SourceControlledI().at((xs, 3.6)).up().length(1.4))
+    d += elm.Ground().at((xs, 3.6))
+    lbl(d, (xs, 2.75), "B_s:I = Σ_k φa_k·f·C_h / (T·0.1 µs)", halign="center", fontsize=8.5)
+    d += elm.Line().at(bs.end).right().length(1.5)
+    d += elm.Dot().label("s", loc="top", ofst=0.1)
+    d += elm.Capacitor().down().length(1.4)
+    d += elm.Ground()
+    d += elm.Switch().at((xs + 1.5, 5.0)).right().length(1.3)
+    d += elm.Ground().theta(0)
+    lbl(d, (xs + 1.85, 3.95), "C_h 1 pF", fontsize=8.5)
+    lbl(d, (xs + 2.15, 5.55), "S_clr(clr)", halign="center", fontsize=8.5)
+    lbl(d, (-4.5, -1.6), "一个 token:泄漏窗 → 积分窗 → T 个子时隙,每个子时隙先 φs_k 把比较结果采进 f,再 φa_k 让 s += f/T、U −= f·θ/T。", fontsize=9.5)
+    lbl(d, (-4.5, -2.3), "T 个子时隙后 s = c/T(c ≤ T 个脉冲,三值时带符号),与 snn_spec 的 levels = T 相同:c = min(T, floor(U·T/θ))。T = 1 即原来的单脉冲神经元。", fontsize=9.5)
+    # ---- 右:2T 比较器组 ----
+    X = 21.0
+    d += elm.Dot().at((X, 3.0)).label("h_i", loc="left", ofst=0.15)
+    ths = ["+θ/T", "+2θ/T = +θ(T = 2)", "−θ/T", "−2θ/T = −θ"]
+    ys = [5.6, 4.1, 1.9, 0.4]
+    d += elm.Line().at((X, ys[0])).down().toy(ys[-1])
+    for y, th in zip(ys, ths):
+        d += elm.Line().at((X, y)).right().length(0.6)
+        d += (cc := Cmp().right().anchor("in"))
+        lbl(d, (cc.out[0] + 0.2, y + 0.4), th, fontsize=8)
+        d += elm.Line().at(cc.out).right().tox(X + 4.6)
+    d += flow.Box(w=2.4, h=6.0).at((X + 4.6, 3.0)).anchor("W").label("(Σ 上 − Σ 下)\n÷ T", fontsize=9.5)
+    d += elm.Line().at((X + 7.0, 3.0)).right().length(0.4)
+    d += elm.Switch().right().length(1.3)
+    d += elm.Dot().label("x_i", loc="right", ofst=0.15)
+    d += elm.Capacitor().down().length(1.3)
+    d += elm.Ground()
+    lbl(d, (X + 8.05, 3.6), "cmp1 / cmp2", halign="center", fontsize=8.5)
+    lbl(d, (X - 0.5, -1.6), "块入口量化器 Q_in:每通道 2T 个比较器,阈值 ±jθ/T(j = 1…T);", fontsize=9.5)
+    lbl(d, (X - 0.5, -2.3), "x_i = (Σ_j 1[h_i ≥ jθ/T] − Σ_j 1[h_i ≤ −jθ/T]) / T ∈ {−1, …, −1/T, 0, 1/T, …, 1}", fontsize=9.5)
+    save(d, "08d_multilevel_neuron_and_comparators")
+
+
+def block_layer_figures():
+    block_layer_datapath(); block_layer_schematic(); block_layer_phases(); block_layer_multilevel_units()
+
+
 if __name__ == "__main__":
     import sys as _sys
     only = _sys.argv[1] if len(_sys.argv) > 1 else None
     if only == "layer":
         gdn_layer_full_schematic()
+    elif only == "block":
+        block_layer_figures()
+    elif only == "crossbar":
+        crossbar_bench()
     else:
         gain_cell_single_step(); phase_timing(); leak_paths(); ideal_switch_neuron(); adm_1m1t1r(); gdn_layer_figures(); gdn_layer_full_schematic()
+        crossbar_bench(); block_layer_figures()
     print("\n".join(sorted(p.name for p in OUT.iterdir())))

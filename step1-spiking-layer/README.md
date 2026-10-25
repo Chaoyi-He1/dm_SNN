@@ -54,11 +54,11 @@ python3 -m venv .venv
 
 ## GDN 子块闭环与原理图
 
-`experiments/spice/gdn_layer.py` 把单头 d=16 的 GDN 子块按相位表搭进 ngspice，16 个 token 与软件模型逐 token 比对（`tests/test_spice_gdn_layer.py`，约 70 s），结果 `results/spice-gdn-layer.md`。所有测试台的原理图由 `experiments/spice/draw_schematics.py` 生成到 `schematics/`（schemdraw + matplotlib，SVG 与 PNG）。
+`experiments/spice/gdn_layer.py` 把单头 d=16 的 GDN 子块按相位表搭进 ngspice，16 个 token 与软件模型逐 token 比对（`tests/test_spice_gdn_layer.py`，约 70 s），结果 `results/spice-gdn-layer.md`。`experiments/spice/block_layer.py` 在它上面补齐前馈子块、两个累加器与两组块入口比较器，得到完整的一层（d = 16、d_ff = 32，每 token 最多 T 个脉冲，T = 1、2），与 `SpikingBlock` 逐脉冲比对，三个种子 × 16 个 token 在 11 个脉冲点上逐元素一致（`tests/test_spice_block_layer.py`，ngspice 部分约 2.5 分钟），结果 `results/spice-block-layer.md`。所有测试台的原理图由 `experiments/spice/draw_schematics.py` 生成到 `schematics/`（schemdraw + matplotlib，SVG 与 PNG；完整一层是 `08a–08d`）。
 
 ## Stage 0 完成状态
 
-当前软件工作、固定版本上游对照与两个可选学习探针已完成；正式冻结仍需 Stage 2 真实层结果。完整验收记录见上级目录 `stage0-validation.md`。2026-09-14 复跑三项实验，数值与记录完全一致；加入行为级电路原语、SPICE 测试台、GF180MCU 与 ADM 物理模型、GDN 子块闭环后 pytest 110 项通过;2026-10-19 加入多级脉冲点(`levels = T`)后 123 项通过、1 项预期失败(含 16 项 SPICE,用 ngspice 47)。
+当前软件工作、固定版本上游对照与两个可选学习探针已完成；正式冻结仍需 Stage 2 真实层结果。完整验收记录见上级目录 `stage0-validation.md`。2026-09-14 复跑三项实验，数值与记录完全一致；加入行为级电路原语、SPICE 测试台、GF180MCU 与 ADM 物理模型、GDN 子块闭环后 pytest 110 项通过;2026-10-19 加入多级脉冲点(`levels = T`)后 123 项通过、1 项预期失败(含 16 项 SPICE,用 ngspice 47);2026-10-25 加入完整一层的 SPICE 闭环后 130 项通过、1 项预期失败(含 17 项 SPICE)。
 
 ```sh
 .venv/bin/python -m pytest -o addopts='' -q
