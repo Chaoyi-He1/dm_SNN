@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/ternres_sat_T1_s2_a1/model.pt",
+ "merge": "sat",
+ "levels": 1,
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.0955,
+   "ppl": 1573.802
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.1997,
+   "ppl": 73.902
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.2116,
+   "ppl": 62.852
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.1889,
+   "ppl": 85.68
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1736,
+   "ppl": 109.823
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.1608,
+   "ppl": 138.697
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1571,
+   "ppl": 152.463
+  }
+ ]
+}
