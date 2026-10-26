@@ -1,6 +1,6 @@
 #!/bin/bash
 # 三值残差种子补跑:胜出规则 sat,先 T=2 的种子 1、2 并行,完成后再 T=1 的种子 1、2 并行(GPU 1)。
-cd /data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo || exit 1
+cd "$(dirname "$0")" || exit 1
 PY=/data/chaoyi_he/dm_snn/step2-toy-demo/.venv/bin/python
 export CUDA_VISIBLE_DEVICES=1 PYTHONUNBUFFERED=1 PYTHONUTF8=1
 for T in 2 1; do
