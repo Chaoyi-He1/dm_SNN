@@ -103,7 +103,7 @@ def test_run_with_only_chain_and_a1_dir_is_a1_running(tmp_path):
     assert row[:4] == ["and", "1", "0.5", "0.001"] and set(row[4:]) == {tt.DASH}
 
 
-def test_status_c_running_and_partial_minutes(tmp_path):
+def test_status_c_running_minutes_is_none_without_both_stages(tmp_path):
     name = "ternres_sat_T2"
     write(tmp_path / f"{name}_chain.json", chain(name))
     write(tmp_path / f"{name}_a1" / "result.json", a1_result(seconds=120.0))
@@ -111,7 +111,9 @@ def test_status_c_running_and_partial_minutes(tmp_path):
     r = tt.read_run(tmp_path, name)
     assert r["status"] == "c running"
     assert r["c_acc"] is None and r["seconds_c"] is None
-    assert r["minutes"] == pytest.approx(2.0)            # 只有 A1 的部分和
+    assert r["seconds_a1"] == 120.0 and r["seconds_c"] is None
+    assert r["minutes"] is None                          # 只有 A1 一段:用时为 null,不给部分和
+    assert tt.fmt_row(r)[-1] == tt.DASH
 
 
 def test_missing_run_and_unreadable_json(tmp_path):
@@ -152,8 +154,10 @@ def test_read_baseline_without_a1_result_or_c(tmp_path):
     r = tt.read_baseline("T2", c_dir)
     assert r["a1_init_acc"] is None and r["a1_acc"] is None and r["a1_steps"] is None
     assert r["fq"] == 0.75                                # A1 不在时退回 C 的 args.fq
+    assert r["seconds_c"] == 300.0 and r["seconds_a1"] is None
+    assert r["minutes"] is None                           # 只有 C 一段:用时为 null,不把 C 的时间当总数
     row = tt.fmt_row(r)
-    assert row[3] == tt.DASH and row[4] == tt.DASH and row[7] == "0.700"
+    assert row[3] == tt.DASH and row[4] == tt.DASH and row[7] == "0.700" and row[-1] == tt.DASH
     gone = tt.read_baseline("T9", tmp_path / "none")
     assert gone["status"] == "missing" and gone["c_acc"] is None
 

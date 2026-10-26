@@ -76,7 +76,6 @@ def last_step(history):
 def stage_fields(a1, c):
     """从 A1 与 C 的 result.json(可为 None)里取出表里要的数,键的含义见 fmt_row。缺什么就是 None。"""
     sec_a1, sec_c = dig_num(a1, "seconds"), dig_num(c, "seconds")
-    secs = [s for s in (sec_a1, sec_c) if s is not None]
     return dict(
         a1_init_acc=dig_num(a1, "init", "token_acc"),
         a1_acc=dig_num(a1, "final", "token_acc"),
@@ -91,7 +90,7 @@ def stage_fields(a1, c):
         w2_events=dig_num(c, "spikes", "w2_events_per_token"),
         seconds_a1=sec_a1,
         seconds_c=sec_c,
-        minutes=sum(secs) / 60 if secs else None,     # 只有一段时是部分和,原始秒数在 seconds_a1 / seconds_c
+        minutes=(sec_a1 + sec_c) / 60 if sec_a1 is not None and sec_c is not None else None,   # A1、C 两段都有才算,否则 null;原始秒数在 seconds_a1 / seconds_c
     )
 
 
