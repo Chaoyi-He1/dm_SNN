@@ -1,0 +1,26 @@
+{
+ "merge": "sat",
+ "levels": 2,
+ "sizes": {},
+ "a0": "results/ckpt/a0.pt",
+ "rows": [
+  {
+   "fq": 0.5,
+   "token_acc": 0.0506,
+   "ppl": 625.585,
+   "spikes": 1.1752
+  },
+  {
+   "fq": 0.75,
+   "token_acc": 0.111,
+   "ppl": 309.053,
+   "spikes": 0.8322
+  },
+  {
+   "fq": 0.9,
+   "token_acc": 0.1129,
+   "ppl": 378.889,
+   "spikes": 0.5241
+  }
+ ]
+}

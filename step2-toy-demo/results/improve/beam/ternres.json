@@ -1,0 +1,424 @@
+{
+ "sets": {
+  "unique": 3277,
+  "any": 3438
+ },
+ "models": {
+  "sat_T1": {
+   "path": "results/improve/ternres_sat_T1_c/model.pt",
+   "info": {
+    "kind": "ternres",
+    "leak": 0.9,
+    "levels": 1,
+    "merge": "sat",
+    "sizes": {
+     "d": 128,
+     "dk": 32,
+     "dv": 32,
+     "d_ff": 256,
+     "n_heads": 4
+    }
+   },
+   "runs": [
+    {
+     "K": 1,
+     "alpha": 0.0,
+     "demo_exact": 0,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " dirty shirt into the dryer and watched it found a big inside.",
+       "exact": false
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer and to show them.",
+       "exact": false
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": " parents and tried to figure ran with the world.",
+       "exact": false
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " wet cloth to the gum wipe the water.",
+       "exact": false
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum and talked about that if it was dancing.",
+       "exact": false
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.1416,
+     "unique_matched_frac": 0.2844,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.1422,
+     "seconds": 2.3
+    },
+    {
+     "K": 4,
+     "alpha": 0.0,
+     "demo_exact": 0,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " dirty shirt into the dryer and let it spin.",
+       "exact": false
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer help.",
+       "exact": false
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": " park, but she could not find help.",
+       "exact": false
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " use a wet cloth to the gum from the gum.",
+       "exact": false
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum in the sky.",
+       "exact": false
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.1776,
+     "unique_matched_frac": 0.2966,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.1806,
+     "seconds": 6.3
+    }
+   ]
+  },
+  "and_T1": {
+   "path": "results/improve/ternres_and_T1_c/model.pt",
+   "info": {
+    "kind": "ternres",
+    "leak": 0.9,
+    "levels": 1,
+    "merge": "and",
+    "sizes": {
+     "d": 128,
+     "dk": 32,
+     "dv": 32,
+     "d_ff": 256,
+     "n_heads": 4
+    }
+   },
+   "runs": [
+    {
+     "K": 1,
+     "alpha": 0.0,
+     "demo_exact": 0,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " higher singing and higher cuddled collecting himed inside.",
+       "exact": false
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer to play with his of his friends.",
+       "exact": false
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": " and forth.",
+       "exact": false
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " play with the park and said goodbye was a daily ritual.",
+       "exact": false
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum and talked about.",
+       "exact": false
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.032,
+     "unique_matched_frac": 0.097,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.0332,
+     "seconds": 2.0
+    },
+    {
+     "K": 4,
+     "alpha": 0.0,
+     "demo_exact": 0,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " went shoes and higher laughing.",
+       "exact": false
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer poor.",
+       "exact": false
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": ".",
+       "exact": false
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " cry.",
+       "exact": false
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum.",
+       "exact": false
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.0525,
+     "unique_matched_frac": 0.0968,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.0547,
+     "seconds": 5.9
+    }
+   ]
+  },
+  "sat_T2": {
+   "path": "results/improve/ternres_sat_T2_c/model.pt",
+   "info": {
+    "kind": "ternres",
+    "leak": 0.9,
+    "levels": 2,
+    "merge": "sat",
+    "sizes": {
+     "d": 128,
+     "dk": 32,
+     "dv": 32,
+     "d_ff": 256,
+     "n_heads": 4
+    }
+   },
+   "runs": [
+    {
+     "K": 1,
+     "alpha": 0.0,
+     "demo_exact": 5,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " dirty shirt into the dryer and watched it spin.",
+       "exact": true
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer and ran to meet them.",
+       "exact": true
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": " park, but she could not find him anywhere.",
+       "exact": true
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " use a wet cloth to wipe the gum away.",
+       "exact": true
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum and talked about how amazing it was.",
+       "exact": true
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.7064,
+     "unique_matched_frac": 0.8134,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.7056,
+     "seconds": 2.6
+    },
+    {
+     "K": 4,
+     "alpha": 0.0,
+     "demo_exact": 5,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " dirty shirt into the dryer and watched it spin.",
+       "exact": true
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer and ran to meet them.",
+       "exact": true
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": " park, but she could not find him anywhere.",
+       "exact": true
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " use a wet cloth to wipe the gum away.",
+       "exact": true
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum and talked about how amazing it was.",
+       "exact": true
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.7952,
+     "unique_matched_frac": 0.8672,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.7952,
+     "seconds": 8.2
+    }
+   ]
+  },
+  "and_T2": {
+   "path": "results/improve/ternres_and_T2_c/model.pt",
+   "info": {
+    "kind": "ternres",
+    "leak": 0.9,
+    "levels": 2,
+    "merge": "and",
+    "sizes": {
+     "d": 128,
+     "dk": 32,
+     "dv": 32,
+     "d_ff": 256,
+     "n_heads": 4
+    }
+   },
+   "runs": [
+    {
+     "K": 1,
+     "alpha": 0.0,
+     "demo_exact": 5,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " dirty shirt into the dryer and watched it spin.",
+       "exact": true
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer and ran to meet them.",
+       "exact": true
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": " park, but she could not find him anywhere.",
+       "exact": true
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " use a wet cloth to wipe the gum away.",
+       "exact": true
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum and talked about how amazing it was.",
+       "exact": true
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.4858,
+     "unique_matched_frac": 0.6255,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.4828,
+     "seconds": 2.6
+    },
+    {
+     "K": 4,
+     "alpha": 0.0,
+     "demo_exact": 4,
+     "demo": [
+      {
+       "prefix": "He put his wet and",
+       "target": " dirty shirt into the dryer and watched it spin.",
+       "output": " dirty shirt into the dryer and watched it spin.",
+       "exact": true
+      },
+      {
+       "prefix": "He couldn't wait any",
+       "target": " longer and ran to meet them.",
+       "output": " longer and ran to meet them.",
+       "exact": true
+      },
+      {
+       "prefix": "She ran around the whole",
+       "target": " park, but she could not find him anywhere.",
+       "output": " park ever,",
+       "exact": false
+      },
+      {
+       "prefix": "They showed her how to",
+       "target": " use a wet cloth to wipe the gum away.",
+       "output": " use a wet cloth to wipe the gum away.",
+       "exact": true
+      },
+      {
+       "prefix": "They all looked at the",
+       "target": " gum and talked about how amazing it was.",
+       "output": " gum and talked about how amazing it was.",
+       "exact": true
+      }
+     ],
+     "unique_n": 3277,
+     "unique_exact": 0.5944,
+     "unique_matched_frac": 0.7032,
+     "any_n": 3438,
+     "any_corpus_sentence": 0.5931,
+     "seconds": 8.1
+    }
+   ]
+  }
+ }
+}

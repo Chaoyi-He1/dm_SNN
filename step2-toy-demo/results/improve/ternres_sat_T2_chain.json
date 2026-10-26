@@ -1,0 +1,49 @@
+{
+ "name": "ternres_sat_T2",
+ "merge": "sat",
+ "levels": 2,
+ "lr": 0.003,
+ "steps": 12000,
+ "seed": 0,
+ "fq": 0.9,
+ "iscan": {
+  "best": {
+   "fq": 0.9,
+   "token_acc": 0.1129,
+   "ppl": 378.889,
+   "spikes": 0.5241
+  },
+  "seconds": 23.8,
+  "file": "results/improve/ternres_sat_T2_iscan.json"
+ },
+ "a1": {
+  "final": {
+   "token_acc": 0.8036509724159957,
+   "ppl": 2.1118271646558546,
+   "n_exact": 5,
+   "n_demo": 5
+  },
+  "seconds": 6354.3,
+  "dir": "results/improve/ternres_sat_T2_a1"
+ },
+ "lif_scale": 1.5,
+ "bscan": {
+  "best": {
+   "lif_scale": 1.5,
+   "token_acc": 0.2646,
+   "ppl": 54.674
+  },
+  "seconds": 25.5,
+  "file": "results/improve/ternres_sat_T2_bscan.json"
+ },
+ "c": {
+  "final": {
+   "token_acc": 0.8113832344388227,
+   "ppl": 2.0816342945870474,
+   "n_exact": 5,
+   "n_demo": 5
+  },
+  "seconds": 6139.4,
+  "dir": "results/improve/ternres_sat_T2_c"
+ }
+}

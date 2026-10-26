@@ -17,6 +17,8 @@ print(model.generate(sl.ids[0][:5], 40))
 
 `ckpt/a0.pt` 没有 `result.json`,按文件名识别为浮点模型。数字含义见 `improve/README.md`。
 
+三值残差检查点(`improve/ternres_*`)走同一个 `beam_eval.load_model`,`info['kind']` 是 `ternres`(另带 `info['merge']`:sat 或 and)。
+
 | 文件 | 模型 | 说明 | 大小 | sha256 |
 |---|---|---|---|---|
 | `ckpt/a0.pt` | 浮点 A0 | 原宽度 d=128,116 万参数,token 准确率 0.842 | 4.4 MiB | `dababbfe97fa5e92` |
@@ -40,5 +42,21 @@ print(model.generate(sl.ids[0][:5], 40))
 | `improve/LT_cont12k_fromCL2/model.pt` | 训练更久:在原来的 C 上续训 | T=1,token 准确率 0.757,demo 5/5 | 4.4 MiB | `f25454cd60420bbd` |
 | `improve/LT_c24k_fromL1/model.pt` | 训练更久:A1 12k → C 24k | T=1,token 准确率 0.778,demo 5/5 | 4.4 MiB | `a86988bc042227f5` |
 | `improve/LT_c24k_from24k/model.pt` | 训练更久:A1 24k → C 24k | T=1,token 准确率 0.764,demo 3/5 | 4.4 MiB | `998ac8db5a5dd33a` |
+| `improve/ternres_sat_T1_a1/model.pt` | 三值残差 sat T=1 A1,种子 0 | sat 规则,T=1,token 准确率 0.568,demo 1/5 | 4.4 MiB | `c4a6935417516c62` |
+| `improve/ternres_sat_T1_c/model.pt` | 三值残差 sat T=1 C,种子 0 | sat 规则,T=1,token 准确率 0.625,demo 0/5 | 4.4 MiB | `01974845635b6fa7` |
+| `improve/ternres_and_T1_a1/model.pt` | 三值残差 and T=1 A1,种子 0 | and 规则,T=1,token 准确率 0.451,demo 0/5 | 4.4 MiB | `9607a573317bd4fe` |
+| `improve/ternres_and_T1_c/model.pt` | 三值残差 and T=1 C,种子 0 | and 规则,T=1,token 准确率 0.429,demo 0/5 | 4.4 MiB | `47ae1edc57690442` |
+| `improve/ternres_sat_T2_a1/model.pt` | 三值残差 sat T=2 A1,种子 0 | sat 规则,T=2,token 准确率 0.804,demo 5/5 | 4.4 MiB | `45cf93006434834d` |
+| `improve/ternres_sat_T2_c/model.pt` | 三值残差 sat T=2 C,种子 0 | sat 规则,T=2,token 准确率 0.811,demo 5/5 | 4.4 MiB | `1f2e7bfcff0ecef1` |
+| `improve/ternres_and_T2_a1/model.pt` | 三值残差 and T=2 A1,种子 0 | and 规则,T=2,token 准确率 0.788,demo 3/5 | 4.4 MiB | `a988950de9a855b8` |
+| `improve/ternres_and_T2_c/model.pt` | 三值残差 and T=2 C,种子 0 | and 规则,T=2,token 准确率 0.769,demo 5/5 | 4.4 MiB | `b346ef2a21c1c1c6` |
+| `improve/ternres_sat_T2_s1_a1/model.pt` | 三值残差 sat T=2 A1,种子 1 | sat 规则,T=2,token 准确率 0.818,demo 5/5 | 4.4 MiB | `072460bb73e8154b` |
+| `improve/ternres_sat_T2_s1_c/model.pt` | 三值残差 sat T=2 C,种子 1 | sat 规则,T=2,token 准确率 0.814,demo 5/5 | 4.4 MiB | `693b029842aac6bc` |
+| `improve/ternres_sat_T2_s2_a1/model.pt` | 三值残差 sat T=2 A1,种子 2 | sat 规则,T=2,token 准确率 0.810,demo 5/5 | 4.4 MiB | `ea19a22f192186e5` |
+| `improve/ternres_sat_T2_s2_c/model.pt` | 三值残差 sat T=2 C,种子 2 | sat 规则,T=2,token 准确率 0.805,demo 5/5 | 4.4 MiB | `003991daccd97612` |
+| `improve/ternres_sat_T1_s1_a1/model.pt` | 三值残差 sat T=1 A1,种子 1 | sat 规则,T=1,token 准确率 0.566,demo 0/5 | 4.4 MiB | `da50c86891bc3ee7` |
+| `improve/ternres_sat_T1_s1_c/model.pt` | 三值残差 sat T=1 C,种子 1 | sat 规则,T=1,token 准确率 0.624,demo 0/5 | 4.4 MiB | `f873f416a8813133` |
+| `improve/ternres_sat_T1_s2_a1/model.pt` | 三值残差 sat T=1 A1,种子 2 | sat 规则,T=1,token 准确率 0.566,demo 0/5 | 4.4 MiB | `29d5e66af0fa7945` |
+| `improve/ternres_sat_T1_s2_c/model.pt` | 三值残差 sat T=1 C,种子 2 | sat 规则,T=1,token 准确率 0.626,demo 0/5 | 4.4 MiB | `9f492efd3ba56c8f` |
 
-合计 21 个文件,113.6 MiB。sha256 只列前 16 位。
+合计 37 个文件,184.4 MiB(前面各方向的 21 个 113.6 MiB,三值残差的 16 个 70.8 MiB)。sha256 只列前 16 位。
