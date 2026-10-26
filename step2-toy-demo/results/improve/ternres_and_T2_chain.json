@@ -1,0 +1,49 @@
+{
+ "name": "ternres_and_T2",
+ "merge": "and",
+ "levels": 2,
+ "lr": 0.003,
+ "steps": 12000,
+ "seed": 0,
+ "fq": 0.5,
+ "iscan": {
+  "best": {
+   "fq": 0.5,
+   "token_acc": 0.0339,
+   "ppl": 1409.569,
+   "spikes": 1.0513
+  },
+  "seconds": 24.0,
+  "file": "results/improve/ternres_and_T2_iscan.json"
+ },
+ "a1": {
+  "final": {
+   "token_acc": 0.788404968818813,
+   "ppl": 2.2545339156363062,
+   "n_exact": 3,
+   "n_demo": 5
+  },
+  "seconds": 7508.4,
+  "dir": "results/improve/ternres_and_T2_a1"
+ },
+ "lif_scale": 2.0,
+ "bscan": {
+  "best": {
+   "lif_scale": 2.0,
+   "token_acc": 0.0509,
+   "ppl": 872.718
+  },
+  "seconds": 25.3,
+  "file": "results/improve/ternres_and_T2_bscan.json"
+ },
+ "c": {
+  "final": {
+   "token_acc": 0.7689398396396093,
+   "ppl": 2.433073589221761,
+   "n_exact": 5,
+   "n_demo": 5
+  },
+  "seconds": 6870.4,
+  "dir": "results/improve/ternres_and_T2_c"
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/ternres_and_T2_a1/model.pt",
+ "merge": "and",
+ "levels": 2,
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.0328,
+   "ppl": 31497.299
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.0484,
+   "ppl": 4528.745
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.0509,
+   "ppl": 872.718
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.0231,
+   "ppl": 1657.403
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.0026,
+   "ppl": 2969.287
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.0,
+   "ppl": 3225.985
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.0,
+   "ppl": 3226.001
+  }
+ ]
+}
