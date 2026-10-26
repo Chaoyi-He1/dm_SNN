@@ -83,3 +83,20 @@ def test_gradient_flows_to_embedding_through_ternary_residual(cfg, sl):
         F.cross_entropy(logits.reshape(-1, sl.vocab_size), tok[:, 1:].reshape(-1)).backward()
         assert m.emb.weight.grad.abs().sum() > 0 and m.blocks[0].attn.Wq.weight.grad.abs().sum() > 0
         assert (m.blocks[0].m1.log_thr.grad is not None) == (merge == "learn")
+
+
+def test_describe_and_load_checkpoint_recognise_ternary_residual(cfg, sl, tmp_path):
+    import json
+    from experiments.beam_eval import SIZE_KEYS, describe_checkpoint, load_model
+    m = TernaryResidualLM(cfg, sl.vocab_size, leak=0.0, merge="and", levels=2)
+    d = tmp_path / "ternres_and_T2_a1"
+    d.mkdir()
+    torch.save(m.state_dict(), d / "model.pt")
+    args = dict(stage="a1", residual="ternary", merge="and", levels=2)
+    args.update({k: getattr(cfg, key) for k, key in SIZE_KEYS})
+    (d / "result.json").write_text(json.dumps(dict(args=args)), encoding="utf-8")
+    info = describe_checkpoint(d / "model.pt")
+    assert info["kind"] == "ternres" and info["merge"] == "and" and info["levels"] == 2 and info["leak"] == 0.0
+    mm, _, _ = load_model(d / "model.pt", sl, torch.device("cpu"))
+    assert isinstance(mm, TernaryResidualLM) and mm.blocks[0].m1.thr.item() == 1.5 and mm.blocks[0].m1.levels == 2
+    assert torch.equal(mm(all_sequences(sl)[:2, :-1]), m(all_sequences(sl)[:2, :-1]))
