@@ -100,3 +100,13 @@ def test_describe_and_load_checkpoint_recognise_ternary_residual(cfg, sl, tmp_pa
     mm, _, _ = load_model(d / "model.pt", sl, torch.device("cpu"))
     assert isinstance(mm, TernaryResidualLM) and mm.blocks[0].m1.thr.item() == 1.5 and mm.blocks[0].m1.levels == 2
     assert torch.equal(mm(all_sequences(sl)[:2, :-1]), m(all_sequences(sl)[:2, :-1]))
+
+
+def test_build_a1_calibrates_and_trains_a_few_steps(cfg, sl, demo):
+    from experiments.convert_lab import train
+    from experiments.ternary_residual import build_a1
+    tokens = all_sequences(sl)
+    m, thr = build_a1(FloatLM(cfg, sl.vocab_size), cfg, sl, tokens, torch.device("cpu"), fq=0.75, merge="sat", levels=2, seed=0)
+    assert m.merge == "sat" and m.levels == 2 and "q_emb" in thr and m.blocks[0].m1.thr.item() == 1.0
+    res = train(m, sl, demo, cfg, tokens, lr=1e-3, steps=3, seed=0, eval_every=3, stop=False, log=lambda *_: None)
+    assert res["history"][-1]["step"] == 3 and 0.0 <= res["final"]["token_acc"] <= 1.0
