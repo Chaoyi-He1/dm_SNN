@@ -7,9 +7,14 @@ import numpy as np
 import torch
 
 from experiments import energy_model as em
+from experiments.energy_events import count_events, model_kind, model_matrices
 from experiments.energy_params import COLUMNS, DEVICE, v
+from experiments.multilevel import apply_levels
 from experiments.spice import crossbar as xb
 from toy_demo.config import ToyConfig
+from toy_demo.data import all_sequences, split_inputs_targets
+from toy_demo.model import SpikingLM
+from toy_demo.ternary_residual import TernaryResidualLM
 
 
 def test_every_parameter_has_a_source():
@@ -102,3 +107,88 @@ def test_digital_event_energy_scales_with_driven_rows():
                for k in ev["rows"] if k != "head") + ev["rows"]["head"].sum() * V
     assert np.isclose(e["add"], adds * v("65nm", "E_add16")) and np.isclose(e["weight"], adds * 8 * v("65nm", "E_sram_far_bit"))
     assert np.isclose(em.digital_event_energy(ev, cfg, V, "65nm", batch=16)["weight"], e["weight"] / 16)
+
+
+def _lower_thresholds(m):
+    with torch.no_grad():
+        for lif in m.lif_modules():
+            lif._thr.log_thr.fill_(-1.0)
+
+
+@torch.no_grad()
+def test_count_events_matches_manual_recount(cfg, sl):
+    torch.manual_seed(0)
+    m = SpikingLM(cfg, sl.vocab_size, leak=0.9); _lower_thresholds(m)
+    tok = all_sequences(sl)[:12]
+    ev = count_events(m, tok, torch.device("cpu"), batch=5)
+    inputs, _, mask = split_inputs_targets(tok)
+    _, recs = m(inputs, record=True)
+    x = torch.stack([recs[t][0]["x_attn"] for t in range(inputs.shape[1])], 1)[mask]
+    assert ev["n_tokens"] == int(mask.sum()) and ev["levels"] == 1
+    assert np.allclose(ev["rows"]["blocks.0.qkv"], x.abs().mean(0).numpy())
+    assert np.allclose(ev["rows"]["blocks.0.gates"][:-1], x.abs().mean(0).numpy()) and ev["rows"]["blocks.0.gates"][-1] == 1.0
+    g = torch.stack([recs[t][0]["g"] for t in range(inputs.shape[1])], 1)[mask]; u = torch.stack([recs[t][0]["u"] for t in range(inputs.shape[1])], 1)[mask]
+    assert np.allclose(ev["rows"]["blocks.0.w2"], (g.abs() * u.abs()).mean(0).numpy())
+    hf = torch.stack([recs[t][-1]["h_final"] for t in range(inputs.shape[1])], 1)[mask]
+    assert np.allclose(ev["rows"]["head"], m.q_out(hf).abs().mean(0).numpy())
+    assert ev["cmp_decisions"] == (cfg.n_blocks * 2 * cfg.d + cfg.d) * 2 and ev["n_lif"] == cfg.n_blocks * (6 * cfg.d + 2 * cfg.d_ff)
+    assert np.isclose(ev["embed_rows"].sum(), 1.0) and ev["embed_rows"].shape == (sl.vocab_size,)
+    assert 0 < ev["gain"]["alpha_mean"] < 1 and 0 <= ev["gain"]["s_rms_norm"] <= 1 and ev["gain"]["k_rows"] >= 0
+    assert ev["spikes_lif"] > 0
+
+
+@torch.no_grad()
+def test_count_events_levels_two_counts_pulses_and_w2_products(cfg, sl):
+    torch.manual_seed(0)
+    m = SpikingLM(cfg, sl.vocab_size, leak=0.9); apply_levels(m, 2); _lower_thresholds(m)
+    tok = all_sequences(sl)[:8]
+    ev = count_events(m, tok, torch.device("cpu"))
+    inputs, _, mask = split_inputs_targets(tok)
+    _, recs = m(inputs, record=True)
+    x = torch.stack([recs[t][0]["x_attn"] for t in range(inputs.shape[1])], 1)[mask]
+    g = torch.stack([recs[t][0]["g"] for t in range(inputs.shape[1])], 1)[mask]; u = torch.stack([recs[t][0]["u"] for t in range(inputs.shape[1])], 1)[mask]
+    assert ev["levels"] == 2
+    assert np.allclose(ev["rows"]["blocks.0.qkv"], (x.abs() * 2).round().mean(0).numpy())
+    assert np.allclose(ev["rows"]["blocks.0.w2"], ((g.abs() * 2).round() * (u.abs() * 2).round()).mean(0).numpy())
+    assert ev["cmp_decisions"] == (cfg.n_blocks * 2 * cfg.d + cfg.d) * 4
+
+
+@torch.no_grad()
+def test_count_events_ignores_padding(cfg, sl):
+    import pytest
+    torch.manual_seed(1)
+    m = SpikingLM(cfg, sl.vocab_size, leak=0.9); _lower_thresholds(m)
+    tok = all_sequences(sl)[:6]
+    inputs, _, mask = split_inputs_targets(tok)
+    if mask.all():
+        pytest.skip("切片里这 6 句等长,没有填充可测")
+    ev = count_events(m, tok, torch.device("cpu"))
+    _, recs = m(inputs, record=True)
+    x = torch.stack([recs[t][0]["x_attn"] for t in range(inputs.shape[1])], 1)
+    assert ev["n_tokens"] == int(mask.sum())
+    assert np.allclose(ev["rows"]["blocks.0.qkv"], x[mask].abs().mean(0).numpy())                      # 只计有效位置
+    assert not np.allclose(ev["rows"]["blocks.0.qkv"], x.reshape(-1, cfg.d).abs().mean(0).numpy())    # 含填充的平均不同
+
+
+@torch.no_grad()
+def test_ternres_events_use_h_final_as_head_input(cfg, sl):
+    torch.manual_seed(0)
+    m = TernaryResidualLM(cfg, sl.vocab_size, leak=0.9, merge="sat", levels=1); _lower_thresholds(m)
+    tok = all_sequences(sl)[:8]
+    ev = count_events(m, tok, torch.device("cpu"))
+    inputs, _, mask = split_inputs_targets(tok)
+    _, recs = m(inputs, record=True)
+    hf = torch.stack([recs[t][-1]["h_final"] for t in range(inputs.shape[1])], 1)[mask]
+    assert model_kind(m) == "ternres" and np.allclose(ev["rows"]["head"], hf.abs().mean(0).numpy())
+    assert ev["cmp_decisions"] == (cfg.d + cfg.n_blocks * 2 * cfg.d) * 2
+
+
+def test_model_matrices_shapes(cfg, sl):
+    m = SpikingLM(cfg, sl.vocab_size, leak=0.9)
+    mats = model_matrices(m)
+    d, dff, H, V = cfg.d, cfg.d_ff, cfg.n_heads, sl.vocab_size
+    hq, hv = H * cfg.dk, H * cfg.dv                    # 真实配置里 hq = hv = d;tiny 配置里不等,按权重真实形状断言
+    assert mats["blocks.0.qkv"].shape == (2 * hq + hv, d) and mats["blocks.0.gates"].shape == (2 * H, d + 1)
+    assert mats["blocks.0.o"].shape == (d, hv) and mats["blocks.0.ffn13"].shape == (2 * dff, d) and mats["blocks.0.w2"].shape == (d, dff)
+    assert mats["head"].shape == (V, d) and mats["embed"].shape == (d, V)
+    assert np.allclose(mats["blocks.0.gates"][:H, -1], m.blocks[0].attn.gates.Wa.bias.detach().numpy())
