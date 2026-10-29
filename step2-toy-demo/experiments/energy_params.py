@@ -61,7 +61,7 @@ _COL_65NM = dict(
     V_s=_p(0.5, "V", _SRC_PERIPH_65),
     E_ctrl=_p(100e-12, "J/token", _SRC_PERIPH_65),
     # 数字 ASIC:Horowitz 45 nm × node_scale
-    node_scale=_p(NODE_SCALE_65, "×", "45 → 65 nm 的 CV² 换算(约 1.4× 尺寸 × 1.2²/1.0² 电压),与公开 65 nm int8 乘加 0.4–0.5 pJ 一致;估计"),
+    node_scale=_p(NODE_SCALE_65, "×", "自估:45 → 65 nm 的 CV² 换算,尺寸比 65/45 ≈ 1.44 × 电压比平方 (1.2/1.0)² = 1.44,约 2.07,取 2.0;无外部出处。memristor 侧 65 nm 周边按 V_dd = 1.0 V 取,故对数字侧是偏高端的估计"),
     E_mul8=_digital_65(0.2e-12, "J", "int8 mult 0.2 pJ"),
     E_add8=_digital_65(0.03e-12, "J", "int8 add 0.03 pJ"),
     E_add16=_digital_65(0.05e-12, "J", "int16 add 0.05 pJ"),
