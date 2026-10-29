@@ -12,7 +12,7 @@ from experiments.energy_params import COLUMNS, DEVICE, v
 from experiments.multilevel import apply_levels
 from experiments.spice import crossbar as xb
 from toy_demo.config import ToyConfig
-from toy_demo.data import all_sequences, split_inputs_targets
+from toy_demo.data import PAD, all_sequences, split_inputs_targets
 from toy_demo.model import SpikingLM
 from toy_demo.ternary_residual import TernaryResidualLM
 
@@ -151,6 +151,41 @@ def test_count_events_levels_two_counts_pulses_and_w2_products(cfg, sl):
     assert np.allclose(ev["rows"]["blocks.0.qkv"], (x.abs() * 2).round().mean(0).numpy())
     assert np.allclose(ev["rows"]["blocks.0.w2"], ((g.abs() * 2).round() * (u.abs() * 2).round()).mean(0).numpy())
     assert ev["cmp_decisions"] == (cfg.n_blocks * 2 * cfg.d + cfg.d) * 4
+
+
+@torch.no_grad()
+def test_count_events_gain_and_spike_totals_match_recount(cfg, sl):
+    for T in (1, 2):
+        torch.manual_seed(0)
+        m = SpikingLM(cfg, sl.vocab_size, leak=0.9)
+        if T > 1:
+            apply_levels(m, T)
+        _lower_thresholds(m)
+        tok = all_sequences(sl)[:8]
+        ev = count_events(m, tok, torch.device("cpu"), batch=3)
+        inputs, _, mask = split_inputs_targets(tok)
+        _, recs = m(inputs, record=True)
+        L, n = inputs.shape[1], int(mask.sum())
+        rec = lambda i, key: torch.stack([recs[t][i][key] for t in range(L)], 1)[mask]      # 有效位置 [N, ...]
+        pulses = lambda s: (s.abs() * T).round()
+        k_rows = q_rows = spikes = 0.0
+        alphas, states = [], []
+        for i, blk in enumerate(m.blocks):
+            k, q = rec(i, "k") / blk.attn.c_k, rec(i, "q")                                  # k 记录里已乘 c_k,先除掉
+            for h in range(cfg.n_heads):                                                    # 每头 dk 个元素
+                k_rows += float(pulses(k[:, h]).sum()); q_rows += float(pulses(q[:, h]).sum())
+            spikes += sum(float(pulses(x).sum()) for x in (q, k, rec(i, "v"), rec(i, "o_spk"), rec(i, "y_attn"),
+                                                          rec(i, "g"), rec(i, "u"), rec(i, "y_ffn")))
+            alphas.append(rec(i, "alpha").reshape(-1))
+            states.append(rec(i, "S").reshape(-1))
+        S = torch.cat(states)
+        assert k_rows > 0 and q_rows > 0 and spikes > k_rows + q_rows                       # 重算本身不是空的,去掉 /c_k 会被发现
+        assert ev["levels"] == T
+        assert np.isclose(ev["gain"]["k_rows"], k_rows / n) and np.isclose(ev["gain"]["q_rows"], q_rows / n)
+        assert np.isclose(ev["spikes_lif"], spikes / n)
+        assert np.isclose(ev["gain"]["alpha_mean"], float(torch.cat(alphas).mean()))
+        assert np.isclose(ev["gain"]["s_rms_norm"], float((S * S).mean().sqrt() / S.abs().max()))
+        assert ev["embed_rows"][PAD] == 0
 
 
 @torch.no_grad()
