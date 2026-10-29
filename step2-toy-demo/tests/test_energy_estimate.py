@@ -44,15 +44,19 @@ def test_row_conductance_sums_both_cells_of_each_weight():
 
 
 def test_crossbar_energy_formula_on_one_row():
-    c = np.array([2.0, 0.0]); grow = np.array([1e-4, 1e-4])
+    c = np.array([2.0, 0.0, 0.0]); grow = np.array([1e-4, 1e-4, 1e-4])   # 3 行 × 8 cell = 24 cell,2 个驱动行次 × 8 = 16
     e = em.crossbar_energy(c, grow, d_out=4, col="65nm")
     V, t = v("65nm", "V_read"), v("65nm", "t_read")
     assert np.isclose(e["conduction"], V * V * t * 2.0 * 1e-4)
     assert np.isclose(e["gate"], 2.0 * 8 * v("65nm", "C_gate") * v("65nm", "V_sel") ** 2)
     assert np.isclose(e["wire"], 2.0 * 8 * v("65nm", "C_wire") * V * V)
-    assert np.isclose(e["leak_off"], (16 - 16) * V * v("65nm", "I_off") * t) and e["leak_off"] >= 0
+    leak = (24 - 16) * V * v("65nm", "I_off") * t                           # 8 个未驱动 cell,这一项不为 0
+    assert leak > 0 and np.isclose(e["leak_off"], leak, rtol=1e-9, atol=0)
     assert np.isclose(e["integrator"], 4 * v("65nm", "I_int") * v("65nm", "V_dd") * t)
     assert np.isclose(e["total"], sum(e[k] for k in ("conduction", "gate", "wire", "leak_off", "integrator")))
+    e2 = em.crossbar_energy(c, grow, d_out=4, col="65nm", n_pulses_window=2)   # T = 2:积分器供电两个读窗
+    assert np.isclose(e2["integrator"], 2 * e["integrator"], rtol=1e-12, atol=0)
+    assert all(e2[k] == e[k] for k in ("conduction", "gate", "wire", "leak_off"))
 
 
 def test_digital_dense_batch_amortises_only_weight_fetch():
@@ -255,6 +259,8 @@ def test_sensitivity_moves_with_t_read_and_adc():
     assert s["t_read"]["1e-06"] > s["t_read"]["1e-07"] > s["t_read"]["1e-08"]
     assert s["E_adc"]["1e-11"] > s["E_adc"]["1e-12"]
     assert s["G_scale"]["0.1"] < s["G_scale"]["1"]
+    assert set(s["I_int"]) == {"1e-06", "5e-06", "5e-05"} and s["I_int"]["5e-05"] > s["I_int"]["5e-06"] > s["I_int"]["1e-06"]
+    assert s["I_int"]["5e-06"] == s["t_read"]["1e-07"]                     # 两个扫描的主值是同一个基准
 
 
 def test_embedding_quantization_sweep_restores_and_orders(cfg, sl):
@@ -278,5 +284,40 @@ def test_unknown_override_key_raises():
 
 
 def test_dram_bit_is_not_node_scaled():
-    assert np.isclose(v("65nm", "E_dram_bit"), 2e-9 / 64)
-    assert np.isclose(v("65nm", "E_dram_bit"), 2e-9 / 64, rtol=1e-9, atol=0)      # 上一行的默认 atol=1e-8 比 3e-11 大,恒真
+    assert np.isclose(v("65nm", "E_dram_bit"), 2e-9 / 64, rtol=1e-9, atol=0)      # atol=0:默认 atol=1e-8 比 3e-11 大,会恒真
+
+
+def _sweep_entry(levels, scaling, delta_pt):
+    return dict(acc_before=0.8, acc_after=0.8 + delta_pt / 100, delta=delta_pt / 100, delta_pt=delta_pt,
+                levels=levels, scaling=scaling, w_max=1.0)
+
+
+def _hand_sweep(spec):
+    """spec: [(levels, scaling, delta_pt)] → 与 embedding_quantization_sweep 同形的字典(不含 best_within_0.5pt)。"""
+    return {f"{s}/{L}": _sweep_entry(L, s, d) for L, s, d in spec}
+
+
+def test_best_within_threshold_and_embed_levels_needed_without_a_model():
+    from experiments.energy_estimate import best_within_threshold, embed_levels_needed
+    # 门槛的符号:掉 0.5 个百分点算通过,掉 0.51 不算
+    assert best_within_threshold(_hand_sweep([(16, "global", -0.51), (32, "global", -0.5)])) == dict(levels=32, scaling="global")
+    assert best_within_threshold(_hand_sweep([(16, "global", -0.51)])) is None
+    # 先比级数:16 级 per_column 通过就不看 32 级 global
+    assert best_within_threshold(_hand_sweep([(32, "global", 0.0), (16, "global", -2.0), (16, "per_column", -0.1)])) \
+        == dict(levels=16, scaling="per_column")
+    # 同级数下 global 优先,与字典的插入顺序无关
+    assert best_within_threshold(_hand_sweep([(64, "per_column", -0.1), (64, "global", -0.2)])) == dict(levels=64, scaling="global")
+    # 都不通过 → None;embed_levels_needed 取最大级数里掉幅最小的缩放,并标 meets_threshold = False
+    sw = _hand_sweep([(16, "global", -3.0), (256, "global", -0.6), (256, "per_column", -0.7)])
+    sw["best_within_0.5pt"] = best_within_threshold(sw)
+    assert sw["best_within_0.5pt"] is None
+    n = embed_levels_needed(sw, 1e-12)
+    assert n["meets_threshold"] is False and (n["levels"], n["scaling"], n["cells_per_value"]) == (256, "global", 2)
+    assert np.isclose(n["embed_energy_nJ_at_levels"], 2e-3)
+    # cells_per_value = ceil(log(levels) / log(16)):16 → 1,256 → 2,4096 → 3
+    for L, cells in ((16, 1), (256, 2), (4096, 3)):
+        sw = _hand_sweep([(L, "global", -1.0)]); sw["best_within_0.5pt"] = best_within_threshold(sw)
+        n = embed_levels_needed(sw, 1e-12)
+        assert n["meets_threshold"] is False and n["levels"] == L and n["cells_per_value"] == cells
+    sw = _hand_sweep([(256, "global", -0.44)]); sw["best_within_0.5pt"] = best_within_threshold(sw)
+    assert embed_levels_needed(sw, 1e-12)["meets_threshold"] is True

@@ -40,7 +40,7 @@ def _digital_65(base, unit, what):
 _COL_65NM = dict(
     _device_copy(),
     # 读窗与 token 周期
-    t_read=_p(100e-9, "s", "paper SI Note 5:ADM 可在 100 ns 级工作;敏感性 10 ns–1 µs"),
+    t_read=_p(100e-9, "s", "paper SI Note 5(投影,非测量):ADM 可在 100 ns 级工作;敏感性 10 ns–1 µs"),
     t_token=_p(1e-3, "s", "t_token = R_c·C_g·ln(1/0.9),R_c 1 GΩ、C_g 10 pF(Table 7)"),
     # 1T1R crossbar 的周边
     V_sel=_p(1.0, "V", _SRC_PERIPH_65),
@@ -90,7 +90,7 @@ _COL_ADVANCED = dict(
     C_s=_p(10e-15, "F", f"{_SRC_ADV};{_ADV_NOTE}"),
     V_s=_p(0.3, "V", f"{_SRC_ADV};{_ADV_NOTE}"),
     E_ctrl=_p(10e-12, "J/token", f"{_SRC_ADV};{_ADV_NOTE}"),
-    # 数字 ASIC:7 nm 公开量级,直接取值,不再乘 node_scale
+    # 数字 ASIC:7 nm 估计值(文献量级,无逐项出处),直接取值,不再乘 node_scale
     node_scale=_p(1.0, "×", f"{_SRC_ADV};7 nm 数字值直接取用,不再换算"),
     E_mul8=_p(0.03e-12, "J", f"{_SRC_ADV};7 nm int8 mult,{_ADV_NOTE}"),
     E_add8=_p(0.005e-12, "J", f"{_SRC_ADV};7 nm int8 add,{_ADV_NOTE}"),

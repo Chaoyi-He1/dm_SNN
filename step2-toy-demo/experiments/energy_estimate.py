@@ -9,9 +9,10 @@
     - 数字事件驱动脉冲网络:两列 × batch 1/16/64;
     - 嵌入表量化到 16 级(全局 w_max)后重新评估 token 准确率(评估完还原权重),再扫 16/32/64/128/256 级 × global/per_column 缩放,
       找出掉幅不超过 0.5 个百分点的最小配置,按所需的 cell 对数(ceil(log 级数 / log 16))修正嵌入 crossbar 的能量;
-    - 敏感性:65nm 主列、crossbar+ADC 头,分别改 t_read、G 缩放、E_adc。
+    - 敏感性:65nm 主列、crossbar+ADC 头,分别改 t_read、G 缩放、E_adc、列积分器偏置 I_int。
   数字稠密 int8 用 A0 的尺寸(只计成本,不量化不测精度):两列 × batch 1/16/64,另给一行 65nm 下 batch 1、权重在 DRAM 的对照。
   全部原始数(含参数表、事件汇总)写 energy.json,五张 markdown 表写 tables.md(同时打印到标准输出)。
+  energy.json 的 meta 记下运行时的 git HEAD 短 SHA、日期、torch 版本与 --device。
   前向只用来数事件与测准确率;GPU 能耗不在这里测,读 --gpu-json。
 
 用法(在 step2-toy-demo 下;--device cuda 时 CUDA_VISIBLE_DEVICES 必须恰为 1,0 号卡归别的项目,否则退出码 2):
@@ -21,9 +22,11 @@
 """
 import argparse
 import dataclasses
+import datetime
 import json
 import math
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -47,6 +50,7 @@ BATCHES = (1, 16, 64)
 SCAN_T_READ = (10e-9, 100e-9, 1e-6)                    # 主值 100 ns
 SCAN_G_SCALE = (0.1, 1.0)                              # 同乘 G_on 与 G_off,1 是主值
 SCAN_E_ADC = (1e-12, 5e-12, 10e-12)                    # 主值 5 pJ
+SCAN_I_INT = (1e-6, 5e-6, 50e-6)                       # 列积分器偏置,主值 5 µA
 _DIMS = ("d", "n_blocks", "n_heads", "dk", "dv", "d_ff")
 SWEEP_LEVELS = (16, 32, 64, 128, 256)                  # 嵌入量化扫描的级数
 SWEEP_SCALINGS = ("global", "per_column")              # 先 global 后 per_column,同级数下 global 优先
@@ -100,12 +104,12 @@ def embedding_quantization_sweep(model, tokens, levels_list=SWEEP_LEVELS, scalin
     """嵌入表量化的级数 × 缩放扫描。键 f"{scaling}/{levels}"(levels 升序,同级数内按 scalings 给定的顺序)→
     dict(acc_before, acc_after, delta, delta_pt, levels, scaling, w_max);delta 是小数(与 embedding_quantization_check 一致),
     delta_pt = 100·delta 是百分点。每次评估后在 finally 里还原权重。
-    另有 "best_within_0.5pt":按上述顺序第一个满足 delta_pt ≥ −0.5 的 dict(levels, scaling),没有则 None。"""
+    另有 "best_within_0.5pt":best_within_threshold(按上述顺序第一个满足 delta_pt ≥ −0.5 的 dict(levels, scaling),没有则 None)。"""
     emb = model.emb.weight
     saved = emb.data.clone()
     W = saved.cpu().double().numpy()
     acc_before = teacher_forced_metrics(model, tokens)["token_acc"]
-    out, best = {}, None
+    out = {}
     for levels in sorted(levels_list):
         for scaling in scalings:
             Wq, w_max = _quantize_embedding(W, levels, scaling)
@@ -117,10 +121,20 @@ def embedding_quantization_sweep(model, tokens, levels_list=SWEEP_LEVELS, scalin
             delta = acc_after - acc_before
             out[f"{scaling}/{levels}"] = dict(acc_before=acc_before, acc_after=acc_after, delta=delta, delta_pt=100 * delta,
                                               levels=levels, scaling=scaling, w_max=float(w_max))
-            if best is None and 100 * delta >= -SWEEP_THRESHOLD_PT - 1e-9:
-                best = dict(levels=levels, scaling=scaling)
-    out["best_within_0.5pt"] = best
+    out["best_within_0.5pt"] = best_within_threshold(out, scalings)
     return out
+
+
+def best_within_threshold(sweep, scalings=SWEEP_SCALINGS):
+    """扫描字典(键 f"{scaling}/{levels}",可含 "best_within_0.5pt",忽略)→ 第一个满足 100·delta ≥ −SWEEP_THRESHOLD_PT 的
+    dict(levels, scaling),没有则 None。顺序:级数升序,同级数内按 scalings 的顺序(默认 global 优先),与字典的插入顺序无关。
+    纯函数,不需要模型。"""
+    entries = sorted((e for k, e in sweep.items() if k != "best_within_0.5pt"),
+                     key=lambda e: (e["levels"], list(scalings).index(e["scaling"])))
+    for e in entries:
+        if 100 * e["delta"] >= -SWEEP_THRESHOLD_PT - 1e-9:
+            return dict(levels=e["levels"], scaling=e["scaling"])
+    return None
 
 
 def cells_per_value(levels, base=16):
@@ -153,8 +167,8 @@ def _key(x):
 
 
 def sensitivity(events, mats, cfg, vocab, col="65nm"):
-    """主列、crossbar+ADC 头的 memristor 总能量(J)随 t_read、G 缩放(G_on 与 G_off 同乘)、E_adc 的变化。
-    返回 {"t_read": {键: J}, "G_scale": {...}, "E_adc": {...}},键见 _key。覆盖只在单次调用里生效,不改 COLUMNS。"""
+    """主列、crossbar+ADC 头的 memristor 总能量(J)随 t_read、G 缩放(G_on 与 G_off 同乘)、E_adc、列积分器偏置 I_int 的变化。
+    返回 {"t_read": {键: J}, "G_scale": {...}, "E_adc": {...}, "I_int": {...}},键见 _key。覆盖只在单次调用里生效,不改 COLUMNS。"""
     def total(overrides):
         return em.memristor_energy(events, mats, cfg, vocab, col, "crossbar_adc", overrides=overrides)["total"]
 
@@ -162,7 +176,8 @@ def sensitivity(events, mats, cfg, vocab, col="65nm"):
     return dict(
         t_read={_key(t): total({"t_read": t}) for t in SCAN_T_READ},
         G_scale={_key(s): total({"G_on": s * g_on, "G_off": s * g_off}) for s in SCAN_G_SCALE},
-        E_adc={_key(e): total({"E_adc": e}) for e in SCAN_E_ADC})
+        E_adc={_key(e): total({"E_adc": e}) for e in SCAN_E_ADC},
+        I_int={_key(i): total({"I_int": i}) for i in SCAN_I_INT})
 
 
 # ----------------------------------------------------------------------------- 汇总计算
@@ -200,7 +215,16 @@ def model_report(model, cfg, vocab, tokens, dev, path):
         sensitivity=sensitivity(ev, mats, cfg, vocab))
 
 
-def build_result(models, a0_path, slice_dir, dev, gpu_json):
+def git_short_sha():
+    """运行时仓库 HEAD 的短 SHA(git rev-parse --short HEAD,在 step2-toy-demo 下运行);拿不到时为 "unknown"。"""
+    try:
+        r = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=STEP2, capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return "unknown"
+    return r.stdout.strip() if r.returncode == 0 and r.stdout.strip() else "unknown"
+
+
+def build_result(models, a0_path, slice_dir, dev, gpu_json, device_arg=None):
     sl = load_slice(slice_dir)
     tokens = all_sequences(sl)
     a0, cfg, _ = load_model(a0_path, sl, torch.device("cpu"))
@@ -215,7 +239,9 @@ def build_result(models, a0_path, slice_dir, dev, gpu_json):
         del model
     gpu = json.loads(Path(gpu_json).read_text(encoding="utf-8")) if gpu_json else None
     return dict(
-        meta=dict(slice=str(slice_dir), n_sentences=len(tokens), vocab=vocab, a0=str(a0_path), cfg=dataclasses.asdict(cfg)),
+        meta=dict(slice=str(slice_dir), n_sentences=len(tokens), vocab=vocab, a0=str(a0_path), cfg=dataclasses.asdict(cfg),
+                  git_sha=git_short_sha(), run_date=datetime.date.today().isoformat(), torch=torch.__version__,
+                  device=str(dev) if device_arg is None else device_arg),
         params=dict(columns=COLUMNS, device=DEVICE),
         mac_counts=em.mac_counts(cfg, vocab),
         models=per_model,
@@ -328,7 +354,7 @@ def table4(res):
     rows = [("基准(主值)", "—")
             + tuple(nj(res["models"][lab]["memristor"]["65nm"]["crossbar_adc"]["total"]) for lab in labels)]
     for param, unit, scale, shown in (("t_read", "ns", 1e9, "读窗 t_read"), ("G_scale", "×", 1.0, "电导缩放(G_on 与 G_off 同乘)"),
-                                      ("E_adc", "pJ", 1e12, "ADC 能量 E_adc")):
+                                      ("E_adc", "pJ", 1e12, "ADC 能量 E_adc"), ("I_int", "µA", 1e6, "列积分器偏置 I_int")):
         for k in first[param]:
             rows.append((shown, f"{float(k) * scale:g} {unit}")
                         + tuple(nj(res["models"][lab]["sensitivity"][param][k]) for lab in labels))
@@ -360,8 +386,9 @@ def table5(res):
                          f"嵌入 crossbar 能量 {sig3(n['embed_energy_nJ_at_levels'])} nJ/token(16 级一对 cell 为 {sig3(base)} nJ)")
         else:
             d = 100 * m["embed_quant_sweep"][f"{n['scaling']}/{n['levels']}"]["delta"]
-            lines.append(f"- {lab}:无配置满足(扫描上限 {n['levels']} 级、{n['scaling']} 仍掉 {-d:.2f} 个百分点);"
-                         f"按该配置估嵌入 crossbar 能量 {sig3(n['embed_energy_nJ_at_levels'])} nJ/token(16 级一对 cell 为 {sig3(base)} nJ)")
+            lines.append(f"- {lab}:无配置满足 {SWEEP_THRESHOLD_PT} 个百分点的门槛;扫描上限 {n['levels']} 级、{n['scaling']} 仍掉 {-d:.2f} 个百分点,"
+                         f"这个配置**不满足**门槛。若仍按该配置({n['cells_per_value']} 对差分 cell),嵌入 crossbar 能量为 "
+                         f"{sig3(n['embed_energy_nJ_at_levels'])} nJ/token(16 级一对 cell 为 {sig3(base)} nJ);这不是 {lab} 满足门槛时的嵌入能量")
     head = ("**表 5 嵌入表量化的 token 准确率变化**(百分点;切片上的 teacher-forcing,只量化嵌入表;global = 整表一个 w_max,"
             "per_column = 每个嵌入维度各用自己的 w_max;⚠ = 掉幅超过设计文档的门槛 0.5 个百分点,要在 README 写明并给脉冲注入的退路;"
             f"量化前:{before})")
@@ -407,7 +434,7 @@ def main():
     models = parse_models(a.models)
     if a.ref not in models:
         sys.exit(f"--ref {a.ref} 不在 --models 里: {list(models)}")
-    res = build_result(models, a.a0, a.slice, torch.device(a.device), a.gpu_json or None)
+    res = build_result(models, a.a0, a.slice, torch.device(a.device), a.gpu_json or None, device_arg=a.device)
 
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
