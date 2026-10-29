@@ -227,3 +227,12 @@ def test_model_matrices_shapes(cfg, sl):
     assert mats["blocks.0.o"].shape == (d, hv) and mats["blocks.0.ffn13"].shape == (2 * dff, d) and mats["blocks.0.w2"].shape == (d, dff)
     assert mats["head"].shape == (V, d) and mats["embed"].shape == (d, V)
     assert np.allclose(mats["blocks.0.gates"][:H, -1], m.blocks[0].attn.gates.Wa.bias.detach().numpy())
+
+
+from experiments.energy_gpu import joules_per_token, parse_power_lines
+
+
+def test_parse_power_lines_and_joules_per_token():
+    assert parse_power_lines(["20.08", " 25.9 ", "", "N/A"]) == [20.08, 25.9]
+    r = joules_per_token(mean_w=60.0, idle_w=20.0, seconds=10.0, tokens=4000)
+    assert np.isclose(r["total"], 600.0 / 4000) and np.isclose(r["incremental"], 400.0 / 4000) and np.isclose(r["ms_per_token"], 2.5)
