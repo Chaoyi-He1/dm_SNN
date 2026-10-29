@@ -4,15 +4,19 @@
 import toy_demo  # noqa: F401  先导入它才能让 step1 的 experiments.spice 可见
 import numpy as np
 
-from experiments.energy_params import v
+from experiments.energy_params import COLUMNS, v
 from experiments.spice import crossbar as xb
 
 _XBAR_KEYS = ("conduction", "gate", "wire", "leak_off", "integrator")
 
 
 def _getter(col, overrides):
-    """参数读取函数 p(name):overrides(名字 → 值)里有的取覆盖值,否则取列 col 的值。只影响这一次调用,不改 COLUMNS。"""
+    """参数读取函数 p(name):overrides(名字 → 值)里有的取覆盖值,否则取列 col 的值。只影响这一次调用,不改 COLUMNS。
+    overrides 的键必须是列 col 里的参数名,拼错的键(否则会被静默忽略)抛 ValueError。"""
     ov = overrides or {}
+    for name in ov:
+        if name not in COLUMNS[col]:
+            raise ValueError(f"unknown override {name!r} for column {col!r}")
     return lambda name: ov[name] if name in ov else v(col, name)
 
 

@@ -68,7 +68,7 @@ _COL_65NM = dict(
     E_add32=_digital_65(0.1e-12, "J", "int32 add 0.1 pJ"),
     E_sram_near_bit=_digital_65(10e-12 / 64, "J/bit", "8 KB SRAM 10 pJ/64 b ÷ 64"),
     E_sram_far_bit=_digital_65(100e-12 / 64, "J/bit", "1 MB SRAM 100 pJ/64 b ÷ 64"),
-    E_dram_bit=_digital_65(2e-9 / 64, "J/bit", "DRAM 取 1.3–2.6 nJ/64 b 的中值 2 nJ/64 b ÷ 64(仅用于权重在 DRAM 的对照)"),
+    E_dram_bit=_p(2e-9 / 64, "J/bit", "Horowitz ISSCC 2014 DRAM 1.3–2.6 nJ/64 b 的中位 2 nJ,不随逻辑节点缩放(片外接口决定);仅用于对照行"),
 )
 
 _ADV_NOTE = "展望列(各自最优投影,不同节点)"

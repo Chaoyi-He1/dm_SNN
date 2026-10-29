@@ -1,5 +1,5 @@
 """每 token 能耗估算的总入口:三个训练好的脉冲模型在 memristor 电路、数字 ASIC 上的每 token 能量,
-加上本机 GPU 的实测(读 energy_gpu.py 写的 gpu.json),并给出敏感性扫描与嵌入 16 级量化的准确率检查。
+加上本机 GPU 的实测(读 energy_gpu.py 写的 gpu.json),并给出敏感性扫描与嵌入表量化的级数 × 缩放扫描(无 DAC 的嵌入 crossbar 要几级才不掉准确率)。
 对应设计文档 docs/superpowers/specs/2026-10-28-energy-estimate-design.md。
 
 做法
@@ -7,13 +7,14 @@
     取量化前的权重矩阵(model_matrices),然后
     - memristor 电路:两列(65nm 主对比、advanced 展望)× 两个输出头变体(crossbar+ADC / 数字事件驱动)的部件分解;
     - 数字事件驱动脉冲网络:两列 × batch 1/16/64;
-    - 嵌入表量化到 16 级后重新评估 token 准确率(评估完还原权重);
+    - 嵌入表量化到 16 级(全局 w_max)后重新评估 token 准确率(评估完还原权重),再扫 16/32/64/128/256 级 × global/per_column 缩放,
+      找出掉幅不超过 0.5 个百分点的最小配置,按所需的 cell 对数(ceil(log 级数 / log 16))修正嵌入 crossbar 的能量;
     - 敏感性:65nm 主列、crossbar+ADC 头,分别改 t_read、G 缩放、E_adc。
   数字稠密 int8 用 A0 的尺寸(只计成本,不量化不测精度):两列 × batch 1/16/64,另给一行 65nm 下 batch 1、权重在 DRAM 的对照。
   全部原始数(含参数表、事件汇总)写 energy.json,五张 markdown 表写 tables.md(同时打印到标准输出)。
   前向只用来数事件与测准确率;GPU 能耗不在这里测,读 --gpu-json。
 
-用法(在 step2-toy-demo 下;--device cuda 时必须设 CUDA_VISIBLE_DEVICES=1,0 号卡归别的项目):
+用法(在 step2-toy-demo 下;--device cuda 时 CUDA_VISIBLE_DEVICES 必须恰为 1,0 号卡归别的项目,否则退出码 2):
   CUDA_VISIBLE_DEVICES=1 .venv/bin/python experiments/energy_estimate.py \\
       --models T1=results/conversion-sweep/CL2_l1_lif225_lr3e3_12k/model.pt,T2=results/improve/T2_c/model.pt,TR2=results/improve/ternres_sat_T2_c/model.pt \\
       --a0 results/ckpt/a0.pt --out results/energy --gpu-json results/energy/gpu.json --device cuda
@@ -47,6 +48,9 @@ SCAN_T_READ = (10e-9, 100e-9, 1e-6)                    # 主值 100 ns
 SCAN_G_SCALE = (0.1, 1.0)                              # 同乘 G_on 与 G_off,1 是主值
 SCAN_E_ADC = (1e-12, 5e-12, 10e-12)                    # 主值 5 pJ
 _DIMS = ("d", "n_blocks", "n_heads", "dk", "dv", "d_ff")
+SWEEP_LEVELS = (16, 32, 64, 128, 256)                  # 嵌入量化扫描的级数
+SWEEP_SCALINGS = ("global", "per_column")              # 先 global 后 per_column,同级数下 global 优先
+SWEEP_THRESHOLD_PT = 0.5                               # 设计文档的门槛:token 准确率掉幅不超过 0.5 个百分点
 
 
 # ----------------------------------------------------------------------------- 嵌入量化检查与敏感性
@@ -69,6 +73,78 @@ def embedding_quantization_check(model, tokens, levels=16):
 def embedding_w_max(model):
     """嵌入表量化用的全局 w_max(= 权重绝对值的最大值)。"""
     return float(model.emb.weight.detach().abs().max())
+
+
+def _quantize_embedding(W, levels, scaling):
+    """W: numpy [vocab, d] → (Wq, w_max)。scaling:
+    "global"     整张表一个 w_max(crossbar.quantize_weights 的默认,即 Task 4 的 16 级检查);
+    "per_column" 每个嵌入维度(W 的每一列)各用自己的 w_max,电路上就是每列各自的电导满量程 / 积分增益;
+                 返回的 w_max 是各列 w_max 的最大值。"""
+    if scaling == "global":
+        _, _, Wq, w_max = xb.quantize_weights(W, levels)
+        return Wq, w_max
+    if scaling == "per_column":
+        Wq, w_maxes = np.zeros_like(W), []
+        for i in range(W.shape[1]):
+            col = W[:, i:i + 1]
+            if not col.any():                        # 全零列没有可缩放的量(quantize_weights 会除以 0),保持 0
+                w_maxes.append(0.0)
+                continue
+            _, _, Wq[:, i:i + 1], w_i = xb.quantize_weights(col, levels)
+            w_maxes.append(w_i)
+        return Wq, max(w_maxes)
+    raise ValueError(f"unknown scaling {scaling!r}")
+
+
+def embedding_quantization_sweep(model, tokens, levels_list=SWEEP_LEVELS, scalings=SWEEP_SCALINGS):
+    """嵌入表量化的级数 × 缩放扫描。键 f"{scaling}/{levels}"(levels 升序,同级数内按 scalings 给定的顺序)→
+    dict(acc_before, acc_after, delta, delta_pt, levels, scaling, w_max);delta 是小数(与 embedding_quantization_check 一致),
+    delta_pt = 100·delta 是百分点。每次评估后在 finally 里还原权重。
+    另有 "best_within_0.5pt":按上述顺序第一个满足 delta_pt ≥ −0.5 的 dict(levels, scaling),没有则 None。"""
+    emb = model.emb.weight
+    saved = emb.data.clone()
+    W = saved.cpu().double().numpy()
+    acc_before = teacher_forced_metrics(model, tokens)["token_acc"]
+    out, best = {}, None
+    for levels in sorted(levels_list):
+        for scaling in scalings:
+            Wq, w_max = _quantize_embedding(W, levels, scaling)
+            try:
+                emb.data.copy_(torch.as_tensor(Wq, dtype=emb.dtype, device=emb.device))
+                acc_after = teacher_forced_metrics(model, tokens)["token_acc"]
+            finally:
+                emb.data.copy_(saved)
+            delta = acc_after - acc_before
+            out[f"{scaling}/{levels}"] = dict(acc_before=acc_before, acc_after=acc_after, delta=delta, delta_pt=100 * delta,
+                                              levels=levels, scaling=scaling, w_max=float(w_max))
+            if best is None and 100 * delta >= -SWEEP_THRESHOLD_PT - 1e-9:
+                best = dict(levels=levels, scaling=scaling)
+    out["best_within_0.5pt"] = best
+    return out
+
+
+def cells_per_value(levels, base=16):
+    """一个权重值需要的差分 cell 对数:ceil(log(levels)/log(base)),16 级 1 对,32–256 级 2 对(多对 cell 二进制加权)。
+    用整数幂比较,避开浮点对数在整数边界上的误差。"""
+    k = 1
+    while base ** k < levels:
+        k += 1
+    return k
+
+
+def embed_levels_needed(sweep, embed_j_16):
+    """扫描结果 → 嵌入 crossbar 需要的级数与按此修正的能量(embed_j_16 = 16 级一对 cell 的 J/token,即 by_component["embed"])。
+    best_within_0.5pt 为 None 时取扫描里最大的级数(缩放取该级数掉幅最小者),并置 meets_threshold = False。"""
+    best = sweep["best_within_0.5pt"]
+    entries = [e for k, e in sweep.items() if k != "best_within_0.5pt"]
+    if best is None:
+        top = max(e["levels"] for e in entries)
+        pick = max((e for e in entries if e["levels"] == top), key=lambda e: e["delta"])
+        best = dict(levels=top, scaling=pick["scaling"])
+    cells = cells_per_value(best["levels"])
+    return dict(levels=best["levels"], scaling=best["scaling"], cells_per_value=cells,
+                meets_threshold=sweep["best_within_0.5pt"] is not None,
+                embed_energy_nJ_at_levels=embed_j_16 * cells * 1e9)
 
 
 def _key(x):
@@ -113,11 +189,15 @@ def model_report(model, cfg, vocab, tokens, dev, path):
     levels = int(DEVICE["levels"]["value"])
     quant = embedding_quantization_check(model, tokens, levels)
     quant.update(levels=levels, w_max=embedding_w_max(model))
+    sweep = embedding_quantization_sweep(model, tokens)
+    memristor = {col: {head: em.memristor_energy(ev, mats, cfg, vocab, col, head) for head in HEADS} for col in COLUMNS}
     return dict(
         path=str(path), kind=model_kind(model), levels=ev["levels"], events_summary=events_summary(ev),
-        memristor={col: {head: em.memristor_energy(ev, mats, cfg, vocab, col, head) for head in HEADS} for col in COLUMNS},
+        memristor=memristor,
         digital_event={col: {str(b): em.digital_event_energy(ev, cfg, vocab, col, b) for b in BATCHES} for col in COLUMNS},
-        embed_quant=quant, sensitivity=sensitivity(ev, mats, cfg, vocab))
+        embed_quant=quant, embed_quant_sweep=sweep,
+        embed_levels_needed=embed_levels_needed(sweep, memristor["65nm"]["crossbar_adc"]["by_component"]["embed"]),
+        sensitivity=sensitivity(ev, mats, cfg, vocab))
 
 
 def build_result(models, a0_path, slice_dir, dev, gpu_json):
@@ -173,6 +253,10 @@ COMPONENTS = [("crossbar_blocks", "突触 crossbar 导通(各块)"), ("crossbar_
               ("control", "相位时钟与控制")]
 
 
+GPU_FOOTNOTE = ("GPU 行是实测:小模型在 GPU 上被空载功耗(约 21 W)与逐 token 调度淹没,'增量'是扣掉深度空载后的值,不是边际计算能量;"
+                "它反映'GPU 跑这种模型'而非 GPU 的峰值效率。")
+
+
 def table1(res, ref_label):
     mem, ref = res["models"], res["models"][ref_label]["memristor"]["65nm"]["crossbar_adc"]["total"]
     rows = []
@@ -197,6 +281,8 @@ def table1(res, ref_label):
                 add(f"GPU {gpu['gpu']}(实测,8 nm)", label, f"batch {b},总功率 ÷ 吞吐", r["total_j_per_token"], "mJ")
                 add(f"GPU {gpu['gpu']}(实测,8 nm)", label, f"batch {b},扣空载 {gpu['idle_w']:.1f} W", r["incremental_j_per_token"], "mJ")
     head = f"**表 1 每 token 能量总表**(相对基准 = memristor 65 nm {ref_label}、输出头 crossbar+ADC = {nj(ref)} nJ;GPU 行单位为 mJ)"
+    if gpu:
+        head += "\n\n" + GPU_FOOTNOTE
     return head + "\n\n" + _md(["方案", "模型", "设定", "能量/token", f"相对 memristor {ref_label}(crossbar+ADC)"], rows)
 
 
@@ -251,14 +337,35 @@ def table4(res):
 
 
 def table5(res):
+    models = res["models"]
+    first = next(iter(models.values()))["embed_quant_sweep"]
+    entries = [e for k, e in first.items() if k != "best_within_0.5pt"]
+    levels = sorted({e["levels"] for e in entries})
+    scalings = list(dict.fromkeys(e["scaling"] for e in entries))
     rows = []
-    for label, m in res["models"].items():
-        q = m["embed_quant"]
-        rows.append((label, q["levels"], f"{q['w_max']:.4g}", f"{100 * q['acc_before']:.2f}%", f"{100 * q['acc_after']:.2f}%",
-                     f"{100 * q['delta']:+.2f}", "是" if q["delta"] < -0.005 else "否"))
-    return ("**表 5 嵌入表量化到 16 级的 token 准确率变化**(切片上的 teacher-forcing;只量化嵌入表,按 crossbar.quantize_weights 全局 w_max;"
-            "设计文档的门槛:掉幅 > 0.5 个百分点要在 README 写明并给脉冲注入的退路)\n\n"
-            + _md(["模型", "级数", "w_max", "量化前", "量化后", "变化(百分点)", "掉幅 > 0.5 点"], rows))
+    for L in levels:
+        row = [L]
+        for m in models.values():
+            for s in scalings:
+                d = 100 * m["embed_quant_sweep"][f"{s}/{L}"]["delta"]
+                row.append(f"{d:+.2f}" + (" ⚠" if d < -SWEEP_THRESHOLD_PT else ""))
+        rows.append(row)
+    before = "、".join(f"{lab} {100 * next(iter(m['embed_quant_sweep'].values()))['acc_before']:.2f}%" for lab, m in models.items())
+    lines = []
+    for lab, m in models.items():
+        n = m["embed_levels_needed"]
+        base = n["embed_energy_nJ_at_levels"] / n["cells_per_value"]
+        if n["meets_threshold"]:
+            lines.append(f"- {lab}:最小满足 {SWEEP_THRESHOLD_PT} 个百分点的配置 = {n['levels']} 级、{n['scaling']},每个值 {n['cells_per_value']} 对差分 cell,"
+                         f"嵌入 crossbar 能量 {sig3(n['embed_energy_nJ_at_levels'])} nJ/token(16 级一对 cell 为 {sig3(base)} nJ)")
+        else:
+            d = 100 * m["embed_quant_sweep"][f"{n['scaling']}/{n['levels']}"]["delta"]
+            lines.append(f"- {lab}:无配置满足(扫描上限 {n['levels']} 级、{n['scaling']} 仍掉 {-d:.2f} 个百分点);"
+                         f"按该配置估嵌入 crossbar 能量 {sig3(n['embed_energy_nJ_at_levels'])} nJ/token(16 级一对 cell 为 {sig3(base)} nJ)")
+    head = ("**表 5 嵌入表量化的 token 准确率变化**(百分点;切片上的 teacher-forcing,只量化嵌入表;global = 整表一个 w_max,"
+            "per_column = 每个嵌入维度各用自己的 w_max;⚠ = 掉幅超过设计文档的门槛 0.5 个百分点,要在 README 写明并给脉冲注入的退路;"
+            f"量化前:{before})")
+    return head + "\n\n" + _md(["级数"] + [f"{lab} {s}" for lab in models for s in scalings], rows) + "\n\n" + "\n".join(lines)
 
 
 def render_tables(res, ref_label="T2"):
@@ -293,8 +400,10 @@ def main():
     ap.add_argument("--ref", default="T2", help="表 1、3 的倍数以哪个模型的 memristor(crossbar+ADC)为分母")
     a = ap.parse_args()
 
-    if a.device.startswith("cuda") and not os.environ.get("CUDA_VISIBLE_DEVICES"):
-        sys.exit("CUDA_VISIBLE_DEVICES is not set: GPU 0 belongs to another project, run with CUDA_VISIBLE_DEVICES=1")
+    if a.device.startswith("cuda") and os.environ.get("CUDA_VISIBLE_DEVICES") != "1":
+        print(f"CUDA_VISIBLE_DEVICES is {os.environ.get('CUDA_VISIBLE_DEVICES')!r}, not '1': GPU 0 belongs to another project, "
+              "run with CUDA_VISIBLE_DEVICES=1", file=sys.stderr)
+        sys.exit(2)
     models = parse_models(a.models)
     if a.ref not in models:
         sys.exit(f"--ref {a.ref} 不在 --models 里: {list(models)}")

@@ -255,3 +255,28 @@ def test_sensitivity_moves_with_t_read_and_adc():
     assert s["t_read"]["1e-06"] > s["t_read"]["1e-07"] > s["t_read"]["1e-08"]
     assert s["E_adc"]["1e-11"] > s["E_adc"]["1e-12"]
     assert s["G_scale"]["0.1"] < s["G_scale"]["1"]
+
+
+def test_embedding_quantization_sweep_restores_and_orders(cfg, sl):
+    from experiments.energy_estimate import embedding_quantization_sweep
+    torch.manual_seed(0)
+    m = SpikingLM(cfg, sl.vocab_size, leak=0.9); _lower_thresholds(m)
+    before = m.emb.weight.detach().clone()
+    r = embedding_quantization_sweep(m, all_sequences(sl)[:16], levels_list=(16, 64), scalings=("global", "per_column"))
+    assert set(r) == {"global/16", "global/64", "per_column/16", "per_column/64", "best_within_0.5pt"}
+    assert torch.equal(m.emb.weight.detach(), before)
+    for k in ("global/16", "per_column/64"):
+        assert set(r[k]) >= {"acc_before", "acc_after", "delta", "levels", "scaling", "w_max"}
+    assert r["global/16"]["acc_before"] == r["per_column/64"]["acc_before"]
+
+
+def test_unknown_override_key_raises():
+    cfg, V = ToyConfig(), 3226
+    import pytest
+    with pytest.raises(ValueError):
+        em.digital_dense_energy(cfg, V, "65nm", 1, overrides={"t_reed": 1e-7})
+
+
+def test_dram_bit_is_not_node_scaled():
+    assert np.isclose(v("65nm", "E_dram_bit"), 2e-9 / 64)
+    assert np.isclose(v("65nm", "E_dram_bit"), 2e-9 / 64, rtol=1e-9, atol=0)      # 上一行的默认 atol=1e-8 比 3e-11 大,恒真

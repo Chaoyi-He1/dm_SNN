@@ -199,9 +199,9 @@
      "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = 1 MB SRAM 100 pJ/64 b ÷ 64 × node_scale 2.0"
     },
     "E_dram_bit": {
-     "value": 6.25e-11,
+     "value": 3.125e-11,
      "unit": "J/bit",
-     "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = DRAM 取 1.3–2.6 nJ/64 b 的中值 2 nJ/64 b ÷ 64(仅用于权重在 DRAM 的对照) × node_scale 2.0"
+     "source": "Horowitz ISSCC 2014 DRAM 1.3–2.6 nJ/64 b 的中位 2 nJ,不随逻辑节点缩放(片外接口决定);仅用于对照行"
     }
    },
    "advanced": {
@@ -957,6 +957,106 @@
     "levels": 16,
     "w_max": 9.26369857788086
    },
+   "embed_quant_sweep": {
+    "global/16": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.5607738985728934,
+     "delta": -0.1911045368206955,
+     "delta_pt": -19.11045368206955,
+     "levels": 16,
+     "scaling": "global",
+     "w_max": 9.26369857788086
+    },
+    "per_column/16": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.6328520280378545,
+     "delta": -0.11902640735573444,
+     "delta_pt": -11.902640735573444,
+     "levels": 16,
+     "scaling": "per_column",
+     "w_max": 9.26369857788086
+    },
+    "global/32": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.5893664587920862,
+     "delta": -0.16251197660150274,
+     "delta_pt": -16.251197660150275,
+     "levels": 32,
+     "scaling": "global",
+     "w_max": 9.26369857788086
+    },
+    "per_column/32": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.6648400598409844,
+     "delta": -0.08703837555260452,
+     "delta_pt": -8.703837555260453,
+     "levels": 32,
+     "scaling": "per_column",
+     "w_max": 9.26369857788086
+    },
+    "global/64": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.6945588408330672,
+     "delta": -0.057319594560521714,
+     "delta_pt": -5.731959456052172,
+     "levels": 64,
+     "scaling": "global",
+     "w_max": 9.26369857788086
+    },
+    "per_column/64": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.6771780605469735,
+     "delta": -0.0747003748466154,
+     "delta_pt": -7.470037484661541,
+     "levels": 64,
+     "scaling": "per_column",
+     "w_max": 9.26369857788086
+    },
+    "global/128": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.7120740952412971,
+     "delta": -0.03980434015229184,
+     "delta_pt": -3.980434015229184,
+     "levels": 128,
+     "scaling": "global",
+     "w_max": 9.26369857788086
+    },
+    "per_column/128": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.684355616815989,
+     "delta": -0.0675228185775999,
+     "delta_pt": -6.752281857759989,
+     "levels": 128,
+     "scaling": "per_column",
+     "w_max": 9.26369857788086
+    },
+    "global/256": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.7089979996974333,
+     "delta": -0.04288043569615563,
+     "delta_pt": -4.288043569615563,
+     "levels": 256,
+     "scaling": "global",
+     "w_max": 9.26369857788086
+    },
+    "per_column/256": {
+     "acc_before": 0.7518784353935889,
+     "acc_after": 0.7008791245734649,
+     "delta": -0.05099931082012399,
+     "delta_pt": -5.099931082012398,
+     "levels": 256,
+     "scaling": "per_column",
+     "w_max": 9.26369857788086
+    },
+    "best_within_0.5pt": null
+   },
+   "embed_levels_needed": {
+    "levels": 256,
+    "scaling": "global",
+    "cells_per_value": 2,
+    "meets_threshold": false,
+    "embed_energy_nJ_at_levels": 0.014054463149047755
+   },
    "sensitivity": {
     "t_read": {
      "1e-08": 2.3439827097631252e-08,
@@ -1547,6 +1647,109 @@
     "delta": -0.07693600712712856,
     "levels": 16,
     "w_max": 7.889964580535889
+   },
+   "embed_quant_sweep": {
+    "global/16": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.7476256912810341,
+     "delta": -0.07693600712712856,
+     "delta_pt": -7.693600712712856,
+     "levels": 16,
+     "scaling": "global",
+     "w_max": 7.889964580535889
+    },
+    "per_column/16": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.7826393908322268,
+     "delta": -0.04192230757593585,
+     "delta_pt": -4.192230757593585,
+     "levels": 16,
+     "scaling": "per_column",
+     "w_max": 7.889964580535889
+    },
+    "global/32": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.7882704946966768,
+     "delta": -0.036291203711485864,
+     "delta_pt": -3.6291203711485864,
+     "levels": 32,
+     "scaling": "global",
+     "w_max": 7.889964580535889
+    },
+    "per_column/32": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.7881528298398077,
+     "delta": -0.0364088685683549,
+     "delta_pt": -3.64088685683549,
+     "levels": 32,
+     "scaling": "per_column",
+     "w_max": 7.889964580535889
+    },
+    "global/64": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.8082735203644249,
+     "delta": -0.016288178043737722,
+     "delta_pt": -1.6288178043737722,
+     "levels": 64,
+     "scaling": "global",
+     "w_max": 7.889964580535889
+    },
+    "per_column/64": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.8065421660419223,
+     "delta": -0.01801953236624032,
+     "delta_pt": -1.801953236624032,
+     "levels": 64,
+     "scaling": "per_column",
+     "w_max": 7.889964580535889
+    },
+    "global/128": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.8112151417861525,
+     "delta": -0.01334655662201012,
+     "delta_pt": -1.334655662201012,
+     "levels": 128,
+     "scaling": "global",
+     "w_max": 7.889964580535889
+    },
+    "per_column/128": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.8152157469197021,
+     "delta": -0.009345951488460513,
+     "delta_pt": -0.9345951488460513,
+     "levels": 128,
+     "scaling": "per_column",
+     "w_max": 7.889964580535889
+    },
+    "global/256": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.8202080987040057,
+     "delta": -0.004353599704156941,
+     "delta_pt": -0.4353599704156941,
+     "levels": 256,
+     "scaling": "global",
+     "w_max": 7.889964580535889
+    },
+    "per_column/256": {
+     "acc_before": 0.8245616984081626,
+     "acc_after": 0.8201408616429375,
+     "delta": -0.004420836765225089,
+     "delta_pt": -0.4420836765225089,
+     "levels": 256,
+     "scaling": "per_column",
+     "w_max": 7.889964580535889
+    },
+    "best_within_0.5pt": {
+     "levels": 256,
+     "scaling": "global"
+    }
+   },
+   "embed_levels_needed": {
+    "levels": 256,
+    "scaling": "global",
+    "cells_per_value": 2,
+    "meets_threshold": true,
+    "embed_energy_nJ_at_levels": 0.014505970556890959
    },
    "sensitivity": {
     "t_read": {
@@ -2139,6 +2342,106 @@
     "levels": 16,
     "w_max": 6.937836647033691
    },
+   "embed_quant_sweep": {
+    "global/16": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.694340320384596,
+     "delta": -0.11704291405422662,
+     "delta_pt": -11.704291405422662,
+     "levels": 16,
+     "scaling": "global",
+     "w_max": 6.937836647033691
+    },
+    "per_column/16": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7024255769780303,
+     "delta": -0.10895765746079233,
+     "delta_pt": -10.895765746079233,
+     "levels": 16,
+     "scaling": "per_column",
+     "w_max": 6.937836647033691
+    },
+    "global/32": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7881192113092736,
+     "delta": -0.023264023129549005,
+     "delta_pt": -2.3264023129549005,
+     "levels": 32,
+     "scaling": "global",
+     "w_max": 6.937836647033691
+    },
+    "per_column/32": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7569380242389605,
+     "delta": -0.05444521019986215,
+     "delta_pt": -5.444521019986215,
+     "levels": 32,
+     "scaling": "per_column",
+     "w_max": 6.937836647033691
+    },
+    "global/64": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7279252323880924,
+     "delta": -0.08345800205073028,
+     "delta_pt": -8.34580020507303,
+     "levels": 64,
+     "scaling": "global",
+     "w_max": 6.937836647033691
+    },
+    "per_column/64": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7762518700307609,
+     "delta": -0.03513136440806175,
+     "delta_pt": -3.513136440806175,
+     "levels": 64,
+     "scaling": "per_column",
+     "w_max": 6.937836647033691
+    },
+    "global/128": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7490880973592644,
+     "delta": -0.06229513707955825,
+     "delta_pt": -6.2295137079558245,
+     "levels": 128,
+     "scaling": "global",
+     "w_max": 6.937836647033691
+    },
+    "per_column/128": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7853288732749492,
+     "delta": -0.026054361163873496,
+     "delta_pt": -2.6054361163873496,
+     "levels": 128,
+     "scaling": "per_column",
+     "w_max": 6.937836647033691
+    },
+    "global/256": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.764115580507976,
+     "delta": -0.04726765393084664,
+     "delta_pt": -4.726765393084664,
+     "levels": 256,
+     "scaling": "global",
+     "w_max": 6.937836647033691
+    },
+    "per_column/256": {
+     "acc_before": 0.8113832344388227,
+     "acc_after": 0.7928258055840379,
+     "delta": -0.01855742885478473,
+     "delta_pt": -1.855742885478473,
+     "levels": 256,
+     "scaling": "per_column",
+     "w_max": 6.937836647033691
+    },
+    "best_within_0.5pt": null
+   },
+   "embed_levels_needed": {
+    "levels": 256,
+    "scaling": "per_column",
+    "cells_per_value": 2,
+    "meets_threshold": false,
+    "embed_energy_nJ_at_levels": 0.014632648488006588
+   },
    "sensitivity": {
     "t_read": {
      "1e-08": 2.922551505809169e-08,
@@ -2214,10 +2517,10 @@
  "dense_dram_b1_65nm": {
   "mac": 4.6525440000000004e-07,
   "act": 3.877119999999999e-06,
-  "weight": 0.000371336,
+  "weight": 0.000185668,
   "embed": 3.2e-09,
   "state": 4.096e-08,
-  "total": 0.0003757225344
+  "total": 0.0001900545344
  },
  "gpu": {
   "gpu": "NVIDIA RTX A4500",
