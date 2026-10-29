@@ -298,3 +298,5 @@ sat 在 T=2 和 T=1 各补了种子 1、2(`run_ternres_seeds.sh`;配方、fq 与
 - sat 补了种子 1、2,and 只有种子 0。T=1 的 sat(三个种子)和 and 都跑满 12000 步上限,没有更长预算的结果;fq 和 LIF 倍数只在上面列的格子里按 teacher forcing 选。
 - 三值残差模型只做了 K=4、α=0 的束搜索,没有 K=16、α=1,也没有 `model_profile` 的 512 句画像;基线 T=2 的种子 1、2 没有 K=4,所以 K=4 的差只能对种子 0 的基线算。
 - and 差的原因(T=1 上切断、T=2 上削弱恒等通路)没做消融验证。
+
+能耗估算(memristor vs 数字 ASIC vs GPU 每 token 能量)见 `../energy/README.md`。
