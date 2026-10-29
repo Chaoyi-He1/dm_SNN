@@ -236,3 +236,22 @@ def test_parse_power_lines_and_joules_per_token():
     assert parse_power_lines(["20.08", " 25.9 ", "", "N/A"]) == [20.08, 25.9]
     r = joules_per_token(mean_w=60.0, idle_w=20.0, seconds=10.0, tokens=4000)
     assert np.isclose(r["total"], 600.0 / 4000) and np.isclose(r["incremental"], 400.0 / 4000) and np.isclose(r["ms_per_token"], 2.5)
+
+
+from experiments.energy_estimate import embedding_quantization_check, sensitivity
+
+
+def test_embedding_quantization_check_restores_weights(cfg, sl):
+    torch.manual_seed(0)
+    m = SpikingLM(cfg, sl.vocab_size, leak=0.9); _lower_thresholds(m)
+    before = m.emb.weight.detach().clone()
+    r = embedding_quantization_check(m, all_sequences(sl)[:16], levels=16)
+    assert set(r) == {"acc_before", "acc_after", "delta"} and torch.equal(m.emb.weight.detach(), before)
+
+
+def test_sensitivity_moves_with_t_read_and_adc():
+    cfg, V = ToyConfig(), 3226
+    s = sensitivity(_synthetic_events(cfg, V), _synthetic_mats(cfg, V), cfg, V)
+    assert s["t_read"]["1e-06"] > s["t_read"]["1e-07"] > s["t_read"]["1e-08"]
+    assert s["E_adc"]["1e-11"] > s["E_adc"]["1e-12"]
+    assert s["G_scale"]["0.1"] < s["G_scale"]["1"]
