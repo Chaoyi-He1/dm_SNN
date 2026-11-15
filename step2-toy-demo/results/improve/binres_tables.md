@@ -2,14 +2,14 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 二值 | sr | 1 | 2 | 128 | 0.011 | 0.096 (12000) | — | — | — | — | — | — | — | — | — |
 | 二值 | sr | 2 | 3 | 128 | 0.016 | 0.666 (12000) | — | — | — | — | — | — | — | — | — |
-| 二值 | sr | 4 | 5 | 128 | 0.007 | 0.827 (9500) | — | — | — | — | — | — | — | — | — |
+| 二值 | sr | 4 | 5 | 128 | 0.007 | 0.827 (9500) | 0.816 | 2.6 | 5/5 | 2 | 0.733 | 0.822 | 4635 | 1078 | 否 |
 | 二值 | sr | 8 | 9 | 128 | 0.002 | 0.839 (6200) | 0.828 | 1.4 | 5/5 | 3 | 0.840 | 0.903 | 8651 | 3102 | 否 |
-| 二值 | xor | 1 | 2 | 128 | 0.007 | 0.557 (12000) | — | — | — | — | — | — | — | — | — |
+| 二值 | xor | 1 | 2 | 128 | 0.007 | 0.557 (12000) | 0.533 | 30.9 | 0/5 | 0 | 0.081 | 0.105 | 1313 | 39 | 否 |
 | 二值 | xor | 2 | 3 | 128 | 0.011 | 0.727 (12000) | — | — | — | — | — | — | — | — | — |
 | 二值 | src | 1 | 2 | 128 | 0.011 | 0.490 (12000) | — | — | — | — | — | — | — | — | — |
 | 二值 | src | 2 | 3 | 128 | 0.016 | 0.715 (12000) | — | — | — | — | — | — | — | — | — |
 | 二值 | src | 4 | 5 | 128 | 0.007 | — | — | — | — | — | — | — | — | — | — |
-| 二值 | src | 8 | 9 | 128 | 0.002 | — | — | — | — | — | — | — | — | — | — |
+| 二值 | src | 8 | 9 | 128 | 0.002 | 0.835 (4800) | — | — | — | — | — | — | — | — | — |
 | 二值 | binres_src_T1_W | — | — | 128 | — | — | — | — | — | — | — | — | — | — | — |
 | 二值 | binres_src_T2_W | — | — | 128 | — | — | — | — | — | — | — | — | — | — | — |
 | 二值 | binres_src_T4_W | — | — | 128 | — | — | — | — | — | — | — | — | — | — | — |
@@ -28,8 +28,8 @@
 | 三值 | sat(种子 1) | 2 | 5 | 128 | 0.113 | 0.818 (12000) | 0.814 | 2.8 | 5/5 | 5 | 0.723 | 0.818 | 2726 | 189 | 否 |
 | 三值 | sat(种子 2) | 2 | 5 | 128 | 0.113 | 0.810 (11400) | 0.805 | 3.7 | 5/5 | 1 | 0.677 | 0.761 | 2728 | 189 | 否 |
 | 三值 | sat | 4 | 9 | 128 | 0.214 | 0.832 (4700) | 0.826 | 1.6 | 5/5 | 5 | 0.844 | 0.904 | 4898 | 491 | 否 |
-| 三值 | ternres_satc_T2 | — | — | 128 | — | — | — | — | — | — | — | — | — | — | — |
-| 三值 | ternres_satc_T1 | — | — | 128 | — | — | — | — | — | — | — | — | — | — | — |
+| 三值 | satc | 2 | 5 | 128 | 0.113 | — | — | — | — | — | — | — | — | — | — |
+| 三值 | satc | 1 | 3 | 128 | 0.051 | — | — | — | — | — | — | — | — | — | — |
 | 三值 | ternres_satc_T4 | — | — | 128 | — | — | — | — | — | — | — | — | — | — | — |
 | 实值 | — | 1 | — | 128 | 0.123 | 0.740 (12000) | 0.752 | 9.0 | 1/5 | 0 | 0.397 | 0.483 | — | — | 否 |
 | 实值 | — | 2 | — | 128 | 0.242 | 0.832 (9700) | 0.825 | 1.7 | 5/5 | 8 | 0.834 | 0.903 | 3005 | 216 | 否 |
@@ -42,5 +42,5 @@
 | 实值 | — | 1 | — | 256 | 0.197 | 0.831 (10100) | 0.801 | 4.1 | 3/5 | 2 | 0.619 | 0.712 | 3032 | 80 | 否 |
 | 实值 | — | 4 | — | 256 | 0.397 | 0.835 (1400) | 0.836 | 0.6 | 5/5 | 8 | 0.954 | 0.975 | 7892 | 366 | 是 |
 
-状态: binres_sr_T1 c running; binres_sr_T2 c running; binres_sr_T4 c running; binres_sr_T8 done; binres_xor_T1 c running; binres_xor_T2 c running; binres_src_T1 c running; binres_src_T2 c running; binres_src_T4 a1 running; binres_src_T8 a1 running; binres_src_T1_W missing; binres_src_T2_W missing; binres_src_T4_W missing; binres_src_T2_s1 missing; binres_src_T2_s2 missing; binres_src_T4_s1 missing; binres_src_T4_s2 missing; binres_src_T8_s1 missing; binres_src_T8_s2 missing; binres_xor_T4 missing; binres_xor_T8 missing; ternres_sat_T1 done; ternres_sat_T1_s1 done; ternres_sat_T1_s2 done; ternres_sat_T2 done; ternres_sat_T2_s1 done; ternres_sat_T2_s2 done; ternres_sat_T4 done; ternres_satc_T2 missing; ternres_satc_T1 missing; ternres_satc_T4 missing; T1 done; T2 done; T2_s1 done; T2_s2 done; T4 done; T4_s1 done; T4_s2 done; T8 done; T1_W done; T4_W done
+状态: binres_sr_T1 c running; binres_sr_T2 c running; binres_sr_T4 done; binres_sr_T8 done; binres_xor_T1 done; binres_xor_T2 c running; binres_src_T1 c running; binres_src_T2 c running; binres_src_T4 a1 running; binres_src_T8 c running; binres_src_T1_W missing; binres_src_T2_W missing; binres_src_T4_W missing; binres_src_T2_s1 missing; binres_src_T2_s2 missing; binres_src_T4_s1 missing; binres_src_T4_s2 missing; binres_src_T8_s1 missing; binres_src_T8_s2 missing; binres_xor_T4 missing; binres_xor_T8 missing; ternres_sat_T1 done; ternres_sat_T1_s1 done; ternres_sat_T1_s2 done; ternres_sat_T2 done; ternres_sat_T2_s1 done; ternres_sat_T2_s2 done; ternres_sat_T4 done; ternres_satc_T2 a1 running; ternres_satc_T1 a1 running; ternres_satc_T4 missing; T1 done; T2 done; T2_s1 done; T2_s2 done; T4 done; T4_s1 done; T4_s2 done; T8 done; T1_W done; T4_W done
 已写 results/improve/binres_tables.json

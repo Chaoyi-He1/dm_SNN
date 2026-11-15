@@ -35,5 +35,15 @@
   },
   "seconds": 58.1,
   "file": "results/improve/binres_sr_T4_bscan.json"
+ },
+ "c": {
+  "final": {
+   "token_acc": 0.8164428232841943,
+   "ppl": 2.007187588682661,
+   "n_exact": 5,
+   "n_demo": 5
+  },
+  "seconds": 8087.0,
+  "dir": "results/improve/binres_sr_T4_c"
  }
 }

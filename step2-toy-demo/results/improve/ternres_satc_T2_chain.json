@@ -1,0 +1,19 @@
+{
+ "name": "ternres_satc_T2",
+ "merge": "satc",
+ "levels": 2,
+ "lr": 0.003,
+ "steps": 12000,
+ "seed": 0,
+ "fq": 0.9,
+ "iscan": {
+  "best": {
+   "fq": 0.9,
+   "token_acc": 0.1129,
+   "ppl": 378.889,
+   "spikes": 0.5241
+  },
+  "seconds": 48.5,
+  "file": "results/improve/ternres_satc_T2_iscan.json"
+ }
+}

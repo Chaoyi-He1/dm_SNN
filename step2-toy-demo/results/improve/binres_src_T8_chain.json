@@ -15,5 +15,25 @@
   },
   "seconds": 60.8,
   "file": "results/improve/binres_src_T8_iscan.json"
+ },
+ "a1": {
+  "final": {
+   "token_acc": 0.8346472575683717,
+   "ppl": 1.9145322287628577,
+   "n_exact": 5,
+   "n_demo": 5
+  },
+  "seconds": 4953.4,
+  "dir": "results/improve/binres_src_T8_a1"
+ },
+ "lif_scale": 1.0,
+ "bscan": {
+  "best": {
+   "lif_scale": 1.0,
+   "token_acc": 0.2538,
+   "ppl": 55.804
+  },
+  "seconds": 63.5,
+  "file": "results/improve/binres_src_T8_bscan.json"
  }
 }

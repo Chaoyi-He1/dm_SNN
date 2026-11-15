@@ -1,0 +1,3 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7327, "unique_matched_frac": 0.8343, "any_n": 3438, "any_corpus_sentence": 0.7307, "seconds": 12.5, "model": "binres_sr_T4"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.8221, "unique_matched_frac": 0.885, "any_n": 3438, "any_corpus_sentence": 0.8246, "seconds": 43.5, "model": "binres_sr_T4"}
