@@ -93,3 +93,20 @@
 {"step": 8800, "loss": 0.6941, "ce": 0.6941, "token_acc": 0.8284446386848431, "ppl": 1.943526603667763, "n_exact": 5, "seconds": 8582.6, "lr": 0.00049659595714503, "leak": null}
 {"step": 8900, "loss": 0.6762, "ce": 0.6762, "token_acc": 0.8292851019481938, "ppl": 1.9358994798018963, "n_exact": 5, "seconds": 8664.0, "lr": 0.00046775302568980814, "leak": null}
 {"step": 9000, "loss": 0.6975, "ce": 0.6975, "token_acc": 0.8300415188852095, "ppl": 1.930943626170451, "n_exact": 4, "seconds": 8756.1, "lr": 0.0004396175447488926, "leak": null}
+{"step": 9100, "loss": 0.6209, "ce": 0.6209, "token_acc": 0.8304449412516179, "ppl": 1.933407611248899, "n_exact": 5, "seconds": 8859.6, "lr": 0.0004122087969755206, "leak": null}
+{"step": 9200, "loss": 0.6544, "ce": 0.6544, "token_acc": 0.8319577751256493, "ppl": 1.9231790725131124, "n_exact": 4, "seconds": 8957.0, "lr": 0.0003855455669563182, "leak": null}
+{"step": 9300, "loss": 0.6965, "ce": 0.6965, "token_acc": 0.8302600393336808, "ppl": 1.9266230488546883, "n_exact": 4, "seconds": 9055.8, "lr": 0.0003596461283372828, "leak": null}
+{"step": 9400, "loss": 0.6777, "ce": 0.6777, "token_acc": 0.8297053335798692, "ppl": 1.9216120656734916, "n_exact": 3, "seconds": 9153.9, "lr": 0.00033452823129993825, "leak": null}
+{"step": 9500, "loss": 0.6886, "ce": 0.6886, "token_acc": 0.8310332655359635, "ppl": 1.9187362194370967, "n_exact": 5, "seconds": 9252.3, "lr": 0.0003102090903962472, "leak": null}
+[a1:binres_src_T4_a1] acc 0.8310 ppl 1.919 exact 5/5 stopped converged (9277.1 s)
+[a1:binres_src_T4_a1] acc 0.8310 ppl 1.919 exact 5/5 stopped converged (9277.1 s)
+{"lif_scale": 1.0, "token_acc": 0.1714, "ppl": 323.523}
+{"lif_scale": 1.5, "token_acc": 0.2435, "ppl": 51.255}
+{"lif_scale": 2.0, "token_acc": 0.1804, "ppl": 152.029}
+{"lif_scale": 2.25, "token_acc": 0.1749, "ppl": 166.817}
+{"lif_scale": 2.5, "token_acc": 0.1745, "ppl": 169.803}
+{"lif_scale": 3.0, "token_acc": 0.1744, "ppl": 169.95}
+{"lif_scale": 4.0, "token_acc": 0.1745, "ppl": 169.96}
+[chain:binres_src_T4] bscan picks lif_scale 1.5 (token_acc 0.2435)
+[b:binres_src_T4_c] merge src levels 4 acc 0.1714 ppl 323.523 exact 0/5
+[b_lif_scale:binres_src_T4_c] x1.5 acc 0.2435 ppl 51.255

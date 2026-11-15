@@ -3,3 +3,11 @@
 {"fq": 0.9, "token_acc": 0.0317, "ppl": 1512.107, "spikes": 0.1291}
 [chain:ternres_satc_T1] iscan picks fq 0.75 (token_acc 0.0509)
 [a1_init:ternres_satc_T1_a1] merge satc levels 1 acc 0.0509 ppl 705.106 exact 0/5
+{"step": 100, "loss": 3.8701, "ce": 3.8701, "token_acc": 0.3018607856650586, "ppl": 35.07863604556327, "n_exact": 0, "seconds": 83.0, "lr": 0.0029994962157402064, "leak": null}
+{"step": 200, "loss": 3.0047, "ce": 3.0047, "token_acc": 0.3298650215999059, "ppl": 25.549513607420725, "n_exact": 0, "seconds": 158.1, "lr": 0.002997964803079841, "leak": null}
+{"step": 300, "loss": 3.3598, "ce": 3.3598, "token_acc": 0.3474307038039367, "ppl": 21.000461839586457, "n_exact": 0, "seconds": 234.2, "lr": 0.002995406760168456, "leak": null}
+{"step": 400, "loss": 2.7992, "ce": 2.7992, "token_acc": 0.36055873997747556, "ppl": 18.55593991401163, "n_exact": 0, "seconds": 309.6, "lr": 0.002991823840160886, "leak": null}
+{"step": 500, "loss": 2.9244, "ce": 2.9244, "token_acc": 0.37378763174261653, "ppl": 16.48752045159386, "n_exact": 0, "seconds": 385.9, "lr": 0.0029872184986115334, "leak": null}
+{"step": 600, "loss": 2.8369, "ce": 2.8369, "token_acc": 0.38511707653258476, "ppl": 15.129456751618337, "n_exact": 0, "seconds": 462.7, "lr": 0.002981593891791454, "leak": null}
+{"step": 700, "loss": 2.6079, "ce": 2.6079, "token_acc": 0.39582457850767344, "ppl": 13.848539028134713, "n_exact": 0, "seconds": 538.0, "lr": 0.0029749538745252064, "leak": null}
+{"step": 800, "loss": 2.7982, "ce": 2.7982, "token_acc": 0.40481753542552656, "ppl": 13.042827763850003, "n_exact": 0, "seconds": 612.1, "lr": 0.00296730299754895, "leak": null}
