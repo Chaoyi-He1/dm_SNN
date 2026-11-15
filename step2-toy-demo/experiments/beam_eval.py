@@ -34,7 +34,7 @@ from toy_demo.config import ToyConfig                                         # 
 from toy_demo.data import BOS, EOS, PAD, decode, load_slice, select_demo     # noqa: E402
 from toy_demo.model import FloatLM, SpikingLM, greedy_generate               # noqa: E402
 from toy_demo.ternary_residual import TernaryResidualLM                     # noqa: E402
-from toy_demo.binary_residual import BinaryResidualLM                       # noqa: E402
+from toy_demo.binary_residual import BinaryResidualLM, TernaryClampResidualLM  # noqa: E402
 from multilevel import apply_levels                                          # noqa: E402
 
 SIZE_KEYS = (("d", "d"), ("dk", "dk"), ("dv", "dv"), ("d_ff", "d_ff"), ("heads", "n_heads"))
@@ -72,7 +72,10 @@ def load_model(path, sl, dev):
         m = FloatLM(cfg, sl.vocab_size).to(dev)
     elif info["kind"] in ("ternres", "binres"):
         leak = cfg.leak if info["leak"] is None else info["leak"]
-        cls = TernaryResidualLM if info["kind"] == "ternres" else BinaryResidualLM
+        if info["kind"] == "binres":
+            cls = BinaryResidualLM
+        else:                                    # 三值残差:satc 是合并用精确梯度的对照,前向与 sat 相同
+            cls = TernaryClampResidualLM if info["merge"] == "satc" else TernaryResidualLM
         m = cls(cfg, sl.vocab_size, leak=leak, merge=info["merge"], levels=info["levels"]).to(dev)
         info["leak"] = leak
     else:

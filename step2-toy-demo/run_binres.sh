@@ -3,9 +3,10 @@
 #
 #   ./run_binres.sh                         第一批(种子 0,d=128)7 条链并行:
 #                                           sr × T∈{1,2,4,8},xor × T∈{1,2},三值 sat T=4(与二值 T=8 电平数相同的对照)
-#   ./run_binres.sh <merge> <T> [seed] [wide]   只跑一条:merge = sr | src | xor 走二值残差,merge = sat 走三值残差;
+#   ./run_binres.sh <merge> <T> [seed] [wide]   只跑一条:merge = sr | src | xor 走二值残差;merge = sat 走三值残差(原驱动);
+#                                           merge = satc 是三值残差 + 精确梯度的合并(对照,走 binary_residual.py);
 #                                           第 4 个参数写 wide 时用加宽的 d=256(A0 取 results/improve/W_a0_d256)
-# 名字:binres_<merge>_T<T>[_W][_s<seed>](三值对照是 ternres_sat_T<T>[_W][_s<seed>])。脚本等所有链结束才返回。
+# 名字:binres_<merge>_T<T>[_W][_s<seed>](三值对照是 ternres_<sat|satc>_T<T>[_W][_s<seed>])。脚本等所有链结束才返回。
 cd "$(dirname "$0")" || exit 1
 PY=/data/chaoyi_he/dm_snn/step2-toy-demo/.venv/bin/python
 export CUDA_VISIBLE_DEVICES=1 PYTHONUNBUFFERED=1 PYTHONUTF8=1
@@ -16,6 +17,7 @@ one() {
   local M=$1 T=$2 S=${3:-0} W=${4:-}
   local script=binary_residual.py name=binres_${M}_T${T} extra=""
   if [ "$M" = sat ]; then script=ternary_residual.py; name=ternres_${M}_T${T}; fi
+  if [ "$M" = satc ]; then name=ternres_${M}_T${T}; fi
   if [ "$W" = wide ]; then name=${name}_W; extra=$WIDE; fi
   if [ "$S" != 0 ]; then name=${name}_s${S}; fi
   setsid nohup $PY experiments/$script chain --name "$name" --merge "$M" --levels "$T" $COMMON --seed "$S" $extra \

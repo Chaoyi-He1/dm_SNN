@@ -10,6 +10,8 @@
 
 各阶段的含义见 experiments/ternary_residual.py 的说明。合并方式 --merge:sr(置位 / 复位,子块输出仍三值,代理梯度)、src(同 sr,精确梯度)或 xor(翻转,子块输出无符号),
 定义在 snn_spec/binary_residual.py。result.json 的 args 里 residual="binary",beam_eval 据此装载(kind = binres)。
+另有一个对照用的 --merge satc:三值残差流(TernaryClampResidualLM,前向同三值残差的 sat,合并用精确梯度),
+result.json 里 residual="ternary"、merge="satc",beam_eval 装载成 kind = ternres。
 
 实现:五个命令函数直接用 experiments.ternary_residual 里的。它们通过那个模块的 make_model、calibrate_thresholds、save_stage
 三个名字构造模型、标定阈值和存结果;binary_driver() 在运行期间把这三个名字换成本文件的版本,退出时还原,原文件不改动。
@@ -28,16 +30,27 @@ import experiments.ternary_residual as tr                                    # n
 from experiments.beam_eval import SIZE_KEYS                                   # noqa: E402
 from experiments.convert_lab import _save                                     # noqa: E402
 from snn_spec.binary_residual import MERGES                                   # noqa: E402
-from toy_demo.binary_residual import BinaryResidualLM, calibrate_thresholds   # noqa: E402
+from toy_demo.binary_residual import BinaryResidualLM, TernaryClampResidualLM  # noqa: E402
+from toy_demo.binary_residual import calibrate_thresholds as binary_calibrate  # noqa: E402
+from toy_demo.ternary_residual import calibrate_thresholds as ternary_calibrate  # noqa: E402
+
+TERNARY_CONTROL = "satc"                      # 三值残差流 + 精确梯度的合并,对照用
 
 
 def make_model(cfg, sl, dev, merge, levels, leak):
-    return BinaryResidualLM(cfg, sl.vocab_size, leak=leak, merge=merge, levels=levels).to(dev)
+    cls = TernaryClampResidualLM if merge == TERNARY_CONTROL else BinaryResidualLM
+    return cls(cfg, sl.vocab_size, leak=leak, merge=merge, levels=levels).to(dev)
+
+
+def calibrate_thresholds(model, tokens, quantile=0.75):
+    """二值残差模型用带符号分位数的标定;三值对照沿用三值残差的标定。"""
+    fn = binary_calibrate if isinstance(model, BinaryResidualLM) else ternary_calibrate
+    return fn(model, tokens, quantile)
 
 
 def save_stage(out_dir, m, res, args, cfg, extra):
-    """补全 beam_eval.describe_checkpoint 需要的键(residual="binary"、尺寸取 cfg 的值)后存模型与 result.json。"""
-    args.residual = "binary"
+    """补全 beam_eval.describe_checkpoint 需要的键(residual、尺寸取 cfg 的值)后存模型与 result.json。"""
+    args.residual = "binary" if isinstance(m, BinaryResidualLM) else "ternary"
     for k, key in SIZE_KEYS:
         setattr(args, k, getattr(cfg, key))
     _save(out_dir, m, res, args, extra)
@@ -60,7 +73,7 @@ def binary_driver():
 
 
 def build_a1(a0, cfg, sl, tokens, dev, fq, merge, levels, seed=0, leak=0.0):
-    """A0 -> A1:权重转移 + 阈值标定。返回 (BinaryResidualLM, 阈值字典)。"""
+    """A0 -> A1:权重转移 + 阈值标定。返回 (模型, 阈值字典);merge = satc 时模型是三值对照 TernaryClampResidualLM。"""
     with binary_driver():
         return tr.build_a1(a0, cfg, sl, tokens, dev, fq, merge, levels, seed=seed, leak=leak)
 
@@ -82,7 +95,7 @@ def main(argv=None):
                             help="模型尺寸(默认 ToyConfig;c/bscan 从 --init 继承)")
 
     def model_args(p):
-        p.add_argument("--merge", default="sr", choices=list(MERGES), help="残差合并方式")
+        p.add_argument("--merge", default="sr", choices=list(MERGES) + [TERNARY_CONTROL], help="残差合并方式(satc 是三值对照)")
         p.add_argument("--levels", type=int, default=1, help="每 token 最多几个脉冲")
 
     p1 = sub.add_parser("a1", parents=[common])

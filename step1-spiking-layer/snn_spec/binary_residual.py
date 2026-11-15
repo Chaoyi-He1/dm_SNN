@@ -29,6 +29,14 @@ from .ternary_residual import TernaryResidualBlock
 MERGES = ("sr", "src", "xor")
 
 
+def clamp_exact(u, lo, hi):
+    """clamp(u, lo, hi),梯度在 lo <= u <= hi(含端点)时为 1,饱和时为 0。
+    torch.clamp 在端点处的梯度是 0,而 T = 1 时合并的所有取值都在端点上,所以梯度自己写(加的一项数值恒为 0)。"""
+    ud = u.detach()
+    inside = ((ud >= lo - 1e-6) & (ud <= hi + 1e-6)).to(u.dtype)
+    return torch.clamp(ud, lo, hi) + inside * (u - ud)
+
+
 class BinaryQuantizer(nn.Module):
     """无符号量化器 x = Q(h):h >= thr 得 1,否则 0;levels=T 时 x = (1/T) Σ_j 1[h >= j·thr/T] ∈ {0, 1/T, ..., 1}。
     无状态,阈值逐层可学且恒正。电路上是 1 个比较器(levels=T 时 T 个)。负的输入一律得 0。"""
@@ -70,12 +78,7 @@ class BinaryMerge(nn.Module):
         if self.merge == "sr":
             return level_binary_fire(r + y, self.thr, self.levels, self.sg_width)
         if self.merge == "src":
-            # 两路都在电平上,和也在电平上,clamp 之后仍在电平上。梯度:0 <= r + y <= 1(含端点)时为 1,饱和时为 0。
-            # torch.clamp 在端点处的梯度是 0,而 T = 1 时所有取值都在端点上,所以梯度自己写(加的一项数值恒为 0)。
-            u = r + y
-            ud = u.detach()
-            inside = ((ud >= -1e-6) & (ud <= 1.0 + 1e-6)).to(u.dtype)
-            return torch.clamp(ud, 0.0, 1.0) + inside * (u - ud)
+            return clamp_exact(r + y, 0.0, 1.0)     # 两路都在电平上,和也在电平上,clamp 之后仍在电平上
         d = r - y
         # |d| 在 d = 0 处的梯度是 0。相等时取可行方向上的单侧斜率:都为 0 只能往上走(+1,恒等通路的梯度就是 1),
         # 都为 1 只能往下走(-1),中间电平是尖点(0)。加的这一项数值恒为 0,只提供梯度。
@@ -83,6 +86,26 @@ class BinaryMerge(nn.Module):
         slope = torch.where(rd <= 0, torch.ones_like(rd), torch.where(rd >= 1, -torch.ones_like(rd), torch.zeros_like(rd)))
         tie = (d.detach() == 0).to(r.dtype) * slope
         return d.abs() + tie * ((r - rd) + (y - y.detach()))
+
+
+class SignedClampMerge(nn.Module):
+    """三值残差流的对照用合并 satc:M(r, y) = clamp(r + y, -1, 1)。两路都在电平上时前向与 ResidualMerge("sat") 逐位相同,
+    反向用 clamp 自己的梯度(clamp_exact),不经代理梯度。用它是为了让"二值 src 对三值"的比较只差残差流的取值,不差梯度的写法。
+    接口同 ResidualMerge / BinaryMerge(log_thr 固定为 0,不参与训练,也不被用到)。"""
+
+    merge = "satc"
+
+    def __init__(self, levels=1):
+        super().__init__()
+        self.levels = int(levels)
+        self.log_thr = nn.Parameter(torch.zeros(()), requires_grad=False)
+
+    @property
+    def thr(self):
+        return self.log_thr.exp()
+
+    def forward(self, r, y):
+        return clamp_exact(r + y, -1.0, 1.0)
 
 
 class BinaryResidualBlock(TernaryResidualBlock):

@@ -9,7 +9,7 @@
 import torch
 import torch.nn as nn
 
-from snn_spec.binary_residual import BinaryQuantizer, BinaryResidualBlock
+from snn_spec.binary_residual import BinaryQuantizer, BinaryResidualBlock, SignedClampMerge
 from snn_spec.gdn import SigmoidGates
 
 from .convert import _set_thr
@@ -34,6 +34,21 @@ class BinaryResidualLM(TernaryResidualLM):
                                 leak=leak, thr=1.0, learn_thr=True, merge=merge, levels=levels)
             for _ in range(cfg.n_blocks)])
         self.head = nn.Linear(cfg.d, vocab, bias=False)
+
+
+class TernaryClampResidualLM(TernaryResidualLM):
+    """对照模型(merge = "satc"):三值残差流,前向与 TernaryResidualLM 的 sat 逐位相同,只是两处合并换成 SignedClampMerge,
+    反向用 clamp 的精确梯度而不是代理梯度。二值的 src 用的是精确梯度,拿它和原来的 sat(代理梯度)比会混进梯度写法的差别,
+    所以三值这边补一个同样写法的。标定、脉冲计数都沿用 toy_demo.ternary_residual 的函数;state_dict 的键与 TernaryResidualLM 相同。"""
+
+    def __init__(self, cfg, vocab, leak, merge="satc", levels=1):
+        if merge != "satc":
+            raise ValueError(f"TernaryClampResidualLM only implements merge='satc', got {merge!r}")
+        super().__init__(cfg, vocab, leak, merge="sat", levels=levels)
+        self.merge = "satc"
+        for blk in self.blocks:
+            blk.merge = "satc"
+            blk.m1, blk.m2 = SignedClampMerge(levels), SignedClampMerge(levels)
 
 
 def block_points(blk):
