@@ -252,3 +252,9 @@
 {"step": 11500, "loss": 1.916, "ce": 1.916, "token_acc": 0.4917886739170631, "ppl": 7.419980562741789, "n_exact": 0, "seconds": 10823.9, "lr": 1.2884016418940547e-05, "leak": null}
 {"step": 11600, "loss": 2.1115, "ce": 2.1115, "token_acc": 0.4903598863693668, "ppl": 7.4057884186486085, "n_exact": 0, "seconds": 10919.1, "lr": 8.258256301249434e-06, "leak": null}
 {"step": 11700, "loss": 2.0681, "ce": 2.0681, "token_acc": 0.4903598863693668, "ppl": 7.370156695705674, "n_exact": 0, "seconds": 11010.5, "lr": 4.654861460526627e-06, "leak": null}
+{"step": 11800, "loss": 1.9864, "ce": 1.9864, "token_acc": 0.4924946630582777, "ppl": 7.307608896145134, "n_exact": 0, "seconds": 11100.4, "lr": 2.076301483602494e-06, "leak": null}
+{"step": 11900, "loss": 1.9561, "ce": 1.9561, "token_acc": 0.4898387991460893, "ppl": 7.322622468850842, "n_exact": 0, "seconds": 11184.3, "lr": 5.243435866832402e-07, "leak": null}
+{"step": 12000, "loss": 1.9952, "ce": 1.9952, "token_acc": 0.4915869627338589, "ppl": 7.306647507413988, "n_exact": 0, "seconds": 11268.9, "lr": 5.1404189238546396e-11, "leak": null}
+[c:binres_src_T1_W_c] acc 0.4916 ppl 7.307 exact 0/5 stopped max_steps (11316.6 s)
+[c:binres_src_T1_W_c] acc 0.4916 ppl 7.307 exact 0/5 stopped max_steps (11316.6 s)
+[chain:binres_src_T1_W] done: a1 acc 0.6792, c acc 0.4916
