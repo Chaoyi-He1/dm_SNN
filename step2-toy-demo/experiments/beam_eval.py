@@ -34,6 +34,7 @@ from toy_demo.config import ToyConfig                                         # 
 from toy_demo.data import BOS, EOS, PAD, decode, load_slice, select_demo     # noqa: E402
 from toy_demo.model import FloatLM, SpikingLM, greedy_generate               # noqa: E402
 from toy_demo.ternary_residual import TernaryResidualLM                     # noqa: E402
+from toy_demo.binary_residual import BinaryResidualLM                       # noqa: E402
 from multilevel import apply_levels                                          # noqa: E402
 
 SIZE_KEYS = (("d", "d"), ("dk", "dk"), ("dv", "dv"), ("d_ff", "d_ff"), ("heads", "n_heads"))
@@ -42,7 +43,7 @@ SIZE_KEYS = (("d", "d"), ("dk", "dk"), ("dv", "dv"), ("d_ff", "d_ff"), ("heads",
 # ----------------------------------------------------------------------------- 模型装载
 
 def describe_checkpoint(path):
-    """-> dict(kind=float|spiking|ternres, leak, levels, level_points(spiking)|merge(ternres), sizes)。"""
+    """-> dict(kind=float|spiking|ternres|binres, leak, levels, level_points(spiking)|merge(ternres、binres), sizes)。"""
     path = Path(path)
     meta = path.parent / "result.json"
     if meta.exists():
@@ -51,9 +52,9 @@ def describe_checkpoint(path):
         sizes = {key: a[k] for k, key in SIZE_KEYS if a.get(k) is not None}
         if stage == "a0":
             return dict(kind="float", sizes=sizes)
-        if a.get("residual") == "ternary":
-            return dict(kind="ternres", leak=0.0 if stage == "a1" else None, levels=int(a["levels"]),
-                        merge=a["merge"], sizes=sizes)
+        if a.get("residual") in ("ternary", "binary"):
+            return dict(kind="ternres" if a["residual"] == "ternary" else "binres", leak=0.0 if stage == "a1" else None,
+                        levels=int(a["levels"]), merge=a["merge"], sizes=sizes)
         return dict(kind="spiking", leak=0.0 if stage == "a1" else None, levels=int(a.get("levels") or 1),
                     level_points=a.get("level_points") or "all", sizes=sizes)
     name = path.stem
@@ -69,9 +70,10 @@ def load_model(path, sl, dev):
     cfg = ToyConfig(**info["sizes"])
     if info["kind"] == "float":
         m = FloatLM(cfg, sl.vocab_size).to(dev)
-    elif info["kind"] == "ternres":
+    elif info["kind"] in ("ternres", "binres"):
         leak = cfg.leak if info["leak"] is None else info["leak"]
-        m = TernaryResidualLM(cfg, sl.vocab_size, leak=leak, merge=info["merge"], levels=info["levels"]).to(dev)
+        cls = TernaryResidualLM if info["kind"] == "ternres" else BinaryResidualLM
+        m = cls(cfg, sl.vocab_size, leak=leak, merge=info["merge"], levels=info["levels"]).to(dev)
         info["leak"] = leak
     else:
         leak = cfg.leak if info["leak"] is None else info["leak"]
