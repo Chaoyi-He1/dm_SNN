@@ -51,3 +51,22 @@
 {"step": 4600, "loss": 0.6461, "ce": 0.6461, "token_acc": 0.8331008051638062, "ppl": 1.909007360244348, "n_exact": 5, "seconds": 4584.8, "lr": 0.002037918522068326, "leak": null}
 {"step": 4700, "loss": 0.7089, "ce": 0.7089, "token_acc": 0.8314534971676388, "ppl": 1.9136269228636154, "n_exact": 5, "seconds": 4685.4, "lr": 0.00200108044613528, "leak": null}
 [a1:ternres_satc_T4_a1] acc 0.8315 ppl 1.914 exact 5/5 stopped converged (4708.9 s)
+[a1:ternres_satc_T4_a1] acc 0.8315 ppl 1.914 exact 5/5 stopped converged (4708.9 s)
+{"lif_scale": 1.0, "token_acc": 0.2382, "ppl": 89.988}
+{"lif_scale": 1.5, "token_acc": 0.2002, "ppl": 101.572}
+{"lif_scale": 2.0, "token_acc": 0.164, "ppl": 208.979}
+{"lif_scale": 2.25, "token_acc": 0.1609, "ppl": 218.368}
+{"lif_scale": 2.5, "token_acc": 0.1605, "ppl": 219.953}
+{"lif_scale": 3.0, "token_acc": 0.1604, "ppl": 220.131}
+{"lif_scale": 4.0, "token_acc": 0.1604, "ppl": 220.131}
+[chain:ternres_satc_T4] bscan picks lif_scale 1.0 (token_acc 0.2382)
+[b:ternres_satc_T4_c] merge satc levels 4 acc 0.2382 ppl 89.988 exact 0/5
+{"step": 100, "loss": 2.1653, "ce": 2.1653, "token_acc": 0.5341816409204754, "ppl": 6.303272731116345, "n_exact": 0, "seconds": 101.1, "lr": 0.0029994962157402064, "leak": null}
+{"step": 200, "loss": 1.4433, "ce": 1.4433, "token_acc": 0.6297255046981897, "ppl": 4.133866404691144, "n_exact": 0, "seconds": 200.8, "lr": 0.002997964803079841, "leak": null}
+{"step": 300, "loss": 1.4641, "ce": 1.4641, "token_acc": 0.683296633104167, "ppl": 3.3831404051664493, "n_exact": 0, "seconds": 301.0, "lr": 0.002995406760168456, "leak": null}
+{"step": 400, "loss": 1.1509, "ce": 1.1509, "token_acc": 0.7114353431611504, "ppl": 3.0528334391126037, "n_exact": 2, "seconds": 400.3, "lr": 0.002991823840160886, "leak": null}
+{"step": 500, "loss": 1.2654, "ce": 1.2654, "token_acc": 0.7374056579986888, "ppl": 2.767646722458638, "n_exact": 1, "seconds": 501.2, "lr": 0.0029872184986115334, "leak": null}
+{"step": 600, "loss": 1.1511, "ce": 1.1511, "token_acc": 0.7513573481703115, "ppl": 2.6429800750537877, "n_exact": 1, "seconds": 603.1, "lr": 0.002981593891791454, "leak": null}
+{"step": 700, "loss": 0.9057, "ce": 0.9057, "token_acc": 0.761947185288531, "ppl": 2.525980077904612, "n_exact": 2, "seconds": 704.4, "lr": 0.0029749538745252064, "leak": null}
+{"step": 800, "loss": 1.0234, "ce": 1.0234, "token_acc": 0.7727219243246878, "ppl": 2.4479939468127188, "n_exact": 0, "seconds": 805.0, "lr": 0.00296730299754895, "leak": null}
+{"step": 900, "loss": 0.9028, "ce": 0.9028, "token_acc": 0.779630532349431, "ppl": 2.38067605506397, "n_exact": 3, "seconds": 901.1, "lr": 0.0029586465043915937, "leak": null}

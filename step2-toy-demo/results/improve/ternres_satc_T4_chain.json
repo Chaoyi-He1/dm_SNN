@@ -15,5 +15,25 @@
   },
   "seconds": 55.7,
   "file": "results/improve/ternres_satc_T4_iscan.json"
+ },
+ "a1": {
+  "final": {
+   "token_acc": 0.8314534971676388,
+   "ppl": 1.9136269228636154,
+   "n_exact": 5,
+   "n_demo": 5
+  },
+  "seconds": 4711.0,
+  "dir": "results/improve/ternres_satc_T4_a1"
+ },
+ "lif_scale": 1.0,
+ "bscan": {
+  "best": {
+   "lif_scale": 1.0,
+   "token_acc": 0.2382,
+   "ppl": 89.988
+  },
+  "seconds": 61.1,
+  "file": "results/improve/ternres_satc_T4_bscan.json"
  }
 }
