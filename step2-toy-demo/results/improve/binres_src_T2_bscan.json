@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/binres_src_T2_a1/model.pt",
+ "merge": "src",
+ "levels": 2,
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.0812,
+   "ppl": 4194.515
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.2863,
+   "ppl": 31.448
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.2166,
+   "ppl": 72.805
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.2016,
+   "ppl": 96.146
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1954,
+   "ppl": 106.309
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.1931,
+   "ppl": 109.931
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1931,
+   "ppl": 109.879
+  }
+ ]
+}
