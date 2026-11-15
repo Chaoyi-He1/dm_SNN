@@ -92,10 +92,14 @@ def fmt_row(rec):
         a1 += f" ({rec['a1_steps']})"
     demo = DASH if rec["c_n_exact"] is None else f"{rec['c_n_exact']}/5"
     meets = DASH if rec["meets"] is None else ("是" if rec["meets"] else "否")
-    merge = rec.get("merge") or DASH
     name = rec["name"]
-    if "_s" in name.rsplit("T", 1)[-1]:            # 种子后缀写进合并列,免得几行看起来一样
-        merge += f"(种子 {name.rsplit('_s', 1)[-1]})"
+    if rec.get("merge"):
+        merge = rec["merge"]
+    else:                                          # 实值残差没有合并;链还没产出任何文件时写链名,免得这一行认不出是谁
+        merge = DASH if rec["residual"] == "real" else name
+    if rec.get("merge") or rec["residual"] == "real":
+        if "_s" in name.rsplit("T", 1)[-1]:        # 种子后缀写进合并列,免得几行看起来一样
+            merge += f"(种子 {name.rsplit('_s', 1)[-1]})"
     return [KIND.get(rec["residual"], str(rec["residual"])), merge, _f(rec["levels"], "g"),
             DASH if rec["stream_levels"] is None else str(rec["stream_levels"]), _f(rec["d"], "g"),
             _f(rec["a1_init_acc"], ".3f"), a1, _f(rec["c_acc"], ".3f"), _f(rec["gap_to_a0_pt"], ".1f"), demo,

@@ -85,4 +85,7 @@ def test_unfinished_chain_is_reported_with_dashes(tmp_path):
     rec = bt.enrich(read_run(out, "binres_sr_T8"), out / "binres_sr_T8_c", {})
     assert rec["status"] == "c running" and rec["residual"] == "binary" and rec["stream_levels"] == 9 and rec["meets"] is None
     row = bt.fmt_row(rec)
-    assert row[0] == "二值" and row[7] == "—" and row[-1] == "—"
+    assert row[0] == "二值" and row[1] == "sr" and row[7] == "—" and row[-1] == "—"
+    missing = bt.enrich(read_run(out, "binres_src_T4_s2"), out / "binres_src_T4_s2_c", {})
+    assert missing["status"] == "missing"
+    assert bt.fmt_row(missing)[:2] == ["二值", "binres_src_T4_s2"]          # 什么都还没有:合并列写链名
