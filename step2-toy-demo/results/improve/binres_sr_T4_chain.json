@@ -1,0 +1,19 @@
+{
+ "name": "binres_sr_T4",
+ "merge": "sr",
+ "levels": 4,
+ "lr": 0.003,
+ "steps": 12000,
+ "seed": 0,
+ "fq": 0.9,
+ "iscan": {
+  "best": {
+   "fq": 0.9,
+   "token_acc": 0.007,
+   "ppl": 1793.728,
+   "spikes": 1.2458
+  },
+  "seconds": 36.5,
+  "file": "results/improve/binres_sr_T4_iscan.json"
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "merge": "xor",
+ "levels": 2,
+ "sizes": {},
+ "a0": "results/ckpt/a0.pt",
+ "rows": [
+  {
+   "fq": 0.5,
+   "token_acc": 0.0002,
+   "ppl": 7354.688,
+   "spikes": 1.0871
+  },
+  {
+   "fq": 0.75,
+   "token_acc": 0.0002,
+   "ppl": 6488.228,
+   "spikes": 0.7426
+  },
+  {
+   "fq": 0.9,
+   "token_acc": 0.0113,
+   "ppl": 3760.659,
+   "spikes": 0.4517
+  }
+ ]
+}

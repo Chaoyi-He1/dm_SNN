@@ -1,0 +1,19 @@
+{
+ "name": "binres_sr_T8",
+ "merge": "sr",
+ "levels": 8,
+ "lr": 0.003,
+ "steps": 12000,
+ "seed": 0,
+ "fq": 0.9,
+ "iscan": {
+  "best": {
+   "fq": 0.9,
+   "token_acc": 0.0023,
+   "ppl": 2047.543,
+   "spikes": 2.8392
+  },
+  "seconds": 38.0,
+  "file": "results/improve/binres_sr_T8_iscan.json"
+ }
+}

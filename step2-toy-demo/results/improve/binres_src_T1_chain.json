@@ -1,0 +1,19 @@
+{
+ "name": "binres_src_T1",
+ "merge": "src",
+ "levels": 1,
+ "lr": 0.003,
+ "steps": 12000,
+ "seed": 0,
+ "fq": 0.75,
+ "iscan": {
+  "best": {
+   "fq": 0.75,
+   "token_acc": 0.0105,
+   "ppl": 2106.466,
+   "spikes": 0.2722
+  },
+  "seconds": 40.3,
+  "file": "results/improve/binres_src_T1_iscan.json"
+ }
+}
