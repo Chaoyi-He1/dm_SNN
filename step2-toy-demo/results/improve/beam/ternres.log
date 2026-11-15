@@ -1,0 +1,9 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.1416, "unique_matched_frac": 0.2844, "any_n": 3438, "any_corpus_sentence": 0.1422, "seconds": 2.3, "model": "sat_T1"}
+{"K": 4, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.1776, "unique_matched_frac": 0.2966, "any_n": 3438, "any_corpus_sentence": 0.1806, "seconds": 6.3, "model": "sat_T1"}
+{"K": 1, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.032, "unique_matched_frac": 0.097, "any_n": 3438, "any_corpus_sentence": 0.0332, "seconds": 2.0, "model": "and_T1"}
+{"K": 4, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.0525, "unique_matched_frac": 0.0968, "any_n": 3438, "any_corpus_sentence": 0.0547, "seconds": 5.9, "model": "and_T1"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7064, "unique_matched_frac": 0.8134, "any_n": 3438, "any_corpus_sentence": 0.7056, "seconds": 2.6, "model": "sat_T2"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7952, "unique_matched_frac": 0.8672, "any_n": 3438, "any_corpus_sentence": 0.7952, "seconds": 8.2, "model": "sat_T2"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.4858, "unique_matched_frac": 0.6255, "any_n": 3438, "any_corpus_sentence": 0.4828, "seconds": 2.6, "model": "and_T2"}
+{"K": 4, "alpha": 0.0, "demo_exact": 4, "unique_n": 3277, "unique_exact": 0.5944, "unique_matched_frac": 0.7032, "any_n": 3438, "any_corpus_sentence": 0.5931, "seconds": 8.1, "model": "and_T2"}

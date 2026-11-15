@@ -1,0 +1,9 @@
+[leave-out 全标称] agree 0.919 worst sign err 0.0845 worst P/R 0.700 acc 0.8168 exact 3
+[leave-out 去掉比较器失调] agree 0.926 worst sign err 0.0688 worst P/R 0.723 acc 0.8236 exact 5
+[leave-out 去掉电导量化] agree 0.921 worst sign err 0.0723 worst P/R 0.719 acc 0.8263 exact 5
+[leave-out 去掉编程误差 σ_G] agree 0.912 worst sign err 0.0845 worst P/R 0.702 acc 0.8175 exact 4
+[leave-out 去掉读噪声] agree 0.925 worst sign err 0.0839 worst P/R 0.700 acc 0.8179 exact 5
+[leave-out 去掉 crossbar 的三项误差] agree 0.946 worst sign err 0.0713 worst P/R 0.719 acc 0.8276 exact 5
+[leave-out 去掉状态阵列误差] agree 0.924 worst sign err 0.0842 worst P/R 0.701 acc 0.8184 exact 2
+[leave-out 失调改为每个比较器独立随机] agree 0.926 worst sign err 0.0824 worst P/R 0.700 acc 0.8187 exact 5
+wrote results/improve/T4_c/circuit_leaveout.json and results/improve/T4_c/circuit.md (584.2 s)

@@ -1,0 +1,7 @@
+[ideal] acc 0.8246 exact 5 logits diff 0.00e+00 argmax eq True tf pass True
+[nominal] acc 0.7729 exact 1 agree 0.781 worst sign err 0.1045 worst P/R 0.648 pass False
+[sweep sigma_g=0.0] acc 0.7736 exact 2
+[sweep sigma_g=0.02] acc 0.7729 exact 1
+[sweep sigma_g=0.05] acc 0.7678 exact 0
+[sweep sigma_g=0.1] acc 0.7475 exact 1
+wrote results/improve/T2_c/circuit.json and results/improve/T2_c/circuit.md (475.3 s)

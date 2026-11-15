@@ -1,0 +1,1094 @@
+--- dists -> /data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo/results/conversion-sweep/diag/code-audit/dists.json
+{
+ "points": {
+  "blocks.0.q_in1": {
+   "ternary": true,
+   "thr": 1.0755,
+   "frac_neg": 0.5054,
+   "signed_q": [
+    -1.5376,
+    -0.654,
+    -0.0138,
+    0.6181,
+    1.5516
+   ],
+   "abs_q": [
+    0.0648,
+    0.3027,
+    0.6336,
+    1.0755,
+    1.8553
+   ],
+   "z_std": 0.9425,
+   "z_mean": -0.0096,
+   "rate": 0.2503,
+   "rate_pos": 0.1229,
+   "rate_neg": 0.1273,
+   "chan_rate_min": 0.1514,
+   "chan_rate_med": 0.2471,
+   "chan_rate_max": 0.4237,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.778,
+   "chan_std_max": 1.2174,
+   "n_channels": 128
+  },
+  "blocks.0.q": {
+   "ternary": false,
+   "thr": 0.6841,
+   "frac_neg": 0.5001,
+   "signed_q": [
+    -1.6256,
+    -0.6644,
+    -0.0003,
+    0.6841,
+    1.6614
+   ],
+   "abs_q": [
+    0.068,
+    0.3264,
+    0.6741,
+    1.1575,
+    1.9757
+   ],
+   "z_std": 1.0029,
+   "z_mean": 0.0126,
+   "rate": 0.25,
+   "rate_pos": 0.25,
+   "rate_neg": 0.0,
+   "chan_rate_min": 0.1099,
+   "chan_rate_med": 0.2423,
+   "chan_rate_max": 0.4237,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.7383,
+   "chan_std_max": 1.3085,
+   "n_channels": 128,
+   "thr_if_abs_quantile": 1.1575,
+   "rate_if_abs_quantile": 0.1277,
+   "floor_hit": false
+  },
+  "blocks.0.k": {
+   "ternary": true,
+   "thr": 1.1617,
+   "frac_neg": 0.4999,
+   "signed_q": [
+    -1.7027,
+    -0.6756,
+    0.0006,
+    0.6838,
+    1.6568
+   ],
+   "abs_q": [
+    0.0601,
+    0.3212,
+    0.6783,
+    1.1617,
+    2.0417
+   ],
+   "z_std": 1.0236,
+   "z_mean": -0.0058,
+   "rate": 0.2502,
+   "rate_pos": 0.1227,
+   "rate_neg": 0.1275,
+   "chan_rate_min": 0.0903,
+   "chan_rate_med": 0.2315,
+   "chan_rate_max": 0.4999,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.702,
+   "chan_std_max": 1.5501,
+   "n_channels": 128
+  },
+  "blocks.0.v": {
+   "ternary": true,
+   "thr": 0.9398,
+   "frac_neg": 0.4966,
+   "signed_q": [
+    -1.3677,
+    -0.5457,
+    0.0058,
+    0.578,
+    1.3677
+   ],
+   "abs_q": [
+    0.0506,
+    0.2626,
+    0.5589,
+    0.9398,
+    1.634
+   ],
+   "z_std": 0.8245,
+   "z_mean": 0.0096,
+   "rate": 0.2502,
+   "rate_pos": 0.1287,
+   "rate_neg": 0.1215,
+   "chan_rate_min": 0.1403,
+   "chan_rate_med": 0.2417,
+   "chan_rate_max": 0.4428,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.6279,
+   "chan_std_max": 1.0486,
+   "n_channels": 128
+  },
+  "blocks.0.pre": {
+   "ternary": true,
+   "thr": 0.1166,
+   "frac_neg": 0.378,
+   "signed_q": [
+    -0.2146,
+    -0.0554,
+    0.0,
+    0.0483,
+    0.2044
+   ],
+   "abs_q": [
+    0.0,
+    0.0,
+    0.052,
+    0.1166,
+    0.2787
+   ],
+   "z_std": 0.1297,
+   "z_mean": -0.0032,
+   "rate": 0.25,
+   "rate_pos": 0.1201,
+   "rate_neg": 0.1299,
+   "chan_rate_min": 0.1414,
+   "chan_rate_med": 0.2425,
+   "chan_rate_max": 0.428,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.0857,
+   "chan_std_max": 0.1998,
+   "n_channels": 128
+  },
+  "blocks.0.out": {
+   "ternary": true,
+   "thr": 0.935,
+   "frac_neg": 0.499,
+   "signed_q": [
+    -1.4178,
+    -0.5102,
+    0.0,
+    0.5099,
+    1.4315
+   ],
+   "abs_q": [
+    0.0435,
+    0.2273,
+    0.5101,
+    0.935,
+    1.7537
+   ],
+   "z_std": 0.856,
+   "z_mean": 0.0024,
+   "rate": 0.25,
+   "rate_pos": 0.1263,
+   "rate_neg": 0.1237,
+   "chan_rate_min": 0.1519,
+   "chan_rate_med": 0.2485,
+   "chan_rate_max": 0.3454,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.6472,
+   "chan_std_max": 1.0867,
+   "n_channels": 128
+  },
+  "blocks.0.q_in2": {
+   "ternary": true,
+   "thr": 1.1937,
+   "frac_neg": 0.5025,
+   "signed_q": [
+    -1.7299,
+    -0.7123,
+    -0.0076,
+    0.6873,
+    1.745
+   ],
+   "abs_q": [
+    0.07,
+    0.3305,
+    0.7019,
+    1.1937,
+    2.0668
+   ],
+   "z_std": 1.0517,
+   "z_mean": -0.007,
+   "rate": 0.25,
+   "rate_pos": 0.1237,
+   "rate_neg": 0.1263,
+   "chan_rate_min": 0.1721,
+   "chan_rate_med": 0.244,
+   "chan_rate_max": 0.4053,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.8785,
+   "chan_std_max": 1.3116,
+   "n_channels": 128
+  },
+  "blocks.0.g": {
+   "ternary": false,
+   "thr": 0.1508,
+   "frac_neg": 0.6265,
+   "signed_q": [
+    -0.8867,
+    -0.4345,
+    -0.1398,
+    0.1508,
+    0.5895
+   ],
+   "abs_q": [
+    0.0279,
+    0.1446,
+    0.3085,
+    0.5333,
+    0.9344
+   ],
+   "z_std": 0.4493,
+   "z_mean": -0.1426,
+   "rate": 0.25,
+   "rate_pos": 0.25,
+   "rate_neg": 0.0,
+   "chan_rate_min": 0.1696,
+   "chan_rate_med": 0.2451,
+   "chan_rate_max": 0.3988,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.3726,
+   "chan_std_max": 0.5985,
+   "n_channels": 256,
+   "thr_if_abs_quantile": 0.5333,
+   "rate_if_abs_quantile": 0.0636,
+   "floor_hit": false
+  },
+  "blocks.0.u": {
+   "ternary": true,
+   "thr": 0.5114,
+   "frac_neg": 0.4961,
+   "signed_q": [
+    -0.7439,
+    -0.2902,
+    0.0046,
+    0.3021,
+    0.7604
+   ],
+   "abs_q": [
+    0.0273,
+    0.1388,
+    0.2968,
+    0.5114,
+    0.9059
+   ],
+   "z_std": 0.4557,
+   "z_mean": 0.0062,
+   "rate": 0.25,
+   "rate_pos": 0.1284,
+   "rate_neg": 0.1216,
+   "chan_rate_min": 0.1301,
+   "chan_rate_med": 0.2462,
+   "chan_rate_max": 0.4158,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.3456,
+   "chan_std_max": 0.6004,
+   "n_channels": 256
+  },
+  "blocks.0.y2": {
+   "ternary": true,
+   "thr": 0.366,
+   "frac_neg": 0.5006,
+   "signed_q": [
+    -0.5934,
+    -0.1979,
+    -0.0004,
+    0.1858,
+    0.5717
+   ],
+   "abs_q": [
+    0.0112,
+    0.0818,
+    0.1908,
+    0.366,
+    0.7386
+   ],
+   "z_std": 0.3522,
+   "z_mean": -0.0078,
+   "rate": 0.25,
+   "rate_pos": 0.1195,
+   "rate_neg": 0.1305,
+   "chan_rate_min": 0.1911,
+   "chan_rate_med": 0.2442,
+   "chan_rate_max": 0.4138,
+   "frac_chan_rate_lt05": 0.0,
+   "frac_chan_rate_gt50": 0.0,
+   "chan_std_min": 0.301,
+   "chan_std_max": 0.4041,
+   "n_channels": 128
+  },
+  "blocks.0.q_head": {
+   "ones_per_head_mean": 7.9999,
+   "ones_min": 1,
+   "ones_max": 17,
+[dists] 18.9s
+--- drift -> /data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo/results/conversion-sweep/diag/code-audit/drift.json
+/data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo/experiments/diag/code_audit.py:39: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  return round(float(x), n)
+{
+ "rows": {
+  "blocks.0.q_in1": {
+   "init": 1.0755,
+   "a1": 0.7975,
+   "c": 0.8469,
+   "ratio_a1_init": 0.741,
+   "ratio_c_a1": 1.062,
+   "log_drift_a1": -0.299,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.q": {
+   "init": 0.6841,
+   "a1": 0.6709,
+   "c": 0.8995,
+   "ratio_a1_init": 0.981,
+   "ratio_c_a1": 1.341,
+   "log_drift_a1": -0.019,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.k": {
+   "init": 1.1617,
+   "a1": 0.7277,
+   "c": 0.8445,
+   "ratio_a1_init": 0.626,
+   "ratio_c_a1": 1.161,
+   "log_drift_a1": -0.468,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.v": {
+   "init": 0.9398,
+   "a1": 0.4052,
+   "c": 0.542,
+   "ratio_a1_init": 0.431,
+   "ratio_c_a1": 1.338,
+   "log_drift_a1": -0.841,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.pre": {
+   "init": 0.1166,
+   "a1": 0.2102,
+   "c": 0.3339,
+   "ratio_a1_init": 1.802,
+   "ratio_c_a1": 1.588,
+   "log_drift_a1": 0.589,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.out": {
+   "init": 0.935,
+   "a1": 0.6454,
+   "c": 1.0292,
+   "ratio_a1_init": 0.69,
+   "ratio_c_a1": 1.595,
+   "log_drift_a1": -0.371,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.q_in2": {
+   "init": 1.1937,
+   "a1": 0.7793,
+   "c": 0.882,
+   "ratio_a1_init": 0.653,
+   "ratio_c_a1": 1.132,
+   "log_drift_a1": -0.426,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.g": {
+   "init": 0.1508,
+   "a1": 0.2451,
+   "c": 0.335,
+   "ratio_a1_init": 1.626,
+   "ratio_c_a1": 1.367,
+   "log_drift_a1": 0.486,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.u": {
+   "init": 0.5114,
+   "a1": 0.4947,
+   "c": 0.7435,
+   "ratio_a1_init": 0.967,
+   "ratio_c_a1": 1.503,
+   "log_drift_a1": -0.033,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.0.y2": {
+   "init": 0.366,
+   "a1": 0.5109,
+   "c": 0.6546,
+   "ratio_a1_init": 1.396,
+   "ratio_c_a1": 1.281,
+   "log_drift_a1": 0.334,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.q_in1": {
+   "init": 1.3458,
+   "a1": 0.9704,
+   "c": 0.929,
+   "ratio_a1_init": 0.721,
+   "ratio_c_a1": 0.957,
+   "log_drift_a1": -0.327,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.q": {
+   "init": 0.6627,
+   "a1": 0.3844,
+   "c": 0.4023,
+   "ratio_a1_init": 0.58,
+   "ratio_c_a1": 1.046,
+   "log_drift_a1": -0.545,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.k": {
+   "init": 1.1067,
+   "a1": 0.8082,
+   "c": 1.0812,
+   "ratio_a1_init": 0.73,
+   "ratio_c_a1": 1.338,
+   "log_drift_a1": -0.314,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.v": {
+   "init": 0.858,
+   "a1": 0.5805,
+   "c": 0.9054,
+   "ratio_a1_init": 0.677,
+   "ratio_c_a1": 1.56,
+   "log_drift_a1": -0.391,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.pre": {
+   "init": 0.1462,
+   "a1": 0.405,
+   "c": 0.5576,
+   "ratio_a1_init": 2.771,
+   "ratio_c_a1": 1.377,
+   "log_drift_a1": 1.019,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.out": {
+   "init": 0.8492,
+   "a1": 0.7805,
+   "c": 1.1393,
+   "ratio_a1_init": 0.919,
+   "ratio_c_a1": 1.46,
+   "log_drift_a1": -0.084,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.q_in2": {
+   "init": 1.457,
+   "a1": 1.0112,
+   "c": 1.0709,
+   "ratio_a1_init": 0.694,
+   "ratio_c_a1": 1.059,
+   "log_drift_a1": -0.365,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.g": {
+   "init": 0.1211,
+   "a1": 0.1889,
+   "c": 0.2437,
+   "ratio_a1_init": 1.559,
+   "ratio_c_a1": 1.291,
+   "log_drift_a1": 0.444,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.u": {
+   "init": 0.6488,
+   "a1": 0.6294,
+   "c": 0.8904,
+   "ratio_a1_init": 0.97,
+   "ratio_c_a1": 1.415,
+   "log_drift_a1": -0.03,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "blocks.1.y2": {
+   "init": 0.4066,
+   "a1": 0.5608,
+   "c": 0.6262,
+   "ratio_a1_init": 1.379,
+   "ratio_c_a1": 1.117,
+   "log_drift_a1": 0.321,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  },
+  "q_out": {
+   "init": 1.5929,
+   "a1": 0.8175,
+   "c": 0.8207,
+   "ratio_a1_init": 0.513,
+   "ratio_c_a1": 1.004,
+   "log_drift_a1": -0.667,
+   "at_floor_a1": false,
+   "at_floor_c": false
+  }
+ },
+ "ratio_min": 0.431,
+ "ratio_max": 2.771,
+ "n_floor_a1": 0,
+ "n_floor_c": 0,
+ "n_exploded_gt10": 0,
+ "n_collapsed_lt0p1": 0,
+ "a1_trained_rates": {
+  "block0": {
+   "h_in_absmax": 4.498070240020752,
+   "h_mid_absmax": 5.3557915687561035,
+   "h_out_absmax": 6.124833106994629,
+   "rate_x_attn": 0.461,
+   "rate_q": 0.3481,
+   "rate_k": 0.6457,
+   "rate_v": 0.782,
+   "rate_o_spk": 0.5965,
+   "rate_y_attn": 0.6255,
+   "rate_x_ffn": 0.6014,
+   "rate_g": 0.3041,
+   "rate_u": 0.6374,
+   "rate_p": 0.2073,
+   "rate_y_ffn": 0.628,
+   "k_sqnorm_mean": 0.6457
+  },
+  "block1": {
+   "h_in_absmax": 6.124833106994629,
+   "h_mid_absmax": 7.124833106994629,
+   "h_out_absmax": 8.124833106994629,
+   "rate_x_attn": 0.6253,
+   "rate_q": 0.4321,
+   "rate_k": 0.6927,
+   "rate_v": 0.7235,
+   "rate_o_spk": 0.5702,
+   "rate_y_attn": 0.6361,
+   "rate_x_ffn": 0.6379,
+   "rate_g": 0.2575,
+   "rate_u": 0.6264,
+   "rate_p": 0.1754,
+   "rate_y_ffn": 0.5689,
+   "k_sqnorm_mean": 0.6927
+  }
+ },
+ "a1_trained_rate_q_out": 0.7616,
+ "a1_trained_h_final_absmax": 8.1248,
+ "a1_init_rates": {
+  "block0": {
+   "h_in_absmax": 4.288723945617676,
+   "h_mid_absmax": 4.638802528381348,
+   "h_out_absmax": 5.583700180053711,
+   "rate_x_attn": 0.2503,
+   "rate_q": 0.25,
+   "rate_k": 0.2502,
+   "rate_v": 0.2502,
+   "rate_o_spk": 0.25,
+   "rate_y_attn": 0.25,
+   "rate_x_ffn": 0.25,
+   "rate_g": 0.25,
+   "rate_u": 0.25,
+   "rate_p": 0.0657,
+   "rate_y_ffn": 0.25,
+   "k_sqnorm_mean": 0.2502
+  },
+  "block1": {
+   "h_in_absmax": 5.583700180053711,
+   "h_mid_absmax": 6.335609436035156,
+   "h_out_absmax": 6.819522380828857,
+   "rate_x_attn": 0.25,
+   "rate_q": 0.25,
+   "rate_k": 0.25,
+   "rate_v": 0.25,
+   "rate_o_spk": 0.25,
+   "rate_y_attn": 0.25,
+   "rate_x_ffn": 0.25,
+   "rate_g": 0.25,
+   "
+[drift] 2.8s
+--- sg -> /data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo/results/conversion-sweep/diag/code-audit/sg.json
+{
+ "thr1_samples": {
+  "-3": {
+   "y": -1.0,
+   "dy_dU": 0.031
+  },
+  "-2": {
+   "y": -1.0,
+   "dy_dU": 0.1031
+  },
+  "-1.5": {
+   "y": -1.0,
+   "dy_dU": 0.3044
+  },
+  "-1": {
+   "y": -1.0,
+   "dy_dU": 1.0247
+  },
+  "-0.5": {
+   "y": 0.0,
+   "dy_dU": 0.3315
+  },
+  "0": {
+   "y": 0.0,
+   "dy_dU": 0.184
+  },
+  "0.5": {
+   "y": 0.0,
+   "dy_dU": 0.3315
+  },
+  "1": {
+   "y": 1.0,
+   "dy_dU": 1.0247
+  },
+  "1.5": {
+   "y": 1.0,
+   "dy_dU": 0.3044
+  },
+  "2": {
+   "y": 1.0,
+   "dy_dU": 0.1031
+  },
+  "3": {
+   "y": 1.0,
+   "dy_dU": 0.031
+  }
+ },
+ "dy_dthr_at_U": [
+  [
+   -3.0,
+   0.0184
+  ],
+  [
+   -2.0,
+   0.0809
+  ],
+  [
+   -1.0,
+   0.9753
+  ],
+  [
+   -0.5,
+   0.2453
+  ],
+  [
+   -0.0,
+   0.0
+  ],
+  [
+   0.5,
+   -0.2453
+  ],
+  [
+   1.0,
+   -0.9753
+  ],
+  [
+   2.0,
+   -0.0809
+  ],
+  [
+   3.0,
+   -0.0184
+  ]
+ ],
+ "analytic": "dy/dU = sg(U-thr) + sg(U+thr), sg(x) = (w/2)/(1+(pi/2*w*x)^2), w=2 -> peak 1 at U=+-thr, half-max at |U-+thr| = 1/pi = 0.318 (absolute units, not scaled by thr)",
+ "dy_dU_at_0_thr1": 0.184,
+ "dy_dU_at_thr": 1.0247,
+ "coverage_a1_init": {
+  "blocks.0.q_in1": {
+   "thr": 1.0755,
+   "halfwidth_over_thr": 0.296,
+   "mean_grad": 0.4062,
+   "frac_in_window": 0.3013,
+   "frac_grad_lt_0p1": 0.0258
+  },
+  "blocks.0.q": {
+   "thr": 0.6841,
+   "halfwidth_over_thr": 0.465,
+   "mean_grad": 0.2624,
+   "frac_in_window": 0.2012,
+   "frac_grad_lt_0p1": 0.4467
+  },
+  "blocks.0.k": {
+   "thr": 1.1617,
+   "halfwidth_over_thr": 0.274,
+   "mean_grad": 0.3742,
+   "frac_in_window": 0.2693,
+   "frac_grad_lt_0p1": 0.0393
+  },
+  "blocks.0.v": {
+   "thr": 0.9398,
+   "halfwidth_over_thr": 0.338,
+   "mean_grad": 0.4558,
+   "frac_in_window": 0.3521,
+   "frac_grad_lt_0p1": 0.0165
+  },
+  "blocks.0.pre": {
+   "thr": 0.1166,
+   "halfwidth_over_thr": 2.726,
+   "mean_grad": 1.6507,
+   "frac_in_window": 0.9964,
+   "frac_grad_lt_0p1": 0.0
+  },
+  "blocks.0.out": {
+   "thr": 0.935,
+   "halfwidth_over_thr": 0.34,
+   "mean_grad": 0.4273,
+   "frac_in_window": 0.3053,
+   "frac_grad_lt_0p1": 0.0313
+  },
+  "blocks.0.q_in2": {
+   "thr": 1.1937,
+   "halfwidth_over_thr": 0.266,
+   "mean_grad": 0.3642,
+   "frac_in_window": 0.2607,
+   "frac_grad_lt_0p1": 0.0373
+  },
+  "blocks.0.g": {
+   "thr": 0.1508,
+   "halfwidth_over_thr": 2.109,
+   "mean_grad": 0.4883,
+   "frac_in_window": 0.4429,
+   "frac_grad_lt_0p1": 0.0749
+  },
+  "blocks.0.u": {
+   "thr": 0.5114,
+   "halfwidth_over_thr": 0.622,
+   "mean_grad": 0.7505,
+   "frac_in_window": 0.9393,
+   "frac_grad_lt_0p1": 0.0011
+  },
+  "blocks.0.y2": {
+   "thr": 0.366,
+   "halfwidth_over_thr": 0.869,
+   "mean_grad": 0.933,
+   "frac_in_window": 0.9498,
+   "frac_grad_lt_0p1": 0.001
+  },
+  "q_out": {
+   "thr": 1.5929,
+   "halfwidth_over_thr": 0.2,
+   "mean_grad": 0.2676,
+   "frac_in_window": 0.1784,
+   "frac_grad_lt_0p1": 0.368
+  },
+  "blocks.1.q_in1": {
+   "thr": 1.3458,
+   "halfwidth_over_thr": 0.236,
+   "mean_grad": 0.3201,
+   "frac_in_window": 0.2231,
+   "frac_grad_lt_0p1": 0.0526
+  },
+  "blocks.1.q": {
+   "thr": 0.6627,
+   "halfwidth_over_thr": 0.48,
+   "mean_grad": 0.274,
+   "frac_in_window": 0.2105,
+   "frac_grad_lt_0p1": 0.4222
+  },
+  "blocks.1.k": {
+   "thr": 1.1067,
+   "halfwidth_over_thr": 0.287,
+   "mean_grad": 0.3896,
+   "frac_in_window": 0.2801,
+   "frac_grad_lt_0p1": 0.0312
+  },
+  "blocks.1.v": {
+   "thr": 0.858,
+   "halfwidth_over_thr": 0.371,
+   "mean_grad": 0.4858,
+   "frac_in_window": 0.3743,
+   "frac_grad_lt_0p1": 0.0148
+  },
+  "blocks.1.pre": {
+   "thr": 0.1462,
+   "halfwidth_over_thr": 2.176,
+   "mean_grad": 1.531,
+   "frac_in_window": 0.9916,
+   "frac_grad_lt_0p1": 0.0
+  },
+  "blocks.1.out": {
+   "thr": 0.8492,
+   "halfwidth_over_thr": 0.374,
+   "mean_grad": 0.4513,
+   "frac_in_window": 0.325,
+   "frac_grad_lt_0p1": 0.0281
+  },
+  "blocks.1.q_in2": {
+   "thr": 1.457,
+   "halfwidth_over_thr": 0.218,
+   "mean_grad": 0.2958,
+   "frac_in_window": 0.2011,
+   "frac_grad_lt_0p1": 0.2357
+  },
+  "blocks.1.g": {
+   "thr": 0.1211,
+   "halfwidth_over_thr": 2.625,
+   "mean_grad": 0.4113,
+   "frac_in_window": 0.3513,
+   "frac_grad_lt_0p1": 0.1754
+  },
+  "blocks.1.u": {
+   "thr": 0.6488,
+   "halfwidth_over_thr": 0.49,
+   "mean_grad": 0.6169,
+   "frac_in_window": 0.5624,
+   "frac_grad_lt_0p1": 0.005
+  },
+  "blocks.1.y2": {
+   "thr": 0.4066,
+   "halfwidth_over_thr": 0.782,
+   "mean_grad": 0.8723,
+   "frac_in_window": 0.9474,
+   "frac_grad_lt_0p1": 0.001
+  }
+ }
+}
+[sg] 1.3s
+--- extras -> /data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo/results/conversion-sweep/diag/code-audit/extras.json
+{
+ "module_types_a1": [
+  "BinaryLIF",
+  "Embedding",
+  "Linear",
+  "ModuleList",
+  "PositiveScalar",
+  "QuantizerIn",
+  "SigmoidGates",
+  "SpikingBlock",
+  "SpikingGDN",
+  "SpikingLM",
+  "SpikingSwiGLU",
+  "TernaryLIF"
+ ],
+ "mode_dependent_modules": [],
+ "batch_shape": [
+  64,
+  33
+ ],
+ "pad_inputs_at_unmasked_positions": 0,
+ "eos_inputs_at_unmasked_positions": 0,
+ "frac_masked_positions": 0.5049,
+ "full_slice_shape": [
+  4003,
+  42
+ ],
+ "full_frac_masked": 0.6375,
+ "emb_row_norm_pad": 11.3079,
+ "emb_row_norm_median": 11.5241,
+ "emb_row_norm_bos": 9.9238,
+ "a0_eval": {
+  "token_acc": 0.842,
+  "ppl": 1.794,
+  "n_exact": 5
+ },
+ "a0_plus_qout_only": {
+  "thr": 3.9197,
+  "token_acc": 0.6566,
+  "ppl": 166.048,
+  "n_exact": 2
+ },
+ "a0_plus_qout_only_rowscale": {
+  "token_acc": 0.6519,
+  "ppl": 8.984,
+  "n_exact": 3
+ },
+ "a0_plus_qout_only_headLS": {
+  "token_acc": 0.6373,
+  "ppl": 9.51,
+  "n_exact": 2
+ },
+ "a0_plus_qout_perchannel": {
+  "thr_min": 3.2324,
+  "thr_max": 4.9139,
+  "token_acc": 0.651,
+  "ppl": 170.054,
+  "n_exact": 3
+ },
+ "a1_init_perchannel_thr_summary": {
+  "blocks.0.q_in1": {
+   "min": 0.7731,
+   "med": 1.0679,
+   "max": 1.42,
+   "n_floor": 0
+  },
+  "blocks.0.q": {
+   "min": 0.207,
+   "med": 0.682,
+   "max": 1.2245,
+   "n_floor": 0
+  },
+  "blocks.0.k": {
+   "min": 0.7586,
+   "med": 1.1638,
+   "max": 1.869,
+   "n_floor": 0
+  },
+  "blocks.0.v": {
+   "min": 0.6804,
+   "med": 0.9552,
+   "max": 1.4507,
+   "n_floor": 0
+  },
+  "blocks.0.pre": {
+   "min": 0.0929,
+   "med": 0.1253,
+   "max": 0.1678,
+   "n_floor": 0
+  },
+  "blocks.0.out": {
+   "min": 0.7724,
+   "med": 0.9324,
+   "max": 1.1873,
+   "n_floor": 0
+  },
+  "blocks.0.q_in2": {
+   "min": 0.9605,
+   "med": 1.1863,
+   "max": 1.5793,
+   "n_floor": 0
+  },
+  "blocks.0.g": {
+   "min": 0.0031,
+   "med": 0.1415,
+   "max": 0.3614,
+   "n_floor": 0
+  },
+  "blocks.0.u": {
+   "min": 0.405,
+   "med": 0.5145,
+   "max": 0.6983,
+   "n_floor": 0
+  },
+  "blocks.0.y2": {
+   "min": 0.3123,
+   "med": 0.3694,
+   "max": 0.5059,
+   "n_floor": 0
+  },
+  "blocks.1.q_in1": {
+   "min": 1.1441,
+   "med": 1.335,
+   "max": 1.7998,
+   "n_floor": 0
+  },
+  "blocks.1.q": {
+   "min": -0.3448,
+   "med": 0.6334,
+   "max": 1.6455,
+   "n_floor": 4
+  },
+  "blocks.1.k": {
+   "min": 0.7932,
+   "med": 1.0803,
+   "max": 1.5855,
+   "n_floor": 0
+  },
+  "blocks.1.v": {
+   "min": 0.7336,
+   "med": 0.8734,
+   "max": 1.0741,
+   "n_floor": 0
+  },
+  "blocks.1.pre": {
+   "min": 0.0957,
+   "med": 0.1468,
+   "max": 0.1836,
+   "n_floor": 0
+  },
+  "blocks.1.out": {
+   "min": 0.6689,
+   "med": 0.8405,
+   "max": 1.1619,
+   "n_floor": 0
+  },
+  "blocks.1.q_in2": {
+   "min": 1.2614,
+   "med": 1.4208,
+   "max": 1.8571,
+   "n_floor": 0
+  },
+  "blocks.1.g": {
+   "min": -0.2277,
+   "med": 0.0902,
+   "max": 0.4314,
+   "n_floor": 44
+  },
+  "blocks.1.u": {
+   "min": 0.526,
+   "med": 0.6509,
+   "max": 0.8275,
+   "n_floor": 0
+  },
+  "blocks.1.y2": {
+   "min": 0.3589,
+   "med": 0.415,
+   "max": 0.4885,
+   "n_floor": 0
+  },
+  "q_out": {
+   "min": 1.377,
+   "med": 1.5606,
+   "max": 2.0055
+  }
+ },
+ "a1_init_perchannel_eval": {
+  "token_acc": 0.0968,
+  "ppl": 718.519,
+  "n_exact": 0
+ },
+ "a1_init_perchannel_rates": {
+  "block0": {
+   "rate_x_attn": 0.2563,
+   "rate_q": 0.2573,
+   "rate_k": 0.2581,
+   "rate_v": 0.2556,
+   "rate_o_spk": 0.2514,
+   "rate_y_attn": 0.2518,
+   "rate_x_ffn": 0.2552,
+   "rate_g": 0.2512,
+   "rate_u": 0.2515,
+   "rate_p": 0.0675,
+   "rate_y_ffn": 0.2503
+  },
+  "block1": {
+   "rate_x_attn": 0.2552,
+   "rate_q": 0.2479,
+   "rate_k": 0.2523,
+   "rate_v": 0.2511,
+   "rate_o_spk": 0.2504,
+   "rate_y_attn": 0.2505,
+   "rate_x_ffn": 0.2546,
+   "rate_g": 0.2471,
+   "rate_u": 0.2523,
+   "rate_p": 0.0638,
+   "rate_y_ffn": 0.2499
+  }
+ },
+ "a1_init_scalar_eval": {
+  "token_acc": 0.1041,
+  "ppl": 695.153,
+  "n_exact": 0
+ }
+}
+[extras] 63.9s

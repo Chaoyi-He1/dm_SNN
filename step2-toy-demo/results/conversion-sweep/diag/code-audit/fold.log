@@ -1,0 +1,14 @@
+base {'token_acc': 0.1041, 'ppl': 695.153, 'n_exact': 0} {'token_acc': 0.1548, 'ppl': 1244.513, 'n_exact': 0} {'h_final_rms_a1': 1.4228, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.4111}
+inj {'token_acc': 0.1315, 'ppl': 552.535, 'n_exact': 0} {'token_acc': 0.1654, 'ppl': 906.564, 'n_exact': 0} {'Q1.block0': 0.2847, 'Q2.block0': 0.5508, 'Q1.block1': 0.3589, 'Q2.block1': 0.9785, 'h_final_rms_a1': 1.1652, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.4459}
+fold_lin {'token_acc': 0.1345, 'ppl': 671.835, 'n_exact': 0} {'token_acc': 0.1487, 'ppl': 1318.901, 'n_exact': 0} {'lambda_o.block0': {'min': 0.0818, 'med': 0.164, 'max': 0.3099}, 'lambda_p.block0': {'min': 0.0053, 'med': 0.5049, 'max': 2.9334}, 'lambda_o.block1': {'min': 0.0908, 'med': 0.196, 'max': 0.3603}, 'lambda_p.block1': {'min': -0.1412, 'med': 0.8921, 'max': 15.05}, 'h_final_rms_a1': 1.4305, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.4296}
+inj_fold {'token_acc': 0.1495, 'ppl': 561.773, 'n_exact': 0} {'token_acc': 0.17, 'ppl': 899.9, 'n_exact': 0} {'lambda_o.block0': {'min': 0.0818, 'med': 0.164, 'max': 0.3099}, 'Q1.block0': 0.2904, 'lambda_p.block0': {'min': 0.0521, 'med': 0.5803, 'max': 2.815}, 'Q2.block0': 0.6476, 'lambda_o.block1': {'min': 0.0816, 'med': 0.2211, 'max': 0.4104}, 'Q1.block1': 0.4014, 'lambda_p.block1': {'min': -0.2335, 'med': 0.957, 'max': 17.1616}, 'Q2.block1': 1.4229, 'h_final_rms_a1': 1.3164, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.4535}
+emb_x0p5 {'token_acc': 0.0436, 'ppl': 1119.115, 'n_exact': 0} {'token_acc': 0.101, 'ppl': 4032.982, 'n_exact': 0} {'h_final_rms_a1': 1.1484, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.3322}
+emb_x0p33 {'token_acc': 0.0226, 'ppl': 1365.018, 'n_exact': 0} {'token_acc': 0.0736, 'ppl': 4789.101, 'n_exact': 0} {'h_final_rms_a1': 1.0904, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.264}
+emb_x0p25 {'token_acc': 0.0216, 'ppl': 1443.865, 'n_exact': 0} {'token_acc': 0.0629, 'ppl': 4670.607, 'n_exact': 0} {'h_final_rms_a1': 1.0715, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.2284}
+emb_x2 {'token_acc': 0.1044, 'ppl': 613.395, 'n_exact': 0} {'token_acc': 0.1532, 'ppl': 864.969, 'n_exact': 0} {'h_final_rms_a1': 2.1833, 'h_final_rms_a0': 4.0437, 'cos_hfinal': 0.4448}
+Traceback (most recent call last):
+  File "/data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo/experiments/diag/code_audit_fold.py", line 188, in <module>
+    main()
+  File "/data/chaoyi_he/dm_snn/.claude/worktrees/conversion-sweep/step2-toy-demo/experiments/diag/code_audit_fold.py", line 177, in main
+    a0.head.weight.copy_(W * sv[:, None]); e2 = ev3(a0, sl, demo, cfg, tokens); a0.head.weight.copy_(W)
+RuntimeError: a leaf Variable that requires grad is being used in an in-place operation.

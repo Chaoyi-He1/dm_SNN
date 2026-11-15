@@ -1,0 +1,11 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 2, "unique_n": 3277, "unique_exact": 0.5081, "unique_matched_frac": 0.6521, "any_n": 3438, "any_corpus_sentence": 0.507, "seconds": 3.4, "model": "LT_a1_24k"}
+{"K": 4, "alpha": 0.0, "demo_exact": 3, "unique_n": 3277, "unique_exact": 0.5951, "unique_matched_frac": 0.6959, "any_n": 3438, "any_corpus_sentence": 0.5969, "seconds": 9.3, "model": "LT_a1_24k"}
+{"K": 4, "alpha": 1.0, "demo_exact": 4, "unique_n": 3277, "unique_exact": 0.654, "unique_matched_frac": 0.7684, "any_n": 3438, "any_corpus_sentence": 0.655, "seconds": 9.9, "model": "LT_a1_24k"}
+{"K": 16, "alpha": 0.0, "demo_exact": 3, "unique_n": 3277, "unique_exact": 0.5941, "unique_matched_frac": 0.6859, "any_n": 3438, "any_corpus_sentence": 0.5963, "seconds": 38.6, "model": "LT_a1_24k"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.6659, "unique_matched_frac": 0.776, "any_n": 3438, "any_corpus_sentence": 0.6664, "seconds": 37.7, "model": "LT_a1_24k"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.5133, "unique_matched_frac": 0.6457, "any_n": 3438, "any_corpus_sentence": 0.5128, "seconds": 3.1, "model": "LT_c24k_fromL1"}
+{"K": 4, "alpha": 0.0, "demo_exact": 4, "unique_n": 3277, "unique_exact": 0.5975, "unique_matched_frac": 0.7021, "any_n": 3438, "any_corpus_sentence": 0.5995, "seconds": 9.2, "model": "LT_c24k_fromL1"}
+{"K": 4, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.643, "unique_matched_frac": 0.7582, "any_n": 3438, "any_corpus_sentence": 0.6451, "seconds": 8.3, "model": "LT_c24k_fromL1"}
+{"K": 16, "alpha": 0.0, "demo_exact": 4, "unique_n": 3277, "unique_exact": 0.596, "unique_matched_frac": 0.6942, "any_n": 3438, "any_corpus_sentence": 0.5989, "seconds": 29.6, "model": "LT_c24k_fromL1"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.6655, "unique_matched_frac": 0.7798, "any_n": 3438, "any_corpus_sentence": 0.6681, "seconds": 30.0, "model": "LT_c24k_fromL1"}

@@ -190,12 +190,12 @@ T 越大,阈值越像"增益"而不是"开关",所以泄漏开启后不能再放
 ## 其他发现
 
 - 基线 A1(`L1_fq50_12k`)第 2 块 q 神经元的阈值被训练压到 0.00079(低于标定下限 0.001),输出随 batch 大小的浮点求和顺序变化(同一批前缀单条与成批解码有 11/29 不同)。C 没有这个问题。束搜索表里所有模型的贪心数字都来自同一批量实现,口径一致。
-- 2026-10-15 19:30 起 GPU 0 让给扩散模型项目;当时 GPU 0 上的三个运行(基线 C 续训、T=4 只在 q/k/v、加宽 T=1 的 A1)在 GPU 1 上从头重跑,停掉前的半成品在 `_stopped_for_gpu0/`(不进版本库)。
+- 2026-10-15 19:30 起 GPU 0 让给扩散模型项目;当时 GPU 0 上的三个运行(基线 C 续训、T=4 只在 q/k/v、加宽 T=1 的 A1)在 GPU 1 上从头重跑,停掉前的半成品在 `_stopped_for_gpu0/`(2026-11-14 起也在版本库里)。
 
 ## 文件
 
 - 代码:`experiments/multilevel.py`(多级脉冲点)、`experiments/convert_lab.py`(新增 a0/iscan/bscan 子命令与 --levels、尺寸参数)、`experiments/chain_c.py`(A1 → B 扫描 → C 串联)、`experiments/beam_eval.py`、`experiments/model_profile.py`、`experiments/improve_tables.py`(生成下面的表与 `tables.json`)。
-- 每个运行:`<run>/result.json`、`<run>/history.jsonl`;检查点 `model.pt` 只有 `../CHECKPOINTS.md` 列出的进了版本库(含加载方法):前面各节的 21 个,加上三值残差一节的 16 个(8 个运行 × A1、C,含种子补跑),共 37 个;三值残差的检查点走同一个 `beam_eval.load_model`(类型 `ternres`)。其余不进。
+- 每个运行:`<run>/result.json`、`<run>/history.jsonl`;检查点 `model.pt` 只有 `../CHECKPOINTS.md` 列出的进了版本库(含加载方法):前面各节的 21 个,加上三值残差一节的 16 个(8 个运行 × A1、C,含种子补跑),共 37 个;三值残差的检查点走同一个 `beam_eval.load_model`(类型 `ternres`)。2026-11-14 起其余运行的检查点(列在 `../CHECKPOINTS.md` 文末一节)和各运行的训练日志 `*.log` 也都进了版本库。
 - 束搜索:`beam/*.json`;画像:`profile_*.json`(`profile_final.json` 为准);扫描:`iscan_*.json`、`*_bscan.json`。
 
 ## 全部运行(`experiments/improve_tables.py` 生成)

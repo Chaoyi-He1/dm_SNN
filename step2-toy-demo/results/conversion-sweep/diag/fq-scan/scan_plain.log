@@ -1,0 +1,8 @@
+{"fq": 0.3, "refit": false, "token_acc": 0.08322267233699215, "ppl": 399.99440183860014, "n_exact": 0, "rate_mean_all": 0.6104, "k_sqnorm_mean": [0.7, 0.7], "build_seconds": 3.5}
+{"fq": 0.4, "refit": false, "token_acc": 0.11430300381570321, "ppl": 330.1296130911048, "n_exact": 0, "rate_mean_all": 0.5328, "k_sqnorm_mean": [0.6, 0.6], "build_seconds": 3.3}
+{"fq": 0.5, "refit": false, "token_acc": 0.12294296616294902, "ppl": 328.49592869239353, "n_exact": 0, "rate_mean_all": 0.4566, "k_sqnorm_mean": [0.5, 0.5], "build_seconds": 4.8}
+{"fq": 0.6, "refit": false, "token_acc": 0.12475836681178666, "ppl": 401.8958058396418, "n_exact": 0, "rate_mean_all": 0.3723, "k_sqnorm_mean": [0.4, 0.4], "build_seconds": 4.1}
+{"fq": 0.7, "refit": false, "token_acc": 0.11958111310954599, "ppl": 554.5860223301444, "n_exact": 0, "rate_mean_all": 0.2815, "k_sqnorm_mean": [0.3, 0.3], "build_seconds": 4.0}
+{"fq": 0.75, "refit": false, "token_acc": 0.104082970533358, "ppl": 695.1526387594726, "n_exact": 0, "rate_mean_all": 0.2338, "k_sqnorm_mean": [0.2502, 0.25], "build_seconds": 3.8}
+{"fq": 0.8, "refit": false, "token_acc": 0.09071960464608092, "ppl": 889.568545577358, "n_exact": 0, "rate_mean_all": 0.1865, "k_sqnorm_mean": [0.2005, 0.2], "build_seconds": 3.8}
+{"fq": 0.9, "refit": false, "token_acc": 0.03977072162175791, "ppl": 1614.5500579090342, "n_exact": 0, "rate_mean_all": 0.0926, "k_sqnorm_mean": [0.1003, 0.1], "build_seconds": 4.4}

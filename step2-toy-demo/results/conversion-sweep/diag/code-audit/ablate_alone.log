@@ -1,0 +1,23 @@
+none {'token_acc': 0.842, 'ppl': 1.794, 'n_exact': 5} 1s
+b0.xin1 {'token_acc': 0.6384, 'ppl': 4.531, 'n_exact': 1} 2s
+b0.q {'token_acc': 0.2203, 'ppl': 60231025417.128, 'n_exact': 0} 3s
+b0.k {'token_acc': 0.7303, 'ppl': 2.795, 'n_exact': 1} 4s
+b0.v {'token_acc': 0.6648, 'ppl': 3.798, 'n_exact': 1} 6s
+b0.pre {'token_acc': 0.6203, 'ppl': 10.097, 'n_exact': 0} 7s
+b0.out {'token_acc': 0.7997, 'ppl': 2.116, 'n_exact': 3} 8s
+b0.xin2 {'token_acc': 0.5759, 'ppl': 6.018, 'n_exact': 0} 9s
+b0.g {'token_acc': 0.7565, 'ppl': 2.541, 'n_exact': 1} 10s
+b0.u {'token_acc': 0.7648, 'ppl': 2.445, 'n_exact': 1} 11s
+b0.y2 {'token_acc': 0.7843, 'ppl': 2.289, 'n_exact': 2} 12s
+b1.xin1 {'token_acc': 0.5199, 'ppl': 6.711, 'n_exact': 0} 13s
+b1.q {'token_acc': 0.3128, 'ppl': 3067686514.188, 'n_exact': 0} 14s
+b1.k {'token_acc': 0.7177, 'ppl': 2.864, 'n_exact': 0} 15s
+b1.v {'token_acc': 0.5519, 'ppl': 5.482, 'n_exact': 0} 16s
+b1.pre {'token_acc': 0.8061, 'ppl': 2.107, 'n_exact': 5} 17s
+b1.out {'token_acc': 0.6901, 'ppl': 3.152, 'n_exact': 1} 18s
+b1.xin2 {'token_acc': 0.6249, 'ppl': 4.56, 'n_exact': 0} 19s
+b1.g {'token_acc': 0.749, 'ppl': 2.555, 'n_exact': 1} 20s
+b1.u {'token_acc': 0.7613, 'ppl': 2.647, 'n_exact': 3} 21s
+b1.y2 {'token_acc': 0.7074, 'ppl': 3.279, 'n_exact': 0} 22s
+head {'token_acc': 0.6566, 'ppl': 166.048, 'n_exact': 2} 24s
+saved alone

@@ -1,0 +1,10 @@
+LIF x2.0                                      acc 0.2034 ppl    67.179 exact 0/5 mean_rate 0.3210 q_out 0.5848
+uniform x1.5                                  acc 0.1800 ppl    80.597 exact 0/5 mean_rate 0.3401 q_out 0.4766
+LIF x1.75                                     acc 0.1895 ppl    70.324 exact 0/5 mean_rate 0.3938 q_out 0.6512
+LIF x2.5                                      acc 0.1607 ppl   125.635 exact 0/5 mean_rate 0.2165 q_out 0.4765
+LIF x2.0 + Qin x0.7                           acc 0.1947 ppl    70.166 exact 0/5 mean_rate 0.3901 q_out 0.7263
+LIF x2.0 + Qin x1.25                          acc 0.2004 ppl    89.636 exact 0/5 mean_rate 0.2388 q_out 0.4287
+LIF x2.0 + Qin x1.5                           acc 0.1676 ppl   173.647 exact 0/5 mean_rate 0.1656 q_out 0.2795
+LIF x2.0 + Qin x2.0                           acc 0.0647 ppl   753.414 exact 0/5 mean_rate 0.0691 q_out 0.1179
+[phase [{"lif":2.0,"save":"init_lif2"},{"uniform":1.5,"save":"init_uni15"},{"lif":1.75},{"lif":2.5},{"lif":2.0,"qin":0.7},{"lif":2.0,"qin":1.25},{"lif":2.0,"qin":1.5},{"lif":2.0,"qin":2.0}] done in 0.0 s]
+[phase 1 done in 0.0 s]

@@ -1,0 +1,9 @@
+baseline leak0.9 x1.0                         acc 0.1003 ppl   257.122 exact 0/5 mean_rate 0.5886 q_out 0.7467
+uniform x0.3                                  acc 0.0688 ppl   964.303 exact 0/5 mean_rate 0.7710 q_out 0.9161
+uniform x0.5                                  acc 0.0694 ppl   543.517 exact 0/5 mean_rate 0.7186 q_out 0.8743
+uniform x0.7                                  acc 0.0811 ppl   455.411 exact 0/5 mean_rate 0.6722 q_out 0.8293
+uniform x1.5                                  acc 0.1800 ppl    80.597 exact 0/5 mean_rate 0.3401 q_out 0.4766
+uniform x2.0                                  acc 0.0647 ppl   753.414 exact 0/5 mean_rate 0.0691 q_out 0.1179
+uniform x3.0                                  acc 0.0089 ppl  2459.235 exact 0/5 mean_rate 0.0030 q_out 0.0155
+uniform x5.0                                  acc 0.0000 ppl  3220.916 exact 0/5 mean_rate 0.0000 q_out 0.0001
+[phase a done in 48.1 s]

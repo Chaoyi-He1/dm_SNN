@@ -1,0 +1,8 @@
+a1 unchanged leak=0.0                         acc 0.5114 ppl     6.986 exact 0/5 mean_rate 0.5356 q_out 0.7616
+a1 unchanged leak=0.1                         acc 0.4911 ppl     7.764 exact 0/5 mean_rate 0.5356 q_out 0.7608
+a1 unchanged leak=0.3                         acc 0.3902 ppl    13.650 exact 0/5 mean_rate 0.5382 q_out 0.7530
+a1 unchanged leak=0.5                         acc 0.2672 ppl    34.045 exact 0/5 mean_rate 0.5480 q_out 0.7472
+a1 unchanged leak=0.7                         acc 0.1609 ppl   101.175 exact 0/5 mean_rate 0.5646 q_out 0.7467
+a1 unchanged leak=0.8                         acc 0.1264 ppl   169.987 exact 0/5 mean_rate 0.5766 q_out 0.7464
+a1 unchanged leak=0.9                         acc 0.1003 ppl   257.122 exact 0/5 mean_rate 0.5886 q_out 0.7467
+[phase d done in 35.8 s]

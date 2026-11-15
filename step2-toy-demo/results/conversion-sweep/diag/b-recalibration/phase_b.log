@@ -1,0 +1,17 @@
+LIF-only x0.3                                 acc 0.0547 ppl  1366.514 exact 0/5 mean_rate 0.7168 q_out 0.7779
+LIF-only x0.5                                 acc 0.0610 ppl   531.373 exact 0/5 mean_rate 0.6831 q_out 0.7699
+LIF-only x0.7                                 acc 0.0802 ppl   372.200 exact 0/5 mean_rate 0.6479 q_out 0.7649
+LIF-only x1.0                                 acc 0.1003 ppl   257.122 exact 0/5 mean_rate 0.5886 q_out 0.7467
+LIF-only x1.5                                 acc 0.1546 ppl   100.089 exact 0/5 mean_rate 0.4634 q_out 0.7024
+LIF-only x2.0                                 acc 0.2034 ppl    67.179 exact 0/5 mean_rate 0.3210 q_out 0.5848
+LIF-only x3.0                                 acc 0.1439 ppl   184.845 exact 0/5 mean_rate 0.1693 q_out 0.4374
+LIF-only x5.0                                 acc 0.1387 ppl   205.443 exact 0/5 mean_rate 0.1122 q_out 0.4290
+Qin-only x0.3                                 acc 0.0816 ppl   437.482 exact 0/5 mean_rate 0.6553 q_out 0.9066
+Qin-only x0.5                                 acc 0.0973 ppl   325.558 exact 0/5 mean_rate 0.6356 q_out 0.8585
+Qin-only x0.7                                 acc 0.0947 ppl   307.694 exact 0/5 mean_rate 0.6172 q_out 0.8213
+Qin-only x1.0                                 acc 0.1003 ppl   257.122 exact 0/5 mean_rate 0.5886 q_out 0.7467
+Qin-only x1.5                                 acc 0.1178 ppl   161.837 exact 0/5 mean_rate 0.5081 q_out 0.5869
+Qin-only x2.0                                 acc 0.1279 ppl   144.032 exact 0/5 mean_rate 0.4221 q_out 0.4683
+Qin-only x3.0                                 acc 0.0171 ppl  2113.276 exact 0/5 mean_rate 0.0359 q_out 0.0229
+Qin-only x5.0                                 acc 0.0000 ppl  3220.916 exact 0/5 mean_rate 0.0001 q_out 0.0001
+[phase b done in 100.5 s]

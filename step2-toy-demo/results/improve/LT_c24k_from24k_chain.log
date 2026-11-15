@@ -1,0 +1,4 @@
+19:33:08 waiting for results/improve/LT_a1_24k/result.json
+22:53:18 A1 done: {"token_acc": 0.7820342572826142, "n_exact": 2}
+22:53:18 C: /data/chaoyi_he/dm_snn/step2-toy-demo/.venv/bin/python experiments/convert_lab.py c --name LT_c24k_from24k --out results/improve --init results/improve/LT_a1_24k/model.pt --lif-scale 2.25 --lr 0.003 --steps 24000
+02:44:50 C exit code 0

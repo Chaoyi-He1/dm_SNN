@@ -1,0 +1,6 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 3, "unique_n": 3277, "unique_exact": 0.6189, "unique_matched_frac": 0.7396, "any_n": 3438, "any_corpus_sentence": 0.6187, "seconds": 3.2, "model": "W_c"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7122, "unique_matched_frac": 0.8018, "any_n": 3438, "any_corpus_sentence": 0.7164, "seconds": 9.3, "model": "W_c"}
+{"K": 4, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7601, "unique_matched_frac": 0.8514, "any_n": 3438, "any_corpus_sentence": 0.7618, "seconds": 10.0, "model": "W_c"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7098, "unique_matched_frac": 0.7961, "any_n": 3438, "any_corpus_sentence": 0.7144, "seconds": 36.9, "model": "W_c"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7666, "unique_matched_frac": 0.8568, "any_n": 3438, "any_corpus_sentence": 0.7696, "seconds": 38.5, "model": "W_c"}

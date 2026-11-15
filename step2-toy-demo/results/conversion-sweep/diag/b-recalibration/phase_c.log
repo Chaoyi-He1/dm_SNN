@@ -1,0 +1,7 @@
+recalib q=0.5 leak0.9                         acc 0.1274 ppl   138.107 exact 0/5 mean_rate 0.5228 q_out 0.5000
+recalib q=0.6 leak0.9                         acc 0.1479 ppl   108.540 exact 0/5 mean_rate 0.4386 q_out 0.4000
+recalib q=0.75 leak0.9                        acc 0.1518 ppl   165.373 exact 0/5 mean_rate 0.2958 q_out 0.2500
+recalib q=0.85 leak0.9                        acc 0.1081 ppl   399.233 exact 0/5 mean_rate 0.1978 q_out 0.1500
+recalib q=0.9 leak0.9                         acc 0.0749 ppl   743.053 exact 0/5 mean_rate 0.1444 q_out 0.1000
+recalib q=0.95 leak0.9                        acc 0.0324 ppl  1484.015 exact 0/5 mean_rate 0.0849 q_out 0.0500
+[phase c done in 55.0 s]

@@ -1,0 +1,2 @@
+{"fq": 0.5, "refit": true, "token_acc": 0.1987695617824545, "ppl": 1616.4528975919918, "n_exact": 0, "rate_mean_all": 0.4465, "k_sqnorm_mean": [0.5, 0.5], "build_seconds": 5.4}
+{"fq": 0.75, "refit": true, "token_acc": 0.18586004605738682, "ppl": 1527.9602549102265, "n_exact": 0, "rate_mean_all": 0.2309, "k_sqnorm_mean": [0.25, 0.25], "build_seconds": 5.9}

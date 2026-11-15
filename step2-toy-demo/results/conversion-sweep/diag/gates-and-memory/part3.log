@@ -1,0 +1,6 @@
+[beta x2] acc 0.1065 ppl 620.50 | recalib acc 0.1054 ppl 696.20 exact 0 15.7 s
+[beta x4] acc 0.0993 ppl 626.17 | recalib acc 0.1014 ppl 697.55 exact 0 27.3 s
+[k fq 0.5] acc 0.1121 ppl 693.72 exact 0 k_sqnorm [0.5012, 0.5002] 34.7 s
+[k fq 0] acc 0.0968 ppl 686.44 exact 0 k_sqnorm [0.9995, 0.9991] 41.9 s
+[A0 gates beta x4] acc 0.0953 ppl 648.17 46.1 s
+part3 written 46.1 s

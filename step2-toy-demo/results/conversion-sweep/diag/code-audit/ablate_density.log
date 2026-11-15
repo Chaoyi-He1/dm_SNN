@@ -1,0 +1,17 @@
+xin_only@fq0.75 {'token_acc': 0.2345, 'ppl': 51.948, 'n_exact': 0} 2s
+k_only@fq0.75 {'token_acc': 0.537, 'ppl': 6.158, 'n_exact': 0} 3s
+head_only@fq0.75 {'token_acc': 0.6566, 'ppl': 166.048, 'n_exact': 2} 4s
+all@fq0.75 {'token_acc': 0.1029, 'ppl': 694.581, 'n_exact': 0} 7s
+xin_only@fq0.5 {'token_acc': 0.3867, 'ppl': 14.757, 'n_exact': 0} 9s
+k_only@fq0.5 {'token_acc': 0.7541, 'ppl': 2.51, 'n_exact': 4} 10s
+head_only@fq0.5 {'token_acc': 0.786, 'ppl': 31.924, 'n_exact': 2} 11s
+all@fq0.5 {'token_acc': 0.1226, 'ppl': 329.269, 'n_exact': 0} 14s
+xin_only@fq0.25 {'token_acc': 0.3937, 'ppl': 13.423, 'n_exact': 0} 15s
+k_only@fq0.25 {'token_acc': 0.7802, 'ppl': 2.283, 'n_exact': 4} 16s
+head_only@fq0.25 {'token_acc': 0.7682, 'ppl': 12.474, 'n_exact': 0} 17s
+all@fq0.25 {'token_acc': 0.0753, 'ppl': 428.53, 'n_exact': 0} 21s
+xin_only@fq0.0 {'token_acc': 0.3081, 'ppl': 32.837, 'n_exact': 0} 22s
+k_only@fq0.0 {'token_acc': 0.6915, 'ppl': 3.665, 'n_exact': 1} 23s
+head_only@fq0.0 {'token_acc': 0.7042, 'ppl': 12.213, 'n_exact': 0} 24s
+all@fq0.0 {'token_acc': 0.0279, 'ppl': 839.946, 'n_exact': 0} 27s
+saved density

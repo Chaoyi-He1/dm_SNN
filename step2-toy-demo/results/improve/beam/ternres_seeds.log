@@ -1,0 +1,9 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7226, "unique_matched_frac": 0.821, "any_n": 3438, "any_corpus_sentence": 0.7222, "seconds": 2.8, "model": "sat_T2_s1"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.8181, "unique_matched_frac": 0.883, "any_n": 3438, "any_corpus_sentence": 0.8182, "seconds": 8.1, "model": "sat_T2_s1"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.6768, "unique_matched_frac": 0.7917, "any_n": 3438, "any_corpus_sentence": 0.6748, "seconds": 2.5, "model": "sat_T2_s2"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.7614, "unique_matched_frac": 0.8423, "any_n": 3438, "any_corpus_sentence": 0.7641, "seconds": 7.9, "model": "sat_T2_s2"}
+{"K": 1, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.1337, "unique_matched_frac": 0.2742, "any_n": 3438, "any_corpus_sentence": 0.1326, "seconds": 1.8, "model": "sat_T1_s1"}
+{"K": 4, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.1715, "unique_matched_frac": 0.2913, "any_n": 3438, "any_corpus_sentence": 0.1736, "seconds": 5.7, "model": "sat_T1_s1"}
+{"K": 1, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.1449, "unique_matched_frac": 0.2877, "any_n": 3438, "any_corpus_sentence": 0.1451, "seconds": 1.8, "model": "sat_T1_s2"}
+{"K": 4, "alpha": 0.0, "demo_exact": 0, "unique_n": 3277, "unique_exact": 0.1752, "unique_matched_frac": 0.2935, "any_n": 3438, "any_corpus_sentence": 0.178, "seconds": 5.7, "model": "sat_T1_s2"}

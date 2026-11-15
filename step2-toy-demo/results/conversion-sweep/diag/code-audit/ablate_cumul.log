@@ -1,0 +1,22 @@
++b0.xin1 {'token_acc': 0.6384, 'ppl': 4.531, 'n_exact': 1} 1s
++b0.q {'token_acc': 0.3995, 'ppl': 132.732, 'n_exact': 0} 2s
++b0.k {'token_acc': 0.5358, 'ppl': 10.365, 'n_exact': 0} 4s
++b0.v {'token_acc': 0.548, 'ppl': 8.595, 'n_exact': 0} 5s
++b0.pre {'token_acc': 0.2839, 'ppl': 5925.209, 'n_exact': 0} 6s
++b0.out {'token_acc': 0.4325, 'ppl': 35.266, 'n_exact': 0} 8s
++b0.xin2 {'token_acc': 0.295, 'ppl': 57.073, 'n_exact': 0} 9s
++b0.g {'token_acc': 0.3094, 'ppl': 59.405, 'n_exact': 0} 11s
++b0.u {'token_acc': 0.295, 'ppl': 73.022, 'n_exact': 0} 12s
++b0.y2 {'token_acc': 0.2851, 'ppl': 119.642, 'n_exact': 0} 14s
++b1.xin1 {'token_acc': 0.2402, 'ppl': 90.496, 'n_exact': 0} 16s
++b1.q {'token_acc': 0.2222, 'ppl': 268.16, 'n_exact': 0} 18s
++b1.k {'token_acc': 0.2312, 'ppl': 121.756, 'n_exact': 0} 20s
++b1.v {'token_acc': 0.2297, 'ppl': 110.497, 'n_exact': 0} 22s
++b1.pre {'token_acc': 0.2042, 'ppl': 463.075, 'n_exact': 0} 25s
++b1.out {'token_acc': 0.217, 'ppl': 173.476, 'n_exact': 0} 27s
++b1.xin2 {'token_acc': 0.1718, 'ppl': 105.504, 'n_exact': 0} 30s
++b1.g {'token_acc': 0.1706, 'ppl': 113.999, 'n_exact': 0} 32s
++b1.u {'token_acc': 0.1604, 'ppl': 125.418, 'n_exact': 0} 35s
++b1.y2 {'token_acc': 0.1567, 'ppl': 135.114, 'n_exact': 0} 38s
++head {'token_acc': 0.1029, 'ppl': 694.581, 'n_exact': 0} 41s
+saved cumul

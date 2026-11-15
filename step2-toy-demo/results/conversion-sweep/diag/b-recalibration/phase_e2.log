@@ -1,0 +1,10 @@
+recalib q=0.7                                 acc 0.1590 ppl   128.941 exact 0/5 mean_rate 0.3447 q_out 0.3001
+recalib q=0.6 + LIF x1.5                      acc 0.1549 ppl   276.276 exact 0/5 mean_rate 0.2193 q_out 0.1814
+recalib q=0.6 + LIF x2.0                      acc 0.0985 ppl   869.346 exact 0/5 mean_rate 0.1298 q_out 0.0869
+recalib q=0.75 + LIF x1.5                     acc 0.0509 ppl  1397.863 exact 0/5 mean_rate 0.0850 q_out 0.0505
+recalib q=0.75 + LIF x2.0                     acc 0.0230 ppl  1728.069 exact 0/5 mean_rate 0.0547 q_out 0.0388
+recalib q=0.6 + uniform x1.5                  acc 0.0094 ppl  2384.869 exact 0/5 mean_rate 0.0962 q_out 0.0163
+recalib q=0.7 + LIF x1.5                      acc 0.0826 ppl   957.262 exact 0/5 mean_rate 0.1210 q_out 0.0757
+recalib q=0.5 + LIF x2.0                      acc 0.1520 ppl   283.171 exact 0/5 mean_rate 0.2204 q_out 0.1965
+[phase [{"recalib":0.7},{"recalib":0.6,"lif":1.5},{"recalib":0.6,"lif":2.0},{"recalib":0.75,"lif":1.5},{"recalib":0.75,"lif":2.0},{"recalib":0.6,"uniform":1.5},{"recalib":0.7,"lif":1.5},{"recalib":0.5,"lif":2.0}] done in 0.0 s]
+[phase 2 done in 0.0 s]

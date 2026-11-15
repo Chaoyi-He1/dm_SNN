@@ -1,0 +1,5 @@
+[e1] gate_refit acc 0.0996 ppl 701.24 exact 0 28.8 s
+[e2] const gates acc 0.0994 ppl 698.95 exact 0 42.2 s
+[e2b] const gates recalib acc 0.0970 ppl 707.82 exact 0 50.0 s
+[e3] A0 const gates acc 0.7923 ppl 2.20 exact 2 51.1 s
+part2 written 52.4 s

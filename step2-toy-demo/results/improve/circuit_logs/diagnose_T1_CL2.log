@@ -1,0 +1,13 @@
+[one-step gdn+ffn+state+head] worst sign err 0.0037 worst P/R 0.836 count mismatch 0.2054 head agree 0.759
+[one-step gdn] worst sign err 0.0007 worst P/R 0.889 count mismatch 0.1403 head agree 0.883
+[one-step ffn] worst sign err 0.0027 worst P/R 0.854 count mismatch 0.1823 head agree 0.912
+[one-step state] worst sign err 0.0001 worst P/R 0.964 count mismatch 0.0455 head agree 0.977
+[one-step head] worst sign err 0.0000 worst P/R 1.000 count mismatch 0.0000 head agree 0.847
+[position profile, nominal] {'1-3': 0.2182, '4-6': 0.3382, '7-10': 0.3466, '11-15': 0.3427, '16-25': 0.3402, '26-41': 0.3405}
+[tiny n_levels=4096] tf worst sign err 0.0190 agree 0.862 | one-step worst sign err 0.0000 count mismatch 0.00357
+[tiny n_levels=1024] tf worst sign err 0.0249 agree 0.868 | one-step worst sign err 0.0000 count mismatch 0.00946
+[tiny sigma_g=0.0001] tf worst sign err 0.0052 agree 0.961 | one-step worst sign err 0.0000 count mismatch 0.00079
+[tiny sigma_g=0.001] tf worst sign err 0.0256 agree 0.860 | one-step worst sign err 0.0000 count mismatch 0.00806
+[tiny read_noise=0.0001] tf worst sign err 0.0082 agree 0.920 | one-step worst sign err 0.0000 count mismatch 0.00091
+[tiny read_noise=0.001] tf worst sign err 0.0243 agree 0.848 | one-step worst sign err 0.0000 count mismatch 0.00646
+wrote results/improve/circuit_T1_CL2/circuit_diagnose.json and results/improve/circuit_T1_CL2/circuit.md (204.9 s)

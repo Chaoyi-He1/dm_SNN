@@ -1,6 +1,6 @@
 # 检查点清单
 
-这些是 PyTorch `state_dict`(`torch.save(model.state_dict())`),用 torch 2.14 保存。路径相对于本目录 `step2-toy-demo/results/`。其余检查点(转换扫描的中间运行等)仍不进版本库。
+这些是 PyTorch `state_dict`(`torch.save(model.state_dict())`),用 torch 2.14 保存。路径相对于本目录 `step2-toy-demo/results/`。其余检查点(转换扫描的中间运行等)在 2026-11-14 补入,列在文末一节。
 
 加载:脉冲模型的类型、每 token 最多几个脉冲(levels)、模型尺寸和 leak 都由同目录的 `result.json` 决定,用现成的装载函数即可:
 
@@ -60,3 +60,59 @@ print(model.generate(sl.ids[0][:5], 40))
 | `improve/ternres_sat_T1_s2_c/model.pt` | 三值残差 sat T=1 C,种子 2 | sat 规则,T=1,token 准确率 0.626,demo 0/5 | 4.4 MiB | `9f492efd3ba56c8f` |
 
 合计 37 个文件,184.4 MiB(前面各方向的 21 个 113.6 MiB,三值残差的 16 个 70.8 MiB)。sha256 只列前 16 位。
+
+## 2026-11-14 补入的其余检查点
+
+按“GitHub 保持完整”的要求,下面这些此前不进版本库的检查点也入库了(转换扫描与诊断的中间运行、各改进方向的 A1、默认配置首跑的 A1 / C)。格式同上;有 `result.json` 的走 `beam_eval.load_model`,没有的按“加载”一列。`conversion-sweep/_smoke/`(冒烟测试)与 `tiny/` 仍不进。
+
+| 文件 | 模型 | 说明 | 加载 | 大小 | sha256 |
+|---|---|---|---|---|---|
+| `ckpt/a1.pt` | A1(leak 0),T=1,9 月 24 日默认配置首跑 | token 准确率 0.511 | `load_model`(按文件名识别) | 4.4 MiB | `785381c2fa9bd928` |
+| `ckpt/c.pt` | C(leak 0.9),T=1,9 月 24 日默认配置首跑 | token 准确率 0.407 | `load_model`(按文件名识别) | 4.4 MiB | `96c87fe36343461f` |
+| `conversion-sweep/C1_base4k/model.pt` | C(leak 0.9),T=1 | token 准确率 0.516,demo 0/5 | `load_model` | 4.4 MiB | `67dbf27cc629596a` |
+| `conversion-sweep/C2_thr15/model.pt` | C(leak 0.9),T=1 | token 准确率 0.540,demo 0/5 | `load_model` | 4.4 MiB | `9e8c3a6829f366cb` |
+| `conversion-sweep/C3_anneal1000/model.pt` | C(leak 0.9),T=1 | token 准确率 0.539,demo 0/5 | `load_model` | 4.4 MiB | `83b7b401ec6fae93` |
+| `conversion-sweep/C4_lr3e3/model.pt` | C(leak 0.9),T=1 | token 准确率 0.637,demo 0/5 | `load_model` | 4.4 MiB | `11f941f8850f26a1` |
+| `conversion-sweep/C6_lif25/model.pt` | C(leak 0.9),T=1 | token 准确率 0.549,demo 0/5 | `load_model` | 4.4 MiB | `6b1672e0405b7562` |
+| `conversion-sweep/C7_lif25_lr3e3/model.pt` | C(leak 0.9),T=1 | token 准确率 0.663,demo 1/5 | `load_model` | 4.4 MiB | `95a1504630520db7` |
+| `conversion-sweep/CF1_pk4w_lif225_lr3e3/model.pt` | C(leak 0.9),T=1 | token 准确率 0.649,demo 0/5 | `load_model` | 4.4 MiB | `71bca1dd11fc8d98` |
+| `conversion-sweep/CF2_pk4w_lif225_lr5e3_w300/model.pt` | C(leak 0.9),T=1 | token 准确率 0.639,demo 0/5 | `load_model` | 4.4 MiB | `77ba5bf285a0111c` |
+| `conversion-sweep/CF3_s1_lif225_lr3e3/model.pt` | C(leak 0.9),T=1 | token 准确率 0.653,demo 0/5 | `load_model` | 4.4 MiB | `852c735fb51b03e1` |
+| `conversion-sweep/CF4_pk4w_lif225_lr3e3_anneal1000/model.pt` | C(leak 0.9),T=1 | token 准确率 0.624,demo 0/5 | `load_model` | 4.4 MiB | `491f85a3ee7615f8` |
+| `conversion-sweep/CL1_l1_lif225_lr3e3/model.pt` | C(leak 0.9),T=1 | token 准确率 0.682,demo 1/5 | `load_model` | 4.4 MiB | `6b8e011f5beec706` |
+| `conversion-sweep/L1_fq50_12k/model.pt` | A1(leak 0),T=1 | token 准确率 0.740,demo 1/5 | `load_model` | 4.4 MiB | `b300001b2d9fba16` |
+| `conversion-sweep/L2_fq50_lr5e3_w300_12k/model.pt` | A1(leak 0),T=1 | token 准确率 0.746,demo 1/5 | `load_model` | 4.4 MiB | `c39ab02e1919ed0f` |
+| `conversion-sweep/PK3_dense/model.pt` | A1(leak 0),T=1 | token 准确率 0.671,demo 1/5 | `load_model` | 4.4 MiB | `b290a44a40899ee7` |
+| `conversion-sweep/PK4_kinds/model.pt` | A1(leak 0),T=1 | token 准确率 0.671,demo 2/5 | `load_model` | 4.4 MiB | `8922b2e634e83fba` |
+| `conversion-sweep/PK4_lr5e3_w300/model.pt` | A1(leak 0),T=1 | token 准确率 0.701,demo 0/5 | `load_model` | 4.4 MiB | `4b99b2d78169a340` |
+| `conversion-sweep/R1_base6k/model.pt` | A1(leak 0),T=1 | token 准确率 0.659,demo 0/5 | `load_model` | 4.4 MiB | `5049542c6336d35a` |
+| `conversion-sweep/R2_fq50/model.pt` | A1(leak 0),T=1 | token 准确率 0.677,demo 0/5 | `load_model` | 4.4 MiB | `6707e1595f4184e7` |
+| `conversion-sweep/R3_lr1e3/model.pt` | A1(leak 0),T=1 | token 准确率 0.538,demo 0/5 | `load_model` | 4.4 MiB | `08cfd6ccbe8428b2` |
+| `conversion-sweep/R4_kd/model.pt` | A1(leak 0),T=1 | token 准确率 0.637,demo 1/5 | `load_model` | 4.4 MiB | `5e0556c623c023ae` |
+| `conversion-sweep/S1_fq50_lr5e3_w300/model.pt` | A1(leak 0),T=1 | token 准确率 0.698,demo 1/5 | `load_model` | 4.4 MiB | `f79d23481e9aa295` |
+| `conversion-sweep/S2_fq50_kd03_T1/model.pt` | A1(leak 0),T=1 | token 准确率 0.676,demo 2/5 | `load_model` | 4.4 MiB | `b8625a03f6d8582c` |
+| `conversion-sweep/S3_fq50_w300/model.pt` | A1(leak 0),T=1 | token 准确率 0.674,demo 1/5 | `load_model` | 4.4 MiB | `be626b8da2894611` |
+| `conversion-sweep/S4_fq40/model.pt` | A1(leak 0),T=1 | token 准确率 0.678,demo 1/5 | `load_model` | 4.4 MiB | `644572fbd60fdbd4` |
+| `conversion-sweep/S5_fq60/model.pt` | A1(leak 0),T=1 | token 准确率 0.670,demo 0/5 | `load_model` | 4.4 MiB | `2e1df25637a48efa` |
+| `conversion-sweep/S6_fq75_lr5e3/model.pt` | A1(leak 0),T=1 | token 准确率 0.677,demo 1/5 | `load_model` | 4.4 MiB | `f6f5584569a861a6` |
+| `conversion-sweep/diag/b-recalibration/base_c/model.pt` | C(leak 0.9),T=1 | token 准确率 0.272,demo 0/5 | `load_model` | 4.4 MiB | `9f1be78cffe7ef7a` |
+| `conversion-sweep/diag/b-recalibration/base_c_anneal150/model.pt` | C(leak 0.9),T=1 | token 准确率 0.233,demo 0/5 | `load_model` | 4.4 MiB | `641245becf608e64` |
+| `conversion-sweep/diag/b-recalibration/init_lif2.pt` | B 再标定诊断用的 C 初始化,T=1 | 见 `conversion-sweep/README.md` 的 B 再标定 | `SpikingLM` 默认配置 + `load_state_dict` | 4.4 MiB | `7dd27204004f649d` |
+| `conversion-sweep/diag/b-recalibration/init_uni15.pt` | B 再标定诊断用的 C 初始化,T=1 | 见 `conversion-sweep/README.md` 的 B 再标定 | `SpikingLM` 默认配置 + `load_state_dict` | 4.4 MiB | `fd9ae00a5b85bc48` |
+| `conversion-sweep/diag/b-recalibration/lif2_c/model.pt` | C(leak 0.9),T=1 | token 准确率 0.338,demo 0/5 | `load_model` | 4.4 MiB | `ed1e879009ad0d5a` |
+| `conversion-sweep/diag/b-recalibration/lif2_c_anneal150/model.pt` | C(leak 0.9),T=1 | token 准确率 0.287,demo 0/5 | `load_model` | 4.4 MiB | `7728cd362bc9a7a1` |
+| `conversion-sweep/diag/b-recalibration/uni15_c/model.pt` | C(leak 0.9),T=1 | token 准确率 0.314,demo 0/5 | `load_model` | 4.4 MiB | `9c91d2c794ddd75e` |
+| `conversion-sweep/diag/b-recalibration/uni15_c_anneal150/model.pt` | C(leak 0.9),T=1 | token 准确率 0.273,demo 0/5 | `load_model` | 4.4 MiB | `de79ad29e727fbc0` |
+| `conversion-sweep/diag/fq-scan/fq050_plain/model.pt` | A1(leak 0),T=1 | token 准确率 0.348,demo 0/5 | `load_model` | 4.4 MiB | `9c7d32c27a480b38` |
+| `conversion-sweep/diag/fq-scan/fq050_refit/model.pt` | A1(leak 0),T=1 | token 准确率 0.283,demo 0/5 | `load_model` | 4.4 MiB | `409d7ffbaaaade77` |
+| `conversion-sweep/diag/fq-scan/fq060_plain/model.pt` | A1(leak 0),T=1 | token 准确率 0.340,demo 0/5 | `load_model` | 4.4 MiB | `e7dd46f68b198eed` |
+| `conversion-sweep/diag/fq-scan/fq075_plain/model.pt` | A1(leak 0),T=1 | token 准确率 0.330,demo 0/5 | `load_model` | 4.4 MiB | `9e244ea1e84251e4` |
+| `conversion-sweep/diag/fq-scan/fq075_refit/model.pt` | A1(leak 0),T=1 | token 准确率 0.245,demo 0/5 | `load_model` | 4.4 MiB | `2fdb88a2af2543d2` |
+| `improve/LT_a1_24k/model.pt` | A1(leak 0),T=1 | token 准确率 0.782,demo 2/5 | `load_model` | 4.4 MiB | `cd3013251f0b4b49` |
+| `improve/T4mem_a1/model.pt` | A1(leak 0),T=4(只在 mem) | token 准确率 0.776,demo 2/5 | `load_model` | 4.4 MiB | `034a0d9f3e5fdd4c` |
+| `improve/T4mem_c/model.pt` | C(leak 0.9),T=4(只在 mem) | token 准确率 0.783,demo 3/5 | `load_model` | 4.4 MiB | `5b6ad27e7b5d1178` |
+| `improve/T8_a1/model.pt` | A1(leak 0),T=8 | token 准确率 0.836,demo 5/5 | `load_model` | 4.4 MiB | `cbacfe2027abceff` |
+| `improve/WT4_a1/model.pt` | A1(leak 0),T=4,d=256 | token 准确率 0.835,demo 5/5 | `load_model` | 11.3 MiB | `ba8c8f4ff79081aa` |
+| `improve/W_a1/model.pt` | A1(leak 0),T=1,d=256 | token 准确率 0.831,demo 5/5 | `load_model` | 11.3 MiB | `24305826c590698c` |
+
+本节 47 个文件,221.7 MiB。

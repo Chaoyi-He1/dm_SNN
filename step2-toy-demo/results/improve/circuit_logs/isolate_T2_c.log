@@ -1,0 +1,6 @@
+[isolate gdn] agree 0.826 worst sign err 0.0914 worst P/R 0.681 state 0.0091 acc 0.7939 exact 5
+[isolate ffn] agree 0.910 worst sign err 0.0534 worst P/R 0.734 state 0.0061 acc 0.8161 exact 5
+[isolate state] agree 0.930 worst sign err 0.0378 worst P/R 0.771 state 0.0060 acc 0.8250 exact 5
+[isolate head] agree 0.895 worst sign err 0.0000 worst P/R 1.000 state 0.0000 acc 0.8199 exact 5
+[isolate gdn+ffn+state+head] agree 0.781 worst sign err 0.1045 worst P/R 0.648 state 0.0093 acc 0.7729 exact 1
+wrote results/improve/T2_c/circuit_isolate.json and results/improve/T2_c/circuit.md (432.0 s)

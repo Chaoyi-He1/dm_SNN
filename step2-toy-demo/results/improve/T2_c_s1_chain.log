@@ -1,0 +1,13 @@
+00:20:21 waiting for results/improve/T2_a1_s1/result.json
+01:51:43 A1 done: {"token_acc": 0.8158040712040476, "n_exact": 5}
+01:51:43 bscan: /data/chaoyi_he/dm_snn/step2-toy-demo/.venv/bin/python experiments/convert_lab.py bscan --init results/improve/T2_a1_s1/model.pt --scale-list 1,1.5,2,2.25,2.5,3,4 --save results/improve/T2_c_s1_bscan.json
+{"lif_scale": 1.0, "token_acc": 0.1685, "ppl": 340.783}
+{"lif_scale": 1.5, "token_acc": 0.2859, "ppl": 46.461}
+{"lif_scale": 2.0, "token_acc": 0.1961, "ppl": 118.482}
+{"lif_scale": 2.25, "token_acc": 0.1803, "ppl": 159.348}
+{"lif_scale": 2.5, "token_acc": 0.1754, "ppl": 180.899}
+{"lif_scale": 3.0, "token_acc": 0.175, "ppl": 189.697}
+{"lif_scale": 4.0, "token_acc": 0.1751, "ppl": 189.919}
+01:52:19 bscan rows [{'lif_scale': 1.0, 'token_acc': 0.1685, 'ppl': 340.783}, {'lif_scale': 1.5, 'token_acc': 0.2859, 'ppl': 46.461}, {'lif_scale': 2.0, 'token_acc': 0.1961, 'ppl': 118.482}, {'lif_scale': 2.25, 'token_acc': 0.1803, 'ppl': 159.348}, {'lif_scale': 2.5, 'token_acc': 0.1754, 'ppl': 180.899}, {'lif_scale': 3.0, 'token_acc': 0.175, 'ppl': 189.697}, {'lif_scale': 4.0, 'token_acc': 0.1751, 'ppl': 189.919}]; chosen lif_scale 1.5
+01:52:19 C: /data/chaoyi_he/dm_snn/step2-toy-demo/.venv/bin/python experiments/convert_lab.py c --name T2_c_s1 --out results/improve --init results/improve/T2_a1_s1/model.pt --lif-scale 1.5 --lr 0.003 --steps 12000 --seed 1
+03:26:41 C exit code 0

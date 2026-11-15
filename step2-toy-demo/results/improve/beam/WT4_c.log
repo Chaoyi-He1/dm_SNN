@@ -1,0 +1,6 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9536, "unique_matched_frac": 0.9772, "any_n": 3438, "any_corpus_sentence": 0.9543, "seconds": 20.8, "model": "WT4_c"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9753, "unique_matched_frac": 0.9888, "any_n": 3438, "any_corpus_sentence": 0.9753, "seconds": 76.8, "model": "WT4_c"}
+{"K": 4, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9768, "unique_matched_frac": 0.9904, "any_n": 3438, "any_corpus_sentence": 0.9767, "seconds": 78.7, "model": "WT4_c"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9753, "unique_matched_frac": 0.9887, "any_n": 3438, "any_corpus_sentence": 0.9753, "seconds": 298.8, "model": "WT4_c"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9771, "unique_matched_frac": 0.9905, "any_n": 3438, "any_corpus_sentence": 0.977, "seconds": 300.1, "model": "WT4_c"}

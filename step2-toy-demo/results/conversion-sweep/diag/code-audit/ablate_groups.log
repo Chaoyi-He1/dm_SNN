@@ -1,0 +1,16 @@
+none {'token_acc': 0.842, 'ppl': 1.794, 'n_exact': 5} 1s
+all {'token_acc': 0.1029, 'ppl': 694.581, 'n_exact': 0} 4s
+xin_only {'token_acc': 0.2345, 'ppl': 51.948, 'n_exact': 0} 6s
+attn_only {'token_acc': 0.3052, 'ppl': 45.384, 'n_exact': 0} 8s
+qkv_only {'token_acc': 0.3467, 'ppl': 23.606, 'n_exact': 0} 9s
+qk_only {'token_acc': 0.2591, 'ppl': 284368770.759, 'n_exact': 0} 10s
+q_only {'token_acc': 0.0949, 'ppl': 9.836652125403657e+97, 'n_exact': 0} 11s
+k_only {'token_acc': 0.537, 'ppl': 6.158, 'n_exact': 0} 12s
+ffn_only {'token_acc': 0.4137, 'ppl': 14.828, 'n_exact': 0} 14s
+gu_only {'token_acc': 0.4341, 'ppl': 13.915, 'n_exact': 0} 15s
+residual_out_only {'token_acc': 0.4548, 'ppl': 10.275, 'n_exact': 0} 16s
+block0_all {'token_acc': 0.2851, 'ppl': 119.642, 'n_exact': 0} 18s
+block1_all {'token_acc': 0.3596, 'ppl': 17.811, 'n_exact': 0} 20s
+all_but_head {'token_acc': 0.1567, 'ppl': 135.114, 'n_exact': 0} 23s
+all_but_qk {'token_acc': 0.1217, 'ppl': 624.313, 'n_exact': 0} 25s
+saved groups

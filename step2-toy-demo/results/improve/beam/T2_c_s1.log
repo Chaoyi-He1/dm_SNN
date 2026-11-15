@@ -1,0 +1,4 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.8435, "unique_matched_frac": 0.9028, "any_n": 3438, "any_corpus_sentence": 0.8435, "seconds": 3.3, "model": "T2_c_s1"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9112, "unique_matched_frac": 0.9445, "any_n": 3438, "any_corpus_sentence": 0.9116, "seconds": 37.0, "model": "T2_c_s1"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9304, "unique_matched_frac": 0.9627, "any_n": 3438, "any_corpus_sentence": 0.9308, "seconds": 37.2, "model": "T2_c_s1"}

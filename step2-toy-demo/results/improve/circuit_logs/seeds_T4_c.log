@@ -1,0 +1,6 @@
+[noise seed 0] agree 0.919 worst sign err 0.0845 acc 0.8168 exact 3
+[noise seed 1] agree 0.921 worst sign err 0.0828 acc 0.8171 exact 5
+[noise seed 2] agree 0.913 worst sign err 0.0846 acc 0.8177 exact 3
+[noise seed 3] agree 0.906 worst sign err 0.0830 acc 0.8168 exact 4
+[noise seed 4] agree 0.914 worst sign err 0.0841 acc 0.8173 exact 4
+wrote results/improve/T4_c/circuit_seeds.json and results/improve/T4_c/circuit.md (372.5 s)

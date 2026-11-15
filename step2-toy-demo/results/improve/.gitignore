@@ -1,4 +1,1 @@
-*.pt
-*.log
-_stopped_for_gpu0/
 __pycache__/

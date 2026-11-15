@@ -1,0 +1,49 @@
+前缀: 'He put his wet and'
+目标: ' dirty shirt into the dryer and watched it spin.'
+  A0       一致   ' dirty shirt into the dryer and watched it spin.'
+  A1       不一致  ' went on his adventures.'
+  B        不一致  ' said and said went went for in his dad and he his dad and said it in the his dad dad and the and Sam his dad stack'
+  C        不一致  ' into the river.'
+  circuit  不一致  ' dad.'
+
+前缀: "He couldn't wait any"
+目标: ' longer and ran to meet them.'
+  A0       一致   ' longer and ran to meet them.'
+  A1       不一致  ' longer.'
+  B        不一致  ' could and have, and play until the out was until it feel the and have. feel was he he could he could have found Sn the it the the the the catch if help out for help.'
+  C        不一致  ' longer and ran to play with his teddy bear.'
+  circuit  不一致  ' longer faster.'
+
+前缀: 'She ran around the whole'
+目标: ' park, but she could not find him anywhere.'
+  A0       一致   ' park, but she could not find him anywhere.'
+  A1       不一致  ' her back and saw a bush.'
+  B        不一致  ' grabbed was said she said came came opened the she was stepped got really said was was was was was was was a was about needed a a a the the the full the little the door than top than'
+  C        不一致  ' and shouted, "What is, I can I won\'t want to be like.'
+  circuit  不一致  ' house.'
+
+前缀: 'They showed her how to'
+目标: ' use a wet cloth to wipe the gum away.'
+  A0       一致   ' use a wet cloth to wipe the gum away.'
+  A1       不一致  ' be more careful not the most amazing thing.'
+  B        不一致  ' help me each and the both their all and and all and said and said each other and said and each each other and put against the that. that....'
+  C        不一致  ' be helpful and said goodbye.'
+  circuit  不一致  ' the water the best friend.'
+
+前缀: 'They all looked at the'
+目标: ' gum and talked about how amazing it was.'
+  A0       一致   ' gum and talked about how amazing it was.'
+  A1       不一致  ' old and saw a big tree.'
+  B        不一致  ' and said saw and and said and said had put thought and said goodbye that had put thought to the day a great idea him that had it.'
+  C        不一致  ' dinner.'
+  circuit  不一致  ' gum and talked about.'
+
+| 阶段 | token 准确率 | 困惑度 | 补全正确 |
+|---|---|---|---|
+| A0 | 0.8420 | 1.794 | 5/5 |
+| A1_init | 0.1041 | 695.153 | 0/5 |
+| A1 | 0.5114 | 6.986 | 0/5 |
+| B | 0.1003 | 257.122 | 0/5 |
+| C | 0.4072 | 13.185 | 0/5 |
+| circuit_ideal | 0.4072 | 13.185 | 0/5 |
+| circuit_nominal | 0.3864 | 14.876 | 0/5 |

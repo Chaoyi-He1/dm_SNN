@@ -1,0 +1,20 @@
+A0 runs 1 (len [33]), A1 runs 3 (len [20, 20, 20]), C runs 3 (len [15, 15, 15])
+   linear acc vs cumLR: c0=0.3066 c1=0.0667/unit-LR rmse=0.0055; mean acc-gain per unit cumLR by thirds of run: [0.069, 0.066, 0.178]
+[A1 seed0] final acc 0.5143 ppl 7.004 | fit acc=a-b*exp(-step/tau): a=0.5456 b=0.2470 tau=899 rmse=0.0020 | fit vs cumLR: a=4.4274 tau_lam=60.000 rmse=0.0056 | lnppl fit a=1.8831 tau=594 | slope acc/100: first 0.0187 mid 0.0093 last500 0.0030 | lnppl slope/100: mid -0.0565 last -0.0129 | steps->0.842 None ->0.511 1765.9076014960126
+   window(step, lr, d_acc, d_lnppl, d_lrint, acc_per_lr):
+   linear acc vs cumLR: c0=0.3052 c1=0.0665/unit-LR rmse=0.0049; mean acc-gain per unit cumLR by thirds of run: [0.066, 0.068, 0.178]
+[A1 seed1] final acc 0.5128 ppl 6.967 | fit acc=a-b*exp(-step/tau): a=0.5386 b=0.2444 tau=846 rmse=0.0025 | fit vs cumLR: a=4.4178 tau_lam=60.000 rmse=0.0050 | lnppl fit a=1.8946 tau=578 | slope acc/100: first 0.0192 mid 0.0101 last500 0.0030 | lnppl slope/100: mid -0.0563 last -0.0142 | steps->0.842 None ->0.511 1847.0105998209542
+   window(step, lr, d_acc, d_lnppl, d_lrint, acc_per_lr):
+   linear acc vs cumLR: c0=0.3045 c1=0.0671/unit-LR rmse=0.0048; mean acc-gain per unit cumLR by thirds of run: [0.071, 0.068, 0.078]
+[A1 seed2] final acc 0.5114 ppl 6.986 | fit acc=a-b*exp(-step/tau): a=0.5392 b=0.2463 tau=839 rmse=0.0024 | fit vs cumLR: a=4.4523 tau_lam=60.000 rmse=0.0049 | lnppl fit a=1.8836 tau=589 | slope acc/100: first 0.0196 mid 0.0098 last500 0.0021 | lnppl slope/100: mid -0.0587 last -0.0118 | steps->0.842 None ->0.511 1818.6231889304677
+   window(step, lr, d_acc, d_lnppl, d_lrint, acc_per_lr):
+   linear acc vs cumLR: c0=0.2688 c1=0.1868/unit-LR rmse=0.0068; mean acc-gain per unit cumLR by thirds of run: [0.259, 0.135, 0.178]
+[C seed0] final acc 0.4056 ppl 13.189 | fit acc=a-b*exp(-step/tau): a=0.4106 b=0.1812 tau=375 rmse=0.0024 | fit vs cumLR: a=0.4634 tau_lam=0.557 rmse=0.0031 | lnppl fit a=2.5682 tau=312 | slope acc/100: first 0.0203 mid 0.0069 last500 0.0014 | lnppl slope/100: mid -0.0528 last -0.0098 | steps->0.842 None ->0.511 None
+   window(step, lr, d_acc, d_lnppl, d_lrint, acc_per_lr):
+   linear acc vs cumLR: c0=0.2696 c1=0.1844/unit-LR rmse=0.0057; mean acc-gain per unit cumLR by thirds of run: [0.242, 0.141, 0.185]
+[C seed1] final acc 0.4066 ppl 13.136 | fit acc=a-b*exp(-step/tau): a=0.4110 b=0.1762 tau=394 rmse=0.0019 | fit vs cumLR: a=0.4784 tau_lam=0.650 rmse=0.0027 | lnppl fit a=2.5664 tau=321 | slope acc/100: first 0.0192 mid 0.0079 last500 0.0012 | lnppl slope/100: mid -0.0534 last -0.0111 | steps->0.842 None ->0.511 None
+   window(step, lr, d_acc, d_lnppl, d_lrint, acc_per_lr):
+   linear acc vs cumLR: c0=0.2687 c1=0.1887/unit-LR rmse=0.0075; mean acc-gain per unit cumLR by thirds of run: [0.259, 0.146, 0.222]
+[C seed2] final acc 0.4072 ppl 13.185 | fit acc=a-b*exp(-step/tau): a=0.4106 b=0.1855 tau=359 rmse=0.0027 | fit vs cumLR: a=0.4562 tau_lam=0.506 rmse=0.0034 | lnppl fit a=2.5693 tau=299 | slope acc/100: first 0.0202 mid 0.0077 last500 0.0014 | lnppl slope/100: mid -0.0534 last -0.0092 | steps->0.842 None ->0.511 None
+   window(step, lr, d_acc, d_lnppl, d_lrint, acc_per_lr):
+[A0 seed0] steps 3300 final acc 0.8420 ppl 1.794 fit a=0.8366 b=0.6957 tau=395 rmse=0.0128

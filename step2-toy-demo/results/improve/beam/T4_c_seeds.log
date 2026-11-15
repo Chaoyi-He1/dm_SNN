@@ -1,0 +1,7 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9457, "unique_matched_frac": 0.9702, "any_n": 3438, "any_corpus_sentence": 0.9439, "seconds": 3.4, "model": "T4_c_s1"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.975, "unique_matched_frac": 0.9868, "any_n": 3438, "any_corpus_sentence": 0.9741, "seconds": 39.5, "model": "T4_c_s1"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9826, "unique_matched_frac": 0.9927, "any_n": 3438, "any_corpus_sentence": 0.982, "seconds": 40.1, "model": "T4_c_s1"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9417, "unique_matched_frac": 0.9676, "any_n": 3438, "any_corpus_sentence": 0.9415, "seconds": 3.2, "model": "T4_c_s2"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9695, "unique_matched_frac": 0.9835, "any_n": 3438, "any_corpus_sentence": 0.9703, "seconds": 40.2, "model": "T4_c_s2"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9783, "unique_matched_frac": 0.9895, "any_n": 3438, "any_corpus_sentence": 0.9785, "seconds": 40.4, "model": "T4_c_s2"}

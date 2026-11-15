@@ -1,0 +1,21 @@
+eval sets: unique 3277 sentences, any 3438 prefixes
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9118, "unique_matched_frac": 0.9469, "any_n": 3438, "any_corpus_sentence": 0.9113, "seconds": 4.7, "model": "T4_c"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9548, "unique_matched_frac": 0.9729, "any_n": 3438, "any_corpus_sentence": 0.9549, "seconds": 15.2, "model": "T4_c"}
+{"K": 4, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9673, "unique_matched_frac": 0.9828, "any_n": 3438, "any_corpus_sentence": 0.9671, "seconds": 14.4, "model": "T4_c"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9551, "unique_matched_frac": 0.9728, "any_n": 3438, "any_corpus_sentence": 0.9552, "seconds": 57.3, "model": "T4_c"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9686, "unique_matched_frac": 0.9836, "any_n": 3438, "any_corpus_sentence": 0.9683, "seconds": 58.0, "model": "T4_c"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.8834, "unique_matched_frac": 0.9263, "any_n": 3438, "any_corpus_sentence": 0.8828, "seconds": 4.1, "model": "T2_a1"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9286, "unique_matched_frac": 0.9539, "any_n": 3438, "any_corpus_sentence": 0.9293, "seconds": 15.0, "model": "T2_a1"}
+{"K": 4, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9445, "unique_matched_frac": 0.9686, "any_n": 3438, "any_corpus_sentence": 0.9444, "seconds": 14.6, "model": "T2_a1"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9286, "unique_matched_frac": 0.9538, "any_n": 3438, "any_corpus_sentence": 0.9293, "seconds": 55.0, "model": "T2_a1"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9454, "unique_matched_frac": 0.9692, "any_n": 3438, "any_corpus_sentence": 0.9456, "seconds": 56.1, "model": "T2_a1"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.8871, "unique_matched_frac": 0.9301, "any_n": 3438, "any_corpus_sentence": 0.8839, "seconds": 4.8, "model": "W_a1"}
+{"K": 4, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9371, "unique_matched_frac": 0.9629, "any_n": 3438, "any_corpus_sentence": 0.9386, "seconds": 16.5, "model": "W_a1"}
+{"K": 4, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9432, "unique_matched_frac": 0.9699, "any_n": 3438, "any_corpus_sentence": 0.943, "seconds": 16.2, "model": "W_a1"}
+{"K": 16, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9374, "unique_matched_frac": 0.9631, "any_n": 3438, "any_corpus_sentence": 0.9389, "seconds": 65.1, "model": "W_a1"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.9423, "unique_matched_frac": 0.969, "any_n": 3438, "any_corpus_sentence": 0.9421, "seconds": 68.0, "model": "W_a1"}
+{"K": 1, "alpha": 0.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.4132, "unique_matched_frac": 0.5702, "any_n": 3438, "any_corpus_sentence": 0.4124, "seconds": 4.2, "model": "LT_cont12k"}
+{"K": 4, "alpha": 0.0, "demo_exact": 4, "unique_n": 3277, "unique_exact": 0.5157, "unique_matched_frac": 0.631, "any_n": 3438, "any_corpus_sentence": 0.5192, "seconds": 11.2, "model": "LT_cont12k"}
+{"K": 4, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.5539, "unique_matched_frac": 0.6883, "any_n": 3438, "any_corpus_sentence": 0.5561, "seconds": 12.0, "model": "LT_cont12k"}
+{"K": 16, "alpha": 0.0, "demo_exact": 4, "unique_n": 3277, "unique_exact": 0.5084, "unique_matched_frac": 0.6148, "any_n": 3438, "any_corpus_sentence": 0.5131, "seconds": 40.9, "model": "LT_cont12k"}
+{"K": 16, "alpha": 1.0, "demo_exact": 5, "unique_n": 3277, "unique_exact": 0.5716, "unique_matched_frac": 0.7063, "any_n": 3438, "any_corpus_sentence": 0.575, "seconds": 44.5, "model": "LT_cont12k"}
