@@ -12,6 +12,8 @@ n_lif = n_blocks·(6·d + 2·d_ff),按 d 宽度记(q、k、v、pre 各 d,out d,g
 它等于 8 个 LIF 点的真实神经元数只在 n_heads·dk = d 时成立(真实配置满足,tiny 测试配置不满足)。
 cmp_decisions:SpikingLM 是 Q_in1、Q_in2(各块)加 q_out;TernaryResidualLM 是 q_emb 加各块的 m1、m2;
 每个比较点 d 个通道、每通道 2T 个比较器(阈值 ±j·thr/T),所以两种模型都是 (n_blocks·2·d + d)·2T。
+BinaryResidualLM(残差流 0/1)只有 q_emb 是比较器,而且无符号,每通道 T 个:d·T。它的合并 m1、m2 是置位复位锁存器 / 小计数器
+(sr、src)或异或门(xor),是数字逻辑,不计入比较器判决,能耗模型里也没有单列这一项(每通道每 token 一次 fJ 量级的翻转)。
 """
 import toy_demo  # noqa: F401  先导入它才能让 step1 的 snn_spec 可见
 import numpy as np
@@ -21,13 +23,15 @@ from toy_demo.data import split_inputs_targets
 
 
 def model_kind(model):
-    """"ternres"(残差流全程三值,有 q_emb)或 "spiking"(SpikingLM)。"""
-    return "ternres" if hasattr(model, "q_emb") else "spiking"
+    """"spiking"(SpikingLM,实值残差)、"ternres"(残差流全程三值,有 q_emb)或 "binres"(残差流 0/1,q_emb 是无符号量化器)。"""
+    if not hasattr(model, "q_emb"):
+        return "spiking"
+    return "binres" if type(model.q_emb).__name__ == "BinaryQuantizer" else "ternres"
 
 
 def _model_levels(model):
     """全模型共用的脉冲级数 T。各脉冲点级数不一致时无法用一个脉冲窗口表示,直接报错。"""
-    if model_kind(model) == "ternres":
+    if model_kind(model) != "spiking":
         mods = [model.q_emb] + [m for blk in model.blocks for m in (blk.m1, blk.m2)]
     else:
         mods = [model.q_out] + [q for blk in model.blocks for q in (blk.q_in1, blk.q_in2)]
@@ -50,7 +54,8 @@ def count_events(model, tokens, dev=None, batch=64):
     dev = model.device if dev is None else dev
     cfg, nb = model.cfg, len(model.blocks)
     T = _model_levels(model)
-    spiking = model_kind(model) == "spiking"
+    kind = model_kind(model)
+    spiking = kind == "spiking"
     vocab = model.emb.num_embeddings
 
     def pulses(s):                                     # 每个元素的脉冲数 c = round(|s|·T)
@@ -110,7 +115,7 @@ def count_events(model, tokens, dev=None, batch=64):
         embed_rows=_np(embed / n_tokens),
         spikes_lif=spikes / n_tokens,
         n_lif=nb * (6 * d + 2 * cfg.d_ff),
-        cmp_decisions=(nb * 2 * d + d) * 2 * T,
+        cmp_decisions=d * T if kind == "binres" else (nb * 2 * d + d) * 2 * T,
         gain=dict(k_rows=k_rows / n_tokens, q_rows=q_rows / n_tokens, alpha_mean=alpha_sum / alpha_n,
                   s_rms_norm=(s_sq / s_n) ** 0.5 / s_max if s_max > 0 else 0.0))
 
