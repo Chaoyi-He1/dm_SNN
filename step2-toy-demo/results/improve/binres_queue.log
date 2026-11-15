@@ -29,3 +29,6 @@
 [2026-11-15 03:34:08] pushed: new results
 [2026-11-15 03:50:15] launch binres_src_T2_s2 (src 2 2)
 [2026-11-15 03:50:35] evaluate binres_src_T2
+[2026-11-15 03:51:39] pushed: new results
+[2026-11-15 04:19:51] launch binres_src_T4_s1 (src 4 1)
+[2026-11-15 04:20:11] evaluate binres_src_T4
