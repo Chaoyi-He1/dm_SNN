@@ -15,5 +15,25 @@
   },
   "seconds": 53.8,
   "file": "results/improve/binres_xor_T4_iscan.json"
+ },
+ "a1": {
+  "final": {
+   "token_acc": 0.8001378359751895,
+   "ppl": 2.3445062600911712,
+   "n_exact": 1,
+   "n_demo": 5
+  },
+  "seconds": 8954.1,
+  "dir": "results/improve/binres_xor_T4_a1"
+ },
+ "lif_scale": 2.0,
+ "bscan": {
+  "best": {
+   "lif_scale": 2.0,
+   "token_acc": 0.2383,
+   "ppl": 55.981
+  },
+  "seconds": 22.9,
+  "file": "results/improve/binres_xor_T4_bscan.json"
  }
 }

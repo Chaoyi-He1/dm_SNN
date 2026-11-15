@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/binres_xor_T8_a1/model.pt",
+ "merge": "xor",
+ "levels": 8,
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.1586,
+   "ppl": 199.371
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.1795,
+   "ppl": 142.153
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.2144,
+   "ppl": 94.051
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.2081,
+   "ppl": 108.56
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1743,
+   "ppl": 193.02
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.1303,
+   "ppl": 1005.557
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.0779,
+   "ppl": 3935.249
+  }
+ ]
+}

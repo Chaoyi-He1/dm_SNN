@@ -1,4 +1,4 @@
-binres queue status, 2026-11-15 09:48:28  (MAXPAR 9; running chains: 2)
+binres queue status, 2026-11-15 10:49:11  (MAXPAR 9; running chains: 2)
   binres_sr_T1               done      C acc 0.2644
   binres_sr_T2               done      C acc 0.6677
   binres_sr_T4               done      C acc 0.8164
