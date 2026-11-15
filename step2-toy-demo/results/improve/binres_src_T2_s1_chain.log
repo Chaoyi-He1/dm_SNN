@@ -1,0 +1,5 @@
+{"fq": 0.5, "token_acc": 0.0005, "ppl": 4221.811, "spikes": 1.131}
+{"fq": 0.75, "token_acc": 0.0019, "ppl": 2647.927, "spikes": 0.7721}
+{"fq": 0.9, "token_acc": 0.016, "ppl": 1756.393, "spikes": 0.4632}
+[chain:binres_src_T2_s1] iscan picks fq 0.9 (token_acc 0.016)
+[a1_init:binres_src_T2_s1_a1] merge src levels 2 acc 0.0160 ppl 1756.393 exact 0/5

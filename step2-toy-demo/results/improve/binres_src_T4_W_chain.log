@@ -2,3 +2,13 @@
 {"fq": 0.75, "token_acc": 0.0006, "ppl": 6262.925, "spikes": 1.7572}
 {"fq": 0.9, "token_acc": 0.005, "ppl": 2595.28, "spikes": 1.198}
 [chain:binres_src_T4_W] iscan picks fq 0.9 (token_acc 0.005)
+[a1_init:binres_src_T4_W_a1] merge src levels 4 acc 0.0050 ppl 2595.280 exact 0/5
+{"step": 100, "loss": 3.1878, "ce": 3.1878, "token_acc": 0.3918407826393908, "ppl": 17.285974400658773, "n_exact": 0, "seconds": 123.4, "lr": 0.0029994962157402064, "leak": null}
+{"step": 200, "loss": 2.1124, "ce": 2.1124, "token_acc": 0.47502983644584895, "ppl": 9.42877593049827, "n_exact": 0, "seconds": 244.3, "lr": 0.002997964803079841, "leak": null}
+{"step": 300, "loss": 2.2648, "ce": 2.2648, "token_acc": 0.5581012253954379, "ppl": 6.49488262923121, "n_exact": 0, "seconds": 366.6, "lr": 0.002995406760168456, "leak": null}
+{"step": 400, "loss": 1.6546, "ce": 1.6546, "token_acc": 0.616849607503656, "ppl": 4.993146140035673, "n_exact": 1, "seconds": 487.6, "lr": 0.002991823840160886, "leak": null}
+{"step": 500, "loss": 1.7187, "ce": 1.7187, "token_acc": 0.6667731253466911, "ppl": 3.957836263415532, "n_exact": 0, "seconds": 610.2, "lr": 0.0029872184986115334, "leak": null}
+{"step": 600, "loss": 1.3977, "ce": 1.3977, "token_acc": 0.7027449530181036, "ppl": 3.436000383958701, "n_exact": 0, "seconds": 733.1, "lr": 0.002981593891791454, "leak": null}
+{"step": 700, "loss": 1.1721, "ce": 1.1721, "token_acc": 0.7292363550789195, "ppl": 3.0699962031094707, "n_exact": 2, "seconds": 856.2, "lr": 0.0029749538745252064, "leak": null}
+{"step": 800, "loss": 1.1865, "ce": 1.1865, "token_acc": 0.7635440654888975, "ppl": 2.694835387786031, "n_exact": 1, "seconds": 975.1, "lr": 0.00296730299754895, "leak": null}
+{"step": 900, "loss": 0.994, "ce": 0.994, "token_acc": 0.7768233850498395, "ppl": 2.5265577681795706, "n_exact": 2, "seconds": 1086.0, "lr": 0.0029586465043915937, "leak": null}
