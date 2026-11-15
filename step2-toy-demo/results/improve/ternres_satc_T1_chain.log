@@ -109,3 +109,35 @@
 {"step": 10400, "loss": 1.4201, "ce": 1.4201, "token_acc": 0.6388193172076448, "ppl": 3.8475346778275665, "n_exact": 0, "seconds": 7958.6, "lr": 0.00012984158560056663, "leak": null}
 {"step": 10500, "loss": 1.4549, "ce": 1.4549, "token_acc": 0.6374577667210166, "ppl": 3.846423770947016, "n_exact": 0, "seconds": 8034.7, "lr": 0.00011433102815510265, "leak": null}
 {"step": 10600, "loss": 1.3984, "ce": 1.3984, "token_acc": 0.6418113664251736, "ppl": 3.7927639316648056, "n_exact": 0, "seconds": 8109.9, "lr": 9.97701390072317e-05, "leak": null}
+{"step": 10700, "loss": 1.4581, "ce": 1.4581, "token_acc": 0.6387688894118438, "ppl": 3.8267021048699847, "n_exact": 0, "seconds": 8191.2, "lr": 8.616889746304257e-05, "leak": null}
+{"step": 10800, "loss": 1.3752, "ce": 1.3752, "token_acc": 0.6414079440587652, "ppl": 3.8198074959955286, "n_exact": 1, "seconds": 8265.7, "lr": 7.35366251340931e-05, "leak": null}
+{"step": 10900, "loss": 1.3397, "ce": 1.3397, "token_acc": 0.6442655191541578, "ppl": 3.777775146615439, "n_exact": 0, "seconds": 8343.1, "lr": 6.188197954884106e-05, "leak": null}
+{"step": 11000, "loss": 1.4032, "ce": 1.4032, "token_acc": 0.6437780504614143, "ppl": 3.7849337600485526, "n_exact": 0, "seconds": 8420.4, "lr": 5.121294821920852e-05, "leak": null}
+{"step": 11100, "loss": 1.2142, "ce": 1.2142, "token_acc": 0.6436940041350793, "ppl": 3.7767877912957926, "n_exact": 0, "seconds": 8497.6, "lr": 4.153684316633838e-05, "leak": null}
+{"step": 11200, "loss": 1.3407, "ce": 1.3407, "token_acc": 0.6450219360911734, "ppl": 3.7575141150337887, "n_exact": 0, "seconds": 8575.7, "lr": 3.286029590930184e-05, "leak": null}
+{"step": 11300, "loss": 1.3297, "ce": 1.3297, "token_acc": 0.6460641105377284, "ppl": 3.762708071927186, "n_exact": 0, "seconds": 8651.2, "lr": 2.518925292018581e-05, "leak": null}
+{"step": 11400, "loss": 1.3898, "ce": 1.3898, "token_acc": 0.6431729169118018, "ppl": 3.7562073742306463, "n_exact": 1, "seconds": 8728.7, "lr": 1.8528971548677388e-05, "leak": null}
+{"step": 11500, "loss": 1.2426, "ce": 1.2426, "token_acc": 0.6481484594308383, "ppl": 3.712465901538615, "n_exact": 0, "seconds": 8806.8, "lr": 1.2884016418940547e-05, "leak": null}
+{"step": 11600, "loss": 1.3633, "ce": 1.3633, "token_acc": 0.6469886201274142, "ppl": 3.727389611187562, "n_exact": 1, "seconds": 8884.4, "lr": 8.258256301249434e-06, "leak": null}
+{"step": 11700, "loss": 1.3817, "ce": 1.3817, "token_acc": 0.6503000453850162, "ppl": 3.6886648048884703, "n_exact": 1, "seconds": 8960.9, "lr": 4.654861460526627e-06, "leak": null}
+{"step": 11800, "loss": 1.288, "ce": 1.288, "token_acc": 0.6488208300415189, "ppl": 3.6776636192137078, "n_exact": 0, "seconds": 9038.4, "lr": 2.076301483602494e-06, "leak": null}
+{"step": 11900, "loss": 1.2968, "ce": 1.2968, "token_acc": 0.6547881192113093, "ppl": 3.6081647342054834, "n_exact": 1, "seconds": 9114.9, "lr": 5.243435866832402e-07, "leak": null}
+{"step": 12000, "loss": 1.2637, "ce": 1.2637, "token_acc": 0.6607722176463666, "ppl": 3.5326941225055757, "n_exact": 0, "seconds": 9192.5, "lr": 5.1404189238546396e-11, "leak": null}
+[a1:ternres_satc_T1_a1] acc 0.6608 ppl 3.533 exact 0/5 stopped max_steps (9219.9 s)
+[a1:ternres_satc_T1_a1] acc 0.6608 ppl 3.533 exact 0/5 stopped max_steps (9219.9 s)
+{"lif_scale": 1.0, "token_acc": 0.0712, "ppl": 2067.353}
+{"lif_scale": 1.5, "token_acc": 0.119, "ppl": 267.916}
+{"lif_scale": 2.0, "token_acc": 0.199, "ppl": 91.854}
+{"lif_scale": 2.25, "token_acc": 0.1964, "ppl": 108.936}
+{"lif_scale": 2.5, "token_acc": 0.1829, "ppl": 152.09}
+{"lif_scale": 3.0, "token_acc": 0.1651, "ppl": 269.193}
+{"lif_scale": 4.0, "token_acc": 0.1565, "ppl": 388.46}
+[chain:ternres_satc_T1] bscan picks lif_scale 2.0 (token_acc 0.199)
+[b:ternres_satc_T1_c] merge satc levels 1 acc 0.0712 ppl 2067.353 exact 0/5
+[b_lif_scale:ternres_satc_T1_c] x2.0 acc 0.1990 ppl 91.854
+{"step": 100, "loss": 2.9675, "ce": 2.9675, "token_acc": 0.3843942781261031, "ppl": 14.887713610111655, "n_exact": 0, "seconds": 77.1, "lr": 0.0029994962157402064, "leak": null}
+{"step": 200, "loss": 2.4581, "ce": 2.4581, "token_acc": 0.40905347027281436, "ppl": 12.406980748500288, "n_exact": 0, "seconds": 153.4, "lr": 0.002997964803079841, "leak": null}
+{"step": 300, "loss": 2.7127, "ce": 2.7127, "token_acc": 0.4256610243566254, "ppl": 11.008887154156142, "n_exact": 0, "seconds": 230.6, "lr": 0.002995406760168456, "leak": null}
+{"step": 400, "loss": 2.2973, "ce": 2.2973, "token_acc": 0.4348556924576827, "ppl": 10.40227472656465, "n_exact": 0, "seconds": 307.0, "lr": 0.002991823840160886, "leak": null}
+{"step": 500, "loss": 2.4241, "ce": 2.4241, "token_acc": 0.44998403119799635, "ppl": 9.477593526518335, "n_exact": 0, "seconds": 383.8, "lr": 0.0029872184986115334, "leak": null}
+{"step": 600, "loss": 2.2917, "ce": 2.2917, "token_acc": 0.4560017481635878, "ppl": 9.265448164326589, "n_exact": 0, "seconds": 460.9, "lr": 0.002981593891791454, "leak": null}

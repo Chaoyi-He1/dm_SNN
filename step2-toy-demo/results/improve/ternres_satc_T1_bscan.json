@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/ternres_satc_T1_a1/model.pt",
+ "merge": "satc",
+ "levels": 1,
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.0712,
+   "ppl": 2067.353
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.119,
+   "ppl": 267.916
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.199,
+   "ppl": 91.854
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.1964,
+   "ppl": 108.936
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1829,
+   "ppl": 152.09
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.1651,
+   "ppl": 269.193
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1565,
+   "ppl": 388.46
+  }
+ ]
+}
