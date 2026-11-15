@@ -34,3 +34,7 @@
 [2026-11-15 04:20:11] evaluate binres_src_T4
 [2026-11-15 04:21:15] pushed: new results
 [2026-11-15 04:47:27] evaluate ternres_satc_T4
+[2026-11-15 04:48:28] pushed: new results
+[2026-11-15 04:50:29] launch binres_src_T4_s2 (src 4 2)
+[2026-11-15 05:37:10] launch binres_src_T8_s1 (src 8 1)
+[2026-11-15 05:37:30] evaluate binres_src_T4_W
