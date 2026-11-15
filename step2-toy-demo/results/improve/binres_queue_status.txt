@@ -1,4 +1,4 @@
-binres queue status, 2026-11-14 21:48:47  (MAXPAR 9; running chains: 9)
+binres queue status, 2026-11-14 22:49:29  (MAXPAR 9; running chains: 9)
   binres_sr_T1               running
   binres_sr_T2               running
   binres_sr_T4               running
