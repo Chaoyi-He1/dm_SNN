@@ -2,3 +2,6 @@
 [2026-11-14 22:49:33] pushed: progress
 [2026-11-14 23:37:52] launch binres_src_T4 (src 4)
 [2026-11-14 23:38:13] evaluate ternres_sat_T4
+[2026-11-14 23:39:17] pushed: new results
+[2026-11-15 00:07:29] launch binres_src_T8 (src 8)
+[2026-11-15 00:07:49] evaluate binres_sr_T8
