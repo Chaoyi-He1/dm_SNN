@@ -35,5 +35,15 @@
   },
   "seconds": 46.7,
   "file": "results/improve/ternres_satc_T1_bscan.json"
+ },
+ "c": {
+  "final": {
+   "token_acc": 0.70208939167269,
+   "ppl": 3.045662823626602,
+   "n_exact": 0,
+   "n_demo": 5
+  },
+  "seconds": 9242.1,
+  "dir": "results/improve/ternres_satc_T1_c"
  }
 }
