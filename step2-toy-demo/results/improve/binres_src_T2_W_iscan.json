@@ -1,0 +1,32 @@
+{
+ "merge": "src",
+ "levels": 2,
+ "sizes": {
+  "d": 256,
+  "dk": 64,
+  "dv": 64,
+  "d_ff": 512,
+  "n_heads": 4
+ },
+ "a0": "results/improve/W_a0_d256/model.pt",
+ "rows": [
+  {
+   "fq": 0.5,
+   "token_acc": 0.0002,
+   "ppl": 9757.051,
+   "spikes": 1.1195
+  },
+  {
+   "fq": 0.75,
+   "token_acc": 0.0017,
+   "ppl": 4248.021,
+   "spikes": 0.7549
+  },
+  {
+   "fq": 0.9,
+   "token_acc": 0.0111,
+   "ppl": 1718.335,
+   "spikes": 0.4455
+  }
+ ]
+}
