@@ -20,3 +20,6 @@
 [2026-11-15 02:29:25] pushed: new results
 [2026-11-15 02:45:31] launch binres_src_T2_W (src 2 0 wide)
 [2026-11-15 02:45:51] evaluate binres_src_T8
+[2026-11-15 02:46:57] pushed: new results
+[2026-11-15 03:13:09] launch binres_src_T4_W (src 4 0 wide)
+[2026-11-15 03:13:29] evaluate binres_xor_T2

@@ -35,5 +35,15 @@
   },
   "seconds": 56.1,
   "file": "results/improve/binres_xor_T2_bscan.json"
+ },
+ "c": {
+  "final": {
+   "token_acc": 0.6993999092299675,
+   "ppl": 3.2433068898888147,
+   "n_exact": 1,
+   "n_demo": 5
+  },
+  "seconds": 10926.7,
+  "dir": "results/improve/binres_xor_T2_c"
  }
 }

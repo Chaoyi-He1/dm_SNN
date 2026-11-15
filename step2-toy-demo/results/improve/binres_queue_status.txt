@@ -1,10 +1,10 @@
-binres queue status, 2026-11-15 02:46:54  (MAXPAR 9; running chains: 9)
+binres queue status, 2026-11-15 03:14:30  (MAXPAR 9; running chains: 9)
   binres_sr_T1               done      C acc 0.2644
   binres_sr_T2               running
   binres_sr_T4               done      C acc 0.8164
   binres_sr_T8               done      C acc 0.8284
   binres_xor_T1              done      C acc 0.5325
-  binres_xor_T2              running
+  binres_xor_T2              done      C acc 0.6994
   ternres_sat_T4             done      C acc 0.8258
   binres_src_T1              done      C acc 0.5002
   binres_src_T2              running
@@ -15,7 +15,7 @@ binres queue status, 2026-11-15 02:46:54  (MAXPAR 9; running chains: 9)
   ternres_satc_T4            running
   binres_src_T1_W            running
   binres_src_T2_W            running
-  binres_src_T4_W            queued
+  binres_src_T4_W            running
   binres_src_T2_s1           queued
   binres_src_T2_s2           queued
   binres_src_T4_s1           queued
