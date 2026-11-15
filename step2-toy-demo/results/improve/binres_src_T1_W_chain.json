@@ -25,5 +25,15 @@
   },
   "seconds": 11344.6,
   "dir": "results/improve/binres_src_T1_W_a1"
+ },
+ "lif_scale": 4.0,
+ "bscan": {
+  "best": {
+   "lif_scale": 4.0,
+   "token_acc": 0.1902,
+   "ppl": 98.369
+  },
+  "seconds": 72.0,
+  "file": "results/improve/binres_src_T1_W_bscan.json"
  }
 }

@@ -312,7 +312,7 @@
    "merge": "src",
    "levels": 1,
    "fq": 0.9,
-   "lif_scale": null,
+   "lif_scale": 4.0,
    "a1_init_acc": 0.026793968835622194,
    "a1_acc": 0.6792119816442823,
    "a1_steps": 12000,
