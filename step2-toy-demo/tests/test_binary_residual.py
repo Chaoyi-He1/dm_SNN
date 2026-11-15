@@ -37,7 +37,7 @@ def test_weights_transfer_from_float_and_extra_keys_are_thresholds(cfg):
     assert isinstance(m.q_emb, BinaryQuantizer) and isinstance(m.blocks[0].m1, BinaryMerge)
 
 
-@pytest.mark.parametrize("merge,levels", [("sr", 1), ("xor", 1), ("sr", 2), ("xor", 2)])
+@pytest.mark.parametrize("merge,levels", [("sr", 1), ("src", 1), ("xor", 1), ("sr", 2), ("src", 2), ("xor", 2)])
 def test_forward_record_generate_and_residual_is_unsigned(cfg, sl, merge, levels):
     tok = all_sequences(sl)[:4]
     m = BinaryResidualLM(cfg, sl.vocab_size, leak=0.9, merge=merge, levels=levels)
@@ -84,6 +84,7 @@ def test_xor_calibrates_the_unsigned_subblock_outputs_on_the_positive_side(cfg, 
     xor = BinaryResidualLM(cfg, sl.vocab_size, leak=0.0, merge="xor")
     flags = lambda m: {name: ternary for name, _, _, ternary in block_points(m.blocks[0])}
     assert flags(sr) == dict(q=False, k=True, v=True, pre=True, out=True, g=False, u=True, y2=True)
+    assert flags(BinaryResidualLM(cfg, sl.vocab_size, leak=0.0, merge="src")) == flags(sr)
     assert flags(xor) == dict(q=False, k=True, v=True, pre=True, out=False, g=False, u=True, y2=False)
     mods = {name: mod for name, mod, _, _ in block_points(xor.blocks[0])}
     assert mods["out"] is xor.blocks[0].attn.sn_out and mods["y2"] is xor.blocks[0].ffn.sn_2
@@ -99,7 +100,7 @@ def test_spike_counts_cover_every_point_including_merges(cfg, sl):
 
 
 def test_a1_state_loads_into_leaky_c_model(cfg, sl):
-    for merge in ("sr", "xor"):
+    for merge in ("sr", "src", "xor"):
         a = BinaryResidualLM(cfg, sl.vocab_size, leak=0.0, merge=merge, levels=2)
         c = BinaryResidualLM(cfg, sl.vocab_size, leak=cfg.leak, merge=merge, levels=2)
         c.load_state_dict(a.state_dict())
@@ -108,7 +109,7 @@ def test_a1_state_loads_into_leaky_c_model(cfg, sl):
         assert len(list(c.lif_modules())) == 8 * cfg.n_blocks
 
 
-@pytest.mark.parametrize("merge", ["sr", "xor"])
+@pytest.mark.parametrize("merge", ["sr", "src", "xor"])
 def test_gradient_flows_to_embedding_through_binary_residual(cfg, sl, merge):
     tok = all_sequences(sl)[:4]
     m = BinaryResidualLM(cfg, sl.vocab_size, leak=0.0, merge=merge)

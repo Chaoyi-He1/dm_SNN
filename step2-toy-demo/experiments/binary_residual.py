@@ -8,7 +8,7 @@
     .venv/bin/python experiments/binary_residual.py bscan --init results/improve/binres_sr_T2_a1/model.pt --save results/improve/binres_sr_T2_bscan.json
 加宽:--a0 results/improve/W_a0_d256/model.pt --d 256 --dk 64 --dv 64 --d-ff 512 --heads 4
 
-各阶段的含义见 experiments/ternary_residual.py 的说明。合并方式 --merge:sr(置位 / 复位,子块输出仍三值)或 xor(翻转,子块输出无符号),
+各阶段的含义见 experiments/ternary_residual.py 的说明。合并方式 --merge:sr(置位 / 复位,子块输出仍三值,代理梯度)、src(同 sr,精确梯度)或 xor(翻转,子块输出无符号),
 定义在 snn_spec/binary_residual.py。result.json 的 args 里 residual="binary",beam_eval 据此装载(kind = binres)。
 
 实现:五个命令函数直接用 experiments.ternary_residual 里的。它们通过那个模块的 make_model、calibrate_thresholds、save_stage

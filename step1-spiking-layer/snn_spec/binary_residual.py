@@ -5,14 +5,19 @@
 
   sr   置位 / 复位。子块输出 y 仍是三值,只在块内走一小段:y 的正脉冲把 r 置 1,负脉冲把 r 清 0,y = 0 时保持,
        r' = clamp(r + y, 0, 1)。T = 1 时就是 SR 锁存器 r' = (r OR y+) AND NOT y-;levels=T 时是每通道一个 0..T 的饱和计数。
-       实现成阈值为 1.0 的无符号 T 级阶跃,阈值固定,不需要标定。
+       实现成阈值为 1.0 的无符号 T 级阶跃(与三值残差的 sat 同一种写法),阈值固定,不需要标定;反向走 arctan 代理梯度。
+       代理梯度的中心在 r + y = 1:y = 0 时恒等通路的梯度在 r = 1 处是 1,在 r = 0 处只有 0.092(T = 1)。
+       阶跃的阈值正好落在电平上,只对 T 为 2 的幂时精确(其余 T 有浮点误判),所以 sr 只接受这样的 T。
+  src  前向与 sr 完全相同,r' = clamp(r + y, 0, 1);反向用 clamp 自己的梯度(0 <= r + y <= 1 时为 1,饱和时为 0),
+       不经代理梯度。这个合并本来就是分段线性的,这是它的精确(次)梯度:y = 0 时恒等通路的梯度恒为 1,和实值残差一样。
+       电路与 sr 相同,差别只在训练。
   xor  翻转。子块输出 y 也是无符号的(sn_out、sn_2 换成 BinaryLIF),r' = |r - y|。
        T = 1 时是异或(y = 1 把 r 翻转);levels=T 时等于把两路对齐的脉冲串(温度计码)逐子时隙异或,剩 |c_r - c_y| 个脉冲。
        没有比较器,也没有阈值。
 
-两种规则在 y = 0 时都有 r' = r,残差的恒等通路保留。
+三种规则在 y = 0 时都有 r' = r,残差的恒等通路保留。
 
-电路含义:层间连线与 GDN→FFN 的连线每通道一根线、只传"有 / 无"脉冲;sr 每通道一个置位复位锁存器(T > 1 时是小计数器),
+电路含义:层间连线与 GDN→FFN 的连线每通道一根线、只传"有 / 无"脉冲;sr / src 每通道一个置位复位锁存器(T > 1 时是小计数器),
 xor 每通道一个异或门。块入口没有 Q_in,也没有实值累加器 h。
 """
 import torch
@@ -21,7 +26,7 @@ import torch.nn as nn
 from .neurons import BinaryLIF, level_binary_fire
 from .ternary_residual import TernaryResidualBlock
 
-MERGES = ("sr", "xor")
+MERGES = ("sr", "src", "xor")
 
 
 class BinaryQuantizer(nn.Module):
@@ -43,13 +48,15 @@ class BinaryQuantizer(nn.Module):
 
 
 class BinaryMerge(nn.Module):
-    """两输入合并 M(r, y),r 是无符号的残差,y 是子块输出(sr:三值;xor:无符号)。无状态。
-    log_thr 只是为了与 ResidualMerge 的接口一致(固定为 0,即阈值 1.0,不参与训练);xor 不用它。"""
+    """两输入合并 M(r, y),r 是无符号的残差,y 是子块输出(sr、src:三值;xor:无符号)。无状态。
+    log_thr 只是为了与 ResidualMerge 的接口一致(固定为 0,即阈值 1.0,不参与训练);只有 sr 用它。"""
 
     def __init__(self, merge="sr", levels=1, sg_width=2.0):
         super().__init__()
         if merge not in MERGES:
             raise ValueError(f"merge must be one of {MERGES}, got {merge!r}")
+        if merge == "sr" and int(levels) & (int(levels) - 1):
+            raise ValueError(f"sr 的阈值落在电平上,只对 2 的幂的 levels 精确,得到 {levels};其余 levels 用 src")
         self.merge = merge
         self.levels = int(levels)
         self.sg_width = float(sg_width)
@@ -62,6 +69,13 @@ class BinaryMerge(nn.Module):
     def forward(self, r, y):
         if self.merge == "sr":
             return level_binary_fire(r + y, self.thr, self.levels, self.sg_width)
+        if self.merge == "src":
+            # 两路都在电平上,和也在电平上,clamp 之后仍在电平上。梯度:0 <= r + y <= 1(含端点)时为 1,饱和时为 0。
+            # torch.clamp 在端点处的梯度是 0,而 T = 1 时所有取值都在端点上,所以梯度自己写(加的一项数值恒为 0)。
+            u = r + y
+            ud = u.detach()
+            inside = ((ud >= -1e-6) & (ud <= 1.0 + 1e-6)).to(u.dtype)
+            return torch.clamp(ud, 0.0, 1.0) + inside * (u - ud)
         d = r - y
         # |d| 在 d = 0 处的梯度是 0。相等时取可行方向上的单侧斜率:都为 0 只能往上走(+1,恒等通路的梯度就是 1),
         # 都为 1 只能往下走(-1),中间电平是尖点(0)。加的这一项数值恒为 0,只提供梯度。

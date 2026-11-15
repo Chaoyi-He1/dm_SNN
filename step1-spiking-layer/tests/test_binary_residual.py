@@ -49,6 +49,43 @@ def test_sr_threshold_is_one_and_frozen_and_unknown_merge_raises():
     assert m.thr.item() == 1.0 and not m.log_thr.requires_grad and "log_thr" in m.state_dict()
     with pytest.raises(ValueError):
         BinaryMerge("sat")
+    with pytest.raises(ValueError):                         # 阈值落在电平上:非 2 的幂的 T 有浮点误判,不接受
+        BinaryMerge("sr", levels=3)
+    BinaryMerge("sr", levels=8), BinaryMerge("src", levels=3), BinaryMerge("xor", levels=3)
+
+
+def test_sr_identity_path_gradient_is_weak_at_zero():
+    """sr 的代理梯度中心在 r + y = 1:y = 0 时 r = 1 的梯度是 1,r = 0 的梯度只有 1 / (1 + π²) ≈ 0.092。"""
+    for rv, want in ((1.0, 1.0), (0.0, 1.0 / (1.0 + torch.pi ** 2))):
+        r, y = torch.tensor([rv], requires_grad=True), torch.zeros(1)
+        BinaryMerge("sr")(r, y).sum().backward()
+        assert abs(r.grad.item() - want) < 1e-6, rv
+
+
+# ----------------------------------------------------------------------------- 合并:src
+
+def test_src_merge_has_the_same_forward_as_sr_on_every_level_grid():
+    for T in (1, 2, 4, 8):
+        r, y = _grid(tuple(j / T for j in range(T + 1)), tuple(j / T for j in range(-T, T + 1)))
+        out = BinaryMerge("src", levels=T)(r, y)
+        assert torch.equal(out, torch.clamp(r + y, 0.0, 1.0)) and torch.equal(out, BinaryMerge("sr", levels=T)(r, y)), T
+    r, y = _grid((0.0, 1 / 3, 2 / 3, 1.0), tuple(j / 3 for j in range(-3, 4)))            # 非 2 的幂:src 仍然落在电平上
+    out = BinaryMerge("src", levels=3)(r, y)
+    assert torch.allclose(out * 3, (out * 3).round(), atol=1e-6) and out.min() >= 0 and out.max() <= 1
+
+
+def test_src_gradient_is_the_exact_clamp_gradient():
+    cases = [((0.0, 0.0), (1.0, 1.0)),      # 恒等通路:r = 0 时梯度也是 1
+             ((1.0, 0.0), (1.0, 1.0)),
+             ((0.0, 1.0), (1.0, 1.0)),      # 置位
+             ((1.0, -1.0), (1.0, 1.0)),     # 复位
+             ((1.0, 1.0), (0.0, 0.0)),      # 已经是 1 再置位:饱和,输出对两路都不敏感
+             ((0.0, -1.0), (0.0, 0.0)),     # 已经是 0 再复位:饱和
+             ((0.5, 0.5), (1.0, 1.0))]
+    for (rv, yv), (gr, gy) in cases:
+        r, y = torch.tensor([rv], requires_grad=True), torch.tensor([yv], requires_grad=True)
+        BinaryMerge("src", levels=2)(r, y).sum().backward()
+        assert (r.grad.item(), y.grad.item()) == (gr, gy), (rv, yv)
 
 
 # ----------------------------------------------------------------------------- 合并:xor
@@ -85,7 +122,7 @@ def _on_grid(v, T, signed):
     return torch.equal((v * T).round(), v * T) and v.min() >= lo and v.max() <= 1.0
 
 
-@pytest.mark.parametrize("merge", ["sr", "xor"])
+@pytest.mark.parametrize("merge", ["sr", "src", "xor"])
 def test_block_residual_stream_is_binary_and_merges_are_used(merge):
     blk = _block(merge=merge, thr=0.3)
     r = torch.randint(0, 2, (5, 16)).float()
@@ -96,7 +133,7 @@ def test_block_residual_stream_is_binary_and_merges_are_used(merge):
     assert torch.equal(rec["h_mid"], blk.m1(r, rec["y_attn"])) and torch.equal(rec["h_out"], blk.m2(rec["h_mid"], rec["y_ffn"]))
     assert isinstance(blk.m1, BinaryMerge) and isinstance(blk.m2, BinaryMerge) and blk.merge == merge
     assert len(blk.lif_modules()) == 8
-    signed = merge == "sr"                                  # sr:子块输出仍是三值;xor:子块输出也无符号
+    signed = merge != "xor"                                 # sr、src:子块输出仍是三值;xor:子块输出也无符号
     for key in ("y_attn", "y_ffn"):
         assert _on_grid(rec[key], 1, signed), key
         assert rec[key].abs().sum() > 0, key                # 测试确实让子块发放了
@@ -115,7 +152,7 @@ def test_sr_block_sets_and_resets_channels():
         assert torch.equal(after[y == 0], before[y == 0])                        # 没有脉冲时保持
 
 
-@pytest.mark.parametrize("merge", ["sr", "xor"])
+@pytest.mark.parametrize("merge", ["sr", "src", "xor"])
 def test_block_levels_two_sets_every_spike_point_and_keeps_the_stream_unsigned(merge):
     blk = _block(merge=merge, levels=2, thr=0.3)
     assert all(m.levels == 2 for m in blk.lif_modules()) and blk.m1.levels == 2 and blk.m2.levels == 2
@@ -124,10 +161,10 @@ def test_block_levels_two_sets_every_spike_point_and_keeps_the_stream_unsigned(m
     for key in ("h_mid", "h_out"):
         assert _on_grid(rec[key], 2, signed=False), key
     for key in ("y_attn", "y_ffn"):
-        assert _on_grid(rec[key], 2, signed=(merge == "sr")), key
+        assert _on_grid(rec[key], 2, signed=(merge != "xor")), key
 
 
-@pytest.mark.parametrize("merge", ["sr", "xor"])
+@pytest.mark.parametrize("merge", ["sr", "src", "xor"])
 def test_silent_subblocks_pass_the_residual_through(merge):
     blk = _block(merge=merge)
     with torch.no_grad():
@@ -139,7 +176,7 @@ def test_silent_subblocks_pass_the_residual_through(merge):
     assert torch.equal(r_out, r)
 
 
-@pytest.mark.parametrize("merge", ["sr", "xor"])
+@pytest.mark.parametrize("merge", ["sr", "src", "xor"])
 def test_gradient_reaches_input_and_weights_through_the_binary_residual(merge):
     blk = _block(merge=merge, learn_thr=True, thr=0.2)       # 单 token、零初始状态:阈值高时 k、v 不发放,S 恒为 0,Wq 梯度恰为 0
     e = (torch.randn(8, 16) * 2).requires_grad_()

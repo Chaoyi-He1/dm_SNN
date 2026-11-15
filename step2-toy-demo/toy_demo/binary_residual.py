@@ -2,7 +2,7 @@
 
 与 TernaryResidualLM 的差别:嵌入查表后过的是无符号量化器(嵌入值 >= 阈值得 1,否则 0,负的一半在这里丢掉),
 各块是 snn_spec.binary_residual.BinaryResidualBlock(残差流 r ∈ {0, 1},levels=T 时 {0, 1/T, ..., 1};
-合并 sr 或 xor),输出头直接读二值的 r。前向、记录字段与脉冲点的名字都沿用 TernaryResidualLM,
+合并 sr、src 或 xor),输出头直接读二值的 r。前向、记录字段与脉冲点的名字都沿用 TernaryResidualLM,
 所以 named_points、spike_counts 直接复用(二值量取绝对值不变)。
 权重名称与 FloatLM 一致,transfer_weights 可直接装载(多出的只有各处阈值 log_thr)。
 """
@@ -48,7 +48,8 @@ def block_points(blk):
 @torch.no_grad()
 def calibrate_thresholds(model, tokens, quantile=0.75):
     """tokens [N, L] 含 BOS/EOS/PAD。按前向顺序逐点标定(先 q_emb,再每块的 8 个 LIF),下限 1e-3;合并 m1/m2 不动。
-    q_emb 与二值点的阈值 = 有效位置上预激活(带符号)的分位数,即约 1 - quantile 的通道发 1;三值点取绝对值的分位数。
+    q_emb 与二值点的阈值 = 有效位置上预激活(带符号)的分位数,即约 1 - quantile 的通道达到满幅 1
+    (levels=T > 1 时还有一部分通道只到 j/T);三值点取绝对值的分位数。
     返回 {点名: 阈值}。"""
     inputs, _, mask = split_inputs_targets(tokens)
     out = {}

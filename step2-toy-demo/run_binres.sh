@@ -3,7 +3,7 @@
 #
 #   ./run_binres.sh                         第一批(种子 0,d=128)7 条链并行:
 #                                           sr × T∈{1,2,4,8},xor × T∈{1,2},三值 sat T=4(与二值 T=8 电平数相同的对照)
-#   ./run_binres.sh <merge> <T> [seed] [wide]   只跑一条:merge = sr | xor 走二值残差,merge = sat 走三值残差;
+#   ./run_binres.sh <merge> <T> [seed] [wide]   只跑一条:merge = sr | src | xor 走二值残差,merge = sat 走三值残差;
 #                                           第 4 个参数写 wide 时用加宽的 d=256(A0 取 results/improve/W_a0_d256)
 # 名字:binres_<merge>_T<T>[_W][_s<seed>](三值对照是 ternres_sat_T<T>[_W][_s<seed>])。脚本等所有链结束才返回。
 cd "$(dirname "$0")" || exit 1
