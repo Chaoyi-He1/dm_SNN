@@ -1,1 +1,4 @@
 [2026-11-14 21:49:03] queue started (pid 531590, MAXPAR 9, DRY 0)
+[2026-11-14 22:49:33] pushed: progress
+[2026-11-14 23:37:52] launch binres_src_T4 (src 4)
+[2026-11-14 23:38:13] evaluate ternres_sat_T4

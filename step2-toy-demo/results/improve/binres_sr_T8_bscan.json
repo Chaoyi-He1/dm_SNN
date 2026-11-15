@@ -1,0 +1,42 @@
+{
+ "init": "results/improve/binres_sr_T8_a1/model.pt",
+ "merge": "sr",
+ "levels": 8,
+ "rows": [
+  {
+   "lif_scale": 1.0,
+   "token_acc": 0.1712,
+   "ppl": 315.495
+  },
+  {
+   "lif_scale": 1.5,
+   "token_acc": 0.2324,
+   "ppl": 78.244
+  },
+  {
+   "lif_scale": 2.0,
+   "token_acc": 0.1846,
+   "ppl": 136.89
+  },
+  {
+   "lif_scale": 2.25,
+   "token_acc": 0.1762,
+   "ppl": 142.869
+  },
+  {
+   "lif_scale": 2.5,
+   "token_acc": 0.1725,
+   "ppl": 146.561
+  },
+  {
+   "lif_scale": 3.0,
+   "token_acc": 0.1684,
+   "ppl": 148.527
+  },
+  {
+   "lif_scale": 4.0,
+   "token_acc": 0.1677,
+   "ppl": 148.756
+  }
+ ]
+}
