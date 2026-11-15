@@ -42,3 +42,6 @@
 [2026-11-15 06:39:38] pushed: progress
 [2026-11-15 07:13:54] launch binres_src_T8_s2 (src 8 2)
 [2026-11-15 07:14:14] evaluate ternres_satc_T1
+[2026-11-15 07:15:19] pushed: new results
+[2026-11-15 07:33:27] launch binres_xor_T4 (xor 4)
+[2026-11-15 07:33:47] evaluate ternres_satc_T2

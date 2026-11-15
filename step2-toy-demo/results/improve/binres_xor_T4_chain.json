@@ -1,0 +1,19 @@
+{
+ "name": "binres_xor_T4",
+ "merge": "xor",
+ "levels": 4,
+ "lr": 0.003,
+ "steps": 12000,
+ "seed": 0,
+ "fq": 0.9,
+ "iscan": {
+  "best": {
+   "fq": 0.9,
+   "token_acc": 0.0006,
+   "ppl": 4607.291,
+   "spikes": 1.1616
+  },
+  "seconds": 53.8,
+  "file": "results/improve/binres_xor_T4_iscan.json"
+ }
+}
