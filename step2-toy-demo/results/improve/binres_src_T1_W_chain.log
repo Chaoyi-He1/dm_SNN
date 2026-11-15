@@ -1,0 +1,4 @@
+{"fq": 0.5, "token_acc": 0.0006, "ppl": 6372.354, "spikes": 0.4878}
+{"fq": 0.75, "token_acc": 0.0062, "ppl": 2122.715, "spikes": 0.2702}
+{"fq": 0.9, "token_acc": 0.0268, "ppl": 1693.833, "spikes": 0.1147}
+[chain:binres_src_T1_W] iscan picks fq 0.9 (token_acc 0.0268)

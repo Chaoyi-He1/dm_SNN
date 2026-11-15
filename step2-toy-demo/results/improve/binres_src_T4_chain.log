@@ -110,3 +110,11 @@
 [chain:binres_src_T4] bscan picks lif_scale 1.5 (token_acc 0.2435)
 [b:binres_src_T4_c] merge src levels 4 acc 0.1714 ppl 323.523 exact 0/5
 [b_lif_scale:binres_src_T4_c] x1.5 acc 0.2435 ppl 51.255
+{"step": 100, "loss": 2.1218, "ce": 2.1218, "token_acc": 0.50932073759056, "ppl": 6.641800143719704, "n_exact": 0, "seconds": 100.5, "lr": 0.0029994962157402064, "leak": null}
+{"step": 200, "loss": 1.6941, "ce": 1.6941, "token_acc": 0.5518817972466423, "ppl": 5.4159855253018305, "n_exact": 0, "seconds": 198.2, "lr": 0.002997964803079841, "leak": null}
+{"step": 300, "loss": 1.8313, "ce": 1.8313, "token_acc": 0.571414163486914, "ppl": 5.042613450393464, "n_exact": 0, "seconds": 296.6, "lr": 0.002995406760168456, "leak": null}
+{"step": 400, "loss": 1.456, "ce": 1.456, "token_acc": 0.590307777647039, "ppl": 4.591315411062555, "n_exact": 0, "seconds": 393.7, "lr": 0.002991823840160886, "leak": null}
+{"step": 500, "loss": 1.5345, "ce": 1.5345, "token_acc": 0.6093694844598343, "ppl": 4.267911471050158, "n_exact": 0, "seconds": 492.1, "lr": 0.0029872184986115334, "leak": null}
+{"step": 600, "loss": 1.4888, "ce": 1.4888, "token_acc": 0.6232035097745877, "ppl": 4.004410380699414, "n_exact": 0, "seconds": 590.0, "lr": 0.002981593891791454, "leak": null}
+{"step": 700, "loss": 1.4041, "ce": 1.4041, "token_acc": 0.634499336034022, "ppl": 3.834049330536055, "n_exact": 0, "seconds": 689.0, "lr": 0.0029749538745252064, "leak": null}
+{"step": 800, "loss": 1.4223, "ce": 1.4223, "token_acc": 0.654519170967037, "ppl": 3.6162591941177458, "n_exact": 1, "seconds": 782.1, "lr": 0.00296730299754895, "leak": null}
