@@ -116,3 +116,62 @@ print(model.generate(sl.ids[0][:5], 40))
 | `improve/W_a1/model.pt` | A1(leak 0),T=1,d=256 | token 准确率 0.831,demo 5/5 | `load_model` | 11.3 MiB | `24305826c590698c` |
 
 本节 47 个文件,221.7 MiB。
+
+## 二值残差流与对照(2026-11-15)
+
+二值(0/1)残差流实验(`improve/README.md` 的“二值残差流”一节、设计稿 `docs/superpowers/specs/2026-11-14-binary-residual-design.md`)的全部检查点,含三值对照(sat T=4;satc = 三值 + 精确梯度合并)。二值模型走 `beam_eval.load_model`,`info['kind']` 是 `binres`(`merge` 为 sr / src / xor);satc 对照是 `ternres` + `merge='satc'`,装载成 `TernaryClampResidualLM`。队列脚本在每条链结束时已把它们提交进版本库,这里补清单。
+
+| 文件 | 模型 | 说明 | 大小 | sha256 |
+|---|---|---|---|---|
+| `improve/binres_sr_T1_a1/model.pt` | 二值残差,sr,T=1,A1(leak 0) | token 准确率 0.096,demo 0/5 | 4.4 MiB | `5b52576915eb01f8` |
+| `improve/binres_sr_T1_c/model.pt` | 二值残差,sr,T=1,C(leak 0.9) | token 准确率 0.264,demo 0/5 | 4.4 MiB | `54d937579de9795d` |
+| `improve/binres_sr_T2_a1/model.pt` | 二值残差,sr,T=2,A1(leak 0) | token 准确率 0.666,demo 0/5 | 4.4 MiB | `0efff81853b2273e` |
+| `improve/binres_sr_T2_c/model.pt` | 二值残差,sr,T=2,C(leak 0.9) | token 准确率 0.668,demo 0/5 | 4.4 MiB | `1fb41a78e0070dd7` |
+| `improve/binres_sr_T4_a1/model.pt` | 二值残差,sr,T=4,A1(leak 0) | token 准确率 0.827,demo 5/5 | 4.4 MiB | `503f93c9f680b4d9` |
+| `improve/binres_sr_T4_c/model.pt` | 二值残差,sr,T=4,C(leak 0.9) | token 准确率 0.816,demo 5/5 | 4.4 MiB | `e7ea28af4e823d81` |
+| `improve/binres_sr_T8_a1/model.pt` | 二值残差,sr,T=8,A1(leak 0) | token 准确率 0.839,demo 5/5 | 4.4 MiB | `b6a9085255655968` |
+| `improve/binres_sr_T8_c/model.pt` | 二值残差,sr,T=8,C(leak 0.9) | token 准确率 0.828,demo 5/5 | 4.4 MiB | `1c770d45e07fc622` |
+| `improve/binres_src_T1_W_a1/model.pt` | 二值残差,src,T=1,d=256,A1(leak 0) | token 准确率 0.679,demo 0/5 | 11.3 MiB | `7c8ad1ca3832eeb1` |
+| `improve/binres_src_T1_W_c/model.pt` | 二值残差,src,T=1,d=256,C(leak 0.9) | token 准确率 0.492,demo 0/5 | 11.3 MiB | `d6313a0c9b5fa8b0` |
+| `improve/binres_src_T1_a1/model.pt` | 二值残差,src,T=1,A1(leak 0) | token 准确率 0.490,demo 0/5 | 4.4 MiB | `e843c48c20ee61dd` |
+| `improve/binres_src_T1_c/model.pt` | 二值残差,src,T=1,C(leak 0.9) | token 准确率 0.500,demo 0/5 | 4.4 MiB | `f374fb9c927e34ac` |
+| `improve/binres_src_T2_W_a1/model.pt` | 二值残差,src,T=2,d=256,A1(leak 0) | token 准确率 0.833,demo 5/5 | 11.3 MiB | `31716847bf3a4fda` |
+| `improve/binres_src_T2_W_c/model.pt` | 二值残差,src,T=2,d=256,C(leak 0.9) | token 准确率 0.817,demo 5/5 | 11.3 MiB | `0ff68ce22d3d021a` |
+| `improve/binres_src_T2_a1/model.pt` | 二值残差,src,T=2,A1(leak 0) | token 准确率 0.715,demo 0/5 | 4.4 MiB | `53227af2410f9fe5` |
+| `improve/binres_src_T2_c/model.pt` | 二值残差,src,T=2,C(leak 0.9) | token 准确率 0.713,demo 1/5 | 4.4 MiB | `ce5837c107b9f64a` |
+| `improve/binres_src_T2_s1_a1/model.pt` | 二值残差,src,T=2,种子 1,A1(leak 0) | token 准确率 0.717,demo 1/5 | 4.4 MiB | `89c0c87264b01588` |
+| `improve/binres_src_T2_s1_c/model.pt` | 二值残差,src,T=2,种子 1,C(leak 0.9) | token 准确率 0.714,demo 2/5 | 4.4 MiB | `96c4fd27659fea24` |
+| `improve/binres_src_T2_s2_a1/model.pt` | 二值残差,src,T=2,种子 2,A1(leak 0) | token 准确率 0.720,demo 1/5 | 4.4 MiB | `72f05b65e54ab074` |
+| `improve/binres_src_T2_s2_c/model.pt` | 二值残差,src,T=2,种子 2,C(leak 0.9) | token 准确率 0.714,demo 1/5 | 4.4 MiB | `a90cc48ddf28aed5` |
+| `improve/binres_src_T4_W_a1/model.pt` | 二值残差,src,T=4,d=256,A1(leak 0) | token 准确率 0.834,demo 5/5 | 11.3 MiB | `48372e9f6569a028` |
+| `improve/binres_src_T4_W_c/model.pt` | 二值残差,src,T=4,d=256,C(leak 0.9) | token 准确率 0.828,demo 5/5 | 11.3 MiB | `cf0b371d0a8816b0` |
+| `improve/binres_src_T4_a1/model.pt` | 二值残差,src,T=4,A1(leak 0) | token 准确率 0.831,demo 5/5 | 4.4 MiB | `902f780a3068aa8f` |
+| `improve/binres_src_T4_c/model.pt` | 二值残差,src,T=4,C(leak 0.9) | token 准确率 0.813,demo 5/5 | 4.4 MiB | `9b7e78b0c2ebd74f` |
+| `improve/binres_src_T4_s1_a1/model.pt` | 二值残差,src,T=4,种子 1,A1(leak 0) | token 准确率 0.831,demo 5/5 | 4.4 MiB | `6cfe4cfca57d91e8` |
+| `improve/binres_src_T4_s1_c/model.pt` | 二值残差,src,T=4,种子 1,C(leak 0.9) | token 准确率 0.820,demo 5/5 | 4.4 MiB | `82b130d0319a046d` |
+| `improve/binres_src_T4_s2_a1/model.pt` | 二值残差,src,T=4,种子 2,A1(leak 0) | token 准确率 0.827,demo 5/5 | 4.4 MiB | `e0b68beaa238964e` |
+| `improve/binres_src_T4_s2_c/model.pt` | 二值残差,src,T=4,种子 2,C(leak 0.9) | token 准确率 0.821,demo 5/5 | 4.4 MiB | `f2b27c63e7030012` |
+| `improve/binres_src_T8_a1/model.pt` | 二值残差,src,T=8,A1(leak 0) | token 准确率 0.835,demo 5/5 | 4.4 MiB | `9b4c62f5af23d460` |
+| `improve/binres_src_T8_c/model.pt` | 二值残差,src,T=8,C(leak 0.9) | token 准确率 0.830,demo 5/5 | 4.4 MiB | `0059f75319a463d6` |
+| `improve/binres_src_T8_s1_a1/model.pt` | 二值残差,src,T=8,种子 1,A1(leak 0) | token 准确率 0.838,demo 5/5 | 4.4 MiB | `d277398563a795c6` |
+| `improve/binres_src_T8_s1_c/model.pt` | 二值残差,src,T=8,种子 1,C(leak 0.9) | token 准确率 0.835,demo 5/5 | 4.4 MiB | `9e23d36fcb49e37c` |
+| `improve/binres_src_T8_s2_a1/model.pt` | 二值残差,src,T=8,种子 2,A1(leak 0) | token 准确率 0.830,demo 5/5 | 4.4 MiB | `7bfd8b095ebb7df5` |
+| `improve/binres_src_T8_s2_c/model.pt` | 二值残差,src,T=8,种子 2,C(leak 0.9) | token 准确率 0.835,demo 5/5 | 4.4 MiB | `fccd4b437e5bd9ca` |
+| `improve/binres_xor_T1_a1/model.pt` | 二值残差,xor,T=1,A1(leak 0) | token 准确率 0.557,demo 0/5 | 4.4 MiB | `43dab3f2565e3404` |
+| `improve/binres_xor_T1_c/model.pt` | 二值残差,xor,T=1,C(leak 0.9) | token 准确率 0.533,demo 0/5 | 4.4 MiB | `12ceac86e657177d` |
+| `improve/binres_xor_T2_a1/model.pt` | 二值残差,xor,T=2,A1(leak 0) | token 准确率 0.727,demo 3/5 | 4.4 MiB | `aed0b2ee2320b089` |
+| `improve/binres_xor_T2_c/model.pt` | 二值残差,xor,T=2,C(leak 0.9) | token 准确率 0.699,demo 1/5 | 4.4 MiB | `496209498a057d55` |
+| `improve/binres_xor_T4_a1/model.pt` | 二值残差,xor,T=4,A1(leak 0) | token 准确率 0.800,demo 1/5 | 4.4 MiB | `af5dbd99743b3953` |
+| `improve/binres_xor_T4_c/model.pt` | 二值残差,xor,T=4,C(leak 0.9) | token 准确率 0.814,demo 5/5 | 4.4 MiB | `f29e1e609e404fd0` |
+| `improve/binres_xor_T8_a1/model.pt` | 二值残差,xor,T=8,A1(leak 0) | token 准确率 0.812,demo 5/5 | 4.4 MiB | `6c773c6ef9532dd6` |
+| `improve/binres_xor_T8_c/model.pt` | 二值残差,xor,T=8,C(leak 0.9) | token 准确率 0.832,demo 5/5 | 4.4 MiB | `be8fc50c4f65e4b4` |
+| `improve/ternres_sat_T4_a1/model.pt` | 三值残差,sat,T=4,A1(leak 0) | token 准确率 0.832,demo 5/5 | 4.4 MiB | `7f146987ee921e92` |
+| `improve/ternres_sat_T4_c/model.pt` | 三值残差,sat,T=4,C(leak 0.9) | token 准确率 0.826,demo 5/5 | 4.4 MiB | `b9c63d437dcd1109` |
+| `improve/ternres_satc_T1_a1/model.pt` | 三值残差,satc,T=1,A1(leak 0) | token 准确率 0.661,demo 0/5 | 4.4 MiB | `a52b52f7d62614b1` |
+| `improve/ternres_satc_T1_c/model.pt` | 三值残差,satc,T=1,C(leak 0.9) | token 准确率 0.702,demo 0/5 | 4.4 MiB | `9b37b278b7a669c1` |
+| `improve/ternres_satc_T2_a1/model.pt` | 三值残差,satc,T=2,A1(leak 0) | token 准确率 0.815,demo 5/5 | 4.4 MiB | `d0ba7dc96f8c79ba` |
+| `improve/ternres_satc_T2_c/model.pt` | 三值残差,satc,T=2,C(leak 0.9) | token 准确率 0.816,demo 5/5 | 4.4 MiB | `4e7106d36d7ce489` |
+| `improve/ternres_satc_T4_a1/model.pt` | 三值残差,satc,T=4,A1(leak 0) | token 准确率 0.831,demo 5/5 | 4.4 MiB | `44be7a476568bc64` |
+| `improve/ternres_satc_T4_c/model.pt` | 三值残差,satc,T=4,C(leak 0.9) | token 准确率 0.830,demo 5/5 | 4.4 MiB | `b6e6c76dda3f929e` |
+
+本节 50 个文件,262.6 MiB。
