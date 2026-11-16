@@ -1,0 +1,1852 @@
+{
+ "meta": {
+  "slice": "data/tinystories-slice",
+  "n_sentences": 4003,
+  "vocab": 3226,
+  "a0": "results/improve/W_a0_d256/model.pt",
+  "cfg": {
+   "slice_dir": "data/tinystories-slice",
+   "target_sentences": 4000,
+   "min_len": 2,
+   "max_len": 40,
+   "n_demo": 5,
+   "demo_prefix_len": 5,
+   "demo_len_min": 12,
+   "demo_len_max": 16,
+   "demo_seed": 0,
+   "d": 256,
+   "n_blocks": 2,
+   "n_heads": 4,
+   "dk": 64,
+   "dv": 64,
+   "d_ff": 512,
+   "alpha_min": 0.5,
+   "alpha_max": 0.99,
+   "leak": 0.9,
+   "fire_quantile": 0.75,
+   "calib_sentences": 256,
+   "batch_size": 64,
+   "clip": 1.0,
+   "lr_a0": 0.003,
+   "steps_a0": 6000,
+   "lr_a1": 0.003,
+   "steps_a1": 2000,
+   "lr_c": 0.001,
+   "steps_c": 1500,
+   "eval_every": 100,
+   "plateau_steps": 500,
+   "plateau_delta": 0.001,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "max_new_tokens": 40,
+   "n_levels": 16,
+   "sigma_g": 0.02,
+   "read_noise": 0.01,
+   "write_err": 0.02,
+   "read_err": 0.02,
+   "eps_hold": 0.999,
+   "cmp_offset_frac": 0.02,
+   "sigma_g_sweep": [
+    0.0,
+    0.02,
+    0.05,
+    0.1
+   ],
+   "n_compare_sentences": 200,
+   "compare_seed": 0,
+   "results_dir": "results"
+  },
+  "git_sha": "813dd61",
+  "run_date": "2026-11-16",
+  "torch": "2.14.0+cu126",
+  "device": "cuda"
+ },
+ "params": {
+  "columns": {
+   "65nm": {
+    "G_on": {
+     "value": 0.0001,
+     "unit": "S",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "G_off": {
+     "value": 1e-06,
+     "unit": "S",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "levels": {
+     "value": 16,
+     "unit": "级",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "V_read": {
+     "value": 0.2,
+     "unit": "V",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "t_read": {
+     "value": 1e-07,
+     "unit": "s",
+     "source": "paper SI Note 5(投影,非测量):ADM 可在 100 ns 级工作;敏感性 10 ns–1 µs"
+    },
+    "t_token": {
+     "value": 0.001,
+     "unit": "s",
+     "source": "t_token = R_c·C_g·ln(1/0.9),R_c 1 GΩ、C_g 10 pF(Table 7)"
+    },
+    "V_sel": {
+     "value": 1.0,
+     "unit": "V",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "C_gate": {
+     "value": 1.5e-15,
+     "unit": "F",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "C_wire": {
+     "value": 1.5e-16,
+     "unit": "F/cell",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "I_off": {
+     "value": 1e-11,
+     "unit": "A",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "I_int": {
+     "value": 5e-06,
+     "unit": "A",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "V_dd": {
+     "value": 1.0,
+     "unit": "V",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "E_spike": {
+     "value": 1.39e-12,
+     "unit": "J/spike",
+     "source": "Zhao et al. 2025 Nature Electronics, SI Table 7(65 nm 能耗配置),转引自 step1-spiking-layer/results/adm-neuron.md"
+    },
+    "R_c": {
+     "value": 1000000000.0,
+     "unit": "Ω",
+     "source": "Zhao et al. 2025 Nature Electronics, SI Table 7(65 nm 能耗配置),转引自 step1-spiking-layer/results/adm-neuron.md"
+    },
+    "V_gs": {
+     "value": 0.15,
+     "unit": "V",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "E_cmp": {
+     "value": 5e-14,
+     "unit": "J/判决",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "E_adc": {
+     "value": 5e-12,
+     "unit": "J/次",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "C_s": {
+     "value": 5e-14,
+     "unit": "F",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "V_s": {
+     "value": 0.5,
+     "unit": "V",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "E_ctrl": {
+     "value": 1e-10,
+     "unit": "J/token",
+     "source": "65 nm 文献量级,估计(见 README 参数表)"
+    },
+    "node_scale": {
+     "value": 2.0,
+     "unit": "×",
+     "source": "自估:45 → 65 nm 的 CV² 换算,尺寸比 65/45 ≈ 1.44 × 电压比平方 (1.2/1.0)² = 1.44,约 2.07,取 2.0;无外部出处。memristor 侧 65 nm 周边按 V_dd = 1.0 V 取,故对数字侧是偏高端的估计"
+    },
+    "E_mul8": {
+     "value": 4e-13,
+     "unit": "J",
+     "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = int8 mult 0.2 pJ × node_scale 2.0"
+    },
+    "E_add8": {
+     "value": 6e-14,
+     "unit": "J",
+     "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = int8 add 0.03 pJ × node_scale 2.0"
+    },
+    "E_add16": {
+     "value": 1e-13,
+     "unit": "J",
+     "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = int16 add 0.05 pJ × node_scale 2.0"
+    },
+    "E_add32": {
+     "value": 2e-13,
+     "unit": "J",
+     "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = int32 add 0.1 pJ × node_scale 2.0"
+    },
+    "E_sram_near_bit": {
+     "value": 3.125e-13,
+     "unit": "J/bit",
+     "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = 8 KB SRAM 10 pJ/64 b ÷ 64 × node_scale 2.0"
+    },
+    "E_sram_far_bit": {
+     "value": 3.125e-12,
+     "unit": "J/bit",
+     "source": "Horowitz, Computing's energy problem (and what we can do about it), ISSCC 2014, 45 nm: int8 add 0.03 pJ, int8 mult 0.2 pJ, int16 add 0.05 pJ, int32 add 0.1 pJ, 8 KB SRAM 10 pJ/64 b, 1 MB SRAM 100 pJ/64 b, DRAM 1.3–2.6 nJ/64 b;本项 = 1 MB SRAM 100 pJ/64 b ÷ 64 × node_scale 2.0"
+    },
+    "E_dram_bit": {
+     "value": 3.125e-11,
+     "unit": "J/bit",
+     "source": "Horowitz ISSCC 2014 DRAM 1.3–2.6 nJ/64 b 的中位 2 nJ,不随逻辑节点缩放(片外接口决定);仅用于对照行"
+    }
+   },
+   "advanced": {
+    "G_on": {
+     "value": 0.0001,
+     "unit": "S",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "G_off": {
+     "value": 1e-06,
+     "unit": "S",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "levels": {
+     "value": 16,
+     "unit": "级",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "V_read": {
+     "value": 0.2,
+     "unit": "V",
+     "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+    },
+    "t_read": {
+     "value": 1e-08,
+     "unit": "s",
+     "source": "同处:10 ns 脉冲刺激"
+    },
+    "t_token": {
+     "value": 1e-07,
+     "unit": "s",
+     "source": "同式,R_c 242 GΩ、C_g 4.14 aF(Table 8)"
+    },
+    "V_sel": {
+     "value": 0.7,
+     "unit": "V",
+     "source": "估计(文献量级),见 README;3 nm 选通管,展望列(各自最优投影,不同节点)"
+    },
+    "C_gate": {
+     "value": 1e-16,
+     "unit": "F",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "C_wire": {
+     "value": 5e-17,
+     "unit": "F/cell",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "I_off": {
+     "value": 1e-11,
+     "unit": "A",
+     "source": "估计(文献量级),见 README;未投影,沿用 65 nm 列的值(漏电项本就可忽略)"
+    },
+    "I_int": {
+     "value": 1e-06,
+     "unit": "A",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "V_dd": {
+     "value": 0.7,
+     "unit": "V",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "E_spike": {
+     "value": 1e-18,
+     "unit": "J/spike",
+     "source": "同文 Table 8(3 nm FinFET 投影);1 aJ/spike"
+    },
+    "R_c": {
+     "value": 242000000000.0,
+     "unit": "Ω",
+     "source": "同文 Table 8(3 nm FinFET 投影);242 GΩ"
+    },
+    "V_gs": {
+     "value": 0.15,
+     "unit": "V",
+     "source": "估计(文献量级),见 README;ADM 器件量,沿用 65 nm 列的值"
+    },
+    "E_cmp": {
+     "value": 5e-15,
+     "unit": "J/判决",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "E_adc": {
+     "value": 5e-13,
+     "unit": "J/次",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "C_s": {
+     "value": 1e-14,
+     "unit": "F",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "V_s": {
+     "value": 0.3,
+     "unit": "V",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "E_ctrl": {
+     "value": 1e-11,
+     "unit": "J/token",
+     "source": "估计(文献量级),见 README;展望列(各自最优投影,不同节点)"
+    },
+    "node_scale": {
+     "value": 1.0,
+     "unit": "×",
+     "source": "估计(文献量级),见 README;7 nm 数字值直接取用,不再换算"
+    },
+    "E_mul8": {
+     "value": 3e-14,
+     "unit": "J",
+     "source": "估计(文献量级),见 README;7 nm int8 mult,展望列(各自最优投影,不同节点)"
+    },
+    "E_add8": {
+     "value": 5e-15,
+     "unit": "J",
+     "source": "估计(文献量级),见 README;7 nm int8 add,展望列(各自最优投影,不同节点)"
+    },
+    "E_add16": {
+     "value": 8e-15,
+     "unit": "J",
+     "source": "估计(文献量级),见 README;7 nm int16 add,展望列(各自最优投影,不同节点)"
+    },
+    "E_add32": {
+     "value": 1.5e-14,
+     "unit": "J",
+     "source": "估计(文献量级),见 README;7 nm int32 add,展望列(各自最优投影,不同节点)"
+    },
+    "E_sram_near_bit": {
+     "value": 2e-14,
+     "unit": "J/bit",
+     "source": "估计(文献量级),见 README;7 nm 近端 SRAM,展望列(各自最优投影,不同节点)"
+    },
+    "E_sram_far_bit": {
+     "value": 3e-13,
+     "unit": "J/bit",
+     "source": "估计(文献量级),见 README;7 nm 片上大 SRAM,展望列(各自最优投影,不同节点)"
+    },
+    "E_dram_bit": {
+     "value": 1e-11,
+     "unit": "J/bit",
+     "source": "估计(文献量级),见 README;DRAM 每 bit,展望列(各自最优投影,不同节点)"
+    }
+   }
+  },
+  "device": {
+   "G_on": {
+    "value": 0.0001,
+    "unit": "S",
+    "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+   },
+   "G_off": {
+    "value": 1e-06,
+    "unit": "S",
+    "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+   },
+   "levels": {
+    "value": 16,
+    "unit": "级",
+    "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+   },
+   "V_read": {
+    "value": 0.2,
+    "unit": "V",
+    "source": "experiments/spice/crossbar.py 测试台器件(HfO₂ 类 1T1R)"
+   }
+  }
+ },
+ "mac_counts": {
+  "proj_qkv": 393216,
+  "proj_o": 131072,
+  "ffn_13": 524288,
+  "ffn_2": 262144,
+  "gates": 4096,
+  "core": 131072,
+  "head": 825856,
+  "total_macs": 2271744,
+  "params_stream": 2140688,
+  "params_embedding": 825856
+ },
+ "models": {
+  "T4W": {
+   "path": "results/improve/WT4_c/model.pt",
+   "kind": "spiking",
+   "levels": 4,
+   "events_summary": {
+    "n_tokens": 59491,
+    "levels": 4,
+    "spikes_lif": 5960.31256828764,
+    "n_lif": 5120,
+    "cmp_decisions": 10240,
+    "gain": {
+     "k_rows": 1103.330688675598,
+     "q_rows": 380.3572136961893,
+     "alpha_mean": 0.9116783469253629,
+     "s_rms_norm": 0.09435739092457684
+    },
+    "rows_sum": {
+     "blocks.0.qkv": 379.94479837286315,
+     "blocks.0.gates": 380.94479837286315,
+     "blocks.0.o": 213.2151249768873,
+     "blocks.0.ffn13": 340.9153485401153,
+     "blocks.0.w2": 228.39995965776336,
+     "blocks.1.qkv": 424.35563362525426,
+     "blocks.1.gates": 425.35563362525426,
+     "blocks.1.o": 343.34946462490126,
+     "blocks.1.ffn13": 349.0877443646939,
+     "blocks.1.w2": 204.12640567480798,
+     "head": 623.9264090366611
+    },
+    "embed_rows_sum": 1.0
+   },
+   "memristor": {
+    "65nm": {
+     "crossbar_adc": {
+      "by_component": {
+       "crossbar_blocks": 1.1616616493351914e-07,
+       "crossbar_head": 1.016202129868376e-07,
+       "embed": 1.6092448538434383e-11,
+       "gate_wire": 1.0834062141330152e-08,
+       "integrator": 1.6212000000000003e-08,
+       "leak_off": 3.951880713923114e-13,
+       "adm_spikes": 8.284834469919818e-09,
+       "adm_leak": 1.1519999999999999e-10,
+       "comparators": 5.12e-10,
+       "gain_cells": 1.0351153038938832e-09,
+       "adc": 1.613e-08,
+       "head_digital": 0.0,
+       "control": 1e-10
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 2.318410682224869e-08,
+        "gate": 8.753928154510765e-10,
+        "wire": 3.501571261804307e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 2.5599001208961572e-08
+       },
+       "blocks.0.gates": {
+        "conduction": 2.2476779019347464e-10,
+        "gate": 9.142675160948714e-12,
+        "wire": 3.6570700643794865e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.4994703605506714e-10
+       },
+       "blocks.0.o": {
+        "conduction": 4.425421040547313e-09,
+        "gate": 1.6374921598224944e-10,
+        "wire": 6.549968639289979e-13,
+        "leak_off": 4.381171202366741e-15,
+        "integrator": 5.12e-10,
+        "total": 5.101829634564693e-09
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.540445348663826e-08,
+        "gate": 1.0472919507152341e-09,
+        "wire": 4.189167802860937e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.8503934605156357e-08
+       },
+       "blocks.0.w2": {
+        "conduction": 4.611325812025351e-09,
+        "gate": 1.7541116901716225e-10,
+        "wire": 7.016446760686491e-13,
+        "leak_off": 2.904064413104503e-14,
+        "integrator": 5.12e-10,
+        "total": 5.299467666362713e-09
+       },
+       "blocks.1.qkv": {
+        "conduction": 2.244704480212463e-08,
+        "gate": 9.777153798725858e-10,
+        "wire": 3.910861519490344e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 2.4964671043516708e-08
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0143490722294132e-10,
+        "gate": 1.0208535207006102e-11,
+        "wire": 4.0834140828024417e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.2768427657077545e-10
+       },
+       "blocks.1.o": {
+        "conduction": 6.832113004723407e-09,
+        "gate": 2.6369238883192414e-10,
+        "wire": 1.0547695553276968e-12,
+        "leak_off": 0.0,
+        "integrator": 5.12e-10,
+        "total": 7.608860163110659e-09
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.5008115926213982e-08,
+        "gate": 1.0723975506883396e-09,
+        "wire": 4.2895902027533585e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.8132803067105075e-08
+       },
+       "blocks.1.w2": {
+        "conduction": 3.827381341581082e-09,
+        "gate": 1.5676907955825252e-10,
+        "wire": 6.270763182330102e-13,
+        "leak_off": 3.152625605889966e-14,
+        "integrator": 5.12e-10,
+        "total": 4.496809023713626e-09
+       },
+       "head": {
+        "conduction": 1.016202129868376e-07,
+        "gate": 6.0383597866568055e-09,
+        "wire": 2.4153439146627228e-11,
+        "leak_off": 0.0,
+        "integrator": 6.4520000000000005e-09,
+        "total": 1.1413472621264103e-07
+       },
+       "embed": {
+        "conduction": 1.6092448538434383e-11,
+        "gate": 7.68e-13,
+        "wire": 3.0720000000000002e-15,
+        "leak_off": 3.3023999999999996e-13,
+        "integrator": 5.12e-10,
+        "total": 5.291937605384344e-10
+       }
+      },
+      "total": 2.710260774721104e-07
+     },
+     "digital_event": {
+      "by_component": {
+       "crossbar_blocks": 1.1616616493351914e-07,
+       "crossbar_head": 0.0,
+       "embed": 1.6092448538434383e-11,
+       "gate_wire": 4.7715489155267175e-09,
+       "integrator": 9.76e-09,
+       "leak_off": 3.951880713923114e-13,
+       "adm_spikes": 8.284834469919818e-09,
+       "adm_leak": 1.1519999999999999e-10,
+       "comparators": 5.12e-10,
+       "gain_cells": 1.0351153038938832e-09,
+       "adc": 0.0,
+       "head_digital": 6.058487652612329e-05,
+       "control": 1e-10
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 2.318410682224869e-08,
+        "gate": 8.753928154510765e-10,
+        "wire": 3.501571261804307e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 2.5599001208961572e-08
+       },
+       "blocks.0.gates": {
+        "conduction": 2.2476779019347464e-10,
+        "gate": 9.142675160948714e-12,
+        "wire": 3.6570700643794865e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.4994703605506714e-10
+       },
+       "blocks.0.o": {
+        "conduction": 4.425421040547313e-09,
+        "gate": 1.6374921598224944e-10,
+        "wire": 6.549968639289979e-13,
+        "leak_off": 4.381171202366741e-15,
+        "integrator": 5.12e-10,
+        "total": 5.101829634564693e-09
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.540445348663826e-08,
+        "gate": 1.0472919507152341e-09,
+        "wire": 4.189167802860937e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.8503934605156357e-08
+       },
+       "blocks.0.w2": {
+        "conduction": 4.611325812025351e-09,
+        "gate": 1.7541116901716225e-10,
+        "wire": 7.016446760686491e-13,
+        "leak_off": 2.904064413104503e-14,
+        "integrator": 5.12e-10,
+        "total": 5.299467666362713e-09
+       },
+       "blocks.1.qkv": {
+        "conduction": 2.244704480212463e-08,
+        "gate": 9.777153798725858e-10,
+        "wire": 3.910861519490344e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 2.4964671043516708e-08
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0143490722294132e-10,
+        "gate": 1.0208535207006102e-11,
+        "wire": 4.0834140828024417e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.2768427657077545e-10
+       },
+       "blocks.1.o": {
+        "conduction": 6.832113004723407e-09,
+        "gate": 2.6369238883192414e-10,
+        "wire": 1.0547695553276968e-12,
+        "leak_off": 0.0,
+        "integrator": 5.12e-10,
+        "total": 7.608860163110659e-09
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.5008115926213982e-08,
+        "gate": 1.0723975506883396e-09,
+        "wire": 4.2895902027533585e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.8132803067105075e-08
+       },
+       "blocks.1.w2": {
+        "conduction": 3.827381341581082e-09,
+        "gate": 1.5676907955825252e-10,
+        "wire": 6.270763182330102e-13,
+        "leak_off": 3.152625605889966e-14,
+        "integrator": 5.12e-10,
+        "total": 4.496809023713626e-09
+       },
+       "head": {
+        "total": 0.0,
+        "conduction": 0.0,
+        "gate": 0.0,
+        "wire": 0.0,
+        "leak_off": 0.0,
+        "integrator": 0.0
+       },
+       "embed": {
+        "conduction": 1.6092448538434383e-11,
+        "gate": 7.68e-13,
+        "wire": 3.0720000000000002e-15,
+        "leak_off": 3.3023999999999996e-13,
+        "integrator": 5.12e-10,
+        "total": 5.291937605384344e-10
+       }
+      },
+      "total": 6.072563787738276e-05
+     }
+    },
+    "advanced": {
+     "crossbar_adc": {
+      "by_component": {
+       "crossbar_blocks": 1.1616616493351914e-08,
+       "crossbar_head": 1.0162021298683761e-08,
+       "embed": 1.6092448538434385e-12,
+       "gate_wire": 3.668905506028139e-10,
+       "integrator": 2.2696799999999998e-10,
+       "leak_off": 3.9518807139231146e-14,
+       "adm_spikes": 5.9603125682876405e-15,
+       "adm_leak": 4.7603305785123956e-17,
+       "comparators": 5.12e-11,
+       "gain_cells": 7.45283018803596e-11,
+       "adc": 1.613e-09,
+       "head_digital": 0.0,
+       "control": 1e-11
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 2.318410682224869e-09,
+        "gate": 2.8596165304735163e-11,
+        "wire": 1.1671904206014356e-12,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 2.369678037950206e-09
+       },
+       "blocks.0.gates": {
+        "conduction": 2.2476779019347465e-11,
+        "gate": 2.9866072192432466e-13,
+        "wire": 1.2190233547931621e-14,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 2.301162997481972e-11
+       },
+       "blocks.0.o": {
+        "conduction": 4.425421040547313e-10,
+        "gate": 5.3491410554201476e-12,
+        "wire": 2.1833228797633261e-13,
+        "leak_off": 4.3811712023667413e-16,
+        "integrator": 7.168e-12,
+        "total": 4.5527801551524807e-10
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.5404453486638266e-09,
+        "gate": 3.421153705669765e-11,
+        "wire": 1.3963892676203125e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.6047252749881445e-09
+       },
+       "blocks.0.w2": {
+        "conduction": 4.6113258120253517e-10,
+        "gate": 5.730098187893966e-12,
+        "wire": 2.338815586895497e-13,
+        "leak_off": 2.904064413104503e-15,
+        "integrator": 7.168e-12,
+        "total": 4.742674650135318e-10
+       },
+       "blocks.1.qkv": {
+        "conduction": 2.2447044802124634e-09,
+        "gate": 3.1938702409171135e-11,
+        "wire": 1.3036205064967813e-12,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 2.2994508031281313e-09
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0143490722294133e-11,
+        "gate": 3.334788167621993e-13,
+        "wire": 1.3611380276008137e-14,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 2.071458091933234e-11
+       },
+       "blocks.1.o": {
+        "conduction": 6.832113004723409e-10,
+        "gate": 8.613951368509521e-12,
+        "wire": 3.515898517758989e-13,
+        "leak_off": 0.0,
+        "integrator": 7.168e-12,
+        "total": 6.993448416926262e-10
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.5008115926213987e-09,
+        "gate": 3.5031653322485757e-11,
+        "wire": 1.4298634009177862e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.565945109344802e-09
+       },
+       "blocks.1.w2": {
+        "conduction": 3.8273813415810827e-10,
+        "gate": 5.121123265569582e-12,
+        "wire": 2.0902543941100339e-13,
+        "leak_off": 3.1526256058899666e-15,
+        "integrator": 7.168e-12,
+        "total": 3.952394354886948e-10
+       },
+       "head": {
+        "conduction": 1.0162021298683761e-08,
+        "gate": 1.9725308636412232e-10,
+        "wire": 8.051146382209075e-12,
+        "leak_off": 0.0,
+        "integrator": 9.0328e-11,
+        "total": 1.0457653531430093e-08
+       },
+       "embed": {
+        "conduction": 1.6092448538434385e-12,
+        "gate": 2.5087999999999997e-14,
+        "wire": 1.024e-15,
+        "leak_off": 3.3024e-14,
+        "integrator": 7.168e-12,
+        "total": 8.836380853843438e-12
+       }
+      },
+      "total": 2.41228794160957e-08
+     },
+     "digital_event": {
+      "by_component": {
+       "crossbar_blocks": 1.1616616493351914e-08,
+       "crossbar_head": 0.0,
+       "embed": 1.6092448538434385e-12,
+       "gate_wire": 1.615863178564825e-10,
+       "integrator": 1.3663999999999998e-10,
+       "leak_off": 3.9518807139231146e-14,
+       "adm_spikes": 5.9603125682876405e-15,
+       "adm_leak": 4.7603305785123956e-17,
+       "comparators": 5.12e-11,
+       "gain_cells": 7.45283018803596e-11,
+       "adc": 0.0,
+       "head_digital": 5.490881832666589e-06,
+       "control": 1e-11
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 2.318410682224869e-09,
+        "gate": 2.8596165304735163e-11,
+        "wire": 1.1671904206014356e-12,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 2.369678037950206e-09
+       },
+       "blocks.0.gates": {
+        "conduction": 2.2476779019347465e-11,
+        "gate": 2.9866072192432466e-13,
+        "wire": 1.2190233547931621e-14,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 2.301162997481972e-11
+       },
+       "blocks.0.o": {
+        "conduction": 4.425421040547313e-10,
+        "gate": 5.3491410554201476e-12,
+        "wire": 2.1833228797633261e-13,
+        "leak_off": 4.3811712023667413e-16,
+        "integrator": 7.168e-12,
+        "total": 4.5527801551524807e-10
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.5404453486638266e-09,
+        "gate": 3.421153705669765e-11,
+        "wire": 1.3963892676203125e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.6047252749881445e-09
+       },
+       "blocks.0.w2": {
+        "conduction": 4.6113258120253517e-10,
+        "gate": 5.730098187893966e-12,
+        "wire": 2.338815586895497e-13,
+        "leak_off": 2.904064413104503e-15,
+        "integrator": 7.168e-12,
+        "total": 4.742674650135318e-10
+       },
+       "blocks.1.qkv": {
+        "conduction": 2.2447044802124634e-09,
+        "gate": 3.1938702409171135e-11,
+        "wire": 1.3036205064967813e-12,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 2.2994508031281313e-09
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0143490722294133e-11,
+        "gate": 3.334788167621993e-13,
+        "wire": 1.3611380276008137e-14,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 2.071458091933234e-11
+       },
+       "blocks.1.o": {
+        "conduction": 6.832113004723409e-10,
+        "gate": 8.613951368509521e-12,
+        "wire": 3.515898517758989e-13,
+        "leak_off": 0.0,
+        "integrator": 7.168e-12,
+        "total": 6.993448416926262e-10
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.5008115926213987e-09,
+        "gate": 3.5031653322485757e-11,
+        "wire": 1.4298634009177862e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.565945109344802e-09
+       },
+       "blocks.1.w2": {
+        "conduction": 3.8273813415810827e-10,
+        "gate": 5.121123265569582e-12,
+        "wire": 2.0902543941100339e-13,
+        "leak_off": 3.1526256058899666e-15,
+        "integrator": 7.168e-12,
+        "total": 3.952394354886948e-10
+       },
+       "head": {
+        "total": 0.0,
+        "conduction": 0.0,
+        "gate": 0.0,
+        "wire": 0.0,
+        "leak_off": 0.0,
+        "integrator": 0.0
+       },
+       "embed": {
+        "conduction": 1.6092448538434385e-12,
+        "gate": 2.5087999999999997e-14,
+        "wire": 1.024e-15,
+        "leak_off": 3.3024e-14,
+        "integrator": 7.168e-12,
+        "total": 8.836380853843438e-12
+       }
+      },
+      "total": 5.502934058551255e-06
+     }
+    }
+   },
+   "digital_event": {
+    "65nm": {
+     "1": {
+      "add": 3.596710182380528e-07,
+      "weight": 8.99177545595132e-05,
+      "act": 1.798355091190264e-05,
+      "neurons": 2.56e-09,
+      "core": 7.340031999999999e-07,
+      "state": 1.6384e-07,
+      "embed": 6.4e-09,
+      "total": 0.0001091677796896539
+     },
+     "16": {
+      "add": 3.596710182380528e-07,
+      "weight": 5.619859659969575e-06,
+      "act": 1.798355091190264e-05,
+      "neurons": 2.56e-09,
+      "core": 7.340031999999999e-07,
+      "state": 1.6384e-07,
+      "embed": 6.4e-09,
+      "total": 2.4869884790110267e-05
+     },
+     "64": {
+      "add": 3.596710182380528e-07,
+      "weight": 1.4049649149923938e-06,
+      "act": 1.798355091190264e-05,
+      "neurons": 2.56e-09,
+      "core": 7.340031999999999e-07,
+      "state": 1.6384e-07,
+      "embed": 6.4e-09,
+      "total": 2.0654990045133087e-05
+     }
+    },
+    "advanced": {
+     "1": {
+      "add": 2.877368145904423e-08,
+      "weight": 8.632104437713267e-06,
+      "act": 1.150947258361769e-06,
+      "neurons": 1.9456e-10,
+      "core": 4.784128e-08,
+      "state": 1.048576e-08,
+      "embed": 6.144e-10,
+      "total": 9.87096137753408e-06
+     },
+     "16": {
+      "add": 2.877368145904423e-08,
+      "weight": 5.395065273570792e-07,
+      "act": 1.150947258361769e-06,
+      "neurons": 1.9456e-10,
+      "core": 4.784128e-08,
+      "state": 1.048576e-08,
+      "embed": 6.144e-10,
+      "total": 1.7783634671778923e-06
+     },
+     "64": {
+      "add": 2.877368145904423e-08,
+      "weight": 1.348766318392698e-07,
+      "act": 1.150947258361769e-06,
+      "neurons": 1.9456e-10,
+      "core": 4.784128e-08,
+      "state": 1.048576e-08,
+      "embed": 6.144e-10,
+      "total": 1.373733571660083e-06
+     }
+    }
+   },
+   "embed_quant": {
+    "acc_before": 0.8362945655645392,
+    "acc_after": 0.8160394009177859,
+    "delta": -0.020255164646753254,
+    "levels": 16,
+    "w_max": 5.091856479644775
+   },
+   "embed_quant_sweep": {
+    "global/16": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8160394009177859,
+     "delta": -0.020255164646753254,
+     "delta_pt": -2.0255164646753254,
+     "levels": 16,
+     "scaling": "global",
+     "w_max": 5.091856479644775
+    },
+    "per_column/16": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8325797179405289,
+     "delta": -0.003714847624010309,
+     "delta_pt": -0.3714847624010309,
+     "levels": 16,
+     "scaling": "per_column",
+     "w_max": 5.091856479644775
+    },
+    "global/32": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8345800205073036,
+     "delta": -0.0017145450572355614,
+     "delta_pt": -0.17145450572355614,
+     "levels": 32,
+     "scaling": "global",
+     "w_max": 5.091856479644775
+    },
+    "per_column/32": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8351851540569162,
+     "delta": -0.0011094115076230038,
+     "delta_pt": -0.11094115076230038,
+     "levels": 32,
+     "scaling": "per_column",
+     "w_max": 5.091856479644775
+    },
+    "global/64": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8355717671580575,
+     "delta": -0.0007227984064817061,
+     "delta_pt": -0.07227984064817061,
+     "levels": 64,
+     "scaling": "global",
+     "w_max": 5.091856479644775
+    },
+    "per_column/64": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8363954211561413,
+     "delta": 0.00010085559160211144,
+     "delta_pt": 0.010085559160211144,
+     "levels": 64,
+     "scaling": "per_column",
+     "w_max": 5.091856479644775
+    },
+    "global/128": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8354372930359214,
+     "delta": -0.0008572725286177807,
+     "delta_pt": -0.08572725286177807,
+     "levels": 128,
+     "scaling": "global",
+     "w_max": 5.091856479644775
+    },
+    "per_column/128": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8367484157267486,
+     "delta": 0.00045385016220944596,
+     "delta_pt": 0.045385016220944596,
+     "levels": 128,
+     "scaling": "per_column",
+     "w_max": 5.091856479644775
+    },
+    "global/256": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8371182195626229,
+     "delta": 0.0008236539980837065,
+     "delta_pt": 0.08236539980837065,
+     "levels": 256,
+     "scaling": "global",
+     "w_max": 5.091856479644775
+    },
+    "per_column/256": {
+     "acc_before": 0.8362945655645392,
+     "acc_after": 0.8366475601351465,
+     "delta": 0.0003529945706073345,
+     "delta_pt": 0.03529945706073345,
+     "levels": 256,
+     "scaling": "per_column",
+     "w_max": 5.091856479644775
+    },
+    "best_within_0.5pt": {
+     "levels": 16,
+     "scaling": "per_column"
+    }
+   },
+   "embed_levels_needed": {
+    "levels": 16,
+    "scaling": "per_column",
+    "cells_per_value": 1,
+    "meets_threshold": true,
+    "embed_energy_nJ_at_levels": 0.016092448538434383
+   },
+   "sensitivity": {
+    "t_read": {
+     "1e-08": 6.041269847084051e-08,
+     "1e-07": 2.710260774721104e-07,
+     "1e-06": 2.377159867484809e-06
+    },
+    "G_scale": {
+     "0.1": 7.500385414010531e-08,
+     "1": 2.710260774721104e-07
+    },
+    "E_adc": {
+     "1e-12": 2.5812207747211044e-07,
+     "5e-12": 2.710260774721104e-07,
+     "1e-11": 2.8715607747211043e-07
+    },
+    "I_int": {
+     "1e-06": 2.5805647747211044e-07,
+     "5e-06": 2.710260774721104e-07,
+     "5e-05": 4.1693407747211047e-07
+    }
+   }
+  },
+  "BR4W": {
+   "path": "results/improve/binres_src_T4_W_c/model.pt",
+   "kind": "binres",
+   "levels": 4,
+   "events_summary": {
+    "n_tokens": 59491,
+    "levels": 4,
+    "spikes_lif": 6154.659360239364,
+    "n_lif": 5120,
+    "cmp_decisions": 1024,
+    "gain": {
+     "k_rows": 1337.6072010892403,
+     "q_rows": 351.63806290027065,
+     "alpha_mean": 0.8985122184456472,
+     "s_rms_norm": 0.11143564092935467
+    },
+    "rows_sum": {
+     "blocks.0.qkv": 299.19164243330926,
+     "blocks.0.gates": 300.19164243330926,
+     "blocks.0.o": 232.00963170899803,
+     "blocks.0.ffn13": 338.9163066682355,
+     "blocks.0.w2": 204.30945857356573,
+     "blocks.1.qkv": 349.766636970298,
+     "blocks.1.gates": 350.766636970298,
+     "blocks.1.o": 274.9888050293322,
+     "blocks.1.ffn13": 360.9566993326722,
+     "blocks.1.w2": 284.00971575532435,
+     "head": 369.4984955707587
+    },
+    "embed_rows_sum": 1.0
+   },
+   "memristor": {
+    "65nm": {
+     "crossbar_adc": {
+      "by_component": {
+       "crossbar_blocks": 1.0138798411118298e-07,
+       "crossbar_head": 4.470554527430316e-08,
+       "embed": 1.7793061444588254e-11,
+       "gate_wire": 8.034019158777094e-09,
+       "integrator": 1.6212000000000003e-08,
+       "leak_off": 3.875503302617202e-13,
+       "adm_spikes": 8.554976510732715e-09,
+       "adm_leak": 1.1519999999999999e-10,
+       "comparators": 5.12e-11,
+       "gain_cells": 1.2112309964778117e-09,
+       "adc": 1.613e-08,
+       "head_digital": 0.0,
+       "control": 1e-10
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 1.8048388132013207e-08,
+        "gate": 6.893375441663446e-10,
+        "wire": 2.7573501766653786e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 2.0276483026356215e-08
+       },
+       "blocks.0.gates": {
+        "conduction": 1.8197756109663647e-10,
+        "gate": 7.204599418399422e-12,
+        "wire": 2.8818397673597695e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.0521097891270948e-10
+       },
+       "blocks.0.o": {
+        "conduction": 4.732783546593605e-09,
+        "gate": 1.7818339715251048e-10,
+        "wire": 7.12733588610042e-13,
+        "leak_off": 2.4566137129986015e-15,
+        "integrator": 5.12e-10,
+        "total": 5.423682133948438e-09
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.5116018446622117e-08,
+        "gate": 1.0411508940848194e-09,
+        "wire": 4.164603576339279e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.8209333944283276e-08
+       },
+       "blocks.0.w2": {
+        "conduction": 3.3093592484510303e-09,
+        "gate": 1.5690966418449846e-10,
+        "wire": 6.27638656737994e-13,
+        "leak_off": 3.150751144206687e-14,
+        "integrator": 5.12e-10,
+        "total": 3.978928058803709e-09
+       },
+       "blocks.1.qkv": {
+        "conduction": 1.630808602292107e-08,
+        "gate": 8.058623315795666e-10,
+        "wire": 3.223449326318267e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 1.8653171803826955e-08
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0964263340673378e-10,
+        "gate": 8.418399287287152e-12,
+        "wire": 3.367359714914861e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.340947062911701e-10
+       },
+       "blocks.1.o": {
+        "conduction": 5.4132283496865095e-09,
+        "gate": 2.111914022625271e-10,
+        "wire": 8.447656090501085e-13,
+        "leak_off": 0.0,
+        "integrator": 5.12e-10,
+        "total": 6.137264517558086e-09
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.4162395397112063e-08,
+        "gate": 1.108858980349969e-09,
+        "wire": 4.4354359213998765e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.7323689813383432e-08
+       },
+       "blocks.1.w2": {
+        "conduction": 3.906104773279997e-09,
+        "gate": 2.1811946170008908e-10,
+        "wire": 8.724778468003564e-13,
+        "leak_off": 2.3346205106654785e-14,
+        "integrator": 5.12e-10,
+        "total": 4.637120059031993e-09
+       },
+       "head": {
+        "conduction": 4.470554527430316e-08,
+        "gate": 3.5760064401338025e-09,
+        "wire": 1.4304025760535212e-11,
+        "leak_off": 0.0,
+        "integrator": 6.4520000000000005e-09,
+        "total": 5.47478557401975e-08
+       },
+       "embed": {
+        "conduction": 1.7793061444588254e-11,
+        "gate": 7.68e-13,
+        "wire": 3.0720000000000002e-15,
+        "leak_off": 3.3023999999999996e-13,
+        "integrator": 5.12e-10,
+        "total": 5.308943734445883e-10
+       }
+      },
+      "total": 1.965203366632486e-07
+     },
+     "digital_event": {
+      "by_component": {
+       "crossbar_blocks": 1.0138798411118298e-07,
+       "crossbar_head": 0.0,
+       "embed": 1.7793061444588254e-11,
+       "gate_wire": 4.443708692882756e-09,
+       "integrator": 9.76e-09,
+       "leak_off": 3.875503302617202e-13,
+       "adm_spikes": 8.554976510732715e-09,
+       "adm_leak": 1.1519999999999999e-10,
+       "comparators": 5.12e-11,
+       "gain_cells": 1.2112309964778117e-09,
+       "adc": 0.0,
+       "head_digital": 3.587926461600915e-05,
+       "control": 1e-10
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 1.8048388132013207e-08,
+        "gate": 6.893375441663446e-10,
+        "wire": 2.7573501766653786e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 2.0276483026356215e-08
+       },
+       "blocks.0.gates": {
+        "conduction": 1.8197756109663647e-10,
+        "gate": 7.204599418399422e-12,
+        "wire": 2.8818397673597695e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.0521097891270948e-10
+       },
+       "blocks.0.o": {
+        "conduction": 4.732783546593605e-09,
+        "gate": 1.7818339715251048e-10,
+        "wire": 7.12733588610042e-13,
+        "leak_off": 2.4566137129986015e-15,
+        "integrator": 5.12e-10,
+        "total": 5.423682133948438e-09
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.5116018446622117e-08,
+        "gate": 1.0411508940848194e-09,
+        "wire": 4.164603576339279e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.8209333944283276e-08
+       },
+       "blocks.0.w2": {
+        "conduction": 3.3093592484510303e-09,
+        "gate": 1.5690966418449846e-10,
+        "wire": 6.27638656737994e-13,
+        "leak_off": 3.150751144206687e-14,
+        "integrator": 5.12e-10,
+        "total": 3.978928058803709e-09
+       },
+       "blocks.1.qkv": {
+        "conduction": 1.630808602292107e-08,
+        "gate": 8.058623315795666e-10,
+        "wire": 3.223449326318267e-12,
+        "leak_off": 0.0,
+        "integrator": 1.536e-09,
+        "total": 1.8653171803826955e-08
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0964263340673378e-10,
+        "gate": 8.418399287287152e-12,
+        "wire": 3.367359714914861e-14,
+        "leak_off": 0.0,
+        "integrator": 1.6e-11,
+        "total": 2.340947062911701e-10
+       },
+       "blocks.1.o": {
+        "conduction": 5.4132283496865095e-09,
+        "gate": 2.111914022625271e-10,
+        "wire": 8.447656090501085e-13,
+        "leak_off": 0.0,
+        "integrator": 5.12e-10,
+        "total": 6.137264517558086e-09
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.4162395397112063e-08,
+        "gate": 1.108858980349969e-09,
+        "wire": 4.4354359213998765e-12,
+        "leak_off": 0.0,
+        "integrator": 2.048e-09,
+        "total": 2.7323689813383432e-08
+       },
+       "blocks.1.w2": {
+        "conduction": 3.906104773279997e-09,
+        "gate": 2.1811946170008908e-10,
+        "wire": 8.724778468003564e-13,
+        "leak_off": 2.3346205106654785e-14,
+        "integrator": 5.12e-10,
+        "total": 4.637120059031993e-09
+       },
+       "head": {
+        "total": 0.0,
+        "conduction": 0.0,
+        "gate": 0.0,
+        "wire": 0.0,
+        "leak_off": 0.0,
+        "integrator": 0.0
+       },
+       "embed": {
+        "conduction": 1.7793061444588254e-11,
+        "gate": 7.68e-13,
+        "wire": 3.0720000000000002e-15,
+        "leak_off": 3.3023999999999996e-13,
+        "integrator": 5.12e-10,
+        "total": 5.308943734445883e-10
+       }
+      },
+      "total": 3.6004907096932205e-05
+     }
+    },
+    "advanced": {
+     "crossbar_adc": {
+      "by_component": {
+       "crossbar_blocks": 1.0138798411118298e-08,
+       "crossbar_head": 4.470554527430316e-09,
+       "embed": 1.7793061444588257e-12,
+       "gate_wire": 2.720683778868736e-10,
+       "integrator": 2.2696799999999998e-10,
+       "leak_off": 3.875503302617203e-14,
+       "adm_spikes": 6.154659360239365e-15,
+       "adm_leak": 4.7603305785123956e-17,
+       "comparators": 5.12e-12,
+       "gain_cells": 8.720863174640245e-11,
+       "adc": 1.613e-09,
+       "head_digital": 0.0,
+       "control": 1e-11
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 1.8048388132013207e-09,
+        "gate": 2.2518359776100587e-11,
+        "wire": 9.191167255551262e-13,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 1.8497802897029764e-09
+       },
+       "blocks.0.gates": {
+        "conduction": 1.819775610966365e-11,
+        "gate": 2.3535024766771443e-13,
+        "wire": 9.606132557865896e-15,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 1.866671248988923e-11
+       },
+       "blocks.0.o": {
+        "conduction": 4.732783546593606e-10,
+        "gate": 5.820657640315342e-12,
+        "wire": 2.37577862870014e-13,
+        "leak_off": 2.456613712998602e-16,
+        "integrator": 7.168e-12,
+        "total": 4.865048358239171e-10
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.511601844662212e-09,
+        "gate": 3.401092920677076e-11,
+        "wire": 1.3882011921130927e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.5756729750610957e-09
+       },
+       "blocks.0.w2": {
+        "conduction": 3.309359248451031e-10,
+        "gate": 5.1257156966936166e-12,
+        "wire": 2.092128855793313e-13,
+        "leak_off": 3.150751144206687e-15,
+        "integrator": 7.168e-12,
+        "total": 3.4344200417852026e-10
+       },
+       "blocks.1.qkv": {
+        "conduction": 1.630808602292107e-09,
+        "gate": 2.6324836164932508e-11,
+        "wire": 1.0744831087727557e-12,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 1.6797119215658122e-09
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0964263340673382e-11,
+        "gate": 2.7500104338471356e-13,
+        "wire": 1.1224532383049537e-14,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 2.1474488916441143e-11
+       },
+       "blocks.1.o": {
+        "conduction": 5.413228349686511e-10,
+        "gate": 6.898919140575885e-12,
+        "wire": 2.8158853635003616e-13,
+        "leak_off": 0.0,
+        "integrator": 7.168e-12,
+        "total": 5.556713426455769e-10
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.4162395397112064e-09,
+        "gate": 3.6222726691432314e-11,
+        "wire": 1.4784786404666253e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.4826127450431053e-09
+       },
+       "blocks.1.w2": {
+        "conduction": 3.9061047732799975e-10,
+        "gate": 7.125235748869576e-12,
+        "wire": 2.9082594893345215e-13,
+        "leak_off": 2.3346205106654787e-15,
+        "integrator": 7.168e-12,
+        "total": 4.051968736463135e-10
+       },
+       "head": {
+        "conduction": 4.470554527430316e-09,
+        "gate": 1.168162103777042e-10,
+        "wire": 4.7680085868450704e-12,
+        "leak_off": 0.0,
+        "integrator": 9.0328e-11,
+        "total": 4.682466746394865e-09
+       },
+       "embed": {
+        "conduction": 1.7793061444588257e-12,
+        "gate": 2.5087999999999997e-14,
+        "wire": 1.024e-15,
+        "leak_off": 3.3024e-14,
+        "integrator": 7.168e-12,
+        "total": 9.006442144458826e-12
+       }
+      },
+      "total": 1.682554221162204e-08
+     },
+     "digital_event": {
+      "by_component": {
+       "crossbar_blocks": 1.0138798411118298e-08,
+       "crossbar_head": 0.0,
+       "embed": 1.7793061444588257e-12,
+       "gate_wire": 1.5048415892232434e-10,
+       "integrator": 1.3663999999999998e-10,
+       "leak_off": 3.875503302617203e-14,
+       "adm_spikes": 6.154659360239365e-15,
+       "adm_leak": 4.7603305785123956e-17,
+       "comparators": 5.12e-12,
+       "gain_cells": 8.720863174640245e-11,
+       "adc": 0.0,
+       "head_digital": 3.251781856228338e-06,
+       "control": 1e-11
+      },
+      "by_matrix": {
+       "blocks.0.qkv": {
+        "conduction": 1.8048388132013207e-09,
+        "gate": 2.2518359776100587e-11,
+        "wire": 9.191167255551262e-13,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 1.8497802897029764e-09
+       },
+       "blocks.0.gates": {
+        "conduction": 1.819775610966365e-11,
+        "gate": 2.3535024766771443e-13,
+        "wire": 9.606132557865896e-15,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 1.866671248988923e-11
+       },
+       "blocks.0.o": {
+        "conduction": 4.732783546593606e-10,
+        "gate": 5.820657640315342e-12,
+        "wire": 2.37577862870014e-13,
+        "leak_off": 2.456613712998602e-16,
+        "integrator": 7.168e-12,
+        "total": 4.865048358239171e-10
+       },
+       "blocks.0.ffn13": {
+        "conduction": 2.511601844662212e-09,
+        "gate": 3.401092920677076e-11,
+        "wire": 1.3882011921130927e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.5756729750610957e-09
+       },
+       "blocks.0.w2": {
+        "conduction": 3.309359248451031e-10,
+        "gate": 5.1257156966936166e-12,
+        "wire": 2.092128855793313e-13,
+        "leak_off": 3.150751144206687e-15,
+        "integrator": 7.168e-12,
+        "total": 3.4344200417852026e-10
+       },
+       "blocks.1.qkv": {
+        "conduction": 1.630808602292107e-09,
+        "gate": 2.6324836164932508e-11,
+        "wire": 1.0744831087727557e-12,
+        "leak_off": 0.0,
+        "integrator": 2.1504e-11,
+        "total": 1.6797119215658122e-09
+       },
+       "blocks.1.gates": {
+        "conduction": 2.0964263340673382e-11,
+        "gate": 2.7500104338471356e-13,
+        "wire": 1.1224532383049537e-14,
+        "leak_off": 0.0,
+        "integrator": 2.24e-13,
+        "total": 2.1474488916441143e-11
+       },
+       "blocks.1.o": {
+        "conduction": 5.413228349686511e-10,
+        "gate": 6.898919140575885e-12,
+        "wire": 2.8158853635003616e-13,
+        "leak_off": 0.0,
+        "integrator": 7.168e-12,
+        "total": 5.556713426455769e-10
+       },
+       "blocks.1.ffn13": {
+        "conduction": 2.4162395397112064e-09,
+        "gate": 3.6222726691432314e-11,
+        "wire": 1.4784786404666253e-12,
+        "leak_off": 0.0,
+        "integrator": 2.8672e-11,
+        "total": 2.4826127450431053e-09
+       },
+       "blocks.1.w2": {
+        "conduction": 3.9061047732799975e-10,
+        "gate": 7.125235748869576e-12,
+        "wire": 2.9082594893345215e-13,
+        "leak_off": 2.3346205106654787e-15,
+        "integrator": 7.168e-12,
+        "total": 4.051968736463135e-10
+       },
+       "head": {
+        "total": 0.0,
+        "conduction": 0.0,
+        "gate": 0.0,
+        "wire": 0.0,
+        "leak_off": 0.0,
+        "integrator": 0.0
+       },
+       "embed": {
+        "conduction": 1.7793061444588257e-12,
+        "gate": 2.5087999999999997e-14,
+        "wire": 1.024e-15,
+        "leak_off": 3.3024e-14,
+        "integrator": 7.168e-12,
+        "total": 9.006442144458826e-12
+       }
+      },
+      "total": 3.262311931693565e-06
+     }
+    }
+   },
+   "digital_event": {
+    "65nm": {
+     "1": {
+      "add": 2.6670810381066044e-07,
+      "weight": 6.667702595266512e-05,
+      "act": 1.3335405190533022e-05,
+      "neurons": 2.56e-09,
+      "core": 7.340031999999999e-07,
+      "state": 1.6384e-07,
+      "embed": 6.4e-09,
+      "total": 8.11859424470088e-05
+     },
+     "16": {
+      "add": 2.6670810381066044e-07,
+      "weight": 4.16731412204157e-06,
+      "act": 1.3335405190533022e-05,
+      "neurons": 2.56e-09,
+      "core": 7.340031999999999e-07,
+      "state": 1.6384e-07,
+      "embed": 6.4e-09,
+      "total": 1.8676230616385254e-05
+     },
+     "64": {
+      "add": 2.6670810381066044e-07,
+      "weight": 1.0418285305103925e-06,
+      "act": 1.3335405190533022e-05,
+      "neurons": 2.56e-09,
+      "core": 7.340031999999999e-07,
+      "state": 1.6384e-07,
+      "embed": 6.4e-09,
+      "total": 1.5550745024854074e-05
+     }
+    },
+    "advanced": {
+     "1": {
+      "add": 2.1336648304852837e-08,
+      "weight": 6.40099449145585e-06,
+      "act": 8.534659321941134e-07,
+      "neurons": 1.9456e-10,
+      "core": 4.784128e-08,
+      "state": 1.048576e-08,
+      "embed": 6.144e-10,
+      "total": 7.334933071954817e-06
+     },
+     "16": {
+      "add": 2.1336648304852837e-08,
+      "weight": 4.0006215571599063e-07,
+      "act": 8.534659321941134e-07,
+      "neurons": 1.9456e-10,
+      "core": 4.784128e-08,
+      "state": 1.048576e-08,
+      "embed": 6.144e-10,
+      "total": 1.3340007362149568e-06
+     },
+     "64": {
+      "add": 2.1336648304852837e-08,
+      "weight": 1.0001553892899766e-07,
+      "act": 8.534659321941134e-07,
+      "neurons": 1.9456e-10,
+      "core": 4.784128e-08,
+      "state": 1.048576e-08,
+      "embed": 6.144e-10,
+      "total": 1.033954119427964e-06
+     }
+    }
+   },
+   "embed_quant": {
+    "acc_before": 0.8284446386848431,
+    "acc_after": 0.8148123245532938,
+    "delta": -0.013632314131549306,
+    "levels": 16,
+    "w_max": 5.514172077178955
+   },
+   "embed_quant_sweep": {
+    "global/16": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8148123245532938,
+     "delta": -0.013632314131549306,
+     "delta_pt": -1.3632314131549306,
+     "levels": 16,
+     "scaling": "global",
+     "w_max": 5.514172077178955
+    },
+    "per_column/16": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.818375888789901,
+     "delta": -0.010068749894942108,
+     "delta_pt": -1.0068749894942108,
+     "levels": 16,
+     "scaling": "per_column",
+     "w_max": 5.514172077178955
+    },
+    "global/32": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8219226437612412,
+     "delta": -0.006521994923601837,
+     "delta_pt": -0.6521994923601837,
+     "levels": 32,
+     "scaling": "global",
+     "w_max": 5.514172077178955
+    },
+    "per_column/32": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8252340690188432,
+     "delta": -0.003210569665999863,
+     "delta_pt": -0.3210569665999863,
+     "levels": 32,
+     "scaling": "per_column",
+     "w_max": 5.514172077178955
+    },
+    "global/64": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8276714124825604,
+     "delta": -0.0007732262022827063,
+     "delta_pt": -0.07732262022827063,
+     "levels": 64,
+     "scaling": "global",
+     "w_max": 5.514172077178955
+    },
+    "per_column/64": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8264443361180683,
+     "delta": -0.0020003025667747476,
+     "delta_pt": -0.20003025667747476,
+     "levels": 64,
+     "scaling": "per_column",
+     "w_max": 5.514172077178955
+    },
+    "global/128": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8279739792573667,
+     "delta": -0.000470659427476372,
+     "delta_pt": -0.0470659427476372,
+     "levels": 128,
+     "scaling": "global",
+     "w_max": 5.514172077178955
+    },
+    "per_column/128": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8268645677497437,
+     "delta": -0.0015800709350993758,
+     "delta_pt": -0.15800709350993758,
+     "levels": 128,
+     "scaling": "per_column",
+     "w_max": 5.514172077178955
+    },
+    "global/256": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8281084533795028,
+     "delta": -0.00033618530534029745,
+     "delta_pt": -0.033618530534029745,
+     "levels": 256,
+     "scaling": "global",
+     "w_max": 5.514172077178955
+    },
+    "per_column/256": {
+     "acc_before": 0.8284446386848431,
+     "acc_after": 0.8289321073775865,
+     "delta": 0.0004874686927434091,
+     "delta_pt": 0.04874686927434091,
+     "levels": 256,
+     "scaling": "per_column",
+     "w_max": 5.514172077178955
+    },
+    "best_within_0.5pt": {
+     "levels": 32,
+     "scaling": "per_column"
+    }
+   },
+   "embed_levels_needed": {
+    "levels": 32,
+    "scaling": "per_column",
+    "cells_per_value": 2,
+    "meets_threshold": true,
+    "embed_energy_nJ_at_levels": 0.03558612288917651
+   },
+   "sensitivity": {
+    "t_read": {
+     "1e-08": 5.042899766571372e-08,
+     "1e-07": 1.965203366632486e-07,
+     "1e-06": 1.6574337266385978e-06
+    },
+    "G_scale": {
+     "0.1": 6.502014646101128e-08,
+     "1": 1.965203366632486e-07
+    },
+    "E_adc": {
+     "1e-12": 1.836163366632486e-07,
+     "5e-12": 1.965203366632486e-07,
+     "1e-11": 2.126503366632486e-07
+    },
+    "I_int": {
+     "1e-06": 1.8355073666324858e-07,
+     "5e-06": 1.965203366632486e-07,
+     "5e-05": 3.424283366632486e-07
+    }
+   }
+  }
+ },
+ "dense": {
+  "65nm": {
+   "1": {
+    "mac": 1.3630464e-06,
+    "act": 1.135872e-05,
+    "weight": 5.35172e-05,
+    "embed": 6.4e-09,
+    "state": 1.6384e-07,
+    "total": 6.64092064e-05
+   },
+   "16": {
+    "mac": 1.3630464e-06,
+    "act": 1.135872e-05,
+    "weight": 3.344825e-06,
+    "embed": 6.4e-09,
+    "state": 1.6384e-07,
+    "total": 1.62368314e-05
+   },
+   "64": {
+    "mac": 1.3630464e-06,
+    "act": 1.135872e-05,
+    "weight": 8.3620625e-07,
+    "embed": 6.4e-09,
+    "state": 1.6384e-07,
+    "total": 1.372821265e-05
+   }
+  },
+  "advanced": {
+   "1": {
+    "mac": 1.0222847999999999e-07,
+    "act": 7.2695808e-07,
+    "weight": 5.1376512e-06,
+    "embed": 6.144e-10,
+    "state": 1.048576e-08,
+    "total": 5.97793792e-06
+   },
+   "16": {
+    "mac": 1.0222847999999999e-07,
+    "act": 7.2695808e-07,
+    "weight": 3.211032e-07,
+    "embed": 6.144e-10,
+    "state": 1.048576e-08,
+    "total": 1.1613899199999999e-06
+   },
+   "64": {
+    "mac": 1.0222847999999999e-07,
+    "act": 7.2695808e-07,
+    "weight": 8.02758e-08,
+    "embed": 6.144e-10,
+    "state": 1.048576e-08,
+    "total": 9.205625199999999e-07
+   }
+  }
+ },
+ "dense_dram_b1_65nm": {
+  "mac": 1.3630464e-06,
+  "act": 1.135872e-05,
+  "weight": 0.000535172,
+  "embed": 6.4e-09,
+  "state": 1.6384e-07,
+  "total": 0.0005480640064
+ },
+ "gpu": null
+}
